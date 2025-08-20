@@ -47,17 +47,33 @@ All colors MUST be HSL.
     --warning: 35 90% 55%;
     --warning-foreground: 0 0% 100%;
 
-    /* Custom gradient variables */
-    --gradient-hero: linear-gradient(135deg, hsl(210 100% 48%) 0%, hsl(210 100% 38%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 11% 99%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(210 11% 98%) 0%, hsl(0 0% 100%) 100%);
+    /* Claymorphism color palette - warm, earthy tones */
+    --clay-primary: 28 85% 65%;      /* Warm terracotta */
+    --clay-secondary: 45 65% 75%;    /* Soft sandy beige */
+    --clay-accent: 15 75% 70%;       /* Warm coral */
+    --clay-surface: 35 25% 92%;      /* Light cream */
+    --clay-surface-dark: 35 15% 88%; /* Slightly darker cream */
+    --clay-text: 30 8% 25%;          /* Dark warm gray */
+    --clay-text-light: 30 5% 45%;    /* Medium warm gray */
+    
+    /* Clay gradients - subtle, matte */
+    --gradient-hero: linear-gradient(145deg, hsl(var(--clay-primary)), hsl(var(--clay-accent)));
+    --gradient-card: linear-gradient(135deg, hsl(var(--clay-surface)) 0%, hsl(var(--clay-surface-dark)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--clay-surface)) 0%, hsl(var(--background)) 100%);
+    
+    /* Clay shadows - soft, organic */
+    --shadow-clay-soft: 0 8px 32px -8px hsl(var(--clay-primary) / 0.15), 0 2px 8px -2px hsl(var(--clay-primary) / 0.1);
+    --shadow-clay-medium: 0 12px 40px -12px hsl(var(--clay-primary) / 0.2), 0 4px 16px -4px hsl(var(--clay-primary) / 0.15);
+    --shadow-clay-strong: 0 16px 48px -16px hsl(var(--clay-primary) / 0.25), 0 6px 20px -6px hsl(var(--clay-primary) / 0.2);
+    --shadow-clay-inset: inset 0 2px 4px hsl(var(--clay-primary) / 0.1), inset 0 -2px 4px hsl(var(--clay-surface-dark) / 0.1);
+    
+    /* Border radius - more organic */
+    --radius: 1.25rem;
 
-    /* Shadows */
+    /* Legacy shadows */
     --shadow-card: 0 4px 12px -2px hsl(210 11% 15% / 0.08);
     --shadow-card-hover: 0 8px 24px -4px hsl(210 11% 15% / 0.12);
     --shadow-button: 0 2px 8px -2px hsl(210 100% 48% / 0.3);
-
-    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
 

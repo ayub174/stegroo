@@ -142,12 +142,27 @@ export default {
 			boxShadow: {
 				'card': 'var(--shadow-card)',
 				'card-hover': 'var(--shadow-card-hover)',
-				'button': 'var(--shadow-button)'
+				'button': 'var(--shadow-button)',
+				'clay-soft': 'var(--shadow-clay-soft)',
+				'clay-medium': 'var(--shadow-clay-medium)',
+				'clay-strong': 'var(--shadow-clay-strong)',
+				'clay-inset': 'var(--shadow-clay-inset)'
 			},
 			backgroundImage: {
 				'gradient-hero': 'var(--gradient-hero)',
 				'gradient-card': 'var(--gradient-card)',
 				'gradient-subtle': 'var(--gradient-subtle)'
+			},
+			colors: {
+				clay: {
+					primary: 'hsl(var(--clay-primary))',
+					secondary: 'hsl(var(--clay-secondary))',
+					accent: 'hsl(var(--clay-accent))',
+					surface: 'hsl(var(--clay-surface))',
+					'surface-dark': 'hsl(var(--clay-surface-dark))',
+					text: 'hsl(var(--clay-text))',
+					'text-light': 'hsl(var(--clay-text-light))'
+				}
 			}
 		}
 	},
