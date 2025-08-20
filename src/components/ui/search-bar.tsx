@@ -16,9 +16,10 @@ export const SearchBar = ({ className }: SearchBarProps) => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (searchQuery) params.set('q', searchQuery);
-    if (locationQuery) params.set('location', locationQuery);
-    navigate(`/jobs?${params.toString()}`);
+    if (searchQuery.trim()) params.set('q', searchQuery.trim());
+    if (locationQuery.trim()) params.set('location', locationQuery.trim());
+    // Always navigate to jobs page, even with empty search
+    navigate(`/jobs${params.toString() ? `?${params.toString()}` : ''}`);
   };
 
   return (
