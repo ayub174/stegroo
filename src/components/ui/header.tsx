@@ -54,9 +54,15 @@ export const Header = () => {
               <Button variant="ghost" className="hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
                 Logga in
               </Button>
-              <Button variant="hero" className="relative overflow-hidden group hover:shadow-xl hover:shadow-primary/30 transition-all duration-300">
-                <span className="relative z-10">Registrera dig</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-hover to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Button 
+                asChild
+                variant="hero" 
+                className="relative overflow-hidden group hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+              >
+                <a href="/auth">
+                  <span className="relative z-10">Registrera dig</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-hover to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
               </Button>
             </div>
             
