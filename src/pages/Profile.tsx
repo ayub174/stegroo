@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
+import { CVBuilderModal } from "@/components/ui/cv-builder-modal";
 import { 
   User, 
   MapPin, 
@@ -53,6 +54,7 @@ export default function Profile() {
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
+  const [cvBuilderOpen, setCvBuilderOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -562,6 +564,13 @@ export default function Profile() {
                           <Upload className="h-4 w-4 mr-2" />
                           Ladda upp CV
                         </Button>
+                        <Button 
+                          onClick={() => setCvBuilderOpen(true)}
+                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl hover:shadow-green-500/40 border-0 hover-scale transition-all duration-300"
+                        >
+                          <Edit3 className="h-4 w-4 mr-2" />
+                          Skapa CV
+                        </Button>
                         <Button className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300">
                           <Download className="h-4 w-4 mr-2" />
                           Ladda ner CV
@@ -688,6 +697,11 @@ export default function Profile() {
           </div>
         </div>
       </main>
+
+      <CVBuilderModal 
+        open={cvBuilderOpen} 
+        onOpenChange={setCvBuilderOpen} 
+      />
 
       <Footer />
     </div>
