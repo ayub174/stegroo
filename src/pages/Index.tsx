@@ -90,9 +90,28 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl">
             <div className="flex items-center gap-2 mb-6 animate-fade-in">
-              <Badge variant="secondary" className="font-medium hover:scale-105 transition-transform duration-300 cursor-pointer bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-                <TrendingUp className="h-3 w-3 mr-1 animate-pulse" />
-                25,000+ nya jobb denna vecka
+              <Badge variant="secondary" className="relative group font-medium hover:scale-105 transition-all duration-500 cursor-pointer bg-gradient-to-r from-primary/15 via-accent/10 to-primary/5 border-primary/30 hover:border-primary/50 px-4 py-2 overflow-hidden">
+                {/* Animated background pulse */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-primary/5 animate-pulse"></div>
+                
+                {/* Content */}
+                <div className="relative z-10 flex items-center gap-2">
+                  <TrendingUp className="h-3 w-3 animate-pulse text-primary" />
+                  <span className="font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    25,000+
+                  </span>
+                  <span className="text-foreground/80">nya jobb denna vecka</span>
+                  
+                  {/* Live indicator */}
+                  <div className="flex items-center gap-1 ml-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-green-600 font-medium">LIVE</span>
+                  </div>
+                </div>
+                
+                {/* Animated border */}
+                <div className="absolute inset-0 rounded-full border-2 border-primary/20 group-hover:border-primary/40 transition-colors duration-500"></div>
               </Badge>
             </div>
             
