@@ -18,19 +18,16 @@ const Index = () => {
   const rotatingWords = ["Arbete", "Nätverk", "Praktik", "Utbildning"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIsAnimating(true);
       setTimeout(() => {
-        setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
+        setCurrentWordIndex(prev => (prev + 1) % rotatingWords.length);
         setIsAnimating(false);
       }, 300); // Half of animation duration for smooth transition
     }, 2000);
-
     return () => clearInterval(interval);
   }, []);
-
   const featuredJobs = [{
     id: "1",
     title: "Senior Frontend Utvecklare",
@@ -198,17 +195,10 @@ const Index = () => {
               <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{
               animationDelay: '0.2s'
             }}>
-                <span className="block mb-2">Din karriär</span>
-                <span className="block mb-2">plattform för</span>
+                <span className="block mb-2">Karriär</span>
+                <span className="block mb-2">Plattformen för</span>
                 <span className="relative inline-block group min-h-[1.2em]">
-                  <span 
-                    className={`text-blue-600 block relative transition-all duration-600 ${
-                      isAnimating 
-                        ? 'opacity-0 transform scale-95 translate-y-4' 
-                        : 'opacity-100 transform scale-100 translate-y-0'
-                    }`}
-                    key={currentWordIndex}
-                  >
+                  <span className={`text-blue-600 block relative transition-all duration-600 ${isAnimating ? 'opacity-0 transform scale-95 translate-y-4' : 'opacity-100 transform scale-100 translate-y-0'}`} key={currentWordIndex}>
                     {rotatingWords[currentWordIndex]}
                     {/* Blue highlight */}
                     <div className="absolute inset-0 bg-blue-200 opacity-20 rounded-xl -skew-x-12 transform scale-105 -z-10"></div>
