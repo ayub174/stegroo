@@ -59,25 +59,41 @@ export default function Profile() {
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
+      const isDemoMode = localStorage.getItem('demoAuth') === 'true';
+      
+      if (!session && !isDemoMode) {
         navigate("/auth");
         return;
       }
       
-      setUser(session.user);
-      
-      // Fetch profile
-      const { data: profileData, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('user_id', session.user.id)
-        .single();
-      
-      if (error) {
-        console.error('Error fetching profile:', error);
-      } else {
-        setProfile(profileData);
-        setDisplayName(profileData.display_name || "");
+      if (session) {
+        setUser(session.user);
+        
+        // Fetch profile
+        const { data: profileData, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('user_id', session.user.id)
+          .single();
+        
+        if (error) {
+          console.error('Error fetching profile:', error);
+        } else {
+          setProfile(profileData);
+          setDisplayName(profileData.display_name || "");
+        }
+      } else if (isDemoMode) {
+        // Demo mode - set mock user
+        setUser({ email: 'demo@example.com', id: 'demo-user' });
+        setProfile({
+          id: 'demo-profile',
+          user_id: 'demo-user',
+          account_type: 'private',
+          display_name: 'Demo Användare',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+        setDisplayName('Demo Användare');
       }
       
       setLoading(false);
@@ -86,9 +102,10 @@ export default function Profile() {
     checkUser();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
+      const isDemoMode = localStorage.getItem('demoAuth') === 'true';
+      if (!session && !isDemoMode) {
         navigate("/auth");
-      } else {
+      } else if (session) {
         setUser(session.user);
       }
     });
@@ -97,7 +114,17 @@ export default function Profile() {
   }, [navigate]);
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    const isDemoMode = localStorage.getItem('demoAuth') === 'true';
+    if (isDemoMode) {
+      localStorage.removeItem('demoAuth');
+    } else {
+      await supabase.auth.signOut();
+    }
+    navigate("/");
+  };
+
+  const exitTestMode = () => {
+    localStorage.removeItem('demoAuth');
     navigate("/");
   };
 
@@ -155,9 +182,32 @@ export default function Profile() {
     { id: 2, title: "Product Manager", company: "Innovation Co", status: "Intervju bokad", date: "2024-01-10" },
   ];
 
+  const isDemoMode = localStorage.getItem('demoAuth') === 'true';
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      
+      {isDemoMode && (
+        <div className="bg-gradient-to-r from-accent/20 to-primary/20 border-b border-accent/30">
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-accent">🚀</span>
+                <span>Du är i testläge - ingen inloggning krävs</span>
+              </div>
+              <Button 
+                onClick={exitTestMode} 
+                variant="ghost" 
+                size="sm"
+                className="hover:bg-accent/20 text-accent hover:text-accent"
+              >
+                Avsluta testläge
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
       
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto space-y-8">

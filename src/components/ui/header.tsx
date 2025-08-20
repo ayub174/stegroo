@@ -52,7 +52,7 @@ export const Header = () => {
             
             <div className="hidden md:flex items-center gap-3">
               <Button variant="ghost" className="hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/20" asChild>
-                <a href="/auth">Logga in</a>
+                <a href="/auth?mode=login">Logga in</a>
               </Button>
               <Button 
                 asChild
