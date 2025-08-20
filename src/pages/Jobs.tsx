@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
-import { JobCard } from "@/components/ui/job-card";
+import { JobListItem } from "@/components/ui/job-list-item";
 import { SearchBar } from "@/components/ui/search-bar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,10 +17,11 @@ const allJobs = [
     title: "Senior Frontend Developer",
     company: "TechVision AB",
     location: "Stockholm",
-    salary: "55 000 - 70 000 kr/mån",
+    deadline: "5 dagar kvar",
     type: "Heltid",
     timePosted: "2 dagar sedan",
     tags: ["React", "TypeScript", "Next.js", "GraphQL"],
+    logo: "/placeholder.svg",
     description: "Vi söker en erfaren frontend-utvecklare för att bygga nästa generations webbapplikationer."
   },
   {
@@ -28,10 +29,11 @@ const allJobs = [
     title: "UX/UI Designer",
     company: "Creative Studio",
     location: "Göteborg",
-    salary: "45 000 - 55 000 kr/mån",
+    deadline: "2 dagar kvar",
     type: "Heltid",
     timePosted: "1 dag sedan",
     tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+    logo: "/placeholder.svg",
     description: "Designa användarupplevelser som förändrar hur människor interagerar med teknik."
   },
   {
@@ -39,10 +41,11 @@ const allJobs = [
     title: "DevOps Engineer",
     company: "CloudFirst Solutions",
     location: "Malmö",
-    salary: "60 000 - 75 000 kr/mån",
+    deadline: "8 dagar kvar",
     type: "Heltid",
     timePosted: "3 dagar sedan",
     tags: ["AWS", "Docker", "Kubernetes", "Terraform"],
+    logo: "/placeholder.svg",
     description: "Automatisera och optimera vår molninfrastruktur för skalbarhet och tillförlitlighet."
   },
   {
@@ -50,10 +53,11 @@ const allJobs = [
     title: "Data Scientist",
     company: "Analytics Pro",
     location: "Stockholm",
-    salary: "65 000 - 80 000 kr/mån",
+    deadline: "1 dag kvar",
     type: "Heltid",
     timePosted: "1 vecka sedan",
     tags: ["Python", "Machine Learning", "SQL", "Tableau"],
+    logo: "/placeholder.svg",
     description: "Utvinna insikter från data för att driva affärsbeslut och innovation."
   },
   {
@@ -61,10 +65,11 @@ const allJobs = [
     title: "Backend Developer",
     company: "ServerWorks Inc",
     location: "Uppsala",
-    salary: "50 000 - 65 000 kr/mån",
+    deadline: "6 dagar kvar",
     type: "Heltid",
     timePosted: "4 dagar sedan",
     tags: ["Node.js", "MongoDB", "Express", "REST API"],
+    logo: "/placeholder.svg",
     description: "Utveckla robusta backend-system som hanterar miljontals användare dagligen."
   },
   {
@@ -72,10 +77,11 @@ const allJobs = [
     title: "Product Manager",
     company: "InnovateNow",
     location: "Stockholm",
-    salary: "70 000 - 90 000 kr/mån",
+    deadline: "10 dagar kvar",
     type: "Heltid",
     timePosted: "2 dagar sedan",
     tags: ["Agile", "Scrum", "Product Strategy", "Analytics"],
+    logo: "/placeholder.svg",
     description: "Leda produktutveckling från ide till lansering för våra digitala plattformar."
   },
   {
@@ -83,10 +89,11 @@ const allJobs = [
     title: "Cybersecurity Specialist",
     company: "SecureTech AB",
     location: "Göteborg",
-    salary: "60 000 - 75 000 kr/mån",
+    deadline: "3 dagar kvar",
     type: "Heltid",
     timePosted: "5 dagar sedan",
     tags: ["Penetration Testing", "CISSP", "Network Security", "Incident Response"],
+    logo: "/placeholder.svg",
     description: "Skydda vår organisation mot cyberhot och säkerställ dataintegritet."
   },
   {
@@ -94,10 +101,11 @@ const allJobs = [
     title: "Mobile App Developer",
     company: "AppCreators",
     location: "Lund",
-    salary: "48 000 - 62 000 kr/mån",
+    deadline: "7 dagar kvar",
     type: "Heltid",
     timePosted: "1 dag sedan",
     tags: ["React Native", "iOS", "Android", "Flutter"],
+    logo: "/placeholder.svg",
     description: "Skapa nästa generations mobilapplikationer för iOS och Android."
   },
   {
@@ -105,10 +113,11 @@ const allJobs = [
     title: "AI/ML Engineer",
     company: "FutureAI Solutions",
     location: "Stockholm",
-    salary: "70 000 - 85 000 kr/mån",
+    deadline: "12 dagar kvar",
     type: "Heltid",
     timePosted: "3 dagar sedan",
     tags: ["TensorFlow", "PyTorch", "Deep Learning", "Computer Vision"],
+    logo: "/placeholder.svg",
     description: "Utveckla AI-lösningar som formar framtiden inom olika industrier."
   },
   {
@@ -116,10 +125,11 @@ const allJobs = [
     title: "Full Stack Developer",
     company: "WebSolutions Pro",
     location: "Västerås",
-    salary: "52 000 - 67 000 kr/mån",
+    deadline: "4 dagar kvar",
     type: "Heltid",
     timePosted: "6 dagar sedan",
     tags: ["React", "Node.js", "PostgreSQL", "TypeScript"],
+    logo: "/placeholder.svg",
     description: "Jobba med hela teknikstacken för att leverera kompletta webblösningar."
   },
   {
@@ -127,10 +137,11 @@ const allJobs = [
     title: "Marketing Manager",
     company: "GrowthHack Media",
     location: "Stockholm",
-    salary: "55 000 - 70 000 kr/mån",
+    deadline: "9 dagar kvar",
     type: "Heltid",
     timePosted: "2 dagar sedan",
     tags: ["Digital Marketing", "SEO", "Social Media", "Analytics"],
+    logo: "/placeholder.svg",
     description: "Utveckla och genomför marknadsföringsstrategier för att driva tillväxt."
   },
   {
@@ -138,10 +149,11 @@ const allJobs = [
     title: "QA Engineer",
     company: "QualityFirst Tech",
     location: "Linköping",
-    salary: "45 000 - 58 000 kr/mån",
+    deadline: "15 dagar kvar",
     type: "Heltid",
     timePosted: "4 dagar sedan",
     tags: ["Test Automation", "Selenium", "Jest", "CI/CD"],
+    logo: "/placeholder.svg",
     description: "Säkerställ kvalitet genom omfattande testning och automatisering."
   },
   {
@@ -149,10 +161,11 @@ const allJobs = [
     title: "Business Analyst",
     company: "DataDriven Solutions",
     location: "Göteborg",
-    salary: "50 000 - 65 000 kr/mån",
+    deadline: "11 dagar kvar",
     type: "Heltid",
     timePosted: "1 vecka sedan",
     tags: ["Business Intelligence", "SQL", "Power BI", "Process Improvement"],
+    logo: "/placeholder.svg",
     description: "Analysera affärsprocesser och föreslå förbättringar baserat på data."
   },
   {
@@ -160,10 +173,11 @@ const allJobs = [
     title: "Cloud Architect",
     company: "CloudNative AB",
     location: "Stockholm",
-    salary: "75 000 - 95 000 kr/mån",
+    deadline: "20 dagar kvar",
     type: "Heltid",
     timePosted: "3 dagar sedan",
     tags: ["Azure", "AWS", "Microservices", "System Design"],
+    logo: "/placeholder.svg",
     description: "Designa och implementera skalbar molnarkitektur för enterprise-lösningar."
   },
   {
@@ -171,10 +185,11 @@ const allJobs = [
     title: "Content Creator",
     company: "Creative Content Co",
     location: "Malmö",
-    salary: "35 000 - 45 000 kr/mån",
+    deadline: "3 dagar kvar",
     type: "Heltid",
     timePosted: "2 dagar sedan",
     tags: ["Content Writing", "Video Production", "Social Media", "Adobe Creative"],
+    logo: "/placeholder.svg",
     description: "Skapa engagerande innehåll för digitala plattformar och sociala medier."
   },
   {
@@ -182,10 +197,11 @@ const allJobs = [
     title: "Sales Representative",
     company: "SalesPro Nordic",
     location: "Stockholm",
-    salary: "40 000 - 60 000 kr/mån + provision",
+    deadline: "14 dagar kvar",
     type: "Heltid",
     timePosted: "5 dagar sedan",
     tags: ["B2B Sales", "CRM", "Lead Generation", "Negotiation"],
+    logo: "/placeholder.svg",
     description: "Driva försäljning och bygga långsiktiga kundrelationer inom B2B-marknaden."
   },
   {
@@ -193,10 +209,11 @@ const allJobs = [
     title: "HR Manager",
     company: "PeopleFirst AB",
     location: "Göteborg",
-    salary: "55 000 - 70 000 kr/mån",
+    deadline: "7 dagar kvar",
     type: "Heltid",
     timePosted: "1 dag sedan",
     tags: ["Recruitment", "Employee Relations", "Performance Management", "HR Systems"],
+    logo: "/placeholder.svg",
     description: "Leda HR-processer och skapa en positiv arbetsmiljö för våra medarbetare."
   },
   {
@@ -204,10 +221,11 @@ const allJobs = [
     title: "Financial Analyst",
     company: "FinanceFlow Solutions",
     location: "Stockholm",
-    salary: "50 000 - 65 000 kr/mån",
+    deadline: "18 dagar kvar",
     type: "Heltid",
     timePosted: "4 dagar sedan",
     tags: ["Financial Modeling", "Excel", "Budgeting", "Forecasting"],
+    logo: "/placeholder.svg",
     description: "Analysera finansiell data och stödja strategiska affärsbeslut."
   },
   {
@@ -215,10 +233,11 @@ const allJobs = [
     title: "Graphic Designer",
     company: "Visual Impact Studio",
     location: "Lund",
-    salary: "38 000 - 48 000 kr/mån",
+    deadline: "2 dagar kvar",
     type: "Heltid",
     timePosted: "3 dagar sedan",
     tags: ["Adobe Illustrator", "Photoshop", "InDesign", "Brand Design"],
+    logo: "/placeholder.svg",
     description: "Skapa visuell identitet och designlösningar för varumärken och kampanjer."
   },
   {
@@ -226,10 +245,11 @@ const allJobs = [
     title: "Project Manager",
     company: "ProjectPro Consulting",
     location: "Västerås",
-    salary: "60 000 - 75 000 kr/mån",
+    deadline: "22 dagar kvar",
     type: "Heltid",
     timePosted: "6 dagar sedan",
     tags: ["PMP", "Agile", "Risk Management", "Stakeholder Management"],
+    logo: "/placeholder.svg",
     description: "Leda komplexa projekt från start till avslut och säkerställ leverans i tid."
   },
   {
@@ -237,10 +257,11 @@ const allJobs = [
     title: "Systems Administrator",
     company: "IT Infrastructure Ltd",
     location: "Uppsala",
-    salary: "48 000 - 62 000 kr/mån",
+    deadline: "13 dagar kvar",
     type: "Heltid",
     timePosted: "2 dagar sedan",
     tags: ["Linux", "Windows Server", "VMware", "Network Administration"],
+    logo: "/placeholder.svg",
     description: "Administrera och underhålla IT-infrastruktur för optimal prestanda och säkerhet."
   },
   {
@@ -248,10 +269,11 @@ const allJobs = [
     title: "Customer Success Manager",
     company: "ClientCare Solutions",
     location: "Stockholm",
-    salary: "50 000 - 65 000 kr/mån",
+    deadline: "16 dagar kvar",
     type: "Heltid",
     timePosted: "1 vecka sedan",
     tags: ["Customer Relations", "SaaS", "Onboarding", "Account Management"],
+    logo: "/placeholder.svg",
     description: "Säkerställ kundnöjdhet och driva retention genom proaktiv kundvård."
   },
   {
@@ -259,10 +281,11 @@ const allJobs = [
     title: "Network Engineer",
     company: "NetworkPro AB",
     location: "Göteborg",
-    salary: "55 000 - 70 000 kr/mån",
+    deadline: "25 dagar kvar",
     type: "Heltid",
     timePosted: "4 dagar sedan",
     tags: ["Cisco", "CCNA", "Network Design", "Troubleshooting"],
+    logo: "/placeholder.svg",
     description: "Designa och underhålla nätverksinfrastruktur för optimal konnektivitet."
   },
   {
@@ -270,10 +293,11 @@ const allJobs = [
     title: "Technical Writer",
     company: "DocuTech Solutions",
     location: "Linköping",
-    salary: "42 000 - 55 000 kr/mån",
+    deadline: "8 dagar kvar",
     type: "Heltid",
     timePosted: "3 dagar sedan",
     tags: ["Technical Documentation", "API Documentation", "Markdown", "Git"],
+    logo: "/placeholder.svg",
     description: "Skapa tydlig och användbar teknisk dokumentation för utvecklare och slutanvändare."
   },
   {
@@ -281,10 +305,11 @@ const allJobs = [
     title: "Database Administrator",
     company: "DataBase Experts",
     location: "Malmö",
-    salary: "58 000 - 72 000 kr/mån",
+    deadline: "30 dagar kvar",
     type: "Heltid",
     timePosted: "5 dagar sedan",
     tags: ["MySQL", "PostgreSQL", "Oracle", "Database Optimization"],
+    logo: "/placeholder.svg",
     description: "Administrera och optimera databaser för maximala prestanda och tillförlitlighet."
   },
   {
@@ -292,10 +317,11 @@ const allJobs = [
     title: "Scrum Master",
     company: "AgileWorks AB",
     location: "Stockholm",
-    salary: "60 000 - 75 000 kr/mån",
+    deadline: "6 dagar kvar",
     type: "Heltid",
     timePosted: "2 dagar sedan",
     tags: ["Scrum", "Agile Coaching", "Team Leadership", "Sprint Planning"],
+    logo: "/placeholder.svg",
     description: "Facilitera agila processer och hjälpa team att leverera värde effektivt."
   },
   {
@@ -303,10 +329,11 @@ const allJobs = [
     title: "SEO Specialist",
     company: "SearchOptimize Pro",
     location: "Göteborg",
-    salary: "40 000 - 52 000 kr/mån",
+    deadline: "5 dagar kvar",
     type: "Heltid",
     timePosted: "1 dag sedan",
     tags: ["SEO", "Google Analytics", "Keyword Research", "Content Optimization"],
+    logo: "/placeholder.svg",
     description: "Optimera webbplatser för sökmotor för att öka organisk trafik och synlighet."
   },
   {
@@ -314,10 +341,11 @@ const allJobs = [
     title: "Operations Manager",
     company: "OpEx Solutions",
     location: "Uppsala",
-    salary: "65 000 - 80 000 kr/mån",
+    deadline: "21 dagar kvar",
     type: "Heltid",
     timePosted: "6 dagar sedan",
     tags: ["Operations Management", "Process Optimization", "Supply Chain", "Lean"],
+    logo: "/placeholder.svg",
     description: "Optimera operativa processer för att förbättra effektivitet och kvalitet."
   },
   {
@@ -325,10 +353,11 @@ const allJobs = [
     title: "React Developer",
     company: "Frontend Masters",
     location: "Lund",
-    salary: "50 000 - 64 000 kr/mån",
+    deadline: "17 dagar kvar",
     type: "Heltid",
     timePosted: "3 dagar sedan",
     tags: ["React", "Redux", "JavaScript", "CSS"],
+    logo: "/placeholder.svg",
     description: "Utveckla moderna webbapplikationer med React och relaterade teknologier."
   },
   {
@@ -336,10 +365,11 @@ const allJobs = [
     title: "IT Support Specialist",
     company: "TechSupport Nordic",
     location: "Västerås",
-    salary: "35 000 - 45 000 kr/mån",
+    deadline: "12 dagar kvar",
     type: "Heltid",
     timePosted: "4 dagar sedan",
     tags: ["Help Desk", "Windows", "Hardware Support", "ITIL"],
+    logo: "/placeholder.svg",
     description: "Tillhandahålla teknisk support och lösningar för användare och system."
   }
 ];
@@ -379,9 +409,11 @@ const Jobs = () => {
       return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
     }
     if (sortBy === 'salary') {
-      const aSalary = parseInt(a.salary?.replace(/\D/g, '') || '0');
-      const bSalary = parseInt(b.salary?.replace(/\D/g, '') || '0');
-      return bSalary - aSalary;
+      // For deadline sorting, convert to days and sort by urgency (fewer days first)
+      const getDeadlineDays = (deadline: string) => parseInt(deadline.split(' ')[0]);
+      const aDays = getDeadlineDays(a.deadline || '999 dagar kvar');
+      const bDays = getDeadlineDays(b.deadline || '999 dagar kvar');
+      return aDays - bDays;
     }
     return 0; // relevance (default order)
   });
@@ -588,7 +620,7 @@ const Jobs = () => {
                       <SelectContent>
                         <SelectItem value="relevance">Relevans</SelectItem>
                         <SelectItem value="newest">Senaste</SelectItem>
-                        <SelectItem value="salary">Lön</SelectItem>
+                        <SelectItem value="salary">Sista ansökningsdatum</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -605,16 +637,16 @@ const Jobs = () => {
                 {/* Background decoration for grid */}
                 <div className="absolute -inset-6 bg-gradient-to-br from-primary/3 via-transparent to-accent/3 rounded-3xl blur-3xl opacity-60"></div>
                 
-                <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <div className="relative space-y-6 mb-16">
                   {currentJobs.map((job, index) => (
                     <div key={job.id} className="group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
                       <div className="relative">
-                        {/* Individual card glow effect */}
+                        {/* Individual item glow effect */}
                         <div className="absolute -inset-2 bg-gradient-to-r from-primary/15 to-accent/15 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                         
-                        <JobCard
+                        <JobListItem
                           {...job}
-                          className="relative transform hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border-border/40 hover:border-primary/30"
+                          className="relative transform hover:-translate-y-1 hover:scale-[1.01] transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20"
                         />
                       </div>
                     </div>
