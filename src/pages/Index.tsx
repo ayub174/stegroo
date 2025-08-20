@@ -44,6 +44,36 @@ const Index = () => {
       type: "Heltid",
       timePosted: "3 dagar sedan",
       tags: ["Agile", "Scrum", "Analytics"]
+    },
+    {
+      id: "4",
+      title: "Backend Developer",
+      company: "CloudTech",
+      location: "Stockholm",
+      salary: "60 000 - 80 000 kr/mån",
+      type: "Heltid",
+      timePosted: "4 dagar sedan",
+      tags: ["Node.js", "MongoDB", "AWS"]
+    },
+    {
+      id: "5",
+      title: "DevOps Engineer",
+      company: "ScaleTech",
+      location: "Göteborg",
+      salary: "75 000 - 95 000 kr/mån",
+      type: "Heltid",
+      timePosted: "5 dagar sedan",
+      tags: ["Docker", "Kubernetes", "CI/CD"]
+    },
+    {
+      id: "6",
+      title: "Data Scientist",
+      company: "AI Solutions",
+      location: "Stockholm",
+      salary: "70 000 - 90 000 kr/mån",
+      type: "Heltid",
+      timePosted: "6 dagar sedan",
+      tags: ["Python", "Machine Learning", "SQL"]
     }
   ];
 
@@ -70,22 +100,22 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden bg-clay-surface">
-        {/* Clay-style organic shapes */}
+      <section className="relative py-20 lg:py-32 overflow-hidden bg-white">
+        {/* Blue accent shapes */}
         <div className="absolute inset-0 z-[1]">
-          {/* Soft clay-like shapes */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-clay-secondary rounded-[3rem] rotate-12 shadow-clay-soft animate-float opacity-60"></div>
-          <div className="absolute top-40 right-20 w-96 h-80 bg-clay-accent rounded-[4rem] -rotate-6 shadow-clay-medium animate-float opacity-40" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-72 bg-clay-primary rounded-[3.5rem] rotate-3 shadow-clay-soft animate-float opacity-50" style={{animationDelay: '4s'}}></div>
+          {/* Blue geometric shapes */}
+          <div className="absolute top-20 left-10 w-64 h-64 bg-blue-100 rounded-3xl rotate-12 opacity-60 animate-float"></div>
+          <div className="absolute top-40 right-20 w-96 h-80 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-72 bg-blue-200 rounded-3xl rotate-3 opacity-50 animate-float" style={{animationDelay: '4s'}}></div>
           
-          {/* Subtle clay texture pattern */}
+          {/* Subtle pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: `radial-gradient(circle, hsl(var(--clay-text)) 0.5px, transparent 0.5px)`,
+            backgroundImage: `radial-gradient(circle, rgb(59 130 246) 0.5px, transparent 0.5px)`,
             backgroundSize: '40px 40px'
           }}></div>
         </div>
         
-        {/* Hero Image with Clay Effects */}
+        {/* Hero Image */}
         <div className="absolute inset-0 z-0">
           <div className="relative w-full h-full overflow-hidden rounded-3xl mx-4">
             <img 
@@ -93,85 +123,84 @@ const Index = () => {
               alt="Modern collaborative workspace" 
               className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[15s] ease-out"
             />
-            {/* Clay-style matte overlays */}
-            <div className="absolute inset-0 bg-gradient-to-br from-clay-surface/85 via-clay-surface/70 to-clay-surface/60"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-clay-surface via-clay-surface/30 to-transparent"></div>
-            <div className="absolute inset-0 shadow-clay-inset"></div>
+            {/* Blue-tinted overlays */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-white/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-blue-50/30 to-transparent"></div>
           </div>
         </div>
         
         {/* Main Content */}
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            {/* Status Badge with Clay Design */}
+            {/* Status Badge */}
             <div className="flex justify-center lg:justify-start mb-8 animate-fade-in">
               <div className="relative group">
-                <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-clay-surface-dark border-2 border-clay-accent hover:border-clay-primary px-6 py-3 rounded-2xl shadow-clay-soft hover:shadow-clay-medium">
-                  {/* Clay button effect */}
-                  <div className="absolute inset-0 bg-clay-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl"></div>
+                <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-blue-50 border-2 border-blue-200 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl">
+                  {/* Blue button effect */}
+                  <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl"></div>
                   
                   {/* Content */}
                   <div className="relative z-10 flex items-center gap-3">
-                    <div className="p-1.5 bg-clay-primary rounded-lg shadow-clay-inset">
+                    <div className="p-1.5 bg-blue-500 rounded-lg shadow-inner">
                       <TrendingUp className="h-4 w-4 text-white" />
                     </div>
-                    <span className="font-bold text-lg text-clay-primary">
+                    <span className="font-bold text-lg text-blue-600">
                       25,000+
                     </span>
-                    <span className="text-clay-text font-medium">nya jobb denna vecka</span>
+                    <span className="text-gray-700 font-medium">nya jobb denna vecka</span>
                   </div>
                 </Badge>
               </div>
             </div>
             
-            {/* Hero Title with Clay Typography */}
+            {/* Hero Title */}
             <div className="text-center lg:text-left mb-8">
-              <h1 className="text-5xl lg:text-7xl font-black text-clay-text mb-6 leading-[0.9] animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{animationDelay: '0.2s'}}>
                 <span className="block mb-2">Hitta ditt</span>
                 <span className="relative inline-block group">
-                  <span className="text-clay-primary hover:scale-105 transition-transform duration-700 cursor-default block relative">
+                  <span className="text-blue-600 hover:scale-105 transition-transform duration-700 cursor-default block relative">
                     drömjobb
-                    {/* Clay-style highlight */}
-                    <div className="absolute inset-0 bg-clay-accent opacity-20 rounded-xl -skew-x-12 transform scale-105 -z-10"></div>
+                    {/* Blue highlight */}
+                    <div className="absolute inset-0 bg-blue-200 opacity-20 rounded-xl -skew-x-12 transform scale-105 -z-10"></div>
                   </span>
                 </span>
-                <span className="block mt-2 text-clay-text-light">idag</span>
+                <span className="block mt-2 text-gray-600">idag</span>
               </h1>
               
-              <p className="text-xl lg:text-2xl text-clay-text-light mb-10 max-w-3xl mx-auto lg:mx-0 animate-fade-in leading-relaxed font-light" style={{animationDelay: '0.4s'}}>
+              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto lg:mx-0 animate-fade-in leading-relaxed font-light" style={{animationDelay: '0.4s'}}>
                 Upptäck tusentals möjligheter från Sveriges ledande företag. 
-                <span className="text-clay-primary font-medium"> Vi använder AI för att matcha dig med perfekta roller</span> som passar din profil och ambitioner.
+                <span className="text-blue-600 font-medium"> Vi använder AI för att matcha dig med perfekta roller</span> som passar din profil och ambitioner.
               </p>
             </div>
             
-            {/* Clay-style Search Bar */}
+            {/* Search Bar */}
             <div className="flex justify-center lg:justify-start mb-12 animate-fade-in" style={{animationDelay: '0.6s'}}>
               <div className="w-full max-w-2xl relative group">
-                <div className="absolute inset-0 bg-clay-surface-dark rounded-2xl shadow-clay-medium group-hover:shadow-clay-strong transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-white rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500 border border-gray-200"></div>
                 <SearchBar className="relative transform hover:scale-[1.02] transition-all duration-300 bg-transparent shadow-none border-0" />
               </div>
             </div>
             
-            {/* Clay-style Statistics Cards */}
+            {/* Statistics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto lg:mx-0 animate-fade-in" style={{animationDelay: '0.8s'}}>
               {[
-                { icon: Users, label: "Jobbsökare", value: "2M+", color: "bg-clay-primary" },
-                { icon: Briefcase, label: "Aktiva jobb", value: "50K+", color: "bg-clay-accent" },
-                { icon: Star, label: "Företag", value: "10K+", color: "bg-clay-secondary" }
+                { icon: Users, label: "Jobbsökare", value: "2M+", color: "bg-blue-500" },
+                { icon: Briefcase, label: "Aktiva jobb", value: "50K+", color: "bg-blue-600" },
+                { icon: Star, label: "Företag", value: "10K+", color: "bg-blue-700" }
               ].map(({ icon: Icon, label, value, color }, index) => (
                 <div key={index} className="group cursor-pointer">
-                  <div className="relative p-6 rounded-3xl bg-clay-surface-dark border-2 border-clay-surface hover:border-clay-accent shadow-clay-soft hover:shadow-clay-strong transition-all duration-500 hover:-translate-y-2">
-                    <div className="absolute inset-0 bg-clay-accent opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity duration-500"></div>
+                  <div className="relative p-6 rounded-3xl bg-white border-2 border-gray-100 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
                     
                     <div className="relative z-10 flex items-center gap-4">
-                      <div className={`p-3 rounded-2xl ${color} shadow-clay-inset group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`p-3 rounded-2xl ${color} shadow-inner group-hover:scale-110 transition-transform duration-300`}>
                         <Icon className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-clay-text group-hover:text-clay-primary transition-colors duration-300">
+                        <div className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                           {value}
                         </div>
-                        <div className="text-sm text-clay-text-light font-medium">
+                        <div className="text-sm text-gray-500 font-medium">
                           {label}
                         </div>
                       </div>
@@ -187,14 +216,14 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       </section>
 
-      {/* Categories Section - Clay Style */}
-      <section className="py-16 bg-clay-surface-dark">
+      {/* Categories Section */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-clay-text mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Populära jobbkategorier
             </h2>
-            <p className="text-clay-text-light max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto">
               Utforska jobb inom de områden som passar dig bäst
             </p>
           </div>
@@ -206,81 +235,86 @@ const Index = () => {
                 title={category.title}
                 jobCount={category.jobCount}
                 image={category.image}
-                className="animate-fade-in shadow-clay-soft hover:shadow-clay-medium transition-all duration-300 bg-clay-surface border-2 border-clay-surface hover:border-clay-accent rounded-3xl"
+                className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl"
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Jobs Section - Clay Style */}
-      <section className="relative py-20 overflow-hidden bg-clay-surface">
-        {/* Clay organic shapes */}
+      {/* Trending Jobs Section */}
+      <section className="relative py-20 overflow-hidden bg-white">
+        {/* Blue decorative shapes */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-10 w-80 h-80 bg-clay-secondary rounded-[4rem] rotate-6 shadow-clay-soft animate-float opacity-50" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-20 left-20 w-96 h-72 bg-clay-accent rounded-[3rem] -rotate-12 shadow-clay-medium animate-float opacity-40" style={{animationDelay: '3s'}}></div>
-          
-          {/* Subtle clay texture */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{
-            backgroundImage: `radial-gradient(circle, hsl(var(--clay-text)) 0.5px, transparent 0.5px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
+          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float" style={{animationDelay: '3s'}}></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          {/* Section Header - Clay Style */}
+          {/* Section Header */}
           <div className="text-center mb-16 animate-fade-in">
             <div className="inline-flex items-center gap-2 mb-6">
-              <Badge variant="secondary" className="font-medium bg-clay-surface-dark border-2 border-clay-accent px-4 py-2 rounded-2xl shadow-clay-soft">
-                <Star className="h-3 w-3 mr-1 text-clay-primary" />
-                <span className="text-clay-text">Personligt utvalda</span>
+              <Badge variant="secondary" className="font-medium bg-blue-50 border-2 border-blue-200 px-4 py-2 rounded-2xl shadow-lg">
+                <TrendingUp className="h-3 w-3 mr-1 text-blue-600" />
+                <span className="text-gray-700">Populärt nu</span>
               </Badge>
             </div>
             
-            <h2 className="text-4xl lg:text-5xl font-black text-clay-text mb-6 leading-tight">
-              <span className="text-clay-primary">
-                Utvalda jobb
+            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">
+              <span className="text-blue-600">
+                Trendande jobb
               </span>
-              <span className="block text-clay-text-light mt-2">för dig</span>
+              <span className="block text-gray-600 mt-2">just nu</span>
             </h2>
             
-            <p className="text-xl text-clay-text-light max-w-2xl mx-auto leading-relaxed">
-              Handplockade möjligheter från våra partners som
-              <span className="text-clay-primary font-medium"> matchar din profil perfekt</span>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              De mest populära jobben som
+              <span className="text-blue-600 font-medium"> flest söker efter idag</span>
             </p>
           </div>
           
-          {/* Jobs Grid with Clay Design */}
+          {/* Scrolling Jobs Container */}
           <div className="relative">
-            {/* Background clay shape */}
-            <div className="absolute -inset-8 bg-clay-surface-dark rounded-[3rem] shadow-clay-soft opacity-30"></div>
-            
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {featuredJobs.map((job, index) => (
-                <div key={index} className="group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
-                  <div className="relative">
-                    {/* Clay card shadow */}
-                    <div className="absolute inset-0 bg-clay-surface-dark rounded-2xl shadow-clay-medium group-hover:shadow-clay-strong transition-all duration-500"></div>
-                    
-                    <JobCard
-                      {...job}
-                      className="relative transform hover:-translate-y-2 transition-all duration-500 bg-clay-surface border-2 border-clay-surface-dark hover:border-clay-accent shadow-none"
-                    />
-                  </div>
+            <div className="bg-gray-50 rounded-3xl p-8 border border-gray-200 shadow-xl">
+              <div 
+                className="group overflow-hidden"
+                onMouseEnter={(e) => {
+                  const scrollContainer = e.currentTarget.querySelector('.scroll-container') as HTMLElement;
+                  if (scrollContainer) {
+                    scrollContainer.style.animationPlayState = 'paused';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  const scrollContainer = e.currentTarget.querySelector('.scroll-container') as HTMLElement;
+                  if (scrollContainer) {
+                    scrollContainer.style.animationPlayState = 'running';
+                  }
+                }}
+              >
+                <div className="scroll-container space-y-6 animate-scroll-vertical">
+                  {/* Duplicate the jobs array to create seamless loop */}
+                  {[...featuredJobs, ...featuredJobs].map((job, index) => (
+                    <div key={`${job.id}-${index}`} className="transform hover:scale-[1.02] transition-all duration-300">
+                      <JobCard
+                        {...job}
+                        className="bg-white border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-xl rounded-2xl"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
           
-          {/* Clay-style CTA Button */}
+          {/* CTA Button */}
           <div className="text-center mt-16 animate-fade-in" style={{animationDelay: '0.6s'}}>
             <div className="relative inline-block group">
-              <div className="absolute inset-0 bg-clay-primary rounded-2xl shadow-clay-medium group-hover:shadow-clay-strong transition-all duration-500"></div>
+              <div className="absolute inset-0 bg-blue-600 rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500"></div>
               <Link to="/jobs">
                 <Button 
                   variant="hero" 
                   size="lg" 
-                  className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-clay-primary hover:bg-clay-accent text-white border-0 shadow-clay-inset"
+                  className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-inner"
                 >
                   <span className="flex items-center gap-3">
                     Utforska alla jobb
@@ -290,32 +324,29 @@ const Index = () => {
               </Link>
             </div>
             
-            {/* Clay-styled stats */}
-            <div className="flex justify-center items-center gap-8 mt-8 text-sm text-clay-text-light">
+            {/* Stats */}
+            <div className="flex justify-center items-center gap-8 mt-8 text-sm text-gray-500">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-clay-accent rounded-full animate-pulse shadow-clay-soft"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse shadow-lg"></div>
                 <span>Nya jobb varje dag</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-clay-primary rounded-full animate-pulse shadow-clay-soft"></div>
+                <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse shadow-lg"></div>
                 <span>AI-matchade rekommendationer</span>
               </div>
             </div>
           </div>
         </div>
-        
-        {/* Bottom decorative line */}
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
       </section>
 
-      {/* Companies Section - Clay Style */}
-      <section className="py-16 bg-clay-surface-dark">
+      {/* Companies Section */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-clay-text mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Företag som rekryterar
             </h2>
-            <p className="text-clay-text-light max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto">
               Anslut dig till Sveriges mest innovativa företag
             </p>
           </div>
@@ -325,19 +356,19 @@ const Index = () => {
               <CompanyCard
                 key={index}
                 {...company}
-                className="animate-fade-in shadow-clay-soft hover:shadow-clay-medium transition-all duration-300 bg-clay-surface border-2 border-clay-surface hover:border-clay-accent rounded-3xl"
+                className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl"
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Clay Style */}
-      <section className="relative py-20 bg-gradient-hero overflow-hidden">
-        {/* Clay decorative shapes */}
+      {/* CTA Section */}
+      <section className="relative py-20 bg-gradient-to-r from-blue-600 to-blue-700 overflow-hidden">
+        {/* Blue decorative shapes */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-1/4 w-72 h-72 bg-clay-accent/30 rounded-[4rem] rotate-12 shadow-clay-soft animate-float opacity-40"></div>
-          <div className="absolute bottom-10 right-1/4 w-80 h-64 bg-clay-primary/20 rounded-[3rem] -rotate-6 shadow-clay-medium animate-float opacity-50" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-10 left-1/4 w-72 h-72 bg-blue-400/30 rounded-[4rem] rotate-12 animate-float opacity-40"></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-64 bg-blue-500/20 rounded-[3rem] -rotate-6 animate-float opacity-50" style={{animationDelay: '2s'}}></div>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -351,14 +382,14 @@ const Index = () => {
             <Button 
               variant="secondary" 
               size="lg" 
-              className="font-semibold bg-white text-clay-primary hover:bg-clay-surface shadow-clay-medium hover:shadow-clay-strong border-0 rounded-2xl"
+              className="font-semibold bg-white text-blue-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl border-0 rounded-2xl"
             >
               Skapa profil
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur bg-white/5 rounded-2xl shadow-clay-soft"
+              className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur bg-white/5 rounded-2xl shadow-lg"
             >
               För företag
             </Button>

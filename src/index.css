@@ -17,63 +17,47 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 210 11% 15%;
 
-    /* Professional LinkedIn-inspired blue */
-    --primary: 210 100% 48%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 210 100% 42%;
+    /* Blue/White/Black theme */
+    --primary: 210 100% 48%;         /* Blue */
+    --primary-foreground: 0 0% 100%; /* White */
+    --primary-hover: 210 100% 42%;   /* Darker blue */
 
-    /* Airbnb-inspired clean grays */
-    --secondary: 210 11% 96%;
-    --secondary-foreground: 210 11% 15%;
+    /* White/Gray backgrounds */
+    --secondary: 210 11% 96%;        /* Light gray */
+    --secondary-foreground: 210 11% 15%; /* Dark gray */
 
-    --muted: 210 11% 96%;
-    --muted-foreground: 210 7% 46%;
+    --muted: 210 11% 96%;            /* Light gray */
+    --muted-foreground: 210 7% 46%;  /* Medium gray */
 
-    --accent: 210 100% 95%;
-    --accent-foreground: 210 100% 48%;
+    --accent: 210 100% 95%;          /* Very light blue */
+    --accent-foreground: 210 100% 48%; /* Blue */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;        /* Red */
+    --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 210 20% 92%;
-    --input: 210 20% 92%;
-    --ring: 210 100% 48%;
+    --border: 210 20% 92%;           /* Light gray border */
+    --input: 210 20% 92%;            /* Light gray input */
+    --ring: 210 100% 48%;            /* Blue ring */
 
-    /* Success colors for job applications */
-    --success: 120 60% 45%;
-    --success-foreground: 0 0% 100%;
+    /* Success and warning colors */
+    --success: 120 60% 45%;          /* Green */
+    --success-foreground: 0 0% 100%; /* White */
 
-    /* Warning colors */
-    --warning: 35 90% 55%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 35 90% 55%;           /* Orange */
+    --warning-foreground: 0 0% 100%; /* White */
 
-    /* Claymorphism color palette - warm, earthy tones */
-    --clay-primary: 28 85% 65%;      /* Warm terracotta */
-    --clay-secondary: 45 65% 75%;    /* Soft sandy beige */
-    --clay-accent: 15 75% 70%;       /* Warm coral */
-    --clay-surface: 35 25% 92%;      /* Light cream */
-    --clay-surface-dark: 35 15% 88%; /* Slightly darker cream */
-    --clay-text: 30 8% 25%;          /* Dark warm gray */
-    --clay-text-light: 30 5% 45%;    /* Medium warm gray */
-    
-    /* Clay gradients - subtle, matte */
-    --gradient-hero: linear-gradient(145deg, hsl(var(--clay-primary)), hsl(var(--clay-accent)));
-    --gradient-card: linear-gradient(135deg, hsl(var(--clay-surface)) 0%, hsl(var(--clay-surface-dark)) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(var(--clay-surface)) 0%, hsl(var(--background)) 100%);
-    
-    /* Clay shadows - soft, organic */
-    --shadow-clay-soft: 0 8px 32px -8px hsl(var(--clay-primary) / 0.15), 0 2px 8px -2px hsl(var(--clay-primary) / 0.1);
-    --shadow-clay-medium: 0 12px 40px -12px hsl(var(--clay-primary) / 0.2), 0 4px 16px -4px hsl(var(--clay-primary) / 0.15);
-    --shadow-clay-strong: 0 16px 48px -16px hsl(var(--clay-primary) / 0.25), 0 6px 20px -6px hsl(var(--clay-primary) / 0.2);
-    --shadow-clay-inset: inset 0 2px 4px hsl(var(--clay-primary) / 0.1), inset 0 -2px 4px hsl(var(--clay-surface-dark) / 0.1);
-    
-    /* Border radius - more organic */
-    --radius: 1.25rem;
+    /* Clean gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 48%), hsl(210 100% 56%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(210 11% 98%));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 11% 98%), hsl(0 0% 100%));
 
-    /* Legacy shadows */
+    /* Clean shadows */
     --shadow-card: 0 4px 12px -2px hsl(210 11% 15% / 0.08);
     --shadow-card-hover: 0 8px 24px -4px hsl(210 11% 15% / 0.12);
     --shadow-button: 0 2px 8px -2px hsl(210 100% 48% / 0.3);
+
+    /* Standard radius */
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
