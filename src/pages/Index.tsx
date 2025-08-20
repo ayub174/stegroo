@@ -217,40 +217,96 @@ const Index = () => {
       </section>
 
       {/* Featured Jobs Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Utvalda jobb för dig
-              </h2>
-              <p className="text-muted-foreground">
-                Handplockade möjligheter från våra partners
-              </p>
+      <section className="relative py-20 overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-20 right-10 w-80 h-80 bg-gradient-to-br from-accent/8 to-primary/12 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-primary/6 to-accent/10 rounded-full blur-3xl animate-float" style={{animationDelay: '3s'}}></div>
+          
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0 opacity-[0.015]" style={{
+            backgroundImage: `radial-gradient(circle, hsl(var(--accent)) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-16 animate-fade-in">
+            <div className="inline-flex items-center gap-2 mb-6">
+              <Badge variant="secondary" className="font-medium bg-gradient-to-r from-accent/15 to-primary/10 border-accent/30 px-4 py-2">
+                <Star className="h-3 w-3 mr-1 text-accent" />
+                Personligt utvalda
+              </Badge>
             </div>
-            <Button variant="outline" className="hidden md:inline-flex">
-              Visa alla jobb
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
+            
+            <h2 className="text-4xl lg:text-5xl font-black text-foreground mb-6 leading-tight">
+              <span className="text-transparent bg-gradient-to-r from-primary via-accent to-primary bg-clip-text">
+                Utvalda jobb
+              </span>
+              <span className="block text-foreground/90 mt-2">för dig</span>
+            </h2>
+            
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Handplockade möjligheter från våra partners som
+              <span className="text-primary/80 font-medium"> matchar din profil perfekt</span>
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {featuredJobs.map((job, index) => (
-              <JobCard
-                key={index}
-                {...job}
-                className="animate-fade-in"
-              />
-            ))}
+          {/* Jobs Grid with Enhanced Design */}
+          <div className="relative">
+            {/* Background decoration for grid */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-3xl blur-3xl opacity-30"></div>
+            
+            <div className="relative grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {featuredJobs.map((job, index) => (
+                <div key={index} className="group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+                  <div className="relative">
+                    {/* Card glow effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                    
+                    <JobCard
+                      {...job}
+                      className="relative transform hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-sm border-border/50 hover:border-primary/30"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           
-          <div className="text-center mt-8 md:hidden">
-            <Button variant="outline" className="w-full">
-              Visa alla jobb
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
+          {/* Enhanced CTA Button */}
+          <div className="text-center mt-16 animate-fade-in" style={{animationDelay: '0.6s'}}>
+            <div className="relative inline-block group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition-all duration-500"></div>
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-2xl"
+              >
+                <span className="flex items-center gap-3">
+                  Utforska alla jobb
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+              </Button>
+            </div>
+            
+            {/* Additional stats below button */}
+            <div className="flex justify-center items-center gap-8 mt-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span>Nya jobb varje dag</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span>AI-matchade rekommendationer</span>
+              </div>
+            </div>
           </div>
         </div>
+        
+        {/* Bottom decorative line */}
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
       </section>
 
       {/* Companies Section */}
