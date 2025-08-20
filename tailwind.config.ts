@@ -146,6 +146,14 @@ export default {
 					'100%': {
 						transform: 'translateY(-50%)'
 					}
+				},
+				'scroll-horizontal': {
+					'0%': {
+						transform: 'translateX(0)'
+					},
+					'100%': {
+						transform: 'translateX(-50%)'
+					}
 				}
 			},
 			animation: {
@@ -155,7 +163,8 @@ export default {
 				'scale-in': 'scale-in 0.2s ease-out',
 				'gradient-shift': 'gradient-shift 8s ease-in-out infinite',
 				'float': 'float 6s ease-in-out infinite',
-				'scroll-vertical': 'scroll-vertical 20s linear infinite'
+				'scroll-vertical': 'scroll-vertical 20s linear infinite',
+				'scroll-horizontal': 'scroll-horizontal 30s linear infinite'
 			},
 			boxShadow: {
 				'card': 'var(--shadow-card)',

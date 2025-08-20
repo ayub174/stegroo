@@ -291,13 +291,13 @@ const Index = () => {
                   }
                 }}
               >
-                <div className="scroll-container space-y-6 animate-scroll-vertical">
+                <div className="scroll-container flex gap-6 animate-scroll-horizontal">
                   {/* Duplicate the jobs array to create seamless loop */}
                   {[...featuredJobs, ...featuredJobs].map((job, index) => (
-                    <div key={`${job.id}-${index}`} className="transform hover:scale-[1.02] transition-all duration-300">
+                    <div key={`${job.id}-${index}`} className="flex-shrink-0 w-80 transform hover:scale-[1.02] transition-all duration-300">
                       <JobCard
                         {...job}
-                        className="bg-white border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-xl rounded-2xl"
+                        className="bg-white border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-xl rounded-2xl h-full"
                       />
                     </div>
                   ))}
