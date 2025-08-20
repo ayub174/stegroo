@@ -44,14 +44,14 @@ export default function Auth() {
           title: "Registrering lyckades!",
           description: "Kolla din e-post för att bekräfta ditt konto.",
         });
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-        if (error) throw error;
-        navigate("/");
-      }
+        } else {
+          const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+          });
+          if (error) throw error;
+          navigate("/profile");
+        }
     } catch (error: any) {
       toast({
         title: "Fel uppstod",
@@ -69,7 +69,7 @@ export default function Auth() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/`
+          redirectTo: `${window.location.origin}/profile`
         }
       });
       if (error) throw error;
@@ -90,7 +90,7 @@ export default function Auth() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'apple',
         options: {
-          redirectTo: `${window.location.origin}/`
+          redirectTo: `${window.location.origin}/profile`
         }
       });
       if (error) throw error;
