@@ -70,6 +70,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				clay: {
+					primary: 'hsl(var(--clay-primary))',
+					secondary: 'hsl(var(--clay-secondary))',
+					accent: 'hsl(var(--clay-accent))',
+					surface: 'hsl(var(--clay-surface))',
+					'surface-dark': 'hsl(var(--clay-surface-dark))',
+					text: 'hsl(var(--clay-text))',
+					'text-light': 'hsl(var(--clay-text-light))'
 				}
 			},
 			borderRadius: {
@@ -153,17 +162,6 @@ export default {
 				'gradient-card': 'var(--gradient-card)',
 				'gradient-subtle': 'var(--gradient-subtle)'
 			},
-			colors: {
-				clay: {
-					primary: 'hsl(var(--clay-primary))',
-					secondary: 'hsl(var(--clay-secondary))',
-					accent: 'hsl(var(--clay-accent))',
-					surface: 'hsl(var(--clay-surface))',
-					'surface-dark': 'hsl(var(--clay-surface-dark))',
-					text: 'hsl(var(--clay-text))',
-					'text-light': 'hsl(var(--clay-text-light))'
-				}
-			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
