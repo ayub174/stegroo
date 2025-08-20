@@ -169,258 +169,338 @@ const JobDetails = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="container mx-auto px-4 py-6">
-        {/* Back Navigation */}
-        <div className="mb-6">
-          <Link to="/" className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card/50 border border-border/30 text-muted-foreground hover:text-primary hover:bg-card/80 hover:border-primary/20 hover:shadow-card transition-all duration-300 hover:scale-105">
-            <ChevronLeft className="h-4 w-4 group-hover:translate-x-[-2px] transition-transform duration-300" />
-            <span className="font-medium">Tillbaka till jobb</span>
-          </Link>
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Glassmorphism Background Effects */}
+        <div className="fixed inset-0 z-0">
+          <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-primary/20 to-accent/15 rounded-full blur-3xl animate-float opacity-30"></div>
+          <div className="absolute top-60 right-20 w-80 h-80 bg-gradient-to-bl from-accent/25 to-primary/20 rounded-full blur-3xl animate-float opacity-25" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-40 left-1/3 w-72 h-72 bg-gradient-to-tr from-primary/15 to-accent/20 rounded-full blur-3xl animate-float opacity-20" style={{animationDelay: '4s'}}></div>
+          
+          {/* Subtle grid overlay */}
+          <div className="absolute inset-0 opacity-[0.02]" style={{
+            backgroundImage: `radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}></div>
         </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Job Header */}
-            <Card className="border-border/50">
-              <CardContent className="p-8">
-                <div className="flex justify-between items-start mb-6">
-                  <div className="flex-1">
-                    <h1 className="text-3xl font-bold text-foreground mb-4">
-                      {currentJob.title}
-                    </h1>
-                    <div className="flex items-center gap-6 text-muted-foreground mb-4">
-                      <div className="flex items-center gap-2">
-                        <Building2 className="h-5 w-5" />
-                        <span className="font-medium text-lg">{currentJob.company}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MapPin className="h-5 w-5" />
-                        <span>{currentJob.location}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-5 w-5" />
-                        <span>{currentJob.timePosted}</span>
-                      </div>
-                    </div>
-                    <div className="text-2xl font-bold text-primary mb-4">
-                      {currentJob.salary}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="font-medium">
-                        {currentJob.type}
-                      </Badge>
-                      {currentJob.tags.map((tag, index) => (
-                        <Badge key={index} variant="outline">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex gap-2 ml-4">
-                    <Button variant="ghost" size="icon">
-                      <Share2 className="h-5 w-5" />
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <Bookmark className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4">
-                  <Button variant="hero" size="lg" className="px-8">
-                    Ansök nu
-                  </Button>
-                  <Button variant="outline" size="lg">
-                    Spara jobb
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Job Description */}
-            <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-primary" />
-                  Om rollen
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  {currentJob.description}
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Responsibilities */}
-            <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-primary" />
-                  Arbetsuppgifter
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  {currentJob.responsibilities.map((responsibility, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 shrink-0"></div>
-                      <span className="text-muted-foreground">{responsibility}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Requirements */}
-            <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Award className="h-5 w-5 text-primary" />
-                  Krav
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3">Grundläggande krav:</h4>
-                  <ul className="space-y-2">
-                    {currentJob.requirements.map((requirement, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <CheckCircle className="h-4 w-4 text-success mt-0.5 shrink-0" />
-                        <span className="text-muted-foreground">{requirement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <Separator />
-                
-                <div>
-                  <h4 className="font-semibold text-foreground mb-3">Meriterande:</h4>
-                  <ul className="space-y-2">
-                    {currentJob.preferred.map((preferred, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <Star className="h-4 w-4 text-warning mt-0.5 shrink-0" />
-                        <span className="text-muted-foreground">{preferred}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Benefits */}
-            <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Heart className="h-5 w-5 text-primary" />
-                  Vad vi erbjuder
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {currentJob.benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-gradient-subtle">
-                      <CheckCircle className="h-4 w-4 text-success mt-0.5 shrink-0" />
-                      <span className="text-muted-foreground text-sm">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Company Description */}
-            <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-primary" />
-                  Om {currentJob.company}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed mb-6">
-                  {currentJob.companyDescription}
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-gradient-subtle rounded-lg">
-                  <div className="text-center">
-                    <div className="font-semibold text-foreground">{currentJob.companySize}</div>
-                    <div className="text-sm text-muted-foreground">Anställda</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-semibold text-foreground">{currentJob.founded}</div>
-                    <div className="text-sm text-muted-foreground">Grundat</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-semibold text-foreground">{currentJob.industry}</div>
-                    <div className="text-sm text-muted-foreground">Bransch</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="font-semibold text-foreground">
-                      <Globe className="h-4 w-4 mx-auto" />
-                    </div>
-                    <div className="text-sm text-muted-foreground">Webbplats</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+        
+        <div className="container mx-auto px-4 py-8 relative z-10">
+          {/* Enhanced Back Navigation */}
+          <div className="mb-8 animate-fade-in">
+            <Link to="/" className="group inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-muted-foreground hover:text-primary hover:bg-white/20 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:scale-105">
+              <ChevronLeft className="h-5 w-5 group-hover:translate-x-[-4px] transition-transform duration-300" />
+              <span className="font-semibold">Tillbaka till jobb</span>
+            </Link>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Apply Card */}
-            <Card className="border-border/50 sticky top-24">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-foreground mb-4">Ansök om tjänsten</h3>
-                <div className="space-y-4">
-                  <Button variant="hero" className="w-full" size="lg">
-                    Ansök nu
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Spara för senare
-                  </Button>
-                </div>
-                <Separator className="my-4" />
-                <div className="text-sm text-muted-foreground space-y-2">
-                  <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4" />
-                    <span>25 personer har ansökt</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>Ansökan stänger: 30 dagar</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Related Jobs */}
-            <Card className="border-border/50">
-              <CardHeader>
-                <CardTitle className="text-lg">Liknande jobb</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {relatedJobs.map((job, index) => (
-                  <div key={index} className="p-4 rounded-lg border border-border/50 hover:shadow-card transition-shadow">
-                    <h4 className="font-medium text-foreground mb-1">{job.title}</h4>
-                    <p className="text-sm text-muted-foreground mb-2">{job.company} • {job.location}</p>
-                    <div className="flex flex-wrap gap-1 mb-2">
-                      {job.tags.map((tag, tagIndex) => (
-                        <Badge key={tagIndex} variant="outline" className="text-xs">
-                          {tag}
+          {/* Main Glassmorphic Container */}
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+            {/* Main Content - Compact & Grouped */}
+            <div className="xl:col-span-3 space-y-6">
+              {/* Hero Job Card - Glassmorphism */}
+              <div className="relative group animate-fade-in" style={{animationDelay: '0.1s'}}>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                
+                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+                    {/* Job Info */}
+                    <div className="flex-1 space-y-4">
+                      <div className="flex items-center gap-3 mb-4">
+                        <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 backdrop-blur-sm font-medium px-3 py-1">
+                          {currentJob.type}
                         </Badge>
-                      ))}
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-sm text-green-400 font-medium">Aktivt</span>
+                      </div>
+                      
+                      <h1 className="text-4xl lg:text-5xl font-black text-foreground leading-tight">
+                        {currentJob.title}
+                      </h1>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                          <div className="p-2 rounded-xl bg-primary/10 backdrop-blur-sm">
+                            <Building2 className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="font-medium">{currentJob.company}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                          <div className="p-2 rounded-xl bg-accent/10 backdrop-blur-sm">
+                            <MapPin className="h-4 w-4 text-accent" />
+                          </div>
+                          <span className="font-medium">{currentJob.location}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-muted-foreground">
+                          <div className="p-2 rounded-xl bg-primary/10 backdrop-blur-sm">
+                            <Clock className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="font-medium">{currentJob.timePosted}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        {currentJob.salary}
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-2">
+                        {currentJob.tags.map((tag, index) => (
+                          <Badge key={index} variant="outline" className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">{job.timePosted}</span>
-                      <Button variant="ghost" size="sm">
-                        <ArrowRight className="h-3 w-3" />
+                    
+                    {/* Action Buttons */}
+                    <div className="flex flex-col gap-3 lg:min-w-[200px]">
+                      <Button variant="hero" size="lg" className="w-full font-semibold px-8 py-4 hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm">
+                        Ansök nu
                       </Button>
+                      <div className="flex gap-2">
+                        <Button variant="outline" className="flex-1 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
+                          Spara
+                        </Button>
+                        <Button variant="ghost" size="icon" className="bg-white/10 backdrop-blur-sm hover:bg-white/20">
+                          <Share2 className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="bg-white/10 backdrop-blur-sm hover:bg-white/20">
+                          <Bookmark className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                ))}
-              </CardContent>
-            </Card>
+                </div>
+              </div>
+
+              {/* Compact Info Grid - Glassmorphism */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* About & Responsibilities */}
+                <div className="space-y-6">
+                  {/* About Role */}
+                  <div className="relative group animate-fade-in" style={{animationDelay: '0.2s'}}>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-xl bg-primary/20 backdrop-blur-sm">
+                          <Target className="h-5 w-5 text-primary" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">Om rollen</h3>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {currentJob.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Responsibilities */}
+                  <div className="relative group animate-fade-in" style={{animationDelay: '0.3s'}}>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-xl bg-accent/20 backdrop-blur-sm">
+                          <CheckCircle className="h-5 w-5 text-accent" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">Arbetsuppgifter</h3>
+                      </div>
+                      <div className="space-y-3">
+                        {currentJob.responsibilities.slice(0, 4).map((responsibility, index) => (
+                          <div key={index} className="flex items-start gap-3">
+                            <div className="w-1.5 h-1.5 bg-gradient-to-r from-primary to-accent rounded-full mt-2.5 shrink-0"></div>
+                            <span className="text-muted-foreground text-sm leading-relaxed">{responsibility}</span>
+                          </div>
+                        ))}
+                        {currentJob.responsibilities.length > 4 && (
+                          <div className="text-primary/80 text-sm font-medium mt-2">
+                            +{currentJob.responsibilities.length - 4} fler uppgifter
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Requirements & Benefits */}
+                <div className="space-y-6">
+                  {/* Requirements */}
+                  <div className="relative group animate-fade-in" style={{animationDelay: '0.4s'}}>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-xl bg-primary/20 backdrop-blur-sm">
+                          <Award className="h-5 w-5 text-primary" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">Krav</h3>
+                      </div>
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 text-sm">Grundläggande:</h4>
+                          <div className="space-y-2">
+                            {currentJob.requirements.slice(0, 3).map((requirement, index) => (
+                              <div key={index} className="flex items-start gap-2">
+                                <CheckCircle className="h-3 w-3 text-green-400 mt-1 shrink-0" />
+                                <span className="text-muted-foreground text-xs leading-relaxed">{requirement}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 text-sm">Meriterande:</h4>
+                          <div className="space-y-2">
+                            {currentJob.preferred.slice(0, 2).map((preferred, index) => (
+                              <div key={index} className="flex items-start gap-2">
+                                <Star className="h-3 w-3 text-yellow-400 mt-1 shrink-0" />
+                                <span className="text-muted-foreground text-xs leading-relaxed">{preferred}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Benefits */}
+                  <div className="relative group animate-fade-in" style={{animationDelay: '0.5s'}}>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 rounded-xl bg-accent/20 backdrop-blur-sm">
+                          <Heart className="h-5 w-5 text-accent" />
+                        </div>
+                        <h3 className="text-xl font-bold text-foreground">Förmåner</h3>
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        {currentJob.benefits.slice(0, 6).map((benefit, index) => (
+                          <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-white/5 backdrop-blur-sm">
+                            <CheckCircle className="h-3 w-3 text-green-400 shrink-0" />
+                            <span className="text-muted-foreground text-xs">{benefit}</span>
+                          </div>
+                        ))}
+                        {currentJob.benefits.length > 6 && (
+                          <div className="text-primary/80 text-xs font-medium mt-1">
+                            +{currentJob.benefits.length - 6} fler förmåner
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Company Info - Compact */}
+              <div className="relative group animate-fade-in" style={{animationDelay: '0.6s'}}>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-xl bg-primary/20 backdrop-blur-sm">
+                      <Building2 className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">Om {currentJob.company}</h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
+                    {currentJob.companyDescription}
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { label: "Anställda", value: currentJob.companySize },
+                      { label: "Grundat", value: currentJob.founded },
+                      { label: "Bransch", value: currentJob.industry },
+                      { label: "Webbplats", value: "Besök", icon: Globe }
+                    ].map(({ label, value, icon: Icon }, index) => (
+                      <div key={index} className="text-center p-3 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                        <div className="font-semibold text-foreground text-sm flex items-center justify-center gap-1">
+                          {Icon && <Icon className="h-3 w-3" />}
+                          {value}
+                        </div>
+                        <div className="text-xs text-muted-foreground">{label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar - Glassmorphic Redesign */}
+            <div className="xl:col-span-1 space-y-6">
+              {/* Apply Card - Glassmorphism */}
+              <div className="relative group animate-fade-in sticky top-24" style={{animationDelay: '0.7s'}}>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                
+                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition-all duration-500">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 rounded-xl bg-primary/20 backdrop-blur-sm">
+                      <Target className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">Ansök nu</h3>
+                  </div>
+                  
+                  <div className="space-y-4 mb-6">
+                    <Button variant="hero" size="lg" className="w-full font-semibold py-4 hover:scale-105 transition-all duration-300 shadow-2xl">
+                      Skicka ansökan
+                    </Button>
+                    <Button variant="outline" className="w-full bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
+                      <Bookmark className="h-4 w-4 mr-2" />
+                      Spara för senare
+                    </Button>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-white/20">
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-center gap-3 text-muted-foreground">
+                        <div className="p-1.5 rounded-lg bg-primary/10 backdrop-blur-sm">
+                          <Users className="h-3 w-3 text-primary" />
+                        </div>
+                        <span>25 personer har ansökt</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-muted-foreground">
+                        <div className="p-1.5 rounded-lg bg-accent/10 backdrop-blur-sm">
+                          <Calendar className="h-3 w-3 text-accent" />
+                        </div>
+                        <span>Stänger om 30 dagar</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Related Jobs - Glassmorphism */}
+              <div className="relative group animate-fade-in" style={{animationDelay: '0.8s'}}>
+                <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                
+                <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-xl bg-accent/20 backdrop-blur-sm">
+                      <Star className="h-5 w-5 text-accent" />
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground">Liknande jobb</h3>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {relatedJobs.map((job, index) => (
+                      <div key={index} className="group cursor-pointer">
+                        <div className="relative p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                          <h4 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                            {job.title}
+                          </h4>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            {job.company} • {job.location}
+                          </p>
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {job.tags.map((tag, tagIndex) => (
+                              <Badge key={tagIndex} variant="outline" className="text-xs bg-white/5 backdrop-blur-sm border-white/20">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-muted-foreground">{job.timePosted}</span>
+                            <ArrowRight className="h-3 w-3 text-primary group-hover:translate-x-1 transition-transform duration-300" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
