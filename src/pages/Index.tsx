@@ -12,91 +12,113 @@ import heroImage from "@/assets/hero-image.jpg";
 import techCategoryImage from "@/assets/tech-category.jpg";
 import marketingCategoryImage from "@/assets/marketing-category.jpg";
 import healthcareCategoryImage from "@/assets/healthcare-category.jpg";
-
 const Index = () => {
-  const featuredJobs = [
-    {
-      id: "1",
-      title: "Senior Frontend Utvecklare",
-      company: "TechCorp AB",
-      location: "Stockholm",
-      salary: "65 000 - 85 000 kr/mån",
-      type: "Heltid",
-      timePosted: "2 dagar sedan",
-      tags: ["React", "TypeScript", "Remote OK"]
-    },
-    {
-      id: "2",
-      title: "UX/UI Designer",
-      company: "Design Studio",
-      location: "Göteborg",
-      salary: "55 000 - 70 000 kr/mån",
-      type: "Heltid",
-      timePosted: "1 dag sedan",
-      tags: ["Figma", "Prototyping", "User Research"]
-    },
-    {
-      id: "3",
-      title: "Produktägare",
-      company: "StartupTech",
-      location: "Malmö",
-      salary: "70 000 - 90 000 kr/mån",
-      type: "Heltid",
-      timePosted: "3 dagar sedan",
-      tags: ["Agile", "Scrum", "Analytics"]
-    },
-    {
-      id: "4",
-      title: "Backend Developer",
-      company: "CloudTech",
-      location: "Stockholm",
-      salary: "60 000 - 80 000 kr/mån",
-      type: "Heltid",
-      timePosted: "4 dagar sedan",
-      tags: ["Node.js", "MongoDB", "AWS"]
-    },
-    {
-      id: "5",
-      title: "DevOps Engineer",
-      company: "ScaleTech",
-      location: "Göteborg",
-      salary: "75 000 - 95 000 kr/mån",
-      type: "Heltid",
-      timePosted: "5 dagar sedan",
-      tags: ["Docker", "Kubernetes", "CI/CD"]
-    },
-    {
-      id: "6",
-      title: "Data Scientist",
-      company: "AI Solutions",
-      location: "Stockholm",
-      salary: "70 000 - 90 000 kr/mån",
-      type: "Heltid",
-      timePosted: "6 dagar sedan",
-      tags: ["Python", "Machine Learning", "SQL"]
-    }
-  ];
-
-  const categories = [
-    { title: "Teknik & IT", jobCount: 15240, image: techCategoryImage },
-    { title: "Marknadsföring", jobCount: 8932, image: marketingCategoryImage },
-    { title: "Hälsovård", jobCount: 12456, image: healthcareCategoryImage },
-    { title: "Ekonomi", jobCount: 6789, image: techCategoryImage },
-    { title: "Utbildning", jobCount: 4532, image: marketingCategoryImage },
-    { title: "Försäljning", jobCount: 9876, image: healthcareCategoryImage }
-  ];
-
-  const companies = [
-    { name: "Spotify", industry: "Musikstreaming", openPositions: 23 },
-    { name: "Klarna", industry: "Fintech", openPositions: 45 },
-    { name: "Ericsson", industry: "Telekommunikation", openPositions: 67 },
-    { name: "H&M", industry: "Mode & Retail", openPositions: 34 },
-    { name: "Volvo Cars", industry: "Automotive", openPositions: 56 },
-    { name: "King", industry: "Gaming", openPositions: 28 }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const featuredJobs = [{
+    id: "1",
+    title: "Senior Frontend Utvecklare",
+    company: "TechCorp AB",
+    location: "Stockholm",
+    salary: "65 000 - 85 000 kr/mån",
+    type: "Heltid",
+    timePosted: "2 dagar sedan",
+    tags: ["React", "TypeScript", "Remote OK"]
+  }, {
+    id: "2",
+    title: "UX/UI Designer",
+    company: "Design Studio",
+    location: "Göteborg",
+    salary: "55 000 - 70 000 kr/mån",
+    type: "Heltid",
+    timePosted: "1 dag sedan",
+    tags: ["Figma", "Prototyping", "User Research"]
+  }, {
+    id: "3",
+    title: "Produktägare",
+    company: "StartupTech",
+    location: "Malmö",
+    salary: "70 000 - 90 000 kr/mån",
+    type: "Heltid",
+    timePosted: "3 dagar sedan",
+    tags: ["Agile", "Scrum", "Analytics"]
+  }, {
+    id: "4",
+    title: "Backend Developer",
+    company: "CloudTech",
+    location: "Stockholm",
+    salary: "60 000 - 80 000 kr/mån",
+    type: "Heltid",
+    timePosted: "4 dagar sedan",
+    tags: ["Node.js", "MongoDB", "AWS"]
+  }, {
+    id: "5",
+    title: "DevOps Engineer",
+    company: "ScaleTech",
+    location: "Göteborg",
+    salary: "75 000 - 95 000 kr/mån",
+    type: "Heltid",
+    timePosted: "5 dagar sedan",
+    tags: ["Docker", "Kubernetes", "CI/CD"]
+  }, {
+    id: "6",
+    title: "Data Scientist",
+    company: "AI Solutions",
+    location: "Stockholm",
+    salary: "70 000 - 90 000 kr/mån",
+    type: "Heltid",
+    timePosted: "6 dagar sedan",
+    tags: ["Python", "Machine Learning", "SQL"]
+  }];
+  const categories = [{
+    title: "Teknik & IT",
+    jobCount: 15240,
+    image: techCategoryImage
+  }, {
+    title: "Marknadsföring",
+    jobCount: 8932,
+    image: marketingCategoryImage
+  }, {
+    title: "Hälsovård",
+    jobCount: 12456,
+    image: healthcareCategoryImage
+  }, {
+    title: "Ekonomi",
+    jobCount: 6789,
+    image: techCategoryImage
+  }, {
+    title: "Utbildning",
+    jobCount: 4532,
+    image: marketingCategoryImage
+  }, {
+    title: "Försäljning",
+    jobCount: 9876,
+    image: healthcareCategoryImage
+  }];
+  const companies = [{
+    name: "Spotify",
+    industry: "Musikstreaming",
+    openPositions: 23
+  }, {
+    name: "Klarna",
+    industry: "Fintech",
+    openPositions: 45
+  }, {
+    name: "Ericsson",
+    industry: "Telekommunikation",
+    openPositions: 67
+  }, {
+    name: "H&M",
+    industry: "Mode & Retail",
+    openPositions: 34
+  }, {
+    name: "Volvo Cars",
+    industry: "Automotive",
+    openPositions: 56
+  }, {
+    name: "King",
+    industry: "Gaming",
+    openPositions: 28
+  }];
+  return <div className="min-h-screen bg-background">
       <Header />
       
       {/* Hero Section */}
@@ -105,24 +127,24 @@ const Index = () => {
         <div className="absolute inset-0 z-[1]">
           {/* Blue geometric shapes */}
           <div className="absolute top-20 left-10 w-64 h-64 bg-blue-100 rounded-3xl rotate-12 opacity-60 animate-float"></div>
-          <div className="absolute top-40 right-20 w-96 h-80 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-72 bg-blue-200 rounded-3xl rotate-3 opacity-50 animate-float" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-40 right-20 w-96 h-80 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float" style={{
+          animationDelay: '2s'
+        }}></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-72 bg-blue-200 rounded-3xl rotate-3 opacity-50 animate-float" style={{
+          animationDelay: '4s'
+        }}></div>
           
           {/* Subtle pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: `radial-gradient(circle, rgb(59 130 246) 0.5px, transparent 0.5px)`,
-            backgroundSize: '40px 40px'
-          }}></div>
+          backgroundImage: `radial-gradient(circle, rgb(59 130 246) 0.5px, transparent 0.5px)`,
+          backgroundSize: '40px 40px'
+        }}></div>
         </div>
         
         {/* Hero Image */}
         <div className="absolute inset-0 z-0">
           <div className="relative w-full h-full overflow-hidden rounded-3xl mx-4">
-            <img 
-              src={heroImage} 
-              alt="Modern collaborative workspace" 
-              className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[15s] ease-out"
-            />
+            <img src={heroImage} alt="Modern collaborative workspace" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[15s] ease-out" />
             {/* Blue-tinted overlays */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-white/60"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-white via-blue-50/30 to-transparent"></div>
@@ -155,7 +177,9 @@ const Index = () => {
             
             {/* Hero Title */}
             <div className="text-center lg:text-left mb-8">
-              <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{
+              animationDelay: '0.2s'
+            }}>
                 <span className="block mb-2">Hitta ditt</span>
                 <span className="relative inline-block group">
                   <span className="text-blue-600 hover:scale-105 transition-transform duration-700 cursor-default block relative">
@@ -167,14 +191,18 @@ const Index = () => {
                 <span className="block mt-2 text-gray-600">idag</span>
               </h1>
               
-              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto lg:mx-0 animate-fade-in leading-relaxed font-light" style={{animationDelay: '0.4s'}}>
+              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto lg:mx-0 animate-fade-in leading-relaxed font-light" style={{
+              animationDelay: '0.4s'
+            }}>
                 Upptäck tusentals möjligheter från Sveriges ledande företag. 
                 <span className="text-blue-600 font-medium"> Vi använder AI för att matcha dig med perfekta roller</span> som passar din profil och ambitioner.
               </p>
             </div>
             
             {/* Search Bar */}
-            <div className="flex justify-center lg:justify-start mb-12 animate-fade-in" style={{animationDelay: '0.6s'}}>
+            <div className="flex justify-center lg:justify-start mb-12 animate-fade-in" style={{
+            animationDelay: '0.6s'
+          }}>
               <div className="w-full max-w-2xl relative group">
                 <div className="absolute inset-0 bg-white rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500 border border-gray-200"></div>
                 <SearchBar className="relative transform hover:scale-[1.02] transition-all duration-300 bg-transparent shadow-none border-0" />
@@ -182,13 +210,30 @@ const Index = () => {
             </div>
             
             {/* Statistics Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto lg:mx-0 animate-fade-in" style={{animationDelay: '0.8s'}}>
-              {[
-                { icon: Users, label: "Jobbsökare", value: "2M+", color: "bg-blue-500" },
-                { icon: Briefcase, label: "Aktiva jobb", value: "50K+", color: "bg-blue-600" },
-                { icon: Star, label: "Företag", value: "10K+", color: "bg-blue-700" }
-              ].map(({ icon: Icon, label, value, color }, index) => (
-                <div key={index} className="group cursor-pointer">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto lg:mx-0 animate-fade-in" style={{
+            animationDelay: '0.8s'
+          }}>
+              {[{
+              icon: Users,
+              label: "Jobbsökare",
+              value: "2M+",
+              color: "bg-blue-500"
+            }, {
+              icon: Briefcase,
+              label: "Aktiva jobb",
+              value: "50K+",
+              color: "bg-blue-600"
+            }, {
+              icon: Star,
+              label: "Företag",
+              value: "10K+",
+              color: "bg-blue-700"
+            }].map(({
+              icon: Icon,
+              label,
+              value,
+              color
+            }, index) => <div key={index} className="group cursor-pointer">
                   <div className="relative p-6 rounded-3xl bg-white border-2 border-gray-100 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
                     <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
                     
@@ -206,8 +251,7 @@ const Index = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -217,37 +261,18 @@ const Index = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Populära jobbkategorier
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Utforska jobb inom de områden som passar dig bäst
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, index) => (
-              <CategoryCard
-                key={index}
-                title={category.title}
-                jobCount={category.jobCount}
-                image={category.image}
-                className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Trending Jobs Section */}
       <section className="relative py-20 overflow-hidden bg-white">
         {/* Blue decorative shapes */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float" style={{animationDelay: '3s'}}></div>
+          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float" style={{
+          animationDelay: '1s'
+        }}></div>
+          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float" style={{
+          animationDelay: '3s'
+        }}></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -276,46 +301,35 @@ const Index = () => {
           {/* Scrolling Jobs Container */}
           <div className="relative">
             <div className="bg-gray-50 rounded-3xl p-8 border border-gray-200 shadow-xl">
-              <div 
-                className="group overflow-hidden"
-                onMouseEnter={(e) => {
-                  const scrollContainer = e.currentTarget.querySelector('.scroll-container') as HTMLElement;
-                  if (scrollContainer) {
-                    scrollContainer.style.animationPlayState = 'paused';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  const scrollContainer = e.currentTarget.querySelector('.scroll-container') as HTMLElement;
-                  if (scrollContainer) {
-                    scrollContainer.style.animationPlayState = 'running';
-                  }
-                }}
-              >
+              <div className="group overflow-hidden" onMouseEnter={e => {
+              const scrollContainer = e.currentTarget.querySelector('.scroll-container') as HTMLElement;
+              if (scrollContainer) {
+                scrollContainer.style.animationPlayState = 'paused';
+              }
+            }} onMouseLeave={e => {
+              const scrollContainer = e.currentTarget.querySelector('.scroll-container') as HTMLElement;
+              if (scrollContainer) {
+                scrollContainer.style.animationPlayState = 'running';
+              }
+            }}>
                 <div className="scroll-container flex gap-6 animate-scroll-horizontal">
                   {/* Duplicate the jobs array to create seamless loop */}
-                  {[...featuredJobs, ...featuredJobs].map((job, index) => (
-                    <div key={`${job.id}-${index}`} className="flex-shrink-0 w-80 transform hover:scale-[1.02] transition-all duration-300">
-                      <JobCard
-                        {...job}
-                        className="bg-white border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-xl rounded-2xl h-full"
-                      />
-                    </div>
-                  ))}
+                  {[...featuredJobs, ...featuredJobs].map((job, index) => <div key={`${job.id}-${index}`} className="flex-shrink-0 w-80 transform hover:scale-[1.02] transition-all duration-300">
+                      <JobCard {...job} className="bg-white border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-xl rounded-2xl h-full" />
+                    </div>)}
                 </div>
               </div>
             </div>
           </div>
           
           {/* CTA Button */}
-          <div className="text-center mt-16 animate-fade-in" style={{animationDelay: '0.6s'}}>
+          <div className="text-center mt-16 animate-fade-in" style={{
+          animationDelay: '0.6s'
+        }}>
             <div className="relative inline-block group">
               <div className="absolute inset-0 bg-blue-600 rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500"></div>
               <Link to="/jobs">
-                <Button 
-                  variant="hero" 
-                  size="lg" 
-                  className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-inner"
-                >
+                <Button variant="hero" size="lg" className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-inner">
                   <span className="flex items-center gap-3">
                     Utforska alla jobb
                     <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -352,13 +366,7 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {companies.map((company, index) => (
-              <CompanyCard
-                key={index}
-                {...company}
-                className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl"
-              />
-            ))}
+            {companies.map((company, index) => <CompanyCard key={index} {...company} className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl" />)}
           </div>
         </div>
       </section>
@@ -368,7 +376,9 @@ const Index = () => {
         {/* Blue decorative shapes */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-1/4 w-72 h-72 bg-blue-400/30 rounded-[4rem] rotate-12 animate-float opacity-40"></div>
-          <div className="absolute bottom-10 right-1/4 w-80 h-64 bg-blue-500/20 rounded-[3rem] -rotate-6 animate-float opacity-50" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-64 bg-blue-500/20 rounded-[3rem] -rotate-6 animate-float opacity-50" style={{
+          animationDelay: '2s'
+        }}></div>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -379,18 +389,10 @@ const Index = () => {
             Gå med i miljontals jobbsökare som redan hittat sin drömkarriär genom vår plattform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              variant="secondary" 
-              size="lg" 
-              className="font-semibold bg-white text-blue-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl border-0 rounded-2xl"
-            >
+            <Button variant="secondary" size="lg" className="font-semibold bg-white text-blue-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl border-0 rounded-2xl">
               Skapa profil
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur bg-white/5 rounded-2xl shadow-lg"
-            >
+            <Button variant="outline" size="lg" className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur bg-white/5 rounded-2xl shadow-lg">
               För företag
             </Button>
           </div>
@@ -398,8 +400,6 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
