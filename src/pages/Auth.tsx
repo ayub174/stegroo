@@ -15,6 +15,9 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSignUp, setIsSignUp] = useState(true);
+  const [accountType, setAccountType] = useState<"private" | "business">("private");
+  const [companyName, setCompanyName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -28,7 +31,12 @@ export default function Auth() {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/`
+            emailRedirectTo: `${window.location.origin}/`,
+            data: {
+              account_type: accountType,
+              company_name: accountType === "business" ? companyName : null,
+              display_name: displayName || null
+            }
           }
         });
         if (error) throw error;
@@ -177,6 +185,67 @@ export default function Auth() {
 
               {/* Email Form */}
               <form onSubmit={handleEmailAuth} className="space-y-4">
+                {isSignUp && (
+                  <div className="space-y-4 p-4 bg-muted/20 rounded-lg border border-border/20">
+                    <div className="space-y-3">
+                      <Label className="text-sm font-medium">Kontotyp</Label>
+                      <div className="flex gap-4">
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            id="private"
+                            name="accountType"
+                            value="private"
+                            checked={accountType === "private"}
+                            onChange={(e) => setAccountType(e.target.value as "private" | "business")}
+                            className="text-primary focus:ring-primary"
+                          />
+                          <Label htmlFor="private" className="cursor-pointer">Privatkonto</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            id="business"
+                            name="accountType"
+                            value="business"
+                            checked={accountType === "business"}
+                            onChange={(e) => setAccountType(e.target.value as "private" | "business")}
+                            className="text-primary focus:ring-primary"
+                          />
+                          <Label htmlFor="business" className="cursor-pointer">Företagskonto</Label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {accountType === "business" && (
+                      <div className="space-y-2">
+                        <Label htmlFor="companyName">Företagsnamn *</Label>
+                        <Input
+                          id="companyName"
+                          type="text"
+                          placeholder="Ditt företag AB"
+                          value={companyName}
+                          onChange={(e) => setCompanyName(e.target.value)}
+                          required
+                          className="border-border/20"
+                        />
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <Label htmlFor="displayName">Visningsnamn</Label>
+                      <Input
+                        id="displayName"
+                        type="text"
+                        placeholder="Ditt namn"
+                        value={displayName}
+                        onChange={(e) => setDisplayName(e.target.value)}
+                        className="border-border/20"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-2">
                   <Label htmlFor="email">E-post</Label>
                   <Input
