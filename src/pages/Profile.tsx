@@ -324,28 +324,34 @@ export default function Profile() {
             </Card>
           </div>
 
-          {/* Main Content with Clay Tabs */}
+          {/* Main Content with Vertical Sidebar Menu */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/3 to-primary/5 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
-            <Tabs defaultValue="overview" className="relative space-y-8">
-              <TabsList className="w-full h-auto p-2 bg-gradient-to-r from-background/80 via-background/60 to-background/80 backdrop-blur-xl border-0 shadow-2xl shadow-primary/10 rounded-3xl grid grid-cols-5 gap-2">
-                {[
-                  { value: "overview", label: "Översikt", icon: "📊" },
-                  { value: "jobs", label: "Sparade jobb", icon: "💼" },
-                  { value: "applications", label: "Ansökningar", icon: "📋" },
-                  { value: "cv", label: "CV", icon: "🎓" },
-                  { value: "settings", label: "Inställningar", icon: "⚙️" }
-                ].map((tab) => (
-                  <TabsTrigger 
-                    key={tab.value}
-                    value={tab.value} 
-                    className="flex-col gap-2 h-20 rounded-2xl bg-transparent hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 data-[state=active]:bg-gradient-to-br data-[state=active]:from-primary/20 data-[state=active]:to-accent/15 data-[state=active]:shadow-inner data-[state=active]:shadow-primary/20 border-0 transition-all duration-300 hover-scale group/tab"
-                  >
-                    <span className="text-2xl group-hover/tab:animate-pulse">{tab.icon}</span>
-                    <span className="text-sm font-medium">{tab.label}</span>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+            <Tabs defaultValue="overview" className="relative flex gap-8">
+              {/* Vertical Sidebar Menu */}
+              <div className="w-64 shrink-0">
+                <TabsList className="w-full h-auto p-2 bg-gradient-to-b from-background/80 via-background/60 to-background/80 backdrop-blur-xl border-0 rounded-3xl flex flex-col gap-2">
+                  {[
+                    { value: "overview", label: "Översikt", icon: "📊" },
+                    { value: "jobs", label: "Sparade jobb", icon: "💼" },
+                    { value: "applications", label: "Ansökningar", icon: "📋" },
+                    { value: "cv", label: "CV", icon: "🎓" },
+                    { value: "settings", label: "Inställningar", icon: "⚙️" }
+                  ].map((tab) => (
+                    <TabsTrigger 
+                      key={tab.value}
+                      value={tab.value} 
+                      className="w-full flex items-center gap-4 h-16 px-6 rounded-2xl bg-transparent hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/20 data-[state=active]:to-accent/15 border-0 transition-all duration-300 hover-scale group/tab justify-start"
+                    >
+                      <span className="text-2xl group-hover/tab:animate-pulse">{tab.icon}</span>
+                      <span className="text-base font-medium">{tab.label}</span>
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
+              
+              {/* Content Area */}
+              <div className="flex-1 min-w-0">
 
               <TabsContent value="overview" className="space-y-8 animate-fade-in">
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -691,6 +697,7 @@ export default function Profile() {
                   </Card>
                 </div>
               </TabsContent>
+              </div>
             </Tabs>
           </div>
         </div>
