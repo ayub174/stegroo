@@ -1,4 +1,5 @@
 import { TrendingUp, Users, Briefcase, Star, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { SearchBar } from "@/components/ui/search-bar";
@@ -279,16 +280,18 @@ const Index = () => {
           <div className="text-center mt-16 animate-fade-in" style={{animationDelay: '0.6s'}}>
             <div className="relative inline-block group">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition-all duration-500"></div>
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-2xl"
-              >
-                <span className="flex items-center gap-3">
-                  Utforska alla jobb
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Button>
+              <Link to="/jobs">
+                <Button 
+                  variant="hero" 
+                  size="lg" 
+                  className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-2xl"
+                >
+                  <span className="flex items-center gap-3">
+                    Utforska alla jobb
+                    <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </Button>
+              </Link>
             </div>
             
             {/* Additional stats below button */}
