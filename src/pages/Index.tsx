@@ -1,4 +1,5 @@
 import { TrendingUp, Users, Briefcase, Star, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
@@ -13,6 +14,23 @@ import techCategoryImage from "@/assets/tech-category.jpg";
 import marketingCategoryImage from "@/assets/marketing-category.jpg";
 import healthcareCategoryImage from "@/assets/healthcare-category.jpg";
 const Index = () => {
+  // Rotating words state
+  const rotatingWords = ["Arbete", "Nätverk", "Praktik", "Utbildning"];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
+        setIsAnimating(false);
+      }, 300); // Half of animation duration for smooth transition
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const featuredJobs = [{
     id: "1",
     title: "Senior Frontend Utvecklare",
@@ -180,15 +198,22 @@ const Index = () => {
               <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{
               animationDelay: '0.2s'
             }}>
-                <span className="block mb-2">Hitta ditt</span>
-                <span className="relative inline-block group">
-                  <span className="text-blue-600 hover:scale-105 transition-transform duration-700 cursor-default block relative">
-                    drömjobb
+                <span className="block mb-2">Din karriär</span>
+                <span className="block mb-2">plattform för</span>
+                <span className="relative inline-block group min-h-[1.2em]">
+                  <span 
+                    className={`text-blue-600 block relative transition-all duration-600 ${
+                      isAnimating 
+                        ? 'opacity-0 transform scale-95 translate-y-4' 
+                        : 'opacity-100 transform scale-100 translate-y-0'
+                    }`}
+                    key={currentWordIndex}
+                  >
+                    {rotatingWords[currentWordIndex]}
                     {/* Blue highlight */}
                     <div className="absolute inset-0 bg-blue-200 opacity-20 rounded-xl -skew-x-12 transform scale-105 -z-10"></div>
                   </span>
                 </span>
-                <span className="block mt-2 text-gray-600">idag</span>
               </h1>
               
               <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto lg:mx-0 animate-fade-in leading-relaxed font-light" style={{
