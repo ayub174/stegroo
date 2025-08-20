@@ -102,12 +102,6 @@ const Index = () => {
                     25,000+
                   </span>
                   <span className="text-foreground/80">nya jobb denna vecka</span>
-                  
-                  {/* Live indicator */}
-                  <div className="flex items-center gap-1 ml-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-green-600 font-medium">LIVE</span>
-                  </div>
                 </div>
                 
                 {/* Animated border */}
