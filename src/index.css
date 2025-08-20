@@ -9,32 +9,53 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 210 11% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 11% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 11% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Professional LinkedIn-inspired blue */
+    --primary: 210 100% 48%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 210 100% 42%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Airbnb-inspired clean grays */
+    --secondary: 210 11% 96%;
+    --secondary-foreground: 210 11% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 11% 96%;
+    --muted-foreground: 210 7% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 100% 95%;
+    --accent-foreground: 210 100% 48%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 92%;
+    --input: 210 20% 92%;
+    --ring: 210 100% 48%;
+
+    /* Success colors for job applications */
+    --success: 120 60% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning colors */
+    --warning: 35 90% 55%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Custom gradient variables */
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 48%) 0%, hsl(210 100% 38%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 11% 99%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(210 11% 98%) 0%, hsl(0 0% 100%) 100%);
+
+    /* Shadows */
+    --shadow-card: 0 4px 12px -2px hsl(210 11% 15% / 0.08);
+    --shadow-card-hover: 0 8px 24px -4px hsl(210 11% 15% / 0.12);
+    --shadow-button: 0 2px 8px -2px hsl(210 100% 48% / 0.3);
 
     --radius: 0.5rem;
 
