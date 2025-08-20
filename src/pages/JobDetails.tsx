@@ -166,84 +166,84 @@ const JobDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
       
       <div className="min-h-screen relative overflow-hidden">
-        {/* Glassmorphism Background Effects */}
+        {/* Blue Background Effects */}
         <div className="fixed inset-0 z-0">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-primary/20 to-accent/15 rounded-full blur-3xl animate-float opacity-30"></div>
-          <div className="absolute top-60 right-20 w-80 h-80 bg-gradient-to-bl from-accent/25 to-primary/20 rounded-full blur-3xl animate-float opacity-25" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-40 left-1/3 w-72 h-72 bg-gradient-to-tr from-primary/15 to-accent/20 rounded-full blur-3xl animate-float opacity-20" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-100 rounded-full opacity-30 animate-float"></div>
+          <div className="absolute top-60 right-20 w-80 h-80 bg-blue-50 rounded-full opacity-25 animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-40 left-1/3 w-72 h-72 bg-blue-200 rounded-full opacity-20 animate-float" style={{animationDelay: '4s'}}></div>
           
-          {/* Subtle grid overlay */}
+          {/* Subtle pattern */}
           <div className="absolute inset-0 opacity-[0.02]" style={{
-            backgroundImage: `radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle, rgb(59 130 246) 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
           }}></div>
         </div>
         
         <div className="container mx-auto px-4 py-8 relative z-10">
-          {/* Enhanced Back Navigation */}
+          {/* Back Navigation */}
           <div className="mb-8 animate-fade-in">
-            <Link to="/" className="group inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-muted-foreground hover:text-primary hover:bg-white/20 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:scale-105">
+            <Link to="/" className="group inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white shadow-lg border border-gray-200 text-gray-600 hover:text-blue-600 hover:bg-blue-50 hover:border-blue-300 hover:shadow-xl transition-all duration-500 hover:scale-105">
               <ChevronLeft className="h-5 w-5 group-hover:translate-x-[-4px] transition-transform duration-300" />
               <span className="font-semibold">Tillbaka till jobb</span>
             </Link>
           </div>
 
-          {/* Main Glassmorphic Container */}
+          {/* Main Container */}
           <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
-            {/* Main Content - Compact & Grouped */}
+            {/* Main Content */}
             <div className="xl:col-span-3 space-y-6">
-              {/* Hero Job Card - Glassmorphism */}
+              {/* Hero Job Card */}
               <div className="relative group animate-fade-in" style={{animationDelay: '0.1s'}}>
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-200/30 to-blue-300/30 rounded-3xl blur opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
                 
-                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 hover:bg-white/15 hover:border-white/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+                <div className="relative bg-white shadow-xl border border-gray-200 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                     {/* Job Info */}
                     <div className="flex-1 space-y-4">
                       <div className="flex items-center gap-3 mb-4">
-                        <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30 backdrop-blur-sm font-medium px-3 py-1">
+                        <Badge variant="secondary" className="bg-blue-50 text-blue-600 border-blue-200 font-medium px-3 py-1">
                           {currentJob.type}
                         </Badge>
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                         <span className="text-sm text-green-400 font-medium">Aktivt</span>
                       </div>
                       
-                      <h1 className="text-4xl lg:text-5xl font-black text-foreground leading-tight">
+                      <h1 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
                         {currentJob.title}
                       </h1>
                       
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <div className="p-2 rounded-xl bg-primary/10 backdrop-blur-sm">
-                            <Building2 className="h-4 w-4 text-primary" />
+                        <div className="flex items-center gap-3 text-gray-600">
+                          <div className="p-2 rounded-xl bg-blue-50">
+                            <Building2 className="h-4 w-4 text-blue-600" />
                           </div>
                           <span className="font-medium">{currentJob.company}</span>
                         </div>
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <div className="p-2 rounded-xl bg-accent/10 backdrop-blur-sm">
-                            <MapPin className="h-4 w-4 text-accent" />
+                        <div className="flex items-center gap-3 text-gray-600">
+                          <div className="p-2 rounded-xl bg-blue-50">
+                            <MapPin className="h-4 w-4 text-blue-600" />
                           </div>
                           <span className="font-medium">{currentJob.location}</span>
                         </div>
-                        <div className="flex items-center gap-3 text-muted-foreground">
-                          <div className="p-2 rounded-xl bg-primary/10 backdrop-blur-sm">
-                            <Clock className="h-4 w-4 text-primary" />
+                        <div className="flex items-center gap-3 text-gray-600">
+                          <div className="p-2 rounded-xl bg-blue-50">
+                            <Clock className="h-4 w-4 text-blue-600" />
                           </div>
                           <span className="font-medium">{currentJob.timePosted}</span>
                         </div>
                       </div>
                       
-                      <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                      <div className="text-3xl font-bold text-blue-600">
                         {currentJob.salary}
                       </div>
                       
                       <div className="flex flex-wrap gap-2">
                         {currentJob.tags.map((tag, index) => (
-                          <Badge key={index} variant="outline" className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300">
+                          <Badge key={index} variant="outline" className="bg-gray-50 border-gray-200 hover:bg-blue-50 hover:border-blue-300 transition-all duration-300">
                             {tag}
                           </Badge>
                         ))}
@@ -252,17 +252,17 @@ const JobDetails = () => {
                     
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-3 lg:min-w-[200px]">
-                      <Button variant="hero" size="lg" className="w-full font-semibold px-8 py-4 hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm">
+                      <Button variant="hero" size="lg" className="w-full font-semibold px-8 py-4 hover:scale-105 transition-all duration-300 shadow-xl bg-blue-600 hover:bg-blue-700">
                         Ansök nu
                       </Button>
                       <div className="flex gap-2">
-                        <Button variant="outline" className="flex-1 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20">
+                        <Button variant="outline" className="flex-1 bg-white border-gray-200 hover:bg-gray-50">
                           Spara
                         </Button>
-                        <Button variant="ghost" size="icon" className="bg-white/10 backdrop-blur-sm hover:bg-white/20">
+                        <Button variant="ghost" size="icon" className="bg-gray-50 hover:bg-gray-100">
                           <Share2 className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="bg-white/10 backdrop-blur-sm hover:bg-white/20">
+                        <Button variant="ghost" size="icon" className="bg-gray-50 hover:bg-gray-100">
                           <Bookmark className="h-4 w-4" />
                         </Button>
                       </div>

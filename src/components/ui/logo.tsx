@@ -10,45 +10,42 @@ export const Logo = ({ className }: LogoProps) => {
     <Link 
       to="/" 
       className={cn(
-        "flex flex-col items-center justify-center group cursor-pointer transition-all duration-500 hover:scale-105",
+        "flex items-center justify-center group cursor-pointer transition-all duration-500 hover:scale-105",
         className
       )}
     >
-      {/* STEPS text with special E */}
-      <div className="flex items-end mb-1 relative">
-        <span className="text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors duration-300">
-          ST
-        </span>
-        
-        {/* Special E that looks like stairs */}
-        <div className="relative mx-1 group-hover:animate-float">
-          <div className="flex flex-col items-start justify-end h-7 space-y-px">
-            <div className="w-4 h-1.5 bg-gradient-to-r from-primary to-primary-hover rounded-sm transform transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/30"></div>
-            <div className="w-3 h-1.5 bg-gradient-to-r from-primary to-primary-hover rounded-sm transform transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/30"></div>
-            <div className="w-2 h-1.5 bg-gradient-to-r from-primary to-primary-hover rounded-sm transform transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/30"></div>
+      <div className="relative flex items-center gap-3">
+        {/* Stegroo Icon - Modern geometric steps */}
+        <div className="relative">
+          <div className="flex flex-col items-end justify-center gap-0.5 group-hover:animate-float">
+            {/* Three ascending blocks representing growth/steps */}
+            <div className="w-2 h-2 bg-blue-600 rounded-sm shadow-lg transform transition-all duration-300 group-hover:shadow-blue-500/50 group-hover:bg-blue-500"></div>
+            <div className="w-3 h-3 bg-blue-600 rounded-sm shadow-lg transform transition-all duration-300 group-hover:shadow-blue-500/50 group-hover:bg-blue-500" style={{animationDelay: '0.1s'}}></div>
+            <div className="w-4 h-4 bg-blue-600 rounded-md shadow-xl transform transition-all duration-300 group-hover:shadow-blue-500/50 group-hover:bg-blue-500" style={{animationDelay: '0.2s'}}></div>
+          </div>
+          
+          {/* Floating particles effect */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-1 -right-1 w-1 h-1 bg-blue-400/40 rounded-full animate-float opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{animationDelay: '0s'}}></div>
+            <div className="absolute top-2 -left-2 w-0.5 h-0.5 bg-blue-500/60 rounded-full animate-float opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{animationDelay: '1s'}}></div>
           </div>
         </div>
         
-        <span className="text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors duration-300">
-          PS
-        </span>
-      </div>
-      
-      {/* Jobbcenter text */}
-      <div className="relative">
-        <span className="text-xs font-semibold text-muted-foreground group-hover:text-primary/80 transition-colors duration-300 tracking-wider uppercase">
-          Jobbcenter
-        </span>
+        {/* Stegroo Text */}
+        <div className="flex flex-col">
+          <span className="text-2xl font-black text-gray-900 group-hover:text-blue-600 transition-colors duration-300 leading-none">
+            Stegroo
+          </span>
+          <span className="text-xs font-semibold text-gray-500 group-hover:text-blue-500 transition-colors duration-300 tracking-wider uppercase leading-none">
+            Karriärportalen
+          </span>
+        </div>
         
         {/* Animated underline */}
-        <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-500 rounded-full"></div>
-      </div>
-      
-      {/* Floating particles effect */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1 left-2 w-1 h-1 bg-primary/20 rounded-full animate-float opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '0s' }}></div>
-        <div className="absolute top-3 right-3 w-1.5 h-1.5 bg-primary/30 rounded-full animate-float opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-2 left-4 w-0.5 h-0.5 bg-primary/25 rounded-full animate-float opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 group-hover:w-full transition-all duration-500 rounded-full"></div>
+        
+        {/* Glow effect behind logo */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-blue-600/20 to-blue-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 scale-150 rounded-full"></div>
       </div>
     </Link>
   );

@@ -424,135 +424,94 @@ const Jobs = () => {
   const currentJobs = sortedJobs.slice(startIndex, startIndex + jobsPerPage);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Enhanced Hero Section with Advanced Glassmorphism */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        {/* Complex Dynamic Background Elements */}
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 overflow-hidden bg-white">
+        {/* Blue decorative shapes */}
         <div className="absolute inset-0 z-[1]">
-          {/* Multiple floating geometric shapes with different animations */}
-          <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-primary/12 to-accent/8 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-bl from-accent/10 to-primary/15 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-gradient-to-tr from-primary/8 to-accent/12 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}}></div>
-          <div className="absolute top-1/2 right-1/4 w-48 h-48 bg-gradient-to-tl from-secondary/10 to-primary/8 rounded-full blur-2xl animate-float" style={{animationDelay: '1s'}}></div>
-          <div className="absolute bottom-40 right-10 w-32 h-32 bg-gradient-to-br from-accent/15 to-secondary/10 rounded-full blur-xl animate-float" style={{animationDelay: '3s'}}></div>
+          <div className="absolute top-20 left-10 w-64 h-64 bg-blue-100 rounded-3xl rotate-12 opacity-60 animate-float"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-blue-200 rounded-3xl rotate-3 opacity-50 animate-float" style={{animationDelay: '4s'}}></div>
           
-          {/* Advanced grid pattern with depth */}
+          {/* Subtle pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: `radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle, rgb(59 130 246) 1px, transparent 1px)`,
             backgroundSize: '50px 50px'
           }}></div>
           
-          {/* Subtle animated lines */}
+          {/* Animated lines */}
           <div className="absolute inset-0 opacity-[0.05]">
-            <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-pulse"></div>
-            <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent animate-pulse delay-1000"></div>
+            <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent animate-pulse"></div>
+            <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/20 to-transparent animate-pulse delay-1000"></div>
           </div>
-        </div>
-        
-        {/* Multi-layer Background Gradients */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/90 via-primary/5 to-background/85"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-transparent to-background/70"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            {/* Enhanced Status Badge */}
+            {/* Status Badge */}
             <div className="flex justify-center mb-8 animate-fade-in">
               <div className="relative group">
-                <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-gradient-to-r from-primary/20 via-accent/15 to-primary/10 border border-primary/40 hover:border-primary/60 px-6 py-3 overflow-hidden backdrop-blur-sm">
-                  {/* Dynamic background effects */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/25 to-accent/25 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur opacity-30 group-hover:opacity-50 transition-all duration-500"></div>
+                <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-blue-50 border-2 border-blue-200 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl">
+                  <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl"></div>
                   
-                  {/* Content */}
                   <div className="relative z-10 flex items-center gap-3">
-                    <div className="relative">
-                      <Briefcase className="h-4 w-4 text-primary animate-pulse" />
-                      <div className="absolute inset-0 animate-ping delay-500">
-                        <Briefcase className="h-4 w-4 text-primary/30" />
-                      </div>
+                    <div className="p-1.5 bg-blue-500 rounded-lg shadow-inner">
+                      <TrendingUp className="h-4 w-4 text-white" />
                     </div>
-                    <span className="font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      Jobbsökning
+                    <span className="font-bold text-lg text-blue-600">
+                      {filteredJobs.length}
                     </span>
-                    <div className="flex gap-1">
-                      <div className="w-1 h-1 bg-primary rounded-full animate-bounce"></div>
-                      <div className="w-1 h-1 bg-accent rounded-full animate-bounce delay-100"></div>
-                      <div className="w-1 h-1 bg-primary rounded-full animate-bounce delay-200"></div>
-                    </div>
+                    <span className="text-gray-700 font-medium">tillgängliga jobb</span>
                   </div>
                 </Badge>
               </div>
             </div>
             
-            {/* Enhanced Title Section */}
-            <div className="text-center mb-12 animate-fade-in" style={{animationDelay: '0.2s'}}>
-              <h1 className="text-4xl lg:text-6xl font-black text-foreground mb-6 leading-tight">
-                <span className="text-transparent bg-gradient-to-r from-primary via-accent to-primary bg-clip-text">
-                  {searchQuery || locationQuery ? 'Sökresultat' : 'Alla jobb'}
-                </span>
-                {(searchQuery || locationQuery) && (
-                  <span className="block text-foreground/90 mt-2 text-2xl lg:text-3xl">
-                    {filteredJobs.length} träffar hittade
-                  </span>
-                )}
+            {/* Title */}
+            <div className="text-center mb-8">
+              <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{animationDelay: '0.2s'}}>
+                <span className="block mb-2">Hitta ditt</span>
+                <span className="text-blue-600">drömjobb</span>
               </h1>
               
-              {(searchQuery || locationQuery) && (
-                <div className="flex flex-wrap justify-center gap-4 mb-8">
-                  {searchQuery && (
-                    <div className="backdrop-blur-xl bg-card/40 border border-primary/30 rounded-full px-6 py-2 shadow-glass">
-                      <span className="text-sm text-muted-foreground">Sökord: </span>
-                      <span className="font-semibold text-primary">"{searchQuery}"</span>
-                    </div>
-                  )}
-                  {locationQuery && (
-                    <div className="backdrop-blur-xl bg-card/40 border border-accent/30 rounded-full px-6 py-2 shadow-glass">
-                      <span className="text-sm text-muted-foreground">Plats: </span>
-                      <span className="font-semibold text-accent">"{locationQuery}"</span>
-                    </div>
-                  )}
-                </div>
-              )}
-              
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{animationDelay: '0.4s'}}>
-                Upptäck din nästa karriärmöjlighet bland
-                <span className="text-primary/80 font-medium"> {allJobs.length} handplockade jobb</span>
-                <span className="text-muted-foreground/80"> från Sveriges främsta arbetsgivare</span>
+              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto animate-fade-in leading-relaxed font-light" style={{animationDelay: '0.4s'}}>
+                Bläddra bland alla tillgängliga jobb och hitta den perfekta rollen för dig
               </p>
             </div>
             
-            {/* Advanced Search Bar Container */}
-            <div className="animate-fade-in" style={{animationDelay: '0.6s'}}>
-              <div className="relative group">
-                {/* Glow effect behind search bar */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-                
-                <div className="relative backdrop-blur-2xl bg-card/60 border border-border/50 rounded-3xl p-8 shadow-glass hover:shadow-glass-hover transition-all duration-500">
-                  <SearchBar className="max-w-4xl mx-auto" />
-                </div>
+            {/* Search Bar */}
+            <div className="flex justify-center mb-12 animate-fade-in" style={{animationDelay: '0.6s'}}>
+              <div className="w-full max-w-2xl relative group">
+                <div className="absolute inset-0 bg-white rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500 border border-gray-200"></div>
+                <SearchBar className="relative transform hover:scale-[1.02] transition-all duration-300 bg-transparent shadow-none border-0" />
               </div>
             </div>
-
-            {/* Enhanced Statistics */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 animate-fade-in" style={{animationDelay: '0.8s'}}>
+            
+            {/* Statistics */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-fade-in" style={{animationDelay: '0.8s'}}>
               {[
-                { icon: Building2, label: "Aktiva företag", value: "150+", color: "primary" },
-                { icon: Users, label: "Nya jobb/vecka", value: "50+", color: "accent" },
-                { icon: TrendingUp, label: "Matchningsgrad", value: "94%", color: "primary" },
-                { icon: Star, label: "Nöjda användare", value: "4.8★", color: "accent" }
-              ].map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="relative">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                    <div className="relative backdrop-blur-xl bg-card/30 border border-border/30 rounded-2xl p-6 hover:bg-card/50 transition-all duration-500">
-                      <stat.icon className={`h-8 w-8 mx-auto mb-3 text-${stat.color} animate-pulse`} />
-                      <div className={`text-2xl font-bold text-${stat.color} mb-2`}>{stat.value}</div>
-                      <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                { icon: Users, label: "Jobbsökare", value: "2M+", color: "bg-blue-500" },
+                { icon: Briefcase, label: "Aktiva jobb", value: filteredJobs.length + "+", color: "bg-blue-600" },
+                { icon: Star, label: "Företag", value: "10K+", color: "bg-blue-700" }
+              ].map(({ icon: Icon, label, value, color }, index) => (
+                <div key={index} className="group cursor-pointer">
+                  <div className="relative p-6 rounded-3xl bg-white border-2 border-gray-100 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
+                    
+                    <div className="relative z-10 flex items-center gap-4">
+                      <div className={`p-3 rounded-2xl ${color} shadow-inner group-hover:scale-110 transition-transform duration-300`}>
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                          {value}
+                        </div>
+                        <div className="text-sm text-gray-500 font-medium">
+                          {label}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -560,181 +519,96 @@ const Jobs = () => {
             </div>
           </div>
         </div>
-        
-        {/* Bottom decorative gradient line */}
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
       </section>
 
-      {/* Enhanced Filters and Results Section */}
-      <section className="py-16 relative">
-        {/* Background decoration */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-20 w-40 h-40 bg-primary/5 rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute bottom-40 left-20 w-60 h-60 bg-accent/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Advanced Filters Bar */}
-          <div className="relative group mb-12 animate-fade-in">
-            {/* Glow effect */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 rounded-3xl blur-xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-            
-            <div className="relative backdrop-blur-2xl bg-card/50 border border-border/40 rounded-3xl p-8 shadow-glass hover:shadow-glass-hover transition-all duration-500">
-              <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-                <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <Filter className="h-5 w-5 text-primary" />
-                      <div className="absolute -inset-1 bg-primary/20 rounded-full blur opacity-50"></div>
-                    </div>
-                    <span className="font-semibold text-foreground text-lg">Filtrera resultat</span>
-                  </div>
-                  
-                  <div className="relative group/select">
-                    <Select value={filterByType} onValueChange={setFilterByType}>
-                      <SelectTrigger className="w-56 h-12 bg-background/60 border-border/60 backdrop-blur-sm hover:bg-background/80 hover:border-primary/40 transition-all duration-300 rounded-xl">
-                        <SelectValue placeholder="Anställningstyp" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">Alla typer</SelectItem>
-                        <SelectItem value="Heltid">Heltid</SelectItem>
-                        <SelectItem value="Deltid">Deltid</SelectItem>
-                        <SelectItem value="Konsult">Konsult</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+      {/* Jobs List Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          {/* Filters and Sorting */}
+          <div className="mb-8 bg-white rounded-3xl p-6 shadow-lg border border-gray-200">
+            <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+              <div className="flex items-center gap-4">
+                <Filter className="h-5 w-5 text-blue-600" />
+                <span className="font-semibold text-gray-900">Filtrera och sortera</span>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-full sm:w-[180px] bg-white border-gray-200 rounded-2xl">
+                    <SelectValue placeholder="Sortera efter" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border-gray-200 rounded-2xl">
+                    <SelectItem value="relevance">Relevans</SelectItem>
+                    <SelectItem value="newest">Nyast först</SelectItem>
+                    <SelectItem value="salary">Ansökningsdatum</SelectItem>
+                  </SelectContent>
+                </Select>
                 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                  <div className="backdrop-blur-xl bg-card/40 border border-border/30 rounded-xl px-4 py-2">
-                    <span className="text-sm text-muted-foreground">
-                      Visar <span className="font-semibold text-primary">{startIndex + 1}-{Math.min(startIndex + jobsPerPage, sortedJobs.length)}</span> av <span className="font-semibold text-accent">{sortedJobs.length}</span> jobb
-                    </span>
-                  </div>
-                  
-                  <div className="relative group/sort">
-                    <Select value={sortBy} onValueChange={setSortBy}>
-                      <SelectTrigger className="w-48 h-12 bg-background/60 border-border/60 backdrop-blur-sm hover:bg-background/80 hover:border-accent/40 transition-all duration-300 rounded-xl">
-                        <SelectValue placeholder="Sortera efter" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="relevance">Relevans</SelectItem>
-                        <SelectItem value="newest">Senaste</SelectItem>
-                        <SelectItem value="salary">Sista ansökningsdatum</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                <Select value={filterByType} onValueChange={setFilterByType}>
+                  <SelectTrigger className="w-full sm:w-[140px] bg-white border-gray-200 rounded-2xl">
+                    <SelectValue placeholder="Typ" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border-gray-200 rounded-2xl">
+                    <SelectItem value="all">Alla</SelectItem>
+                    <SelectItem value="Heltid">Heltid</SelectItem>
+                    <SelectItem value="Deltid">Deltid</SelectItem>
+                    <SelectItem value="Konsult">Konsult</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
 
-          {/* Enhanced Jobs Grid */}
-          {currentJobs.length > 0 ? (
-            <>
-              {/* Jobs Container with Background Effects */}
-              <div className="relative animate-fade-in" style={{animationDelay: '0.2s'}}>
-                {/* Background decoration for grid */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-primary/3 via-transparent to-accent/3 rounded-3xl blur-3xl opacity-60"></div>
-                
-                <div className="relative space-y-6 mb-16">
-                  {currentJobs.map((job, index) => (
-                    <div key={job.id} className="group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
-                      <div className="relative">
-                        {/* Individual item glow effect */}
-                        <div className="absolute -inset-2 bg-gradient-to-r from-primary/15 to-accent/15 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                        
-                        <JobListItem
-                          {...job}
-                          className="relative transform hover:-translate-y-1 hover:scale-[1.01] transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Results Info */}
+          <div className="mb-6">
+            <p className="text-gray-600">
+              Visar <span className="font-semibold text-blue-600">{startIndex + 1}-{Math.min(startIndex + jobsPerPage, sortedJobs.length)}</span> av <span className="font-semibold text-blue-600">{sortedJobs.length}</span> jobb
+            </p>
+          </div>
 
-              {/* Enhanced Pagination */}
-              {totalPages > 1 && (
-                <div className="flex justify-center items-center gap-3 animate-fade-in" style={{animationDelay: '0.4s'}}>
-                  <div className="relative group">
-                    <div className="absolute -inset-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                    <div className="relative backdrop-blur-xl bg-card/40 border border-border/40 rounded-2xl p-2 shadow-glass">
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="outline"
-                          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                          disabled={currentPage === 1}
-                          className="bg-background/60 border-border/50 hover:bg-background/80 hover:border-primary/40 transition-all duration-300 disabled:opacity-40"
-                        >
-                          Föregående
-                        </Button>
-                        
-                        <div className="flex gap-1 px-2">
-                          {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                            <Button
-                              key={page}
-                              variant={page === currentPage ? "default" : "outline"}
-                              size="sm"
-                              onClick={() => setCurrentPage(page)}
-                              className={page === currentPage 
-                                ? "bg-gradient-to-r from-primary to-primary-hover text-primary-foreground shadow-button" 
-                                : "bg-background/60 border-border/50 hover:bg-background/80 hover:border-accent/40 transition-all duration-300"
-                              }
-                            >
-                              {page}
-                            </Button>
-                          ))}
-                        </div>
-                        
-                        <Button
-                          variant="outline"
-                          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                          disabled={currentPage === totalPages}
-                          className="bg-background/60 border-border/50 hover:bg-background/80 hover:border-accent/40 transition-all duration-300 disabled:opacity-40"
-                        >
-                          Nästa
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-20 animate-fade-in">
-              <div className="relative group max-w-lg mx-auto">
-                {/* Glow effect */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition-all duration-700"></div>
-                
-                <div className="relative backdrop-blur-2xl bg-card/50 border border-border/40 rounded-3xl p-16 shadow-glass hover:shadow-glass-hover transition-all duration-500">
-                  <div className="relative mb-8">
-                    <Building2 className="h-20 w-20 text-muted-foreground mx-auto animate-pulse" />
-                    <div className="absolute -inset-2 bg-primary/10 rounded-full blur opacity-30"></div>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-foreground mb-4">
-                    Inga jobb hittade
-                  </h3>
-                  <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
-                    Försök med andra sökord eller filtrera mindre specifikt för att hitta fler möjligheter.
-                  </p>
-                  
-                  <div className="relative group/button">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-accent/30 rounded-xl blur opacity-30 group-hover/button:opacity-60 transition-all duration-500"></div>
-                    <Button 
-                      variant="outline" 
-                      onClick={() => {
-                        setFilterByType('all');
-                        window.location.href = '/jobs';
-                      }}
-                      className="relative bg-background/60 border-border/50 hover:bg-background/80 hover:border-primary/40 transition-all duration-300 px-8 py-3"
-                    >
-                      Visa alla jobb
-                    </Button>
-                  </div>
-                </div>
+          {/* Jobs List */}
+          <div className="space-y-4 mb-8">
+            {currentJobs.map((job, index) => (
+              <div key={job.id} className="animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
+                <JobListItem {...job} className="bg-white hover:bg-blue-50 border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-xl transition-all duration-300" />
               </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-2">
+              <Button
+                variant="outline"
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-300"
+              >
+                Föregående
+              </Button>
+              
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                <Button
+                  key={page}
+                  variant={currentPage === page ? "default" : "outline"}
+                  onClick={() => setCurrentPage(page)}
+                  className={currentPage === page 
+                    ? "bg-blue-600 hover:bg-blue-700 text-white" 
+                    : "bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-300"
+                  }
+                >
+                  {page}
+                </Button>
+              ))}
+              
+              <Button
+                variant="outline"
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-300"
+              >
+                Nästa
+              </Button>
             </div>
           )}
         </div>
