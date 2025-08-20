@@ -426,7 +426,7 @@ const Jobs = () => {
       <Header />
       
       {/* Hero Section - Compact for jobs page */}
-      <section className="relative py-12 lg:py-16 overflow-hidden bg-white">
+      <section className="relative py-6 lg:py-8 overflow-hidden bg-white">
         {/* Blue decorative shapes */}
         <div className="absolute inset-0 z-[1]">
           <div className="absolute top-10 left-10 w-32 h-32 bg-blue-100 rounded-3xl rotate-12 opacity-60 animate-float"></div>
