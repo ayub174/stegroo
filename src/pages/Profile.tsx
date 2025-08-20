@@ -185,22 +185,30 @@ export default function Profile() {
   const isDemoMode = localStorage.getItem('demoAuth') === 'true';
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/90 to-muted/20 relative overflow-hidden">
+      {/* Floating Background Elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse opacity-60"></div>
+        <div className="absolute top-1/2 right-20 w-96 h-96 bg-accent/8 rounded-full blur-3xl animate-pulse opacity-40" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-primary/6 rounded-full blur-3xl animate-pulse opacity-50" style={{ animationDelay: '4s' }}></div>
+      </div>
+      
       <Header />
       
       {isDemoMode && (
-        <div className="bg-gradient-to-r from-accent/20 to-primary/20 border-b border-accent/30">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-accent">🚀</span>
-                <span>Du är i testläge - ingen inloggning krävs</span>
+        <div className="relative bg-gradient-to-r from-accent/15 via-primary/10 to-accent/15 backdrop-blur-sm border-b border-accent/20 shadow-inner">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between text-sm bg-background/30 rounded-2xl px-4 py-3 shadow-inner border border-white/10">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center animate-pulse">
+                  <span className="text-white text-sm">🚀</span>
+                </div>
+                <span className="font-medium">Du är i testläge - ingen inloggning krävs</span>
               </div>
               <Button 
                 onClick={exitTestMode} 
-                variant="ghost" 
+                className="h-8 px-4 rounded-full bg-gradient-to-r from-accent/20 to-primary/20 hover:from-accent/30 hover:to-primary/30 border-0 shadow-inner hover:shadow-lg transition-all duration-300 hover-scale"
                 size="sm"
-                className="hover:bg-accent/20 text-accent hover:text-accent"
               >
                 Avsluta testläge
               </Button>
@@ -209,366 +217,475 @@ export default function Profile() {
         </div>
       )}
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto space-y-8">
-          {/* Profile Header */}
-          <Card className="relative overflow-hidden border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-2xl shadow-primary/5">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5"></div>
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl opacity-30"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/15 rounded-full blur-2xl opacity-40"></div>
-            
-            <CardContent className="relative p-8">
-              <div className="flex flex-col md:flex-row items-start gap-6">
-                <div className="relative group">
-                  <Avatar className="w-24 h-24 border-4 border-primary/20 shadow-xl shadow-primary/20">
-                    <AvatarImage src="" />
-                    <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-primary to-primary-hover text-white">
-                      {displayName ? displayName.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <Button size="icon" variant="ghost" className="absolute -bottom-2 -right-2 bg-card/80 backdrop-blur-sm border border-border/20 hover:bg-primary/10">
-                    <Upload className="h-4 w-4" />
-                  </Button>
-                </div>
-                
-                <div className="flex-1 space-y-4">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                      {editing ? (
-                        <div className="space-y-2">
-                          <Input
-                            value={displayName}
-                            onChange={(e) => setDisplayName(e.target.value)}
-                            placeholder="Ditt namn"
-                            className="text-xl font-bold bg-background/50 border-border/20"
-                          />
-                        </div>
-                      ) : (
-                        <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-primary-hover to-accent bg-clip-text text-transparent">
-                          {displayName || "Ange ditt namn"}
-                        </h1>
-                      )}
-                      <p className="text-muted-foreground flex items-center gap-2 mt-2">
-                        <Mail className="h-4 w-4" />
-                        {user?.email}
-                      </p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant={profile?.account_type === 'business' ? 'default' : 'secondary'}>
-                          {profile?.account_type === 'business' ? 'Företagskonto' : 'Privatkonto'}
-                        </Badge>
-                        {profile?.company_name && (
-                          <Badge variant="outline" className="flex items-center gap-1">
-                            <Building className="h-3 w-3" />
-                            {profile.company_name}
-                          </Badge>
+      <main className="container mx-auto px-4 py-12 relative z-10">
+        <div className="max-w-6xl mx-auto space-y-10 animate-fade-in">
+          {/* Profile Header with Claymorphism */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+            <Card className="relative border-0 bg-gradient-to-br from-background/80 via-background/60 to-background/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-primary/10 hover:shadow-3xl hover:shadow-primary/15 transition-all duration-500 hover-scale overflow-hidden">
+              {/* Floating orbs */}
+              <div className="absolute top-6 right-8 w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-xl opacity-40 animate-pulse"></div>
+              <div className="absolute bottom-8 left-6 w-16 h-16 bg-gradient-to-br from-accent/15 to-primary/15 rounded-full blur-lg opacity-50 animate-pulse" style={{ animationDelay: '1s' }}></div>
+              
+              <CardContent className="relative p-10">
+                <div className="flex flex-col md:flex-row items-start gap-8">
+                  <div className="relative group/avatar">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full blur-xl opacity-0 group-hover/avatar:opacity-60 transition-opacity duration-300"></div>
+                    <Avatar className="relative w-28 h-28 rounded-full border-4 border-white/20 shadow-2xl shadow-primary/20 bg-gradient-to-br from-primary/10 to-accent/10 hover-scale transition-all duration-300">
+                      <AvatarImage src="" />
+                      <AvatarFallback className="text-3xl font-bold bg-gradient-to-br from-primary via-primary-hover to-accent text-white rounded-full">
+                        {displayName ? displayName.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <Button 
+                      size="sm" 
+                      className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-r from-background/90 to-background/70 backdrop-blur-sm border border-white/20 hover:border-primary/40 shadow-lg hover:shadow-xl hover:shadow-primary/30 hover-scale transition-all duration-300"
+                    >
+                      <Upload className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="flex-1 space-y-6">
+                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                      <div className="space-y-4">
+                        {editing ? (
+                          <div className="space-y-3">
+                            <Input
+                              value={displayName}
+                              onChange={(e) => setDisplayName(e.target.value)}
+                              placeholder="Ditt namn"
+                              className="text-2xl font-bold bg-background/50 border-0 shadow-inner rounded-2xl px-6 py-4 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                            />
+                          </div>
+                        ) : (
+                          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-primary-hover to-accent bg-clip-text text-transparent animate-fade-in">
+                            {displayName || "Ange ditt namn"}
+                          </h1>
                         )}
+                        
+                        <div className="flex items-center gap-3 p-3 rounded-2xl bg-background/30 shadow-inner border border-white/10">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center">
+                            <Mail className="h-4 w-4 text-primary" />
+                          </div>
+                          <span className="text-muted-foreground font-medium">{user?.email}</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-3">
+                          <Badge className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 border-0 shadow-inner hover:shadow-lg hover-scale transition-all duration-300">
+                            {profile?.account_type === 'business' ? 'Företagskonto' : 'Privatkonto'}
+                          </Badge>
+                          {profile?.company_name && (
+                            <Badge className="px-4 py-2 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 border-0 shadow-inner hover:shadow-lg hover-scale transition-all duration-300 flex items-center gap-2">
+                              <Building className="h-3 w-3" />
+                              {profile.company_name}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                      {editing ? (
-                        <>
-                          <Button onClick={handleSaveProfile} className="bg-gradient-to-r from-primary to-primary-hover hover:shadow-lg hover:shadow-primary/30">
-                            <Save className="h-4 w-4 mr-2" />
-                            Spara
+                      
+                      <div className="flex gap-3">
+                        {editing ? (
+                          <>
+                            <Button 
+                              onClick={handleSaveProfile} 
+                              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
+                            >
+                              <Save className="h-4 w-4 mr-2" />
+                              Spara
+                            </Button>
+                            <Button 
+                              onClick={() => setEditing(false)}
+                              className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+                            >
+                              Avbryt
+                            </Button>
+                          </>
+                        ) : (
+                          <Button 
+                            onClick={() => setEditing(true)} 
+                            className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
+                          >
+                            <Edit3 className="h-4 w-4 mr-2" />
+                            Redigera
                           </Button>
-                          <Button variant="ghost" onClick={() => setEditing(false)}>
-                            Avbryt
-                          </Button>
-                        </>
-                      ) : (
-                        <Button onClick={() => setEditing(true)} variant="outline" className="border-border/20 hover:bg-primary/10">
-                          <Edit3 className="h-4 w-4 mr-2" />
-                          Redigera
+                        )}
+                        <Button 
+                          onClick={handleSignOut}
+                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-red-100/60 to-red-50/60 hover:from-red-200/60 hover:to-red-100/60 text-red-600 hover:text-red-700 shadow-inner border border-red-200/30 hover:border-red-300/40 hover-scale transition-all duration-300"
+                        >
+                          <LogOut className="h-4 w-4 mr-2" />
+                          Logga ut
                         </Button>
-                      )}
-                      <Button variant="ghost" onClick={handleSignOut} className="hover:bg-destructive/10 hover:text-destructive">
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Logga ut
-                      </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Main Content */}
-          <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-5 bg-card/50 backdrop-blur-sm border border-border/20">
-              <TabsTrigger value="overview">Översikt</TabsTrigger>
-              <TabsTrigger value="jobs">Sparade jobb</TabsTrigger>
-              <TabsTrigger value="applications">Ansökningar</TabsTrigger>
-              <TabsTrigger value="cv">CV</TabsTrigger>
-              <TabsTrigger value="settings">Inställningar</TabsTrigger>
-            </TabsList>
+          {/* Main Content with Clay Tabs */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/3 to-primary/5 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+            <Tabs defaultValue="overview" className="relative space-y-8">
+              <TabsList className="w-full h-auto p-2 bg-gradient-to-r from-background/80 via-background/60 to-background/80 backdrop-blur-xl border-0 shadow-2xl shadow-primary/10 rounded-3xl grid grid-cols-5 gap-2">
+                {[
+                  { value: "overview", label: "Översikt", icon: "📊" },
+                  { value: "jobs", label: "Sparade jobb", icon: "💼" },
+                  { value: "applications", label: "Ansökningar", icon: "📋" },
+                  { value: "cv", label: "CV", icon: "🎓" },
+                  { value: "settings", label: "Inställningar", icon: "⚙️" }
+                ].map((tab) => (
+                  <TabsTrigger 
+                    key={tab.value}
+                    value={tab.value} 
+                    className="flex-col gap-2 h-20 rounded-2xl bg-transparent hover:bg-gradient-to-br hover:from-primary/10 hover:to-accent/10 data-[state=active]:bg-gradient-to-br data-[state=active]:from-primary/20 data-[state=active]:to-accent/15 data-[state=active]:shadow-inner data-[state=active]:shadow-primary/20 border-0 transition-all duration-300 hover-scale group/tab"
+                  >
+                    <span className="text-2xl group-hover/tab:animate-pulse">{tab.icon}</span>
+                    <span className="text-sm font-medium">{tab.label}</span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
-            <TabsContent value="overview" className="space-y-6">
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {/* Quick Stats */}
-                <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Heart className="h-5 w-5 text-primary" />
-                      Sparade jobb
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-3xl font-bold text-primary">
-                      {mockJobs.filter(j => j.saved).length}
-                    </div>
-                    <p className="text-sm text-muted-foreground">aktiva favoriter</p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <FileText className="h-5 w-5 text-accent" />
-                      Ansökningar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-3xl font-bold text-accent">
-                      {mockApplications.length}
-                    </div>
-                    <p className="text-sm text-muted-foreground">pågående ansökningar</p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="flex items-center gap-2 text-lg">
-                      <Star className="h-5 w-5 text-yellow-500" />
-                      Profilstyrka
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-3xl font-bold text-yellow-500">
-                      75%
-                    </div>
-                    <p className="text-sm text-muted-foreground">komplett profil</p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Recent Activity */}
-              <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg">
-                <CardHeader>
-                  <CardTitle>Senaste aktivitet</CardTitle>
-                  <CardDescription>Dina senaste handlingar på plattformen</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-4 p-3 rounded-lg bg-background/50 border border-border/20">
-                    <Heart className="h-5 w-5 text-primary" />
-                    <div className="flex-1">
-                      <p className="font-medium">Sparade jobb: Frontend Developer</p>
-                      <p className="text-sm text-muted-foreground">Tech AB - för 2 dagar sedan</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4 p-3 rounded-lg bg-background/50 border border-border/20">
-                    <FileText className="h-5 w-5 text-accent" />
-                    <div className="flex-1">
-                      <p className="font-medium">Skickade ansökan: Product Manager</p>
-                      <p className="text-sm text-muted-foreground">Innovation Co - för 5 dagar sedan</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="jobs" className="space-y-6">
-              <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <BookmarkIcon className="h-5 w-5" />
-                    Dina sparade jobb
-                  </CardTitle>
-                  <CardDescription>Jobb du har sparat för att komma åt senare</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {mockJobs.filter(job => job.saved).map((job) => (
-                    <div key={job.id} className="p-4 rounded-lg border border-border/20 bg-background/30 hover:bg-background/50 transition-colors">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-semibold text-lg">{job.title}</h3>
-                          <p className="text-muted-foreground flex items-center gap-2">
-                            <Building className="h-4 w-4" />
-                            {job.company}
-                          </p>
-                          <p className="text-sm text-muted-foreground flex items-center gap-2 mt-1">
-                            <MapPin className="h-4 w-4" />
-                            {job.location}
-                          </p>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="outline">
-                            Visa jobb
-                          </Button>
-                          <Button size="sm" className="bg-gradient-to-r from-primary to-primary-hover">
-                            Ansök nu
-                          </Button>
-                        </div>
-                      </div>
+              <TabsContent value="overview" className="space-y-8 animate-fade-in">
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  {/* Enhanced Quick Stats with Clay Style */}
+                  {[
+                    { 
+                      title: "Sparade jobb", 
+                      icon: Heart, 
+                      value: mockJobs.filter(j => j.saved).length, 
+                      description: "aktiva favoriter",
+                      color: "primary",
+                      gradient: "from-primary/30 to-primary/10"
+                    },
+                    { 
+                      title: "Ansökningar", 
+                      icon: FileText, 
+                      value: mockApplications.length, 
+                      description: "pågående ansökningar",
+                      color: "accent",
+                      gradient: "from-accent/30 to-accent/10"
+                    },
+                    { 
+                      title: "Profilstyrka", 
+                      icon: Star, 
+                      value: "75%", 
+                      description: "komplett profil",
+                      color: "yellow-500",
+                      gradient: "from-yellow-200/30 to-yellow-100/10"
+                    }
+                  ].map((stat, index) => (
+                    <div key={stat.title} className="relative group/stat" style={{ animationDelay: `${index * 100}ms` }}>
+                      <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} rounded-3xl blur-xl opacity-0 group-hover/stat:opacity-60 transition-opacity duration-500`}></div>
+                      <Card className="relative border-0 bg-gradient-to-br from-background/90 via-background/70 to-background/50 backdrop-blur-xl rounded-3xl shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover-scale overflow-hidden animate-fade-in">
+                        <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-lg opacity-30 animate-pulse"></div>
+                        <CardHeader className="pb-4 pt-8">
+                          <CardTitle className="flex items-center gap-3 text-xl">
+                            <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${stat.gradient} flex items-center justify-center shadow-inner group-hover/stat:animate-pulse`}>
+                              <stat.icon className={`h-6 w-6 text-${stat.color}`} />
+                            </div>
+                            {stat.title}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="pb-8">
+                          <div className={`text-5xl font-bold text-${stat.color} mb-2 group-hover/stat:animate-pulse`}>
+                            {stat.value}
+                          </div>
+                          <p className="text-muted-foreground font-medium">{stat.description}</p>
+                        </CardContent>
+                      </Card>
                     </div>
                   ))}
-                </CardContent>
-              </Card>
-            </TabsContent>
+                </div>
 
-            <TabsContent value="applications" className="space-y-6">
-              <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <FileText className="h-5 w-5" />
-                    Dina ansökningar
-                  </CardTitle>
-                  <CardDescription>Översikt över alla dina jobbansökningar</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {mockApplications.map((app) => (
-                    <div key={app.id} className="p-4 rounded-lg border border-border/20 bg-background/30">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-semibold text-lg">{app.title}</h3>
-                          <p className="text-muted-foreground flex items-center gap-2">
-                            <Building className="h-4 w-4" />
-                            {app.company}
-                          </p>
-                          <div className="flex items-center gap-4 mt-2">
-                            <Badge variant={app.status === "Intervju bokad" ? "default" : "secondary"}>
-                              {app.status}
-                            </Badge>
-                            <p className="text-sm text-muted-foreground flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
-                              {app.date}
-                            </p>
+                {/* Enhanced Recent Activity */}
+                <div className="relative group/activity">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-accent/5 to-primary/8 rounded-3xl blur-2xl opacity-40 group-hover/activity:opacity-60 transition-opacity duration-500"></div>
+                  <Card className="relative border-0 bg-gradient-to-br from-background/90 via-background/70 to-background/50 backdrop-blur-xl rounded-3xl shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden animate-fade-in">
+                    <div className="absolute top-6 right-8 w-16 h-16 bg-gradient-to-br from-primary/15 to-accent/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                    <CardHeader className="pb-6 pt-8">
+                      <CardTitle className="text-2xl flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shadow-inner">
+                          <span className="text-2xl animate-pulse">📈</span>
+                        </div>
+                        Senaste aktivitet
+                      </CardTitle>
+                      <CardDescription className="text-base">Dina senaste handlingar på plattformen</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6 pb-8">
+                      {[
+                        { icon: Heart, title: "Sparade jobb: Frontend Developer", subtitle: "Tech AB - för 2 dagar sedan", color: "primary" },
+                        { icon: FileText, title: "Skickade ansökan: Product Manager", subtitle: "Innovation Co - för 5 dagar sedan", color: "accent" }
+                      ].map((activity, index) => (
+                        <div key={index} className="flex items-center gap-4 p-6 rounded-2xl bg-gradient-to-r from-background/60 to-background/40 shadow-inner border border-white/10 hover:border-white/20 hover:shadow-lg transition-all duration-300 hover-scale group/item">
+                          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br from-${activity.color}/20 to-${activity.color}/10 flex items-center justify-center shadow-inner group-hover/item:animate-pulse`}>
+                            <activity.icon className={`h-5 w-5 text-${activity.color}`} />
+                          </div>
+                          <div className="flex-1">
+                            <p className="font-semibold text-lg">{activity.title}</p>
+                            <p className="text-muted-foreground">{activity.subtitle}</p>
                           </div>
                         </div>
-                        <Button size="sm" variant="outline">
-                          Visa detaljer
+                      ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="jobs" className="space-y-8 animate-fade-in">
+                <div className="relative group/jobs">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-accent/5 to-primary/8 rounded-3xl blur-2xl opacity-40 group-hover/jobs:opacity-60 transition-opacity duration-500"></div>
+                  <Card className="relative border-0 bg-gradient-to-br from-background/90 via-background/70 to-background/50 backdrop-blur-xl rounded-3xl shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden">
+                    <div className="absolute top-6 right-8 w-16 h-16 bg-gradient-to-br from-primary/15 to-accent/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                    <CardHeader className="pb-6 pt-8">
+                      <CardTitle className="text-2xl flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shadow-inner">
+                          <BookmarkIcon className="h-6 w-6 text-primary" />
+                        </div>
+                        Dina sparade jobb
+                      </CardTitle>
+                      <CardDescription className="text-base">Jobb du har sparat för att komma åt senare</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6 pb-8">
+                      {mockJobs.filter(job => job.saved).map((job, index) => (
+                        <div key={job.id} className="relative group/job" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl opacity-0 group-hover/job:opacity-100 transition-opacity duration-300"></div>
+                          <div className="relative p-6 rounded-2xl bg-gradient-to-r from-background/80 to-background/60 shadow-inner border border-white/10 hover:border-white/20 hover:shadow-lg transition-all duration-300 hover-scale animate-fade-in">
+                            <div className="flex justify-between items-start gap-4">
+                              <div className="flex-1 space-y-3">
+                                <h3 className="font-bold text-xl text-primary">{job.title}</h3>
+                                <div className="flex items-center gap-3 p-2 rounded-xl bg-background/40 shadow-inner w-fit">
+                                  <Building className="h-4 w-4 text-accent" />
+                                  <span className="font-medium">{job.company}</span>
+                                </div>
+                                <div className="flex items-center gap-3 p-2 rounded-xl bg-background/40 shadow-inner w-fit">
+                                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                                  <span className="text-muted-foreground">{job.location}</span>
+                                </div>
+                              </div>
+                              <div className="flex gap-3">
+                                <Button 
+                                  size="sm" 
+                                  className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+                                >
+                                  Visa jobb
+                                </Button>
+                                <Button 
+                                  size="sm" 
+                                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
+                                >
+                                  Ansök nu
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="applications" className="space-y-8 animate-fade-in">
+                <div className="relative group/apps">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/8 via-primary/5 to-accent/8 rounded-3xl blur-2xl opacity-40 group-hover/apps:opacity-60 transition-opacity duration-500"></div>
+                  <Card className="relative border-0 bg-gradient-to-br from-background/90 via-background/70 to-background/50 backdrop-blur-xl rounded-3xl shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden">
+                    <div className="absolute top-6 right-8 w-16 h-16 bg-gradient-to-br from-accent/15 to-primary/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                    <CardHeader className="pb-6 pt-8">
+                      <CardTitle className="text-2xl flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center shadow-inner">
+                          <FileText className="h-6 w-6 text-accent" />
+                        </div>
+                        Dina ansökningar
+                      </CardTitle>
+                      <CardDescription className="text-base">Översikt över alla dina jobbansökningar</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6 pb-8">
+                      {mockApplications.map((app, index) => (
+                        <div key={app.id} className="relative group/app" style={{ animationDelay: `${index * 100}ms` }}>
+                          <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-primary/5 rounded-2xl opacity-0 group-hover/app:opacity-100 transition-opacity duration-300"></div>
+                          <div className="relative p-6 rounded-2xl bg-gradient-to-r from-background/80 to-background/60 shadow-inner border border-white/10 hover:border-white/20 hover:shadow-lg transition-all duration-300 hover-scale animate-fade-in">
+                            <div className="flex justify-between items-start gap-4">
+                              <div className="flex-1 space-y-4">
+                                <h3 className="font-bold text-xl text-accent">{app.title}</h3>
+                                <div className="flex items-center gap-3 p-2 rounded-xl bg-background/40 shadow-inner w-fit">
+                                  <Building className="h-4 w-4 text-primary" />
+                                  <span className="font-medium">{app.company}</span>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                  <Badge className={`px-4 py-2 rounded-full shadow-inner border-0 ${
+                                    app.status === "Intervju bokad" 
+                                      ? "bg-gradient-to-r from-green-200/30 to-green-100/20 text-green-700" 
+                                      : "bg-gradient-to-r from-blue-200/30 to-blue-100/20 text-blue-700"
+                                  }`}>
+                                    {app.status}
+                                  </Badge>
+                                  <div className="flex items-center gap-2 p-2 rounded-xl bg-background/40 shadow-inner">
+                                    <Calendar className="h-3 w-3 text-muted-foreground" />
+                                    <span className="text-sm text-muted-foreground">{app.date}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <Button 
+                                size="sm" 
+                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+                              >
+                                Visa detaljer
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="cv" className="space-y-8 animate-fade-in">
+                <div className="relative group/cv">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-accent/5 to-primary/8 rounded-3xl blur-2xl opacity-40 group-hover/cv:opacity-60 transition-opacity duration-500"></div>
+                  <Card className="relative border-0 bg-gradient-to-br from-background/90 via-background/70 to-background/50 backdrop-blur-xl rounded-3xl shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden">
+                    <div className="absolute top-6 right-8 w-16 h-16 bg-gradient-to-br from-primary/15 to-accent/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                    <CardHeader className="pb-6 pt-8">
+                      <CardTitle className="text-2xl flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center shadow-inner">
+                          <GraduationCap className="h-6 w-6 text-primary" />
+                        </div>
+                        Ditt CV
+                      </CardTitle>
+                      <CardDescription className="text-base">Hantera ditt CV och kompetenser</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-8 pb-8">
+                      <div className="flex gap-4">
+                        <Button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300">
+                          <Upload className="h-4 w-4 mr-2" />
+                          Ladda upp CV
+                        </Button>
+                        <Button className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300">
+                          <Download className="h-4 w-4 mr-2" />
+                          Ladda ner CV
                         </Button>
                       </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="cv" className="space-y-6">
-              <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <GraduationCap className="h-5 w-5" />
-                    Ditt CV
-                  </CardTitle>
-                  <CardDescription>Hantera ditt CV och kompetenser</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex gap-4">
-                    <Button className="bg-gradient-to-r from-primary to-primary-hover hover:shadow-lg hover:shadow-primary/30">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Ladda upp CV
-                    </Button>
-                    <Button variant="outline" className="border-border/20">
-                      <Download className="h-4 w-4 mr-2" />
-                      Ladda ner CV
-                    </Button>
-                  </div>
-                  
-                  <Separator className="bg-border/20" />
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="bio">Profil beskrivning</Label>
-                      <Textarea
-                        id="bio"
-                        placeholder="Berätta om dig själv och din yrkesexperiens..."
-                        value={bio}
-                        onChange={(e) => setBio(e.target.value)}
-                        className="mt-2 border-border/20 bg-background/50"
-                        rows={4}
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label>Kompetenser</Label>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {["React", "TypeScript", "Node.js", "Python", "UI/UX Design"].map((skill) => (
-                          <Badge key={skill} variant="secondary" className="hover:bg-primary/20 cursor-pointer">
-                            {skill}
-                          </Badge>
-                        ))}
-                        <Button size="sm" variant="ghost" className="h-6 px-2 text-xs border border-dashed border-border/40">
-                          + Lägg till
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="settings" className="space-y-6">
-              <Card className="border-border/20 bg-gradient-to-br from-card via-card/95 to-card/90 backdrop-blur-xl shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Settings className="h-5 w-5" />
-                    Inställningar
-                  </CardTitle>
-                  <CardDescription>Hantera dina kontoinställningar och preferenser</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="location">Plats</Label>
-                      <Input
-                        id="location"
-                        placeholder="Din stad"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        className="border-border/20 bg-background/50"
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Telefon</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="070-123 45 67"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="border-border/20 bg-background/50"
-                      />
-                    </div>
-                  </div>
-                  
-                  <Separator className="bg-border/20" />
-                  
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Notifieringar</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-medium">E-postnotifieringar</p>
-                          <p className="text-sm text-muted-foreground">Få notifieringar om nya jobb</p>
+                      
+                      <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+                      
+                      <div className="space-y-6">
+                        <div className="space-y-3">
+                          <Label htmlFor="bio" className="text-lg font-semibold">Profil beskrivning</Label>
+                          <Textarea
+                            id="bio"
+                            placeholder="Berätta om dig själv och din yrkesexperiens..."
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                            className="border-0 shadow-inner rounded-2xl px-6 py-4 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                            rows={4}
+                          />
                         </div>
-                        <Button variant="outline" size="sm">Aktivera</Button>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="font-medium">Jobbvarningar</p>
-                          <p className="text-sm text-muted-foreground">Veckovis sammanfattning av nya jobb</p>
+                        
+                        <div className="space-y-4">
+                          <Label className="text-lg font-semibold">Kompetenser</Label>
+                          <div className="flex flex-wrap gap-3">
+                            {["React", "TypeScript", "Node.js", "Python", "UI/UX Design"].map((skill, index) => (
+                              <Badge 
+                                key={skill} 
+                                className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border-0 shadow-inner hover:shadow-lg hover-scale transition-all duration-300 cursor-pointer group/skill"
+                                style={{ animationDelay: `${index * 50}ms` }}
+                              >
+                                <span className="group-hover/skill:animate-pulse">{skill}</span>
+                              </Badge>
+                            ))}
+                            <Button 
+                              size="sm" 
+                              className="h-auto px-4 py-2 rounded-full border-2 border-dashed border-primary/30 bg-transparent hover:bg-primary/10 hover:border-primary/50 text-primary hover-scale transition-all duration-300"
+                            >
+                              + Lägg till
+                            </Button>
+                          </div>
                         </div>
-                        <Button variant="outline" size="sm">Konfigurera</Button>
                       </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="settings" className="space-y-8 animate-fade-in">
+                <div className="relative group/settings">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/8 via-primary/5 to-accent/8 rounded-3xl blur-2xl opacity-40 group-hover/settings:opacity-60 transition-opacity duration-500"></div>
+                  <Card className="relative border-0 bg-gradient-to-br from-background/90 via-background/70 to-background/50 backdrop-blur-xl rounded-3xl shadow-xl shadow-primary/5 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 overflow-hidden">
+                    <div className="absolute top-6 right-8 w-16 h-16 bg-gradient-to-br from-accent/15 to-primary/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                    <CardHeader className="pb-6 pt-8">
+                      <CardTitle className="text-2xl flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center shadow-inner">
+                          <Settings className="h-6 w-6 text-accent" />
+                        </div>
+                        Inställningar
+                      </CardTitle>
+                      <CardDescription className="text-base">Hantera dina kontoinställningar och preferenser</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-8 pb-8">
+                      <div className="grid gap-6">
+                        <div className="space-y-3">
+                          <Label htmlFor="location" className="text-lg font-semibold">Plats</Label>
+                          <Input
+                            id="location"
+                            placeholder="Din stad"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            className="border-0 shadow-inner rounded-2xl px-6 py-4 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                          />
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <Label htmlFor="phone" className="text-lg font-semibold">Telefon</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            placeholder="070-123 45 67"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="border-0 shadow-inner rounded-2xl px-6 py-4 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+                      
+                      <div className="space-y-6">
+                        <h3 className="text-xl font-bold flex items-center gap-3">
+                          <span className="text-2xl">🔔</span>
+                          Notifieringar
+                        </h3>
+                        <div className="space-y-4">
+                          {[
+                            { title: "E-postnotifieringar", description: "Få notifieringar om nya jobb", action: "Aktivera" },
+                            { title: "Jobbvarningar", description: "Veckovis sammanfattning av nya jobb", action: "Konfigurera" }
+                          ].map((item, index) => (
+                            <div 
+                              key={item.title} 
+                              className="flex items-center justify-between p-6 rounded-2xl bg-gradient-to-r from-background/60 to-background/40 shadow-inner border border-white/10 hover:border-white/20 hover:shadow-lg transition-all duration-300 hover-scale group/item animate-fade-in"
+                              style={{ animationDelay: `${index * 100}ms` }}
+                            >
+                              <div className="flex-1">
+                                <p className="font-semibold text-lg">{item.title}</p>
+                                <p className="text-muted-foreground">{item.description}</p>
+                              </div>
+                              <Button 
+                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
+                                size="sm"
+                              >
+                                {item.action}
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </main>
 
