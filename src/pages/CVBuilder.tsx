@@ -86,7 +86,7 @@ export default function CVBuilder() {
           <div className="flex items-center gap-4">
             <Button
               onClick={() => navigate("/profile")}
-              className="px-4 py-2 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+              className="px-4 py-2 rounded-2xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
               Tillbaka till profil
@@ -106,10 +106,10 @@ export default function CVBuilder() {
           <div className="w-1/2 space-y-8">
             {/* Back to Profile Button */}
             <div className="flex justify-start">
-              <Button
-                onClick={() => navigate("/profile")}
-                className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
-              >
+            <Button
+              onClick={() => navigate("/profile")}
+              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary border-0 hover-scale transition-all duration-300"
+            >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Min profil
               </Button>
@@ -135,7 +135,7 @@ export default function CVBuilder() {
                         id="firstName"
                         value={personalInfo.firstName}
                         onChange={(e) => handlePersonalInfoChange('firstName', e.target.value)}
-                        className="border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                        className="border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
                       />
                     </div>
                     <div className="space-y-2">
@@ -144,7 +144,7 @@ export default function CVBuilder() {
                         id="lastName"
                         value={personalInfo.lastName}
                         onChange={(e) => handlePersonalInfoChange('lastName', e.target.value)}
-                        className="border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                        className="border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
                       />
                     </div>
                   </div>
@@ -155,7 +155,7 @@ export default function CVBuilder() {
                       type="date"
                       value={personalInfo.birthDate}
                       onChange={(e) => handlePersonalInfoChange('birthDate', e.target.value)}
-                      className="border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                      className="border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
                     />
                   </div>
                   <div className="space-y-2">
@@ -164,27 +164,27 @@ export default function CVBuilder() {
                       id="address"
                       value={personalInfo.address}
                       onChange={(e) => handlePersonalInfoChange('address', e.target.value)}
-                      className="border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                      className="border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="postalCode" className="text-sm font-semibold">Postnummer</Label>
-                      <Input
-                        id="postalCode"
-                        value={personalInfo.postalCode}
-                        onChange={(e) => handlePersonalInfoChange('postalCode', e.target.value)}
-                        className="border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
-                      />
+                        <Input
+                          id="postalCode"
+                          value={personalInfo.postalCode}
+                          onChange={(e) => handlePersonalInfoChange('postalCode', e.target.value)}
+                          className="border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
+                        />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="city" className="text-sm font-semibold">Ort</Label>
-                      <Input
-                        id="city"
-                        value={personalInfo.city}
-                        onChange={(e) => handlePersonalInfoChange('city', e.target.value)}
-                        className="border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
-                      />
+                        <Input
+                          id="city"
+                          value={personalInfo.city}
+                          onChange={(e) => handlePersonalInfoChange('city', e.target.value)}
+                          className="border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
+                        />
                     </div>
                   </div>
                 </CardContent>
@@ -205,14 +205,14 @@ export default function CVBuilder() {
                       { value: "hobbies", label: "Hobby", icon: "🎨" }
                     ].map((section) => (
                       <AccordionItem key={section.value} value={section.value} className="border-0">
-                        <AccordionTrigger className="text-lg font-semibold px-6 py-4 rounded-2xl bg-gradient-to-r from-background/60 to-background/40 shadow-inner border border-white/10 hover:border-white/20 hover:shadow-lg transition-all duration-300 hover:no-underline">
+                        <AccordionTrigger className="text-lg font-semibold px-6 py-4 rounded-2xl bg-gradient-to-r from-background/60 to-background/40 border border-white/10 hover:border-white/20 transition-all duration-300 hover:no-underline">
                           <div className="flex items-center gap-3">
                             <span className="text-2xl">{section.icon}</span>
                             {section.label}
                           </div>
                         </AccordionTrigger>
                         <AccordionContent className="pt-4 px-6">
-                          <div className="p-6 rounded-2xl bg-background/30 shadow-inner border border-white/10">
+                          <div className="p-6 rounded-2xl bg-background/30 border border-white/10">
                             <p className="text-muted-foreground">Innehåll för {section.label} kommer här...</p>
                           </div>
                         </AccordionContent>
@@ -246,8 +246,8 @@ export default function CVBuilder() {
                           onClick={() => handleTagClick(tag)}
                           className={`px-4 py-2 rounded-full cursor-pointer hover-scale transition-all duration-300 ${
                             selectedTags.includes(tag)
-                              ? "bg-gradient-to-r from-primary/30 to-accent/30 border-primary/50 shadow-inner"
-                              : "bg-gradient-to-r from-background/60 to-background/40 shadow-inner border border-white/20 hover:border-white/30"
+                              ? "bg-gradient-to-r from-primary/30 to-accent/30 border-primary/50"
+                              : "bg-gradient-to-r from-background/60 to-background/40 border border-white/20 hover:border-white/30"
                           }`}
                         >
                           {tag}
@@ -264,12 +264,12 @@ export default function CVBuilder() {
                         value={customTag}
                         onChange={(e) => setCustomTag(e.target.value)}
                         placeholder="Skriv din egen tagg..."
-                        className="flex-1 border-0 shadow-inner rounded-2xl px-4 py-3 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                        className="flex-1 border-0 rounded-2xl px-4 py-3 bg-background/40 transition-all duration-300"
                         onKeyPress={(e) => e.key === 'Enter' && handleAddCustomTag()}
                       />
                       <Button
                         onClick={handleAddCustomTag}
-                        className="px-4 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
+                        className="px-4 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary border-0 hover-scale transition-all duration-300"
                       >
                         <Plus className="h-4 w-4" />
                       </Button>
@@ -284,7 +284,7 @@ export default function CVBuilder() {
                         {selectedTags.map((tag) => (
                           <Badge
                             key={tag}
-                            className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border-0 shadow-inner flex items-center gap-2"
+                            className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border-0 flex items-center gap-2"
                           >
                             {tag}
                             <button
@@ -309,7 +309,7 @@ export default function CVBuilder() {
                 <CardContent className="p-8 text-center">
                   <Button
                     onClick={handleSaveCV}
-                    className="px-12 py-4 text-lg rounded-3xl bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl hover:shadow-green-500/40 border-0 hover-scale transition-all duration-300"
+                    className="px-12 py-4 text-lg rounded-3xl bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 text-white border-0 hover-scale transition-all duration-300"
                   >
                     <Save className="h-5 w-5 mr-3" />
                     Spara CV

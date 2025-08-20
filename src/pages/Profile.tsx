@@ -239,7 +239,7 @@ export default function Profile() {
                     </Avatar>
                     <Button 
                       size="sm" 
-                      className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-r from-background/90 to-background/70 backdrop-blur-sm border border-white/20 hover:border-primary/40 shadow-lg hover:shadow-xl hover:shadow-primary/30 hover-scale transition-all duration-300"
+                      className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-gradient-to-r from-background/90 to-background/70 backdrop-blur-sm border border-white/20 hover:border-primary/40 hover-scale transition-all duration-300"
                     >
                       <Upload className="h-4 w-4" />
                     </Button>
@@ -254,7 +254,7 @@ export default function Profile() {
                               value={displayName}
                               onChange={(e) => setDisplayName(e.target.value)}
                               placeholder="Ditt namn"
-                              className="text-2xl font-bold bg-background/50 border-0 shadow-inner rounded-2xl px-6 py-4 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                              className="text-2xl font-bold bg-background/50 border-0 rounded-2xl px-6 py-4 transition-all duration-300"
                             />
                           </div>
                         ) : (
@@ -288,14 +288,14 @@ export default function Profile() {
                           <>
                             <Button 
                               onClick={handleSaveProfile} 
-                              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
+                              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary border-0 hover-scale transition-all duration-300"
                             >
                               <Save className="h-4 w-4 mr-2" />
                               Spara
                             </Button>
                             <Button 
                               onClick={() => setEditing(false)}
-                              className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+                              className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
                             >
                               Avbryt
                             </Button>
@@ -303,7 +303,7 @@ export default function Profile() {
                         ) : (
                           <Button 
                             onClick={() => setEditing(true)} 
-                            className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
+                            className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
                           >
                             <Edit3 className="h-4 w-4 mr-2" />
                             Redigera
@@ -311,7 +311,7 @@ export default function Profile() {
                         )}
                         <Button 
                           onClick={handleSignOut}
-                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-red-100/60 to-red-50/60 hover:from-red-200/60 hover:to-red-100/60 text-red-600 hover:text-red-700 shadow-inner border border-red-200/30 hover:border-red-300/40 hover-scale transition-all duration-300"
+                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-red-100/60 to-red-50/60 hover:from-red-200/60 hover:to-red-100/60 text-red-600 hover:text-red-700 border border-red-200/30 hover:border-red-300/40 hover-scale transition-all duration-300"
                         >
                           <LogOut className="h-4 w-4 mr-2" />
                           Logga ut
@@ -467,13 +467,13 @@ export default function Profile() {
                               <div className="flex gap-3">
                                 <Button 
                                   size="sm" 
-                                  className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+                                  className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
                                 >
                                   Visa jobb
                                 </Button>
                                 <Button 
                                   size="sm" 
-                                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
+                                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary border-0 hover-scale transition-all duration-300"
                                 >
                                   Ansök nu
                                 </Button>
@@ -529,7 +529,7 @@ export default function Profile() {
                               </div>
                               <Button 
                                 size="sm" 
-                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
+                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-white/30 hover-scale transition-all duration-300"
                               >
                                 Visa detaljer
                               </Button>
@@ -558,18 +558,18 @@ export default function Profile() {
                     </CardHeader>
                     <CardContent className="space-y-8 pb-8">
                       <div className="flex gap-4">
-                        <Button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300">
+                        <Button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary border-0 hover-scale transition-all duration-300">
                           <Upload className="h-4 w-4 mr-2" />
                           Ladda upp CV
                         </Button>
                         <Button 
                           onClick={() => navigate("/cv-builder")}
-                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl hover:shadow-green-500/40 border-0 hover-scale transition-all duration-300"
+                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 text-white border-0 hover-scale transition-all duration-300"
                         >
                           <Edit3 className="h-4 w-4 mr-2" />
                           Skapa CV
                         </Button>
-                        <Button className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-white/30 hover-scale transition-all duration-300">
+                        <Button className="px-6 py-3 rounded-2xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-white/30 hover-scale transition-all duration-300">
                           <Download className="h-4 w-4 mr-2" />
                           Ladda ner CV
                         </Button>
@@ -585,7 +585,7 @@ export default function Profile() {
                             placeholder="Berätta om dig själv och din yrkesexperiens..."
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
-                            className="border-0 shadow-inner rounded-2xl px-6 py-4 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
                             rows={4}
                           />
                         </div>
@@ -596,7 +596,7 @@ export default function Profile() {
                             {["React", "TypeScript", "Node.js", "Python", "UI/UX Design"].map((skill, index) => (
                               <Badge 
                                 key={skill} 
-                                className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border-0 shadow-inner hover:shadow-lg hover-scale transition-all duration-300 cursor-pointer group/skill"
+                                className="px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border-0 hover-scale transition-all duration-300 cursor-pointer group/skill"
                                 style={{ animationDelay: `${index * 50}ms` }}
                               >
                                 <span className="group-hover/skill:animate-pulse">{skill}</span>
@@ -639,7 +639,7 @@ export default function Profile() {
                             placeholder="Din stad"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
-                            className="border-0 shadow-inner rounded-2xl px-6 py-4 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
                           />
                         </div>
                         
@@ -651,7 +651,7 @@ export default function Profile() {
                             placeholder="070-123 45 67"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
-                            className="border-0 shadow-inner rounded-2xl px-6 py-4 bg-background/40 focus:shadow-lg focus:shadow-primary/20 transition-all duration-300"
+                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
                           />
                         </div>
                       </div>
@@ -678,7 +678,7 @@ export default function Profile() {
                                 <p className="text-muted-foreground">{item.description}</p>
                               </div>
                               <Button 
-                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 shadow-inner border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
+                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
                                 size="sm"
                               >
                                 {item.action}
