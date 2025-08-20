@@ -2,8 +2,10 @@ import { MapPin, Clock, Building2, Bookmark } from "lucide-react";
 import { Card, CardContent } from "./card";
 import { Badge } from "./badge";
 import { Button } from "./button";
+import { Link } from "react-router-dom";
 
 interface JobCardProps {
+  id?: string;
   title: string;
   company: string;
   location: string;
@@ -16,6 +18,7 @@ interface JobCardProps {
 }
 
 export const JobCard = ({ 
+  id,
   title, 
   company, 
   location, 
@@ -26,7 +29,7 @@ export const JobCard = ({
   logo,
   className 
 }: JobCardProps) => {
-  return (
+  const cardContent = (
     <Card className={`group hover:shadow-card-hover transition-all duration-300 cursor-pointer border-border/50 ${className}`}>
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-4">
@@ -75,4 +78,14 @@ export const JobCard = ({
       </CardContent>
     </Card>
   );
+
+  if (id) {
+    return (
+      <Link to={`/job/${id}`}>
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return cardContent;
 };

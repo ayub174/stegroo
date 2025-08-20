@@ -15,6 +15,7 @@ import healthcareCategoryImage from "@/assets/healthcare-category.jpg";
 const Index = () => {
   const featuredJobs = [
     {
+      id: "1",
       title: "Senior Frontend Utvecklare",
       company: "TechCorp AB",
       location: "Stockholm",
@@ -24,6 +25,7 @@ const Index = () => {
       tags: ["React", "TypeScript", "Remote OK"]
     },
     {
+      id: "2",
       title: "UX/UI Designer",
       company: "Design Studio",
       location: "Göteborg",
@@ -33,6 +35,7 @@ const Index = () => {
       tags: ["Figma", "Prototyping", "User Research"]
     },
     {
+      id: "3",
       title: "Produktägare",
       company: "StartupTech",
       location: "Malmö",
