@@ -295,7 +295,7 @@ export default function CVBuilder() {
             <div className="relative group pb-8">
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl opacity-50"></div>
               <Card className="relative border-0 bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-xl rounded-3xl shadow-xl">
-                <CardContent className="p-8 text-center">
+                <CardContent className="p-8 text-center space-y-6">
                   <Button
                     onClick={handleSaveCV}
                     className="px-12 py-4 text-lg rounded-3xl bg-gradient-to-r from-green-500 via-green-600 to-emerald-600 hover:from-green-600 hover:via-emerald-600 hover:to-green-700 text-white shadow-lg hover:shadow-xl hover:shadow-green-500/40 border-0 hover-scale transition-all duration-300"
@@ -303,6 +303,15 @@ export default function CVBuilder() {
                     <Save className="h-5 w-5 mr-3" />
                     Spara CV
                   </Button>
+                  <div className="pt-4">
+                    <Button
+                      onClick={() => navigate("/profile")}
+                      className="px-8 py-3 text-base rounded-2xl bg-gradient-to-r from-primary via-primary-hover to-accent hover:from-primary-hover hover:via-accent hover:to-primary shadow-lg hover:shadow-xl hover:shadow-primary/40 border-0 hover-scale transition-all duration-300"
+                    >
+                      <ArrowLeft className="h-4 w-4 mr-2" />
+                      Min profil
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
