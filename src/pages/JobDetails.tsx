@@ -172,9 +172,9 @@ const JobDetails = () => {
       <div className="container mx-auto px-4 py-6">
         {/* Back Navigation */}
         <div className="mb-6">
-          <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors">
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            Tillbaka till jobb
+          <Link to="/" className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-card/50 border border-border/30 text-muted-foreground hover:text-primary hover:bg-card/80 hover:border-primary/20 hover:shadow-card transition-all duration-300 hover:scale-105">
+            <ChevronLeft className="h-4 w-4 group-hover:translate-x-[-2px] transition-transform duration-300" />
+            <span className="font-medium">Tillbaka till jobb</span>
           </Link>
         </div>
 
