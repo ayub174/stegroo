@@ -271,83 +271,75 @@ const JobDetails = () => {
                 </div>
               </div>
 
-              {/* Compact Info Grid - Glassmorphism */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* About & Responsibilities */}
-                <div className="space-y-6">
-                  {/* About Role */}
-                  <div className="relative group animate-fade-in" style={{animationDelay: '0.2s'}}>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
-                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 rounded-xl bg-primary/20 backdrop-blur-sm">
-                          <Target className="h-5 w-5 text-primary" />
-                        </div>
-                        <h3 className="text-xl font-bold text-foreground">Om rollen</h3>
+              {/* Main Content - Prominent Sections */}
+              <div className="space-y-8">
+                {/* About Role - Large and Prominent */}
+                <div className="relative group animate-fade-in" style={{animationDelay: '0.2s'}}>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                  <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-3xl p-8 hover:bg-white/12 transition-all duration-500">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 rounded-2xl bg-primary/20 backdrop-blur-sm">
+                        <Target className="h-6 w-6 text-primary" />
                       </div>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {currentJob.description}
-                      </p>
+                      <h3 className="text-3xl font-bold text-foreground">Om rollen</h3>
                     </div>
+                    <p className="text-muted-foreground leading-relaxed text-lg">
+                      {currentJob.description}
+                    </p>
                   </div>
+                </div>
 
-                  {/* Responsibilities */}
-                  <div className="relative group animate-fade-in" style={{animationDelay: '0.3s'}}>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
-                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 rounded-xl bg-accent/20 backdrop-blur-sm">
-                          <CheckCircle className="h-5 w-5 text-accent" />
+                {/* Responsibilities - Large and Prominent */}
+                <div className="relative group animate-fade-in" style={{animationDelay: '0.3s'}}>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-3xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
+                  <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-3xl p-8 hover:bg-white/12 transition-all duration-500">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 rounded-2xl bg-accent/20 backdrop-blur-sm">
+                        <CheckCircle className="h-6 w-6 text-accent" />
+                      </div>
+                      <h3 className="text-3xl font-bold text-foreground">Arbetsuppgifter</h3>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {currentJob.responsibilities.map((responsibility, index) => (
+                        <div key={index} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 backdrop-blur-sm">
+                          <div className="w-2 h-2 bg-gradient-to-r from-primary to-accent rounded-full mt-2 shrink-0"></div>
+                          <span className="text-muted-foreground leading-relaxed">{responsibility}</span>
                         </div>
-                        <h3 className="text-xl font-bold text-foreground">Arbetsuppgifter</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {currentJob.responsibilities.slice(0, 4).map((responsibility, index) => (
-                          <div key={index} className="flex items-start gap-3">
-                            <div className="w-1.5 h-1.5 bg-gradient-to-r from-primary to-accent rounded-full mt-2.5 shrink-0"></div>
-                            <span className="text-muted-foreground text-sm leading-relaxed">{responsibility}</span>
-                          </div>
-                        ))}
-                        {currentJob.responsibilities.length > 4 && (
-                          <div className="text-primary/80 text-sm font-medium mt-2">
-                            +{currentJob.responsibilities.length - 4} fler uppgifter
-                          </div>
-                        )}
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
 
-                {/* Requirements & Benefits */}
-                <div className="space-y-6">
-                  {/* Requirements */}
+                {/* Compact Requirements & Benefits Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Requirements - Compact */}
                   <div className="relative group animate-fade-in" style={{animationDelay: '0.4s'}}>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
-                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 rounded-xl bg-primary/20 backdrop-blur-sm">
-                          <Award className="h-5 w-5 text-primary" />
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/15 to-accent/15 rounded-xl blur opacity-10 group-hover:opacity-25 transition-all duration-500"></div>
+                    <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4 hover:bg-white/8 transition-all duration-500">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="p-1.5 rounded-lg bg-primary/15 backdrop-blur-sm">
+                          <Award className="h-4 w-4 text-primary" />
                         </div>
-                        <h3 className="text-xl font-bold text-foreground">Krav</h3>
+                        <h3 className="text-lg font-bold text-foreground">Krav</h3>
                       </div>
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2 text-sm">Grundläggande:</h4>
-                          <div className="space-y-2">
+                          <h4 className="font-semibold text-foreground mb-1 text-xs">Grundläggande:</h4>
+                          <div className="space-y-1">
                             {currentJob.requirements.slice(0, 3).map((requirement, index) => (
                               <div key={index} className="flex items-start gap-2">
-                                <CheckCircle className="h-3 w-3 text-green-400 mt-1 shrink-0" />
+                                <CheckCircle className="h-2.5 w-2.5 text-green-400 mt-1 shrink-0" />
                                 <span className="text-muted-foreground text-xs leading-relaxed">{requirement}</span>
                               </div>
                             ))}
                           </div>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2 text-sm">Meriterande:</h4>
-                          <div className="space-y-2">
+                          <h4 className="font-semibold text-foreground mb-1 text-xs">Meriterande:</h4>
+                          <div className="space-y-1">
                             {currentJob.preferred.slice(0, 2).map((preferred, index) => (
                               <div key={index} className="flex items-start gap-2">
-                                <Star className="h-3 w-3 text-yellow-400 mt-1 shrink-0" />
+                                <Star className="h-2.5 w-2.5 text-yellow-400 mt-1 shrink-0" />
                                 <span className="text-muted-foreground text-xs leading-relaxed">{preferred}</span>
                               </div>
                             ))}
@@ -357,26 +349,26 @@ const JobDetails = () => {
                     </div>
                   </div>
 
-                  {/* Benefits */}
+                  {/* Benefits - Compact */}
                   <div className="relative group animate-fade-in" style={{animationDelay: '0.5s'}}>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-2xl blur opacity-10 group-hover:opacity-30 transition-all duration-500"></div>
-                    <div className="relative bg-white/8 backdrop-blur-xl border border-white/15 rounded-2xl p-6 hover:bg-white/12 transition-all duration-500">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 rounded-xl bg-accent/20 backdrop-blur-sm">
-                          <Heart className="h-5 w-5 text-accent" />
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-accent/15 to-primary/15 rounded-xl blur opacity-10 group-hover:opacity-25 transition-all duration-500"></div>
+                    <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4 hover:bg-white/8 transition-all duration-500">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="p-1.5 rounded-lg bg-accent/15 backdrop-blur-sm">
+                          <Heart className="h-4 w-4 text-accent" />
                         </div>
-                        <h3 className="text-xl font-bold text-foreground">Förmåner</h3>
+                        <h3 className="text-lg font-bold text-foreground">Förmåner</h3>
                       </div>
-                      <div className="grid grid-cols-1 gap-2">
-                        {currentJob.benefits.slice(0, 6).map((benefit, index) => (
-                          <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-white/5 backdrop-blur-sm">
-                            <CheckCircle className="h-3 w-3 text-green-400 shrink-0" />
+                      <div className="grid grid-cols-1 gap-1">
+                        {currentJob.benefits.slice(0, 4).map((benefit, index) => (
+                          <div key={index} className="flex items-center gap-2 p-1.5 rounded-lg bg-white/3 backdrop-blur-sm">
+                            <CheckCircle className="h-2.5 w-2.5 text-green-400 shrink-0" />
                             <span className="text-muted-foreground text-xs">{benefit}</span>
                           </div>
                         ))}
-                        {currentJob.benefits.length > 6 && (
-                          <div className="text-primary/80 text-xs font-medium mt-1">
-                            +{currentJob.benefits.length - 6} fler förmåner
+                        {currentJob.benefits.length > 4 && (
+                          <div className="text-primary/80 text-xs font-medium mt-1 pl-4">
+                            +{currentJob.benefits.length - 4} fler förmåner
                           </div>
                         )}
                       </div>
