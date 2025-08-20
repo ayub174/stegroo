@@ -112,6 +112,9 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Dynamic Gradients for Hero */
+    --gradient-shift: linear-gradient(45deg, transparent, hsl(var(--primary) / 0.1), transparent, hsl(var(--accent) / 0.05));
   }
 }
 

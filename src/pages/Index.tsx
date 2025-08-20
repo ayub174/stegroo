@@ -70,49 +70,59 @@ const Index = () => {
       
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
+        {/* Floating Background Elements */}
+        <div className="absolute inset-0 z-[1]">
+          <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-primary/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        </div>
+        
         <div className="absolute inset-0 z-0">
           <img 
             src={heroImage} 
             alt="Professional workspace" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[10s] ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/85 via-primary/5 to-background/70 animate-gradient-shift"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl">
-            <div className="flex items-center gap-2 mb-6">
-              <Badge variant="secondary" className="font-medium">
-                <TrendingUp className="h-3 w-3 mr-1" />
+            <div className="flex items-center gap-2 mb-6 animate-fade-in">
+              <Badge variant="secondary" className="font-medium hover:scale-105 transition-transform duration-300 cursor-pointer bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
+                <TrendingUp className="h-3 w-3 mr-1 animate-pulse" />
                 25,000+ nya jobb denna vecka
               </Badge>
             </div>
             
-            <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 leading-tight animate-fade-in" style={{animationDelay: '0.2s'}}>
               Hitta ditt
-              <span className="text-primary block">drömjobb</span>
+              <span className="text-transparent bg-gradient-primary bg-clip-text block hover:scale-105 transition-transform duration-500 cursor-default">drömjobb</span>
               idag
             </h1>
             
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl animate-fade-in leading-relaxed" style={{animationDelay: '0.4s'}}>
               Upptäck tusentals möjligheter från Sveriges ledande företag. 
-              Vi hjälper dig att ta nästa steg i din karriär.
+              Vi hjälper dig att ta nästa steg i din karriär med AI-driven matchning.
             </p>
             
-            <SearchBar className="mb-8" />
+            <div className="animate-fade-in" style={{animationDelay: '0.6s'}}>
+              <SearchBar className="mb-8 transform hover:scale-[1.02] transition-transform duration-300" />
+            </div>
             
-            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Users className="h-4 w-4" />
-                <span>2M+ jobbsökare</span>
+            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground animate-fade-in" style={{animationDelay: '0.8s'}}>
+              <div className="flex items-center gap-1 group hover:text-primary transition-colors duration-300 cursor-pointer">
+                <Users className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
+                <span className="font-medium">2M+ jobbsökare</span>
               </div>
-              <div className="flex items-center gap-1">
-                <Briefcase className="h-4 w-4" />
-                <span>50K+ jobb</span>
+              <div className="flex items-center gap-1 group hover:text-primary transition-colors duration-300 cursor-pointer">
+                <Briefcase className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
+                <span className="font-medium">50K+ jobb</span>
               </div>
-              <div className="flex items-center gap-1">
-                <Star className="h-4 w-4" />
-                <span>10K+ företag</span>
+              <div className="flex items-center gap-1 group hover:text-primary transition-colors duration-300 cursor-pointer">
+                <Star className="h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
+                <span className="font-medium">10K+ företag</span>
               </div>
             </div>
           </div>
