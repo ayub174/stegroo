@@ -425,45 +425,21 @@ const Jobs = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section - Compact for jobs page */}
-      <section className="relative py-6 lg:py-8 overflow-hidden bg-white">
-        {/* Blue decorative shapes */}
-        <div className="absolute inset-0 z-[1]">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-blue-100 rounded-3xl rotate-12 opacity-60 animate-float"></div>
-          <div className="absolute top-20 right-20 w-48 h-48 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float" style={{animationDelay: '2s'}}></div>
-          
-          {/* Subtle pattern */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: `radial-gradient(circle, rgb(59 130 246) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
-        </div>
-        
+      {/* Minimized Hero Section */}
+      <section className="relative py-3 overflow-hidden bg-white border-b border-gray-100">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Status Badge */}
-            <div className="flex justify-center mb-6">
-              <Badge variant="secondary" className="bg-blue-50 border-2 border-blue-200 px-6 py-3 rounded-2xl shadow-lg">
-                <div className="flex items-center gap-3">
-                  <div className="p-1.5 bg-blue-500 rounded-lg shadow-inner">
-                    <TrendingUp className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="font-bold text-lg text-blue-600">
-                    {filteredJobs.length}
-                  </span>
-                  <span className="text-gray-700 font-medium">tillgängliga jobb</span>
-                </div>
+          <div className="flex items-center justify-between">
+            {/* Compact title and count */}
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold text-gray-900">
+                Alla jobb
+              </h1>
+              <Badge variant="secondary" className="bg-blue-50 border border-blue-200 px-3 py-1">
+                <TrendingUp className="h-3 w-3 text-blue-600 mr-1" />
+                <span className="font-semibold text-blue-600">{filteredJobs.length}</span>
+                <span className="text-gray-600 ml-1">jobb</span>
               </Badge>
             </div>
-            
-            {/* Title */}
-            <h1 className="text-4xl lg:text-5xl font-black text-gray-900 mb-4 leading-tight">
-              <span className="text-blue-600">Alla jobb</span>
-            </h1>
-            
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed font-light">
-              Hitta den perfekta rollen för dig
-            </p>
           </div>
         </div>
       </section>
