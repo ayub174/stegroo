@@ -73,46 +73,81 @@ const Companies = () => {
     <div className="min-h-screen bg-companies-background relative overflow-hidden">
       {/* Abstract Background Patterns */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Base blue gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
+        {/* Enhanced blue gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-blue-200 to-indigo-300"></div>
         
-        {/* Abstract geometric shapes */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute top-1/4 right-0 w-80 h-80 bg-indigo-200/40 rounded-full blur-3xl transform translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-blue-300/25 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-sky-200/30 rounded-full blur-2xl"></div>
+        {/* Large flowing abstract shapes */}
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gradient-to-br from-blue-300/40 to-indigo-400/30 rounded-full blur-3xl transform -translate-x-1/3 -translate-y-1/3 animate-float"></div>
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-indigo-300/50 to-blue-400/40 rounded-full blur-3xl transform translate-x-1/3 animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-tr from-blue-400/35 to-sky-300/45 rounded-full blur-2xl animate-float" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-gradient-to-tl from-sky-300/40 to-indigo-200/50 rounded-full blur-2xl animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-gradient-to-r from-blue-200/30 to-indigo-300/35 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 animate-float" style={{ animationDelay: '3s' }}></div>
         
-        {/* Abstract geometric lines/shapes */}
-        <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 400C300 350 600 450 1200 300" stroke="url(#blueGradient1)" strokeWidth="2"/>
-          <path d="M0 200C400 150 800 250 1200 100" stroke="url(#blueGradient2)" strokeWidth="1.5"/>
-          <path d="M0 600C200 550 800 650 1200 500" stroke="url(#blueGradient3)" strokeWidth="1"/>
-          <circle cx="200" cy="150" r="40" fill="url(#blueGradient1)" fillOpacity="0.1"/>
-          <circle cx="800" cy="300" r="60" fill="url(#blueGradient2)" fillOpacity="0.1"/>
-          <circle cx="1000" cy="600" r="35" fill="url(#blueGradient3)" fillOpacity="0.1"/>
-          <polygon points="400,100 450,150 400,200 350,150" fill="url(#blueGradient1)" fillOpacity="0.08"/>
-          <polygon points="900,400 950,450 900,500 850,450" fill="url(#blueGradient2)" fillOpacity="0.08"/>
+        {/* Enhanced abstract geometric patterns */}
+        <svg className="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Flowing curves */}
+          <path d="M0 400C150 350 300 450 600 300C900 150 1050 250 1200 200" stroke="url(#blueGradient1)" strokeWidth="3"/>
+          <path d="M0 200C200 100 400 300 800 150C1000 50 1100 200 1200 100" stroke="url(#blueGradient2)" strokeWidth="2"/>
+          <path d="M0 600C300 500 600 700 900 550C1050 450 1150 600 1200 500" stroke="url(#blueGradient3)" strokeWidth="2.5"/>
+          <path d="M0 100C400 50 600 200 1200 50" stroke="url(#blueGradient4)" strokeWidth="1.5"/>
+          <path d="M0 700C200 650 800 750 1200 650" stroke="url(#blueGradient1)" strokeWidth="2"/>
+          
+          {/* Abstract circles with varying sizes */}
+          <circle cx="150" cy="120" r="60" fill="url(#blueGradient1)" fillOpacity="0.12"/>
+          <circle cx="350" cy="400" r="80" fill="url(#blueGradient2)" fillOpacity="0.08"/>
+          <circle cx="750" cy="200" r="45" fill="url(#blueGradient3)" fillOpacity="0.15"/>
+          <circle cx="950" cy="500" r="70" fill="url(#blueGradient4)" fillOpacity="0.1"/>
+          <circle cx="550" cy="650" r="55" fill="url(#blueGradient1)" fillOpacity="0.12"/>
+          <circle cx="1100" cy="300" r="40" fill="url(#blueGradient2)" fillOpacity="0.14"/>
+          
+          {/* Geometric shapes */}
+          <polygon points="300,80 360,140 300,200 240,140" fill="url(#blueGradient1)" fillOpacity="0.1"/>
+          <polygon points="800,350 870,420 800,490 730,420" fill="url(#blueGradient2)" fillOpacity="0.09"/>
+          <polygon points="500,500 570,570 500,640 430,570" fill="url(#blueGradient3)" fillOpacity="0.11"/>
+          
+          {/* Abstract triangular shapes */}
+          <polygon points="100,300 150,250 200,300 150,350" fill="url(#blueGradient4)" fillOpacity="0.08"/>
+          <polygon points="600,100 650,50 700,100 650,150" fill="url(#blueGradient1)" fillOpacity="0.1"/>
+          <polygon points="1000,600 1050,550 1100,600 1050,650" fill="url(#blueGradient3)" fillOpacity="0.09"/>
+          
+          {/* Hexagonal patterns */}
+          <polygon points="450,250 480,230 510,250 510,290 480,310 450,290" fill="url(#blueGradient2)" fillOpacity="0.07"/>
+          <polygon points="850,150 880,130 910,150 910,190 880,210 850,190" fill="url(#blueGradient4)" fillOpacity="0.08"/>
           
           <defs>
             <linearGradient id="blueGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="50%" stopColor="#2563eb" />
               <stop offset="100%" stopColor="#1d4ed8" />
             </linearGradient>
             <linearGradient id="blueGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#6366f1" />
+              <stop offset="50%" stopColor="#5b21b6" />
               <stop offset="100%" stopColor="#4f46e5" />
             </linearGradient>
             <linearGradient id="blueGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#0ea5e9" />
-              <stop offset="100%" stopColor="#0284c7" />
+              <stop offset="50%" stopColor="#0284c7" />
+              <stop offset="100%" stopColor="#0369a1" />
+            </linearGradient>
+            <linearGradient id="blueGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#1e40af" />
+              <stop offset="50%" stopColor="#1e3a8a" />
+              <stop offset="100%" stopColor="#1d4ed8" />
             </linearGradient>
           </defs>
         </svg>
         
-        {/* Floating abstract elements */}
-        <div className="absolute top-1/3 left-1/4 w-20 h-20 border-2 border-blue-300/40 rounded-lg rotate-45 animate-float"></div>
-        <div className="absolute top-2/3 right-1/3 w-16 h-16 border-2 border-indigo-300/40 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-2/3 w-12 h-12 bg-blue-400/20 rotate-12 animate-float" style={{ animationDelay: '1s' }}></div>
+        {/* Enhanced floating abstract elements */}
+        <div className="absolute top-1/4 left-1/5 w-24 h-24 border-3 border-blue-400/50 rounded-2xl rotate-45 animate-float backdrop-blur-sm"></div>
+        <div className="absolute top-3/4 right-1/4 w-20 h-20 border-2 border-indigo-400/60 rounded-full animate-float backdrop-blur-sm" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-3/4 w-16 h-16 bg-blue-500/20 rotate-12 animate-float backdrop-blur-sm" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/6 right-1/6 w-28 h-28 border-2 border-sky-400/45 rounded-3xl rotate-12 animate-float backdrop-blur-sm" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-18 h-18 bg-indigo-400/25 rounded-full animate-float backdrop-blur-sm" style={{ animationDelay: '4s' }}></div>
+        
+        {/* Additional decorative elements */}
+        <div className="absolute top-2/3 left-1/6 w-32 h-2 bg-gradient-to-r from-transparent via-blue-400/40 to-transparent rotate-45 animate-float" style={{ animationDelay: '2.5s' }}></div>
+        <div className="absolute top-1/3 right-2/3 w-2 h-32 bg-gradient-to-b from-transparent via-indigo-400/35 to-transparent rotate-12 animate-float" style={{ animationDelay: '1.5s' }}></div>
       </div>
 
       <div className="relative z-10">
