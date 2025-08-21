@@ -4,7 +4,6 @@ import { Button } from "./button";
 import { Separator } from "./separator";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-
 interface Job {
   id: string;
   title: string;
@@ -17,11 +16,9 @@ interface Job {
   logo?: string;
   description: string;
 }
-
 interface JobDetailPanelProps {
   job: Job | null;
 }
-
 const getDeadlineColor = (deadline: string) => {
   const daysLeft = parseInt(deadline.split(' ')[0]);
   if (daysLeft >= 7) return "text-foreground";
@@ -29,11 +26,11 @@ const getDeadlineColor = (deadline: string) => {
   if (daysLeft >= 1) return "text-red-600 dark:text-red-400";
   return "text-red-600 dark:text-red-400";
 };
-
-export const JobDetailPanel = ({ job }: JobDetailPanelProps) => {
+export const JobDetailPanel = ({
+  job
+}: JobDetailPanelProps) => {
   if (!job) {
-    return (
-      <div className="h-full flex items-center justify-center text-center p-8 relative">
+    return <div className="h-full flex items-center justify-center text-center p-8 relative">
         <div className="space-y-6 animate-fade-in">
           <Building2 className="h-16 w-16 text-muted-foreground mx-auto opacity-50" />
           <div>
@@ -48,30 +45,24 @@ export const JobDetailPanel = ({ job }: JobDetailPanelProps) => {
         <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 animate-pulse">
           <div className="flex items-center gap-1">
             <ChevronLeft className="h-6 w-6 text-primary animate-bounce" />
-            <ChevronLeft className="h-5 w-5 text-primary/60 animate-bounce" style={{ animationDelay: '0.1s' }} />
-            <ChevronLeft className="h-4 w-4 text-primary/40 animate-bounce" style={{ animationDelay: '0.2s' }} />
+            <ChevronLeft className="h-5 w-5 text-primary/60 animate-bounce" style={{
+            animationDelay: '0.1s'
+          }} />
+            <ChevronLeft className="h-4 w-4 text-primary/40 animate-bounce" style={{
+            animationDelay: '0.2s'
+          }} />
           </div>
-          <div className="text-xs text-primary font-medium">
-            Börja här!
-          </div>
+          
         </div>
-      </div>
-    );
+      </div>;
   }
-
   const deadlineColorClass = getDeadlineColor(job.deadline);
-
-  return (
-    <div className="h-full overflow-y-auto bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl">
+  return <div className="h-full overflow-y-auto bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl">
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-start gap-4">
           <div className="w-16 h-16 rounded-xl bg-gradient-subtle flex items-center justify-center shrink-0">
-            {job.logo ? (
-              <img src={job.logo} alt={`${job.company} logo`} className="w-12 h-12 object-contain" />
-            ) : (
-              <Building2 className="h-8 w-8 text-primary" />
-            )}
+            {job.logo ? <img src={job.logo} alt={`${job.company} logo`} className="w-12 h-12 object-contain" /> : <Building2 className="h-8 w-8 text-primary" />}
           </div>
           
           <div className="flex-1 min-w-0">
@@ -115,11 +106,9 @@ export const JobDetailPanel = ({ job }: JobDetailPanelProps) => {
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
           <Badge variant="secondary" className="px-3 py-1">{job.type}</Badge>
-          {job.tags.map((tag, index) => (
-            <Badge key={index} variant="outline" className="px-3 py-1">
+          {job.tags.map((tag, index) => <Badge key={index} variant="outline" className="px-3 py-1">
               {tag}
-            </Badge>
-          ))}
+            </Badge>)}
         </div>
 
         <Separator />
@@ -147,6 +136,5 @@ export const JobDetailPanel = ({ job }: JobDetailPanelProps) => {
           </Button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
