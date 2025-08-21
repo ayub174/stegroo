@@ -1,4 +1,4 @@
-import { MapPin, Clock, Building2, Calendar, ExternalLink, Bookmark, Share } from "lucide-react";
+import { MapPin, Clock, Building2, Calendar, ExternalLink, Bookmark, Share, ChevronLeft } from "lucide-react";
 import { Badge } from "./badge";
 import { Button } from "./button";
 import { Separator } from "./separator";
@@ -33,14 +33,26 @@ const getDeadlineColor = (deadline: string) => {
 export const JobDetailPanel = ({ job }: JobDetailPanelProps) => {
   if (!job) {
     return (
-      <div className="h-full flex items-center justify-center text-center p-8">
-        <div className="space-y-4">
+      <div className="h-full flex items-center justify-center text-center p-8 relative">
+        <div className="space-y-6 animate-fade-in">
           <Building2 className="h-16 w-16 text-muted-foreground mx-auto opacity-50" />
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-2">Välj ett jobb</h3>
             <p className="text-muted-foreground text-sm">
               Klicka på ett jobb i listan för att se detaljerad information här.
             </p>
+          </div>
+        </div>
+        
+        {/* Animated Arrow pointing left */}
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 animate-pulse">
+          <div className="flex items-center gap-1">
+            <ChevronLeft className="h-6 w-6 text-primary animate-bounce" />
+            <ChevronLeft className="h-5 w-5 text-primary/60 animate-bounce" style={{ animationDelay: '0.1s' }} />
+            <ChevronLeft className="h-4 w-4 text-primary/40 animate-bounce" style={{ animationDelay: '0.2s' }} />
+          </div>
+          <div className="text-xs text-primary font-medium">
+            Börja här!
           </div>
         </div>
       </div>
