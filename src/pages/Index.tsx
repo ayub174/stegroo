@@ -1,4 +1,4 @@
-import { TrendingUp, Users, Briefcase, Star, ArrowRight } from "lucide-react";
+import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/ui/header";
@@ -277,6 +277,157 @@ const Index = () => {
 
       {/* Categories Section */}
       
+
+      {/* How It Works Section */}
+      <section className="relative py-20 overflow-hidden bg-gray-50">
+        {/* Blue decorative shapes */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float" style={{
+            animationDelay: '1s'
+          }}></div>
+          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float" style={{
+            animationDelay: '3s'
+          }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-16 animate-fade-in">
+            <div className="inline-flex items-center gap-2 mb-6">
+              <Badge variant="secondary" className="font-medium bg-blue-50 border-2 border-blue-200 px-4 py-2 rounded-2xl shadow-lg">
+                <Zap className="h-3 w-3 mr-1 text-blue-600" />
+                <span className="text-gray-700">Så enkelt funkar det</span>
+              </Badge>
+            </div>
+            
+            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">
+              <span className="text-blue-600">3 enkla steg</span>
+              <span className="block text-gray-600 mt-2">till ditt drömjobb</span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Vår AI-drivna plattform gör det
+              <span className="text-blue-600 font-medium"> snabbt och enkelt att hitta rätt jobb</span>
+            </p>
+          </div>
+          
+          {/* Steps */}
+          <div className="relative z-10 flex items-center gap-4 max-w-6xl mx-auto">
+            {/* Step 1 */}
+            <div className="flex-1 group animate-fade-in">
+              <div className="relative p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-blue-300 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center">
+                <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
+                
+                <div className="relative z-10">
+                  {/* Step number */}
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 text-white rounded-2xl font-black text-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    1
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300">
+                      <Search className="h-8 w-8 text-blue-600" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                    Sök & Filtrera
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Använd våra smarta filter för att hitta jobb som matchar dina färdigheter, 
+                    erfarenhet och önskad plats. Vår AI föreslår relevanta roller baserat på din profil.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Arrow */}
+            <div className="hidden lg:block animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <ArrowRight className="h-8 w-8 text-blue-400" />
+            </div>
+            
+            {/* Step 2 */}
+            <div className="flex-1 group animate-fade-in" style={{animationDelay: '0.2s'}}>
+              <div className="relative p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-blue-300 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center">
+                <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
+                
+                <div className="relative z-10">
+                  {/* Step number */}
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 text-white rounded-2xl font-black text-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    2
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300">
+                      <UserCheck className="h-8 w-8 text-blue-600" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                    Skapa Profil
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Bygg en stark profil med ditt CV, färdigheter och arbetserfarenhet. 
+                    Vår CV-builder hjälper dig att skapa en professionell presentation.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Arrow */}
+            <div className="hidden lg:block animate-fade-in" style={{animationDelay: '0.4s'}}>
+              <ArrowRight className="h-8 w-8 text-blue-400" />
+            </div>
+            
+            {/* Step 3 */}
+            <div className="flex-1 group animate-fade-in" style={{animationDelay: '0.4s'}}>
+              <div className="relative p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-blue-300 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center">
+                <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
+                
+                <div className="relative z-10">
+                  {/* Step number */}
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-700 text-white rounded-2xl font-black text-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    3
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300">
+                      <Star className="h-8 w-8 text-blue-600" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                    Ansök & Få Jobb
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Ansök direkt genom plattformen med ett klick. Få meddelanden om 
+                    ansökningsstatus och ta emot jobberbjudanden från intresserade företag.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* CTA */}
+          <div className="text-center mt-16 animate-fade-in" style={{animationDelay: '0.6s'}}>
+            <div className="relative inline-block group">
+              <div className="absolute inset-0 bg-blue-600 rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500"></div>
+              <Button variant="hero" size="lg" className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-inner">
+                <span className="flex items-center gap-3">
+                  Kom igång nu - helt gratis
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Trending Jobs Section */}
       <section className="relative py-20 overflow-hidden bg-white">
