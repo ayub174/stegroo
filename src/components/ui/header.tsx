@@ -17,7 +17,7 @@ export const Header = () => {
             Hitta jobb
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-300 rounded-full"></div>
           </a>
-          <a href="#" className="group relative text-muted-foreground hover:text-primary transition-all duration-300">
+          <a href="/companies" className="group relative text-muted-foreground hover:text-primary transition-all duration-300">
             Företag
             <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-300 rounded-full"></div>
           </a>
