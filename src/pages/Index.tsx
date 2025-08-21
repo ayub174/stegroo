@@ -315,30 +315,35 @@ const Index = () => {
           <div className="relative z-10 flex items-center gap-4 max-w-6xl mx-auto">
             {/* Step 1 */}
             <div className="flex-1 group animate-fade-in">
-              <div className="relative p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-blue-300 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center">
-                <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  {/* Step number */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 text-white rounded-2xl font-black text-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    1
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300">
-                      <Search className="h-8 w-8 text-blue-600" />
+              <div className="relative h-80 w-full perspective-1000">
+                <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
+                  {/* Front Face */}
+                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center">
+                    {/* Step number */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 text-white rounded-2xl font-black text-xl mb-6 mx-auto shadow-lg">
+                      1
                     </div>
+                    
+                    {/* Icon */}
+                    <div className="flex justify-center mb-6">
+                      <div className="p-4 bg-blue-100 rounded-2xl">
+                        <Search className="h-8 w-8 text-blue-600" />
+                      </div>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Sök & Filtrera
+                    </h3>
                   </div>
                   
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                    Sök & Filtrera
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Använd våra smarta filter för att hitta jobb som matchar dina färdigheter, 
-                    erfarenhet och önskad plats. Vår AI föreslår relevanta roller baserat på din profil.
-                  </p>
+                  {/* Back Face */}
+                  <div className="flip-card-back absolute inset-0 backface-hidden rotate-y-180 rounded-3xl bg-blue-600 text-white shadow-xl p-8 text-center flex flex-col justify-center">
+                    <p className="text-lg leading-relaxed">
+                      Använd våra smarta filter för att hitta jobb som matchar dina färdigheter, 
+                      erfarenhet och önskad plats. Vår AI föreslår relevanta roller baserat på din profil.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -350,30 +355,35 @@ const Index = () => {
             
             {/* Step 2 */}
             <div className="flex-1 group animate-fade-in" style={{animationDelay: '0.2s'}}>
-              <div className="relative p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-blue-300 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center">
-                <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  {/* Step number */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 text-white rounded-2xl font-black text-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    2
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300">
-                      <UserCheck className="h-8 w-8 text-blue-600" />
+              <div className="relative h-80 w-full perspective-1000">
+                <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
+                  {/* Front Face */}
+                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center">
+                    {/* Step number */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 text-white rounded-2xl font-black text-xl mb-6 mx-auto shadow-lg">
+                      2
                     </div>
+                    
+                    {/* Icon */}
+                    <div className="flex justify-center mb-6">
+                      <div className="p-4 bg-blue-100 rounded-2xl">
+                        <UserCheck className="h-8 w-8 text-blue-600" />
+                      </div>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Skapa Profil
+                    </h3>
                   </div>
                   
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                    Skapa Profil
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Bygg en stark profil med ditt CV, färdigheter och arbetserfarenhet. 
-                    Vår CV-builder hjälper dig att skapa en professionell presentation.
-                  </p>
+                  {/* Back Face */}
+                  <div className="flip-card-back absolute inset-0 backface-hidden rotate-y-180 rounded-3xl bg-blue-600 text-white shadow-xl p-8 text-center flex flex-col justify-center">
+                    <p className="text-lg leading-relaxed">
+                      Bygg en stark profil med ditt CV, färdigheter och arbetserfarenhet. 
+                      Vår CV-builder hjälper dig att skapa en professionell presentation.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -385,30 +395,35 @@ const Index = () => {
             
             {/* Step 3 */}
             <div className="flex-1 group animate-fade-in" style={{animationDelay: '0.4s'}}>
-              <div className="relative p-8 rounded-3xl bg-white border-2 border-gray-200 hover:border-blue-300 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center">
-                <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
-                
-                <div className="relative z-10">
-                  {/* Step number */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-700 text-white rounded-2xl font-black text-xl mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    3
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className="p-4 bg-blue-100 rounded-2xl group-hover:bg-blue-200 transition-colors duration-300">
-                      <Star className="h-8 w-8 text-blue-600" />
+              <div className="relative h-80 w-full perspective-1000">
+                <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
+                  {/* Front Face */}
+                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center">
+                    {/* Step number */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-700 text-white rounded-2xl font-black text-xl mb-6 mx-auto shadow-lg">
+                      3
                     </div>
+                    
+                    {/* Icon */}
+                    <div className="flex justify-center mb-6">
+                      <div className="p-4 bg-blue-100 rounded-2xl">
+                        <Star className="h-8 w-8 text-blue-600" />
+                      </div>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold text-gray-900">
+                      Ansök & Få Jobb
+                    </h3>
                   </div>
                   
-                  {/* Content */}
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                    Ansök & Få Jobb
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Ansök direkt genom plattformen med ett klick. Få meddelanden om 
-                    ansökningsstatus och ta emot jobberbjudanden från intresserade företag.
-                  </p>
+                  {/* Back Face */}
+                  <div className="flip-card-back absolute inset-0 backface-hidden rotate-y-180 rounded-3xl bg-blue-700 text-white shadow-xl p-8 text-center flex flex-col justify-center">
+                    <p className="text-lg leading-relaxed">
+                      Ansök direkt genom plattformen med ett klick. Få meddelanden om 
+                      ansökningsstatus och ta emot jobberbjudanden från intresserade företag.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
