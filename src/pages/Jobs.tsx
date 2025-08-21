@@ -7,6 +7,15 @@ import { JobFiltersSidebar } from "@/components/ui/job-filters-sidebar";
 import { JobDetailPanel } from "@/components/ui/job-detail-panel";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp } from "lucide-react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 // Extensive dummy job data (30 jobs)
 const allJobs = [
@@ -382,6 +391,9 @@ const Jobs = () => {
   const [sortBy, setSortBy] = useState('relevance');
   const [filterByType, setFilterByType] = useState('all');
   const [selectedJob, setSelectedJob] = useState<typeof allJobs[0] | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const ITEMS_PER_PAGE = 20;
 
   // Filter jobs based on search parameters
   const filteredJobs = allJobs.filter(job => {
@@ -416,6 +428,17 @@ const Jobs = () => {
     }
     return 0; // relevance (default order)
   });
+
+  // Calculate pagination
+  const totalPages = Math.ceil(sortedJobs.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedJobs = sortedJobs.slice(startIndex, endIndex);
+  
+  // Reset to first page when filters change
+  const resetPagination = () => {
+    setCurrentPage(1);
+  };
 
   const handleJobSelect = (job: typeof allJobs[0]) => {
     setSelectedJob(job);
@@ -456,24 +479,36 @@ const Jobs = () => {
                   locationQuery={locationQuery}
                   sortBy={sortBy}
                   filterByType={filterByType}
-                  onSearchChange={setSearchQuery}
-                  onLocationChange={setLocationQuery}
-                  onSortChange={setSortBy}
-                  onTypeFilterChange={setFilterByType}
+                  onSearchChange={(query) => {
+                    setSearchQuery(query);
+                    resetPagination();
+                  }}
+                  onLocationChange={(location) => {
+                    setLocationQuery(location);
+                    resetPagination();
+                  }}
+                  onSortChange={(sort) => {
+                    setSortBy(sort);
+                    resetPagination();
+                  }}
+                  onTypeFilterChange={(type) => {
+                    setFilterByType(type);
+                    resetPagination();
+                  }}
                   jobCount={filteredJobs.length}
                 />
               </div>
             </div>
 
             {/* Middle - Job List */}
-            <div className="lg:col-span-5">
-              <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
+            <div className="lg:col-span-5 flex flex-col h-[calc(100vh-12rem)]">
+              <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
                   <div className="text-center py-12">
                     <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
                   </div>
                 ) : (
-                  sortedJobs.map((job) => (
+                  paginatedJobs.map((job) => (
                     <CompactJobCard
                       key={job.id}
                       {...job}
@@ -483,12 +518,76 @@ const Jobs = () => {
                   ))
                 )}
               </div>
+              
+              {/* Pagination */}
+              {sortedJobs.length > ITEMS_PER_PAGE && (
+                <div className="mt-6 pt-4 border-t border-gray-200">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage > 1) setCurrentPage(currentPage - 1);
+                          }}
+                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                        />
+                      </PaginationItem>
+                      
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                        if (
+                          page === 1 ||
+                          page === totalPages ||
+                          (page >= currentPage - 1 && page <= currentPage + 1)
+                        ) {
+                          return (
+                            <PaginationItem key={page}>
+                              <PaginationLink
+                                href="#"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setCurrentPage(page);
+                                }}
+                                isActive={currentPage === page}
+                              >
+                                {page}
+                              </PaginationLink>
+                            </PaginationItem>
+                          );
+                        } else if (
+                          page === currentPage - 2 ||
+                          page === currentPage + 2
+                        ) {
+                          return (
+                            <PaginationItem key={page}>
+                              <PaginationEllipsis />
+                            </PaginationItem>
+                          );
+                        }
+                        return null;
+                      })}
+                      
+                      <PaginationItem>
+                        <PaginationNext 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                          }}
+                          className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
             </div>
 
             {/* Right - Job Detail Panel */}
             <div className="lg:col-span-4">
               <div className="sticky top-6">
-                <div className="h-[80vh]">
+                <div className="h-[calc(100vh-12rem)]">
                   <JobDetailPanel job={selectedJob} />
                 </div>
               </div>
