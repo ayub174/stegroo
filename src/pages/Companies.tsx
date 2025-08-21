@@ -70,8 +70,53 @@ const Companies = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <div className="min-h-screen bg-companies-background relative overflow-hidden">
+      {/* Abstract Background Patterns */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Base blue gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100"></div>
+        
+        {/* Abstract geometric shapes */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute top-1/4 right-0 w-80 h-80 bg-indigo-200/40 rounded-full blur-3xl transform translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-blue-300/25 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-sky-200/30 rounded-full blur-2xl"></div>
+        
+        {/* Abstract geometric lines/shapes */}
+        <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 400C300 350 600 450 1200 300" stroke="url(#blueGradient1)" strokeWidth="2"/>
+          <path d="M0 200C400 150 800 250 1200 100" stroke="url(#blueGradient2)" strokeWidth="1.5"/>
+          <path d="M0 600C200 550 800 650 1200 500" stroke="url(#blueGradient3)" strokeWidth="1"/>
+          <circle cx="200" cy="150" r="40" fill="url(#blueGradient1)" fillOpacity="0.1"/>
+          <circle cx="800" cy="300" r="60" fill="url(#blueGradient2)" fillOpacity="0.1"/>
+          <circle cx="1000" cy="600" r="35" fill="url(#blueGradient3)" fillOpacity="0.1"/>
+          <polygon points="400,100 450,150 400,200 350,150" fill="url(#blueGradient1)" fillOpacity="0.08"/>
+          <polygon points="900,400 950,450 900,500 850,450" fill="url(#blueGradient2)" fillOpacity="0.08"/>
+          
+          <defs>
+            <linearGradient id="blueGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#1d4ed8" />
+            </linearGradient>
+            <linearGradient id="blueGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#6366f1" />
+              <stop offset="100%" stopColor="#4f46e5" />
+            </linearGradient>
+            <linearGradient id="blueGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#0284c7" />
+            </linearGradient>
+          </defs>
+        </svg>
+        
+        {/* Floating abstract elements */}
+        <div className="absolute top-1/3 left-1/4 w-20 h-20 border-2 border-blue-300/40 rounded-lg rotate-45 animate-float"></div>
+        <div className="absolute top-2/3 right-1/3 w-16 h-16 border-2 border-indigo-300/40 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-2/3 w-12 h-12 bg-blue-400/20 rotate-12 animate-float" style={{ animationDelay: '1s' }}></div>
+      </div>
+
+      <div className="relative z-10">
+        <Header />
       
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16">
@@ -231,6 +276,7 @@ const Companies = () => {
       </section>
 
       <Footer />
+      </div>
     </div>
   );
 };
