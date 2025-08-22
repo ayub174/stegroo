@@ -184,3 +184,15 @@ All colors MUST be HSL.
     transform: translateX(2px);
   }
 }
+
+@keyframes vibrate-slow {
+  0%, 96%, 100% {
+    transform: translateX(0);
+  }
+  2%, 6% {
+    transform: translateX(-4px);
+  }
+  4%, 8% {
+    transform: translateX(4px);
+  }
+}
