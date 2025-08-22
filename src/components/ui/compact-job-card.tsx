@@ -8,6 +8,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { LoginModal } from "./login-modal";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface CompactJobCardProps {
   id?: string;
@@ -51,6 +52,7 @@ export const CompactJobCard = ({
   const deadlineColorClass = getDeadlineColor(deadline);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -154,6 +156,12 @@ export const CompactJobCard = ({
     }
   };
 
+  const handleDoubleClick = () => {
+    if (id) {
+      navigate(`/job/${id}`);
+    }
+  };
+
   return (
     <>
       <div 
@@ -165,6 +173,7 @@ export const CompactJobCard = ({
           className
         )}
         onClick={onClick}
+        onDoubleClick={handleDoubleClick}
       >
         {/* Save Button - Heart Icon */}
         <Button
