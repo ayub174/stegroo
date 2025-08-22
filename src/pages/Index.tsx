@@ -318,10 +318,10 @@ const Index = () => {
               <div className="relative h-80 w-full perspective-1000">
                 <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
                   {/* Front Face */}
-                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center">
-                    {/* Step number */}
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-500 text-white rounded-2xl font-black text-xl mb-6 mx-auto shadow-lg">
-                      1
+                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center overflow-hidden">
+                    {/* Diagonal Banner */}
+                    <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 transform rotate-45 flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xl transform -rotate-45 translate-y-2">1</span>
                     </div>
                     
                     {/* Icon */}
@@ -358,10 +358,10 @@ const Index = () => {
               <div className="relative h-80 w-full perspective-1000">
                 <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
                   {/* Front Face */}
-                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center">
-                    {/* Step number */}
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 text-white rounded-2xl font-black text-xl mb-6 mx-auto shadow-lg">
-                      2
+                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center overflow-hidden">
+                    {/* Diagonal Banner */}
+                    <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-700 transform rotate-45 flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xl transform -rotate-45 translate-y-2">2</span>
                     </div>
                     
                     {/* Icon */}
@@ -398,10 +398,10 @@ const Index = () => {
               <div className="relative h-80 w-full perspective-1000">
                 <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
                   {/* Front Face */}
-                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center">
-                    {/* Step number */}
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-700 text-white rounded-2xl font-black text-xl mb-6 mx-auto shadow-lg">
-                      3
+                  <div className="flip-card-front absolute inset-0 backface-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-xl p-8 text-center flex flex-col justify-center overflow-hidden">
+                    {/* Diagonal Banner */}
+                    <div className="absolute -top-2 -right-2 w-20 h-20 bg-gradient-to-br from-blue-700 to-blue-800 transform rotate-45 flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xl transform -rotate-45 translate-y-2">3</span>
                     </div>
                     
                     {/* Icon */}
