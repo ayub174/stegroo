@@ -518,7 +518,7 @@ export default function Profile() {
                             <Button size="sm" className="px-4 py-2 rounded-xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-medium transition-all duration-300">
                               Visa
                             </Button>
-                            <Button size="sm" className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-medium transition-all duration-300">
+                            <Button size="sm" className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-accent text-white border-2 border-white/20 font-medium transition-all duration-300 hover:opacity-90">
                               Ansök
                             </Button>
                           </div>
