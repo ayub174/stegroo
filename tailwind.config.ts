@@ -170,9 +170,9 @@ export default {
 				'card': 'var(--shadow-card)',
 				'card-hover': 'var(--shadow-card-hover)',
 				'button': 'var(--shadow-button)',
-				'clay-soft': 'var(--shadow-clay-soft)',
-				'clay-medium': 'var(--shadow-clay-medium)',
-				'clay-strong': 'var(--shadow-clay-strong)',
+				'clay-base': 'var(--shadow-clay-base)',
+				'clay-elevated': 'var(--shadow-clay-elevated)',
+				'clay-pressed': 'var(--shadow-clay-pressed)',
 				'clay-inset': 'var(--shadow-clay-inset)'
 			},
 			backgroundImage: {

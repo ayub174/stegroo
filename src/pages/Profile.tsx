@@ -219,22 +219,21 @@ export default function Profile() {
       
       <main className="container mx-auto px-4 py-8 relative z-10">
         <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-          {/* Streamlined Profile Header */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-            <Card className="relative border-0 bg-gradient-to-br from-background/95 via-background/85 to-background/90 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-              <CardContent className="p-8">
+          {/* Claymorphism Profile Header */}
+          <div className="relative">
+            <Card className="border-0 bg-gradient-to-br from-clay-light via-clay-base to-clay-light rounded-3xl shadow-clay-elevated hover:shadow-clay-pressed transition-all duration-300 overflow-hidden">
+              <CardContent className="p-8 bg-gradient-to-br from-white/80 via-gray-50/90 to-white/80 shadow-inner rounded-3xl">
                 <div className="flex flex-col lg:flex-row items-start gap-6">
-                  <div className="relative group/avatar shrink-0">
-                    <Avatar className="w-24 h-24 rounded-2xl border-3 border-white/20 shadow-lg bg-gradient-to-br from-primary/10 to-accent/10 hover-scale transition-all duration-300">
+                  <div className="relative shrink-0">
+                    <Avatar className="w-24 h-24 rounded-2xl border-2 border-gray-200 shadow-clay-inset bg-gradient-to-br from-gray-100 to-white hover:shadow-clay-pressed transition-all duration-300">
                       <AvatarImage src="" />
-                      <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-primary via-primary-hover to-accent text-white rounded-2xl">
+                      <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-primary via-primary-hover to-accent text-white rounded-2xl shadow-inner">
                         {displayName ? displayName.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                     <Button 
                       size="sm" 
-                      className="absolute -bottom-1 -right-1 w-8 h-8 rounded-xl bg-background/90 border border-white/20 hover:border-primary/40 hover-scale transition-all duration-300"
+                      className="absolute -bottom-1 -right-1 w-8 h-8 rounded-xl bg-white border-2 border-gray-200 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary transition-all duration-300"
                     >
                       <Upload className="h-4 w-4" />
                     </Button>
@@ -256,17 +255,17 @@ export default function Profile() {
                           </h1>
                         )}
                         
-                        <div className="flex items-center gap-2 p-2 rounded-xl bg-background/40 border border-white/10 w-fit">
+                        <div className="flex items-center gap-2 p-3 rounded-xl bg-white/90 border-2 border-gray-200 shadow-clay-inset w-fit">
                           <Mail className="h-4 w-4 text-primary" />
-                          <span className="text-muted-foreground text-sm">{user?.email}</span>
+                          <span className="text-gray-700 text-sm font-medium">{user?.email}</span>
                         </div>
                         
                         <div className="flex items-center gap-2 flex-wrap">
-                          <Badge className="px-3 py-1 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 border-0">
+                          <Badge className="px-4 py-2 rounded-full bg-white border-2 border-gray-200 shadow-clay-base text-gray-700 font-medium">
                             {profile?.account_type === 'business' ? 'Företag' : 'Privatperson'}
                           </Badge>
                           {profile?.company_name && (
-                            <Badge className="px-3 py-1 rounded-full bg-gradient-to-r from-accent/20 to-accent/10 border-0 flex items-center gap-1">
+                            <Badge className="px-4 py-2 rounded-full bg-white border-2 border-gray-200 shadow-clay-base text-gray-700 font-medium flex items-center gap-1">
                               <Building className="h-3 w-3" />
                               {profile.company_name}
                             </Badge>
@@ -274,19 +273,19 @@ export default function Profile() {
                         </div>
                       </div>
                       
-                      <div className="flex gap-2 flex-shrink-0">
+                      <div className="flex gap-3 flex-shrink-0">
                         {editing ? (
                           <>
                             <Button 
                               onClick={handleSaveProfile} 
-                              className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-accent text-white border-0 hover-scale transition-all duration-300"
+                              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
                             >
-                              <Save className="h-4 w-4 mr-1" />
+                              <Save className="h-4 w-4 mr-2" />
                               Spara
                             </Button>
                             <Button 
                               onClick={() => setEditing(false)}
-                              className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 border border-white/20"
+                              className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 font-semibold transition-all duration-300"
                             >
                               Avbryt
                             </Button>
@@ -294,17 +293,17 @@ export default function Profile() {
                         ) : (
                           <Button 
                             onClick={() => setEditing(true)} 
-                            className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
+                            className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-semibold transition-all duration-300"
                           >
-                            <Edit3 className="h-4 w-4 mr-1" />
+                            <Edit3 className="h-4 w-4 mr-2" />
                             Redigera
                           </Button>
                         )}
                         <Button 
                           onClick={handleSignOut}
-                          className="px-4 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 hover:border-red-300 hover-scale transition-all duration-300"
+                          className="px-6 py-3 rounded-2xl bg-red-50 border-2 border-red-200 shadow-clay-base hover:shadow-clay-pressed text-red-600 hover:text-red-700 font-semibold transition-all duration-300"
                         >
-                          <LogOut className="h-4 w-4 mr-1" />
+                          <LogOut className="h-4 w-4 mr-2" />
                           Logga ut
                         </Button>
                       </div>
