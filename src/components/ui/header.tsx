@@ -1,80 +1,123 @@
-import { Bell, User, Menu } from "lucide-react";
+import { Bell, User, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "./button";
 import { Logo } from "./logo";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const navigationItems = [
+    { label: "Hitta jobb", href: "/jobs" },
+    { label: "Företag", href: "/companies" },
+    { label: "CV-byggare", href: "/cv-builder" },
+    { label: "Profil", href: "/profile" }
+  ];
+
+  const isActive = (href: string) => location.pathname === href;
+
   return (
-    <header className="relative overflow-hidden border-b border-border/20 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-      {/* Dynamic background elements */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 animate-gradient-shift"></div>
-      <div className="absolute top-0 left-1/4 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-float opacity-30"></div>
-      <div className="absolute top-0 right-1/4 w-24 h-24 bg-accent/15 rounded-full blur-2xl animate-float opacity-40" style={{ animationDelay: '2s' }}></div>
-      
-      <div className="container mx-auto px-4 h-20 flex items-center justify-between relative">
-        {/* Left Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 flex-1">
-          <a href="#" className="group relative text-foreground hover:text-primary transition-all duration-300 font-medium">
-            Hitta jobb
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-300 rounded-full"></div>
-          </a>
-          <a href="/companies" className="group relative text-muted-foreground hover:text-primary transition-all duration-300">
-            Företag
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-300 rounded-full"></div>
-          </a>
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
+        {/* Logo */}
+        <Link to="/" className="flex-shrink-0">
+          <Logo className="hover:scale-105 transition-transform duration-200" />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1">
+          {navigationItems.map((item) => (
+            <Link
+              key={item.href}
+              to={item.href}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
+                isActive(item.href) 
+                  ? 'text-primary bg-primary/10' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
-        
-        {/* Center Logo */}
-        <div className="flex-shrink-0 relative">
-          <Logo className="transform hover:scale-110 transition-transform duration-500" />
-          
-          {/* Glow effect behind logo */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 scale-150"></div>
-        </div>
-        
-        {/* Right Navigation */}
-        <div className="flex items-center gap-6 flex-1 justify-end">
-          <nav className="hidden lg:flex items-center gap-8">
-            <a href="#" className="group relative text-muted-foreground hover:text-primary transition-all duration-300">
-              Karriärguide
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-300 rounded-full"></div>
-            </a>
-            <a href="#" className="group relative text-muted-foreground hover:text-primary transition-all duration-300">
-              Löneguide
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-primary-hover group-hover:w-full transition-all duration-300 rounded-full"></div>
-            </a>
-          </nav>
-          
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative group hover:bg-primary/10 transition-all duration-300">
-              <Bell className="h-5 w-5 group-hover:animate-pulse" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-primary to-primary-hover rounded-full text-xs animate-pulse shadow-lg shadow-primary/50"></span>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-3">
+          {/* Notifications - Desktop only */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="hidden md:flex relative hover:bg-muted/50"
+          >
+            <Bell className="h-4 w-4" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+          </Button>
+
+          {/* Auth Buttons - Desktop */}
+          <div className="hidden md:flex items-center gap-2">
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/auth?mode=login">Logga in</Link>
             </Button>
-            
-            <div className="hidden md:flex items-center gap-3">
-              <Button variant="ghost" className="hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/20" asChild>
-                <a href="/auth?mode=login">Logga in</a>
-              </Button>
-              <Button 
-                asChild
-                variant="hero" 
-                className="relative overflow-hidden group hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
-              >
-                <a href="/auth">
-                  <span className="relative z-10">Registrera dig</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-hover to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </a>
-              </Button>
-            </div>
-            
-            <Button variant="ghost" size="icon" className="md:hidden hover:bg-primary/10 transition-all duration-300 group">
-              <Menu className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+            <Button variant="default" size="sm" asChild>
+              <Link to="/auth">Registrera</Link>
             </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
         </div>
       </div>
-      
-      {/* Bottom border glow effect */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-background border-t border-border/40 animate-fade-in">
+          <div className="container mx-auto px-4 py-4 space-y-2">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  isActive(item.href)
+                    ? 'text-primary bg-primary/10'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            
+            <div className="pt-4 border-t border-border/40 space-y-2">
+              <Link
+                to="/auth?mode=login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
+              >
+                Logga in
+              </Link>
+              <Link
+                to="/auth"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+              >
+                Registrera dig
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
