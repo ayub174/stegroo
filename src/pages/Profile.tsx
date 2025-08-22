@@ -316,16 +316,17 @@ export default function Profile() {
 
           {/* Improved Layout with Responsive Design */}
           <div className="relative">
-            <Tabs defaultValue="overview" className="flex flex-col lg:flex-row gap-6">
+            <Tabs defaultValue="personal" className="flex flex-col lg:flex-row gap-6">
               {/* Horizontal Tabs for Mobile, Vertical for Desktop */}
               <div className="lg:w-72 shrink-0">
                 <TabsList className="w-full h-auto p-1 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-white/10 rounded-2xl flex lg:flex-col gap-1 overflow-x-auto lg:overflow-x-visible">
                   {[
+                    { value: "personal", label: "Personuppgifter", icon: "👤", description: "Hantera personlig information" },
                     { value: "overview", label: "Översikt", icon: "📊", description: "Din dashboard" },
                     { value: "jobs", label: "Sparade jobb", icon: "💼", description: "Favoriter" },
                     { value: "applications", label: "Ansökningar", icon: "📋", description: "Status" },
                     { value: "cv", label: "CV & Profil", icon: "🎓", description: "Hantera CV" },
-                    { value: "settings", label: "Inställningar", icon: "⚙️", description: "Kontoinställningar" }
+                    { value: "settings", label: "Inställningar", icon: "⚙️", description: "Systeminställningar" }
                   ].map((tab) => (
                     <TabsTrigger 
                       key={tab.value}
@@ -345,6 +346,69 @@ export default function Profile() {
               
               {/* Content Area with Better Spacing */}
               <div className="flex-1 min-w-0">
+
+              <TabsContent value="personal" className="space-y-6 animate-fade-in">
+                <div className="grid gap-6">
+                  <Card className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover-scale overflow-hidden">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="text-2xl font-bold flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
+                          <User className="h-6 w-6 text-primary" />
+                        </div>
+                        Personuppgifter
+                      </CardTitle>
+                      <CardDescription className="text-base">Hantera din personliga information och kontaktuppgifter</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-8 pb-8">
+                      <div className="grid gap-6">
+                        <div className="space-y-3">
+                          <Label htmlFor="personal-location" className="text-lg font-semibold">Plats</Label>
+                          <Input
+                            id="personal-location"
+                            placeholder="Din stad"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
+                          />
+                        </div>
+                        
+                        <div className="space-y-3">
+                          <Label htmlFor="personal-phone" className="text-lg font-semibold">Telefon</Label>
+                          <Input
+                            id="personal-phone"
+                            type="tel"
+                            placeholder="070-123 45 67"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
+                          />
+                        </div>
+
+                        <div className="space-y-3">
+                          <Label htmlFor="personal-bio" className="text-lg font-semibold">Beskrivning</Label>
+                          <Textarea
+                            id="personal-bio"
+                            placeholder="Berätta lite om dig själv..."
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300 min-h-[120px]"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-end">
+                        <Button 
+                          onClick={handleSaveProfile}
+                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
+                        >
+                          <Save className="h-4 w-4 mr-2" />
+                          Spara ändringar
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
 
               <TabsContent value="overview" className="space-y-6 animate-fade-in">
                 {/* Quick Stats with Better Grid */}
@@ -594,33 +658,6 @@ export default function Profile() {
                       <CardDescription className="text-base">Hantera dina kontoinställningar och preferenser</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-8 pb-8">
-                      <div className="grid gap-6">
-                        <div className="space-y-3">
-                          <Label htmlFor="location" className="text-lg font-semibold">Plats</Label>
-                          <Input
-                            id="location"
-                            placeholder="Din stad"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
-                          />
-                        </div>
-                        
-                        <div className="space-y-3">
-                          <Label htmlFor="phone" className="text-lg font-semibold">Telefon</Label>
-                          <Input
-                            id="phone"
-                            type="tel"
-                            placeholder="070-123 45 67"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
-                      
                       <div className="space-y-6">
                         <h3 className="text-xl font-bold flex items-center gap-3">
                           <span className="text-2xl">🔔</span>
