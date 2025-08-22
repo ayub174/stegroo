@@ -66,7 +66,7 @@ export const JobDetailPanel = ({
           variant="ghost" 
           size="sm" 
           onClick={onClose}
-          className="absolute top-3 right-3 z-10 h-8 w-8 p-0 hover:bg-muted/50 rounded-full transition-all duration-200 hover:scale-110"
+          className="absolute top-1 right-1 z-10 h-7 w-7 p-0 hover:bg-muted/50 rounded-full transition-all duration-200 hover:scale-110"
         >
           <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
         </Button>
