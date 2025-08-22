@@ -515,10 +515,10 @@ export default function Profile() {
                             </div>
                           </div>
                           <div className="flex gap-2">
-                            <Button size="sm" variant="outline" className="rounded-xl">
+                            <Button size="sm" className="px-4 py-2 rounded-xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-medium transition-all duration-300">
                               Visa
                             </Button>
-                            <Button size="sm" className="rounded-xl bg-gradient-to-r from-primary to-accent text-white">
+                            <Button size="sm" className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-medium transition-all duration-300">
                               Ansök
                             </Button>
                           </div>
@@ -564,7 +564,7 @@ export default function Profile() {
                               </div>
                             </div>
                           </div>
-                          <Button size="sm" variant="outline" className="rounded-xl">
+                          <Button size="sm" className="px-4 py-2 rounded-xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-medium transition-all duration-300">
                             Detaljer
                           </Button>
                         </div>
@@ -587,18 +587,18 @@ export default function Profile() {
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <div className="flex flex-wrap gap-3">
-                      <Button className="rounded-xl bg-gradient-to-r from-primary to-accent text-white">
+                      <Button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300">
                         <Upload className="h-4 w-4 mr-2" />
                         Ladda upp CV
                       </Button>
                       <Button 
                         onClick={() => navigate("/cv-builder")}
-                        className="rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-white"
+                        className="px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white border-2 border-green-400/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
                       >
                         <Edit3 className="h-4 w-4 mr-2" />
                         Skapa CV
                       </Button>
-                      <Button variant="outline" className="rounded-xl">
+                      <Button className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-semibold transition-all duration-300">
                         <Download className="h-4 w-4 mr-2" />
                         Ladda ner
                       </Button>
@@ -632,7 +632,7 @@ export default function Profile() {
                           ))}
                           <Button 
                             size="sm" 
-                            className="h-auto px-3 py-1 rounded-full border-2 border-dashed border-primary/30 bg-transparent hover:bg-primary/10 text-primary"
+                            className="h-auto px-4 py-2 rounded-xl border-2 border-dashed border-primary/30 bg-white/80 hover:bg-white shadow-clay-inset hover:shadow-clay-base text-primary hover:text-primary/80 font-medium transition-all duration-300"
                           >
                             + Lägg till
                           </Button>
@@ -678,7 +678,7 @@ export default function Profile() {
                                 <p className="text-muted-foreground">{item.description}</p>
                               </div>
                               <Button 
-                                className="px-4 py-2 rounded-xl bg-background/60 hover:bg-background/80 border border-white/20 hover:border-primary/30 hover-scale transition-all duration-300"
+                                className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-semibold transition-all duration-300"
                                 size="sm"
                               >
                                 {item.action}
