@@ -1,4 +1,4 @@
-import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap } from "lucide-react";
+import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap, Clock, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/ui/header";
@@ -224,49 +224,49 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Statistics Cards */}
+            {/* Value Propositions */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto lg:mx-0 animate-fade-in" style={{
             animationDelay: '0.8s'
           }}>
               {[{
-              icon: Users,
-              label: "Jobbsökare",
-              value: "2M+",
-              color: "bg-blue-500"
+              icon: Clock,
+              title: "Hitta jobb snabbt",
+              description: "Intelligenta matchningar baserat på dina färdigheter och preferenser",
+              color: "from-emerald-500 to-teal-600"
             }, {
-              icon: Briefcase,
-              label: "Aktiva jobb",
-              value: "50K+",
-              color: "bg-blue-600"
+              icon: Shield,
+              title: "Säkert & pålitligt",
+              description: "Verifierade företag och säkra ansökningsprocesser",
+              color: "from-blue-500 to-indigo-600"
             }, {
-              icon: Star,
-              label: "Företag",
-              value: "10K+",
-              color: "bg-blue-700"
+              icon: TrendingUp,
+              title: "Utveckla din karriär",
+              description: "Verktyg och resurser för att ta nästa steg i din karriär",
+              color: "from-purple-500 to-pink-600"
             }].map(({
               icon: Icon,
-              label,
-              value,
+              title,
+              description,
               color
-            }, index) => <div key={index} className="group cursor-pointer">
-                  <div className="relative p-6 rounded-3xl bg-white border-2 border-gray-100 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                    <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
-                    
-                    <div className="relative z-10 flex items-center gap-4">
-                      <div className={`p-3 rounded-2xl ${color} shadow-inner group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                          {value}
-                        </div>
-                        <div className="text-sm text-gray-500 font-medium">
-                          {label}
-                        </div>
-                      </div>
+            }, index) => (
+              <div key={index} className="group cursor-pointer">
+                <div className="relative p-6 rounded-3xl bg-white border-2 border-gray-100 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="absolute inset-0 bg-blue-50 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500"></div>
+                  
+                  <div className="relative z-10">
+                    <div className={`w-12 h-12 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 mb-3">
+                      {title}
+                    </div>
+                    <div className="text-sm text-gray-600 leading-relaxed">
+                      {description}
                     </div>
                   </div>
-                </div>)}
+                </div>
+              </div>
+            ))}
             </div>
           </div>
         </div>
