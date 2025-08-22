@@ -186,7 +186,7 @@ const JobDetails = () => {
         <div className="container mx-auto px-4 py-8 relative z-10">
           {/* Back Navigation */}
           <div className="mb-8 animate-fade-in">
-            <Link to="/" className="group inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white shadow-lg border border-gray-200 text-gray-600 hover:text-blue-600 hover:bg-blue-50 hover:border-blue-300 hover:shadow-xl transition-all duration-500 hover:scale-105">
+            <Link to="/jobs" className="group inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white shadow-lg border border-gray-200 text-gray-600 hover:text-blue-600 hover:bg-blue-50 hover:border-blue-300 hover:shadow-xl transition-all duration-500 hover:scale-105">
               <ChevronLeft className="h-5 w-5 group-hover:translate-x-[-4px] transition-transform duration-300" />
               <span className="font-semibold">Tillbaka till jobb</span>
             </Link>
