@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SavedJobsSection } from "@/components/ui/saved-jobs-section";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -490,43 +491,7 @@ export default function Profile() {
               </TabsContent>
 
               <TabsContent value="jobs" className="space-y-6 animate-fade-in">
-                <Card className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-2xl shadow-lg">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                        <BookmarkIcon className="h-5 w-5 text-primary" />
-                      </div>
-                      Dina sparade jobb
-                    </CardTitle>
-                    <CardDescription>Jobb du har sparat för att ansöka senare</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {mockJobs.filter(job => job.saved).map((job, index) => (
-                      <div key={job.id} className="p-4 rounded-xl bg-gradient-to-r from-background/60 to-background/40 border border-white/10 hover:border-white/20 transition-all duration-300 hover-scale">
-                        <div className="flex justify-between items-start gap-4">
-                          <div className="flex-1 space-y-2">
-                            <h3 className="font-semibold text-lg text-primary">{job.title}</h3>
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Building className="h-4 w-4" />
-                              <span>{job.company}</span>
-                              <span>•</span>
-                              <MapPin className="h-4 w-4" />
-                              <span>{job.location}</span>
-                            </div>
-                          </div>
-                          <div className="flex gap-2">
-                            <Button size="sm" className="px-4 py-2 rounded-xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-medium transition-all duration-300">
-                              Visa
-                            </Button>
-                            <Button size="sm" className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-accent text-white border-2 border-white/20 font-medium transition-all duration-300 hover:opacity-90">
-                              Ansök
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
+                <SavedJobsSection />
               </TabsContent>
 
               <TabsContent value="applications" className="space-y-6 animate-fade-in">

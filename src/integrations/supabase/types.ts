@@ -44,6 +44,54 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_jobs: {
+        Row: {
+          company: string
+          created_at: string
+          deadline: string | null
+          description: string | null
+          id: string
+          job_id: string
+          job_title: string
+          location: string
+          logo: string | null
+          tags: string[] | null
+          time_posted: string | null
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          id?: string
+          job_id: string
+          job_title: string
+          location: string
+          logo?: string | null
+          tags?: string[] | null
+          time_posted?: string | null
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          id?: string
+          job_id?: string
+          job_title?: string
+          location?: string
+          logo?: string | null
+          tags?: string[] | null
+          time_posted?: string | null
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

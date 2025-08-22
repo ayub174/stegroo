@@ -514,6 +514,7 @@ const Jobs = () => {
                       {...job}
                       isSelected={selectedJob?.id === job.id}
                       onClick={() => handleJobSelect(job)}
+                      description={job.description}
                     />
                   ))
                 )}
