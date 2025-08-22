@@ -509,7 +509,7 @@ const Jobs = () => {
 
             {/* Middle - Job List */}
             <div className={`flex flex-col h-[calc(100vh-12rem)] transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-4' : 'lg:col-span-5'
+              isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-5'
             }`}>
               <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
@@ -596,7 +596,7 @@ const Jobs = () => {
 
             {/* Right - Job Detail Panel */}
             <div className={`transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-3' : 'lg:col-span-4'
+              isFilterCollapsed ? 'lg:col-span-2' : 'lg:col-span-4'
             }`}>
               <div className="sticky top-6">
                 <div className="h-[calc(100vh-12rem)]">
