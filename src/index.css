@@ -172,3 +172,15 @@ All colors MUST be HSL.
     transform: translateY(-20px);
   }
 }
+
+@keyframes vibrate {
+  0%, 98%, 100% {
+    transform: translateX(0);
+  }
+  2%, 4%, 6%, 8%, 10% {
+    transform: translateX(-2px);
+  }
+  3%, 5%, 7%, 9% {
+    transform: translateX(2px);
+  }
+}

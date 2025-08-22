@@ -392,6 +392,7 @@ const Jobs = () => {
   const [filterByType, setFilterByType] = useState('all');
   const [selectedJob, setSelectedJob] = useState<typeof allJobs[0] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isFilterCollapsed, setIsFilterCollapsed] = useState(false);
   
   const ITEMS_PER_PAGE = 20;
 
@@ -470,9 +471,13 @@ const Jobs = () => {
       {/* Main Content - 3 Column Layout */}
       <section className="py-8 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full">
+          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 h-full transition-all duration-300 ${
+            isFilterCollapsed ? 'lg:grid-cols-8' : 'lg:grid-cols-12'
+          }`}>
             {/* Left Sidebar - Filters */}
-            <div className="lg:col-span-3">
+            <div className={`transition-all duration-300 ${
+              isFilterCollapsed ? 'lg:col-span-1' : 'lg:col-span-3'
+            }`}>
               <div className="sticky top-6">
                 <JobFiltersSidebar
                   searchQuery={searchQuery}
@@ -496,12 +501,16 @@ const Jobs = () => {
                     resetPagination();
                   }}
                   jobCount={filteredJobs.length}
+                  isCollapsed={isFilterCollapsed}
+                  onToggleCollapse={() => setIsFilterCollapsed(!isFilterCollapsed)}
                 />
               </div>
             </div>
 
             {/* Middle - Job List */}
-            <div className="lg:col-span-5 flex flex-col h-[calc(100vh-12rem)]">
+            <div className={`flex flex-col h-[calc(100vh-12rem)] transition-all duration-300 ${
+              isFilterCollapsed ? 'lg:col-span-4' : 'lg:col-span-5'
+            }`}>
               <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
                   <div className="text-center py-12">
@@ -586,7 +595,9 @@ const Jobs = () => {
             </div>
 
             {/* Right - Job Detail Panel */}
-            <div className="lg:col-span-4">
+            <div className={`transition-all duration-300 ${
+              isFilterCollapsed ? 'lg:col-span-3' : 'lg:col-span-4'
+            }`}>
               <div className="sticky top-6">
                 <div className="h-[calc(100vh-12rem)]">
                   <JobDetailPanel 
