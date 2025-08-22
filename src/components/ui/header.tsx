@@ -13,7 +13,6 @@ export const Header = () => {
   const navigationItems = [
     { label: "Hitta jobb", href: "/jobs" },
     { label: "Företag", href: "/companies" },
-    { label: "CV-byggare", href: "/cv-builder" },
     { label: "Profil", href: "/profile" }
   ];
 

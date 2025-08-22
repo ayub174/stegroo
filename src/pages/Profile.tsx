@@ -554,14 +554,7 @@ export default function Profile() {
                     <div className="flex flex-wrap gap-3">
                       <Button className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300">
                         <Upload className="h-4 w-4 mr-2" />
-                        Ladda upp CV
-                      </Button>
-                      <Button 
-                        onClick={() => navigate("/cv-builder")}
-                        className="px-6 py-3 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white border-2 border-green-400/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
-                      >
-                        <Edit3 className="h-4 w-4 mr-2" />
-                        Skapa CV
+                        Ladda upp dokument
                       </Button>
                       <Button className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-semibold transition-all duration-300">
                         <Download className="h-4 w-4 mr-2" />

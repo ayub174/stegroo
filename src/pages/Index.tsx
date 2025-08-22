@@ -380,8 +380,8 @@ const Index = () => {
                   {/* Back Face */}
                   <div className="flip-card-back absolute inset-0 backface-hidden rotate-y-180 rounded-3xl bg-blue-600 text-white shadow-xl p-8 text-center flex flex-col justify-center">
                     <p className="text-lg leading-relaxed">
-                      Bygg en stark profil med ditt CV, färdigheter och arbetserfarenhet. 
-                      Vår CV-builder hjälper dig att skapa en professionell presentation.
+                      Bygg en stark profil med dina färdigheter och arbetserfarenhet. 
+                      Skapa en professionell presentation som sticker ut.
                     </p>
                   </div>
                 </div>
