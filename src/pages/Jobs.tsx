@@ -589,7 +589,10 @@ const Jobs = () => {
             <div className="lg:col-span-4">
               <div className="sticky top-6">
                 <div className="h-[calc(100vh-12rem)]">
-                  <JobDetailPanel job={selectedJob} />
+                  <JobDetailPanel 
+                    job={selectedJob} 
+                    onClose={() => setSelectedJob(null)}
+                  />
                 </div>
               </div>
             </div>

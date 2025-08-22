@@ -1,4 +1,4 @@
-import { MapPin, Clock, Building2, Calendar, ExternalLink, Bookmark, Share, ChevronLeft } from "lucide-react";
+import { MapPin, Clock, Building2, Calendar, ExternalLink, Bookmark, Share, ChevronLeft, X } from "lucide-react";
 import { Badge } from "./badge";
 import { Button } from "./button";
 import { Separator } from "./separator";
@@ -18,6 +18,7 @@ interface Job {
 }
 interface JobDetailPanelProps {
   job: Job | null;
+  onClose?: () => void;
 }
 const getDeadlineColor = (deadline: string) => {
   const daysLeft = parseInt(deadline.split(' ')[0]);
@@ -27,7 +28,8 @@ const getDeadlineColor = (deadline: string) => {
   return "text-red-600 dark:text-red-400";
 };
 export const JobDetailPanel = ({
-  job
+  job,
+  onClose
 }: JobDetailPanelProps) => {
   if (!job) {
     return <div className="h-full flex items-center justify-center text-center p-8 relative">
@@ -57,7 +59,19 @@ export const JobDetailPanel = ({
       </div>;
   }
   const deadlineColorClass = getDeadlineColor(job.deadline);
-  return <div className="h-full overflow-y-auto bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl">
+  return <div className="h-full overflow-y-auto bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl relative">
+      {/* Close Button */}
+      {onClose && (
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 h-8 w-8 p-0 hover:bg-muted/50 rounded-full transition-all duration-200 hover:scale-110"
+        >
+          <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+        </Button>
+      )}
+      
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-start gap-4">
