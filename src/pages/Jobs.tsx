@@ -509,7 +509,7 @@ const Jobs = () => {
 
             {/* Middle - Job List */}
             <div className={`flex flex-col h-[calc(100vh-12rem)] transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-5'
+              isFilterCollapsed ? 'lg:col-span-9' : 'lg:col-span-5'
             }`}>
               <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
