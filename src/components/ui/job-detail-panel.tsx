@@ -19,6 +19,7 @@ interface Job {
 interface JobDetailPanelProps {
   job: Job | null;
   onClose?: () => void;
+  hasJobs?: boolean;
 }
 const getDeadlineColor = (deadline: string) => {
   const daysLeft = parseInt(deadline.split(' ')[0]);
@@ -29,9 +30,15 @@ const getDeadlineColor = (deadline: string) => {
 };
 export const JobDetailPanel = ({
   job,
-  onClose
+  onClose,
+  hasJobs = true
 }: JobDetailPanelProps) => {
   if (!job) {
+    // Only show empty state if there are jobs available to select
+    if (!hasJobs) {
+      return null;
+    }
+    
     return <div className="h-full flex items-center justify-center text-center p-8 relative">
         <div className="space-y-6 animate-fade-in">
           <Building2 className="h-16 w-16 text-muted-foreground mx-auto opacity-50" />

@@ -603,6 +603,7 @@ const Jobs = () => {
                   <JobDetailPanel 
                     job={selectedJob} 
                     onClose={() => setSelectedJob(null)}
+                    hasJobs={sortedJobs.length > 0}
                   />
                 </div>
               </div>
