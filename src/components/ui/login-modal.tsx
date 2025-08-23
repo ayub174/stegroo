@@ -23,14 +23,14 @@ export const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </DialogHeader>
         
         <div className="flex flex-col gap-3 mt-6">
-          <Link to="/auth?mode=login" onClick={onClose}>
+          <Link to="/login" onClick={onClose}>
             <Button className="w-full bg-primary hover:bg-primary/90 text-white">
               <LogIn className="h-4 w-4 mr-2" />
               Logga in
             </Button>
           </Link>
           
-          <Link to="/auth?mode=register" onClick={onClose}>
+          <Link to="/register" onClick={onClose}>
             <Button variant="outline" className="w-full">
               <UserPlus className="h-4 w-4 mr-2" />
               Skapa konto
