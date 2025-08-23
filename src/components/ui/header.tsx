@@ -61,10 +61,10 @@ export const Header = () => {
           {!user && (
             <div className="hidden md:flex items-center gap-2">
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/auth?mode=login">Logga in</Link>
+                <Link to="/login">Logga in</Link>
               </Button>
               <Button variant="default" size="sm" asChild>
-                <Link to="/auth">Registrera</Link>
+                <Link to="/register">Registrera</Link>
               </Button>
             </div>
           )}
@@ -108,14 +108,14 @@ export const Header = () => {
             {!user && (
               <div className="pt-4 border-t border-border/40 space-y-2">
                 <Link
-                  to="/auth?mode=login"
+                  to="/login"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 >
                   Logga in
                 </Link>
                 <Link
-                  to="/auth"
+                  to="/register"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
                 >
