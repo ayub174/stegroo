@@ -252,9 +252,14 @@ export default function Profile() {
                             className="text-2xl font-bold bg-background/50 border-0 rounded-xl px-4 py-3 transition-all duration-300"
                           />
                         ) : (
-                          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-primary-hover to-accent bg-clip-text text-transparent">
-                            {displayName || "Ange ditt namn"}
-                          </h1>
+                          <div className="relative">
+                            <h1 className="text-3xl font-bold text-gray-800 px-6 py-4 rounded-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-white/90 border-2 border-gray-200/60 shadow-clay-inset backdrop-blur-sm relative overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-2xl"></div>
+                              <span className="relative z-10 bg-gradient-to-r from-primary via-primary-hover to-accent bg-clip-text text-transparent">
+                                {displayName || "Ange ditt namn"}
+                              </span>
+                            </h1>
+                          </div>
                         )}
                         
                         <div className="flex items-center gap-2 p-3 rounded-xl bg-white/90 border-2 border-gray-200 shadow-clay-inset w-fit">
