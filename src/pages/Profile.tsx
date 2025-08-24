@@ -306,10 +306,10 @@ export default function Profile() {
                             Redigera
                           </Button>
                         )}
-                        <Button 
-                          onClick={handleSignOut}
-                          className="px-6 py-3 rounded-2xl bg-red-50 border-2 border-red-200 shadow-clay-base hover:shadow-clay-pressed text-red-600 hover:text-red-700 font-semibold transition-all duration-300"
-                        >
+                          <Button 
+                            onClick={handleSignOut}
+                            className="px-6 py-3 rounded-2xl bg-red-50 border-2 border-red-200 shadow-clay-base hover:shadow-clay-pressed text-red-600 hover:text-white hover:bg-red-600 font-semibold transition-all duration-300"
+                          >
                           <LogOut className="h-4 w-4 mr-2" />
                           Logga ut
                         </Button>
