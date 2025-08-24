@@ -455,13 +455,11 @@ const Jobs = () => {
       
       {/* Main Content - 3 Column Layout */}
       <section className="pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
-        <div className="container mx-auto px-4 flex-1 flex flex-col">
-          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 transition-all duration-300 ${
-            isFilterCollapsed ? 'lg:grid-cols-8' : 'lg:grid-cols-12'
-          }`}>
+        <div className="max-w-[1800px] mx-auto px-2 flex-1 flex flex-col">
+          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 transition-all duration-300`}>
             {/* Left Sidebar - Filters */}
             <div className={`transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-1' : 'lg:col-span-3'
+              isFilterCollapsed ? 'lg:col-span-1' : 'lg:col-span-2'
             }`}>
               <div className="sticky top-6">
                 <JobFiltersSidebar
@@ -499,7 +497,7 @@ const Jobs = () => {
 
             {/* Middle - Job List */}
             <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-5'
+              isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-7'
             }`}>
               {/* Selected Cities Header */}
               {selectedCities.length > 0 && (
@@ -648,7 +646,7 @@ const Jobs = () => {
 
             {/* Right - Job Detail Panel */}
             <div className={`transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-2' : 'lg:col-span-4'
+              isFilterCollapsed ? 'lg:col-span-6' : 'lg:col-span-3'
             }`}>
               <div className="sticky top-6">
                 <div className="h-[calc(100vh-12rem)]">
