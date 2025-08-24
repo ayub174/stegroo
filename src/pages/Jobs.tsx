@@ -8,8 +8,9 @@ import { JobDetailPanel } from "@/components/ui/job-detail-panel";
 import { CreateJobAlertDialog } from "@/components/ui/create-job-alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TrendingUp, Bell } from "lucide-react";
+import { Search, MapPin, Filter, Bell } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -453,12 +454,13 @@ const Jobs = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Main Content - 3 Column Layout */}
-      <section className="pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
-        <div className="max-w-[1800px] mx-auto px-16 flex-1 flex flex-col">
-          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 transition-all duration-300`}>
-            {/* Left Sidebar - Filters */}
-            <div className={`transition-all duration-300 ${
+      {/* Main Content - Responsive Layout */}
+      <section className="pt-4 md:pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col lg:grid lg:grid-cols-12 gap-4 transition-all duration-300">
+            
+            {/* Left Sidebar - Filters (Desktop only, hidden on mobile) */}
+            <div className={`hidden lg:block transition-all duration-300 ${
               isFilterCollapsed ? 'lg:col-span-1' : 'lg:col-span-2'
             }`}>
               <div className="sticky top-6">
@@ -495,10 +497,156 @@ const Jobs = () => {
               </div>
             </div>
 
-            {/* Middle - Job List */}
-            <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-7'
+            {/* Main Content Area */}
+            <div className={`flex flex-col transition-all duration-300 ${
+              isFilterCollapsed ? 'lg:col-span-11' : 'lg:col-span-10'
             }`}>
+              
+              {/* Mobile Job List */}
+              <div className="lg:hidden">
+                {/* Mobile Search Bar */}
+                <div className="mb-4 p-4 bg-white rounded-xl border shadow-sm">
+                  <form onSubmit={(e) => {
+                    e.preventDefault();
+                    // Apply search
+                  }} className="space-y-3">
+                    <div className="flex gap-2">
+                      <div className="flex-1 relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input 
+                          placeholder="Sök jobb eller företag..."
+                          className="pl-10"
+                          value={searchQuery}
+                          onChange={(e) => {
+                            setSearchQuery(e.target.value);
+                            resetPagination();
+                          }}
+                        />
+                      </div>
+                      <Button variant="outline" size="icon">
+                        <Filter className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <div className="flex-1 relative">
+                        <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                        <Input 
+                          placeholder="Plats..."
+                          className="pl-10"
+                          value={locationQuery}
+                          onChange={(e) => {
+                            setLocationQuery(e.target.value);
+                            resetPagination();
+                          }}
+                        />
+                      </div>
+                      <Select value={sortBy} onValueChange={(sort) => {
+                        setSortBy(sort);
+                        resetPagination();
+                      }}>
+                        <SelectTrigger className="w-32">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="relevance">Relevans</SelectItem>
+                          <SelectItem value="newest">Nyast</SelectItem>
+                          <SelectItem value="salary">Deadline</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </form>
+                </div>
+
+                {/* Selected Cities for Mobile */}
+                {selectedCities.length > 0 && (
+                  <div className="mb-4">
+                    <h3 className="text-lg font-bold text-black mb-2">
+                      Lediga jobb i {selectedCities.join(', ')}
+                    </h3>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
+                      <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
+                      <span className="text-xs text-muted-foreground">jobb hittades</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Mobile Job List */}
+                <div className="space-y-3 mb-6">
+                  {sortedJobs.length === 0 ? (
+                    <div className="text-center py-12 bg-white rounded-xl">
+                      <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
+                    </div>
+                  ) : (
+                    paginatedJobs.map((job) => (
+                      <CompactJobCard
+                        key={job.id}
+                        {...job}
+                        isSelected={selectedJob?.id === job.id}
+                        onClick={() => handleJobSelect(job)}
+                        description={job.description}
+                      />
+                    ))
+                  )}
+                </div>
+
+                {/* Mobile Pagination */}
+                {sortedJobs.length > ITEMS_PER_PAGE && (
+                  <div className="mt-6 pt-4">
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious 
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage > 1) setCurrentPage(currentPage - 1);
+                            }}
+                            className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                          />
+                        </PaginationItem>
+                        
+                        {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => {
+                          const page = currentPage <= 2 ? i + 1 : currentPage - 1 + i;
+                          if (page > totalPages) return null;
+                          return (
+                            <PaginationItem key={page}>
+                              <PaginationLink
+                                href="#"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setCurrentPage(page);
+                                }}
+                                isActive={currentPage === page}
+                              >
+                                {page}
+                              </PaginationLink>
+                            </PaginationItem>
+                          );
+                        })}
+                        
+                        <PaginationItem>
+                          <PaginationNext 
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                            }}
+                            className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                )}
+              </div>
+
+              {/* Desktop Layout */}
+              <div className="hidden lg:grid lg:grid-cols-12 gap-4 flex-1">
+                {/* Desktop Job List */}
+                <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
+                  isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-7'
+                }`}>
               {/* Selected Cities Header */}
               {selectedCities.length > 0 && (
                 <div className="mb-4">
@@ -642,25 +790,44 @@ const Jobs = () => {
                   </Pagination>
                 </div>
               )}
-            </div>
+                </div>
 
-            {/* Right - Job Detail Panel */}
-            <div className={`transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-6' : 'lg:col-span-3'
-            }`}>
-              <div className="sticky top-6">
-                <div className="h-[calc(100vh-12rem)]">
-                  <JobDetailPanel 
-                    job={selectedJob} 
-                    onClose={() => setSelectedJob(null)}
-                    hasJobs={sortedJobs.length > 0}
-                  />
+                {/* Desktop Job Detail Panel */}
+                <div className={`transition-all duration-300 ${
+                  isFilterCollapsed ? 'lg:col-span-6' : 'lg:col-span-3'
+                }`}>
+                  <div className="sticky top-6">
+                    <div className="h-[calc(100vh-12rem)]">
+                      <JobDetailPanel 
+                        job={selectedJob} 
+                        onClose={() => setSelectedJob(null)}
+                        hasJobs={sortedJobs.length > 0}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Mobile Job Detail Modal */}
+      {selectedJob && (
+        <div className="lg:hidden fixed inset-0 z-50 bg-black/50 flex items-end animate-fade-in">
+          <div className="w-full h-[90vh] bg-white rounded-t-2xl overflow-hidden touch-pan-y">
+            {/* Drag Handle */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
+            </div>
+            <JobDetailPanel 
+              job={selectedJob} 
+              onClose={() => setSelectedJob(null)}
+              hasJobs={sortedJobs.length > 0}
+            />
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
