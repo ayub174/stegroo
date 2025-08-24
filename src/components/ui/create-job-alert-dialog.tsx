@@ -169,16 +169,54 @@ export const CreateJobAlertDialog = ({
             )}
           </div>
           
-          {/* Plats */}
+          {/* Stad */}
           <div className="space-y-2">
-            <Label htmlFor="alert-location">Plats (valfritt)</Label>
-            <Input
-              id="alert-location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="T.ex. Stockholm"
-              className="rounded-xl border-0 bg-background/50"
-            />
+            <Label htmlFor="alert-location">Stad (valfritt)</Label>
+            <Select value={location} onValueChange={setLocation}>
+              <SelectTrigger className="rounded-xl border-0 bg-background/50">
+                <SelectValue placeholder="Välj stad" />
+              </SelectTrigger>
+              <SelectContent className="max-h-60">
+                <SelectItem value="">Alla städer</SelectItem>
+                <SelectItem value="Stockholm">Stockholm</SelectItem>
+                <SelectItem value="Göteborg">Göteborg</SelectItem>
+                <SelectItem value="Malmö">Malmö</SelectItem>
+                <SelectItem value="Uppsala">Uppsala</SelectItem>
+                <SelectItem value="Västerås">Västerås</SelectItem>
+                <SelectItem value="Örebro">Örebro</SelectItem>
+                <SelectItem value="Linköping">Linköping</SelectItem>
+                <SelectItem value="Helsingborg">Helsingborg</SelectItem>
+                <SelectItem value="Jönköping">Jönköping</SelectItem>
+                <SelectItem value="Norrköping">Norrköping</SelectItem>
+                <SelectItem value="Lund">Lund</SelectItem>
+                <SelectItem value="Umeå">Umeå</SelectItem>
+                <SelectItem value="Gävle">Gävle</SelectItem>
+                <SelectItem value="Borås">Borås</SelectItem>
+                <SelectItem value="Södertälje">Södertälje</SelectItem>
+                <SelectItem value="Eskilstuna">Eskilstuna</SelectItem>
+                <SelectItem value="Halmstad">Halmstad</SelectItem>
+                <SelectItem value="Växjö">Växjö</SelectItem>
+                <SelectItem value="Karlstad">Karlstad</SelectItem>
+                <SelectItem value="Sundsvall">Sundsvall</SelectItem>
+                <SelectItem value="Trollhättan">Trollhättan</SelectItem>
+                <SelectItem value="Östersund">Östersund</SelectItem>
+                <SelectItem value="Borlänge">Borlänge</SelectItem>
+                <SelectItem value="Falun">Falun</SelectItem>
+                <SelectItem value="Kalmar">Kalmar</SelectItem>
+                <SelectItem value="Kristianstad">Kristianstad</SelectItem>
+                <SelectItem value="Karlskrona">Karlskrona</SelectItem>
+                <SelectItem value="Skövde">Skövde</SelectItem>
+                <SelectItem value="Uddevalla">Uddevalla</SelectItem>
+                <SelectItem value="Motala">Motala</SelectItem>
+                <SelectItem value="Lidköping">Lidköping</SelectItem>
+                <SelectItem value="Sandviken">Sandviken</SelectItem>
+                <SelectItem value="Örnsköldsvik">Örnsköldsvik</SelectItem>
+                <SelectItem value="Nyköping">Nyköping</SelectItem>
+                <SelectItem value="Köping">Köping</SelectItem>
+                <SelectItem value="Kiruna">Kiruna</SelectItem>
+                <SelectItem value="Visby">Visby</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           
           {/* Jobbtyp */}
