@@ -1,14 +1,36 @@
 import { Bell, User, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "./button";
 import { Logo } from "./logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const { user } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - hide header
+        setIsHeaderVisible(false);
+      } else {
+        // Scrolling up - show header
+        setIsHeaderVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const navigationItems = [
     { label: "Hitta jobb", href: "/jobs" },
@@ -19,7 +41,9 @@ export const Header = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header className="sticky top-0 z-50 bg-blue-50/90 backdrop-blur-sm border-b border-blue-100/50">
+    <header className={`sticky top-0 z-50 bg-blue-50/90 backdrop-blur-sm border-b border-blue-100/50 transition-transform duration-300 ease-in-out ${
+      isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
