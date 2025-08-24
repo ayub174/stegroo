@@ -300,7 +300,7 @@ export default function Profile() {
                         ) : (
                           <Button 
                             onClick={() => setEditing(true)} 
-                            className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-semibold transition-all duration-300"
+                            className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-white hover:bg-primary font-semibold transition-all duration-300"
                           >
                             <Edit3 className="h-4 w-4 mr-2" />
                             Redigera
