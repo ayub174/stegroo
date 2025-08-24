@@ -645,7 +645,7 @@ const Jobs = () => {
               <div className="hidden lg:grid lg:grid-cols-12 gap-4 flex-1">
                 {/* Desktop Job List */}
                 <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
-                  isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-7'
+                  isFilterCollapsed ? 'lg:col-span-4' : 'lg:col-span-5'
                 }`}>
               {/* Selected Cities Header */}
               {selectedCities.length > 0 && (
@@ -794,7 +794,7 @@ const Jobs = () => {
 
                 {/* Desktop Job Detail Panel */}
                 <div className={`transition-all duration-300 ${
-                  isFilterCollapsed ? 'lg:col-span-6' : 'lg:col-span-3'
+                  isFilterCollapsed ? 'lg:col-span-7' : 'lg:col-span-5'
                 }`}>
                   <div className="sticky top-6">
                     <div className="h-[calc(100vh-12rem)]">
