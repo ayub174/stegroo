@@ -80,7 +80,7 @@ export const JobDetailPanel = ({
         </Button>
       )}
       
-      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <div className="px-2 py-4 sm:px-3 sm:py-6 space-y-4 sm:space-y-6">
         {/* Header */}
         <div className="flex items-start gap-3 sm:gap-4">
           <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-subtle flex items-center justify-center shrink-0">
