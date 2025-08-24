@@ -454,9 +454,9 @@ const Jobs = () => {
       <Header />
       
       {/* Main Content - 3 Column Layout */}
-      <section className="pt-6 pb-4 bg-gray-50 min-h-screen">
-        <div className="container mx-auto px-4">
-          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 h-full transition-all duration-300 ${
+      <section className="pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
+        <div className="container mx-auto px-4 flex-1 flex flex-col">
+          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 transition-all duration-300 ${
             isFilterCollapsed ? 'lg:grid-cols-8' : 'lg:grid-cols-12'
           }`}>
             {/* Left Sidebar - Filters */}
