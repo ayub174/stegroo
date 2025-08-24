@@ -255,7 +255,7 @@ export default function Profile() {
                           <div className="relative">
                             <h1 className="text-3xl font-bold text-gray-800 px-6 py-4 rounded-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-white/90 border-2 border-gray-200/60 shadow-clay-inset backdrop-blur-sm relative overflow-hidden">
                               <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-2xl"></div>
-                              <span className="relative z-10 bg-gradient-to-r from-primary via-primary-hover to-accent bg-clip-text text-transparent">
+                              <span className="relative z-10 px-6 py-3 rounded-xl bg-gradient-to-br from-white/90 via-gray-50/80 to-white/90 border-2 border-gray-200/50 shadow-clay-inset text-gray-800 font-bold backdrop-blur-sm">
                                 {displayName || "Ange ditt namn"}
                               </span>
                             </h1>
