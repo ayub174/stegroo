@@ -32,7 +32,7 @@ export const CreateJobAlertDialog = ({
 }: CreateJobAlertDialogProps) => {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState(`Bevakning: ${defaultValues.searchQuery || 'Nya jobb'}`);
-  const [location, setLocation] = useState(defaultValues.location || '');
+  const [location, setLocation] = useState(defaultValues.location || 'all');
   const [jobType, setJobType] = useState(defaultValues.jobType || 'all');
   const [frequency, setFrequency] = useState<'daily' | 'weekly'>('daily');
   const [keywords, setKeywords] = useState<string[]>(defaultValues.searchQuery ? [defaultValues.searchQuery] : []);
@@ -60,7 +60,7 @@ export const CreateJobAlertDialog = ({
     const newAlert = {
       id: Date.now().toString(),
       title,
-      location: location || undefined,
+      location: location !== 'all' ? location : undefined,
       jobType: jobType !== 'all' ? jobType : undefined,
       keywords: keywords.length > 0 ? keywords : undefined,
       frequency,
@@ -77,7 +77,7 @@ export const CreateJobAlertDialog = ({
     
     // Reset form
     setTitle('');
-    setLocation('');
+    setLocation('all');
     setJobType('all');
     setFrequency('daily');
     setKeywords([]);
@@ -177,7 +177,7 @@ export const CreateJobAlertDialog = ({
                 <SelectValue placeholder="Välj stad" />
               </SelectTrigger>
               <SelectContent className="max-h-60">
-                <SelectItem value="">Alla städer</SelectItem>
+                <SelectItem value="all">Alla städer</SelectItem>
                 <SelectItem value="Stockholm">Stockholm</SelectItem>
                 <SelectItem value="Göteborg">Göteborg</SelectItem>
                 <SelectItem value="Malmö">Malmö</SelectItem>
