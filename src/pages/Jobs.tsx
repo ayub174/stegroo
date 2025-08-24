@@ -493,7 +493,7 @@ const Jobs = () => {
       </section>
 
       {/* Main Content - 3 Column Layout */}
-      <section className="py-8 bg-gray-50 min-h-screen">
+      <section className="py-4 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">
           <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 h-full transition-all duration-300 ${
             isFilterCollapsed ? 'lg:grid-cols-8' : 'lg:grid-cols-12'
@@ -537,7 +537,7 @@ const Jobs = () => {
             </div>
 
             {/* Middle - Job List */}
-            <div className={`flex flex-col h-[calc(100vh-12rem)] transition-all duration-300 ${
+            <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
               isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-5'
             }`}>
               {/* Selected Cities Header */}
