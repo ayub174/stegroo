@@ -8,6 +8,7 @@ import { JobDetailPanel } from "@/components/ui/job-detail-panel";
 import { CreateJobAlertDialog } from "@/components/ui/create-job-alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TrendingUp, Bell } from "lucide-react";
 import {
   Pagination,
@@ -533,6 +534,55 @@ const Jobs = () => {
             <div className={`flex flex-col h-[calc(100vh-12rem)] transition-all duration-300 ${
               isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-5'
             }`}>
+              {/* Job Alert and Sorting Controls */}
+              <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4">
+                <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+                  {/* Job Alert Creation */}
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Bell className="h-4 w-4 text-primary" />
+                      <span className="text-sm font-medium text-foreground">Jobbbevakning</span>
+                    </div>
+                    <CreateJobAlertDialog 
+                      defaultValues={{
+                        searchQuery: searchQuery,
+                        location: locationQuery,
+                        jobType: filterByType !== 'all' ? filterByType : undefined
+                      }}
+                      trigger={
+                        <Button 
+                          size="sm" 
+                          className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                        >
+                          <Bell className="h-4 w-4" />
+                          Skapa bevakning
+                        </Button>
+                      }
+                    />
+                  </div>
+                  
+                  {/* Sorting Options */}
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-sm font-medium text-foreground">Sortera efter:</span>
+                    </div>
+                    <Select value={sortBy} onValueChange={(sort) => {
+                      setSortBy(sort);
+                      resetPagination();
+                    }}>
+                      <SelectTrigger className="w-48">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="relevance">Relevans</SelectItem>
+                        <SelectItem value="newest">Nyast först</SelectItem>
+                        <SelectItem value="salary">Sista ansökningsdag</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+              
               <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
                   <div className="text-center py-12">

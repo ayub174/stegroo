@@ -207,53 +207,11 @@ export const JobFiltersSidebar = ({
             </Select>
           </div>
 
-          {/* Sort Options */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-foreground">Sortera efter</label>
-            <Select value={sortBy} onValueChange={onSortChange}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {sortOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
+          {/* Sort Options - REMOVED */}
+          
           <Separator />
 
-          {/* Job Alert Section */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Bell className="h-4 w-4 text-primary" />
-              <label className="text-sm font-medium text-foreground">Jobbbevakning</label>
-            </div>
-            <div className="p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/10">
-              <p className="text-sm text-muted-foreground mb-3">
-                Få notiser när nya jobb som matchar din sökning publiceras
-              </p>
-              <CreateJobAlertDialog 
-                defaultValues={{
-                  searchQuery: searchQuery,
-                  location: locationQuery,
-                  jobType: filterByType !== 'all' ? filterByType : undefined
-                }}
-                trigger={
-                  <Button 
-                    size="sm" 
-                    className="w-full gap-2 bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
-                  >
-                    <Bell className="h-4 w-4" />
-                    Skapa bevakning
-                  </Button>
-                }
-              />
-            </div>
-          </div>
+          {/* Job Alert Section - REMOVED */}
 
           <Separator />
 
