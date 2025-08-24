@@ -19,7 +19,7 @@ export const Header = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40">
+    <header className="sticky top-0 z-50 bg-blue-50/90 backdrop-blur-sm border-b border-blue-100/50">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between relative">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
@@ -87,7 +87,7 @@ export const Header = () => {
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border/40 animate-fade-in">
+        <div className="md:hidden bg-blue-50/90 border-t border-blue-100/50 animate-fade-in">
           <div className="container mx-auto px-4 py-4 space-y-2">
             {navigationItems.map((item) => (
               <Link
