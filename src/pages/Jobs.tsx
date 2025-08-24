@@ -5,8 +5,10 @@ import { Footer } from "@/components/ui/footer";
 import { CompactJobCard } from "@/components/ui/compact-job-card";
 import { JobFiltersSidebar } from "@/components/ui/job-filters-sidebar";
 import { JobDetailPanel } from "@/components/ui/job-detail-panel";
+import { CreateJobAlertDialog } from "@/components/ui/create-job-alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, Bell } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -453,17 +455,37 @@ const Jobs = () => {
       <section className="relative py-3 overflow-hidden bg-white border-b border-gray-100">
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex items-center justify-between">
-            {/* Compact title and count */}
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Alla jobb
-              </h1>
-              <Badge variant="secondary" className="bg-blue-50 border border-blue-200 px-3 py-1">
-                <TrendingUp className="h-3 w-3 text-blue-600 mr-1" />
-                <span className="font-semibold text-blue-600">{filteredJobs.length}</span>
-                <span className="text-gray-600 ml-1">jobb</span>
-              </Badge>
-            </div>
+          {/* Compact title and count */}
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-bold text-gray-900">
+              Alla jobb
+            </h1>
+            <Badge variant="secondary" className="bg-blue-50 border border-blue-200 px-3 py-1">
+              <TrendingUp className="h-3 w-3 text-blue-600 mr-1" />
+              <span className="font-semibold text-blue-600">{filteredJobs.length}</span>
+              <span className="text-gray-600 ml-1">jobb</span>
+            </Badge>
+            {/* Job Alert Quick Access */}
+            {(searchQuery || locationQuery || filterByType !== 'all') && (
+              <CreateJobAlertDialog 
+                defaultValues={{
+                  searchQuery: searchQuery,
+                  location: locationQuery,
+                  jobType: filterByType !== 'all' ? filterByType : undefined
+                }}
+                trigger={
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    className="gap-2 bg-white/80 hover:bg-white border-2 border-primary/20 hover:border-primary/40 text-primary hover:text-primary/80 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl px-4 py-2"
+                  >
+                    <Bell className="h-3 w-3" />
+                    Bevaka sökning
+                  </Button>
+                }
+              />
+            )}
+          </div>
           </div>
         </div>
       </section>

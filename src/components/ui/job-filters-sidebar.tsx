@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Search, MapPin, Filter, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, MapPin, Filter, X, ChevronLeft, ChevronRight, Bell } from "lucide-react";
 import { Button } from "./button";
 import { Input } from "./input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 import { Badge } from "./badge";
 import { Separator } from "./separator";
+import { CreateJobAlertDialog } from "./create-job-alert-dialog";
 import { cn } from "@/lib/utils";
 
 interface JobFiltersSidebarProps {
@@ -221,6 +222,37 @@ export const JobFiltersSidebar = ({
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <Separator />
+
+          {/* Job Alert Section */}
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Bell className="h-4 w-4 text-primary" />
+              <label className="text-sm font-medium text-foreground">Jobbbevakning</label>
+            </div>
+            <div className="p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+              <p className="text-sm text-muted-foreground mb-3">
+                Få notiser när nya jobb som matchar din sökning publiceras
+              </p>
+              <CreateJobAlertDialog 
+                defaultValues={{
+                  searchQuery: searchQuery,
+                  location: locationQuery,
+                  jobType: filterByType !== 'all' ? filterByType : undefined
+                }}
+                trigger={
+                  <Button 
+                    size="sm" 
+                    className="w-full gap-2 bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                  >
+                    <Bell className="h-4 w-4" />
+                    Skapa bevakning
+                  </Button>
+                }
+              />
+            </div>
           </div>
 
           <Separator />

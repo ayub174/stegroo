@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SavedJobsSection } from "@/components/ui/saved-jobs-section";
+import { JobAlertsSection } from "@/components/ui/job-alerts-section";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -325,6 +326,7 @@ export default function Profile() {
                     { value: "personal", label: "Personuppgifter", icon: "👤", description: "Hantera personlig information" },
                     { value: "overview", label: "Översikt", icon: "📊", description: "Din dashboard" },
                     { value: "jobs", label: "Sparade jobb", icon: "💼", description: "Favoriter" },
+                    { value: "alerts", label: "Jobbevakningar", icon: "🔔", description: "Bevaka nya jobb" },
                     { value: "applications", label: "Ansökningar", icon: "📋", description: "Status" },
                     { value: "cv", label: "CV & Profil", icon: "🎓", description: "Hantera CV" },
                     { value: "settings", label: "Inställningar", icon: "⚙️", description: "Systeminställningar" }
@@ -492,6 +494,10 @@ export default function Profile() {
 
               <TabsContent value="jobs" className="space-y-6 animate-fade-in">
                 <SavedJobsSection />
+              </TabsContent>
+
+              <TabsContent value="alerts" className="space-y-6 animate-fade-in">
+                <JobAlertsSection />
               </TabsContent>
 
               <TabsContent value="applications" className="space-y-6 animate-fade-in">
