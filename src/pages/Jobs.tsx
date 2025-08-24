@@ -419,20 +419,18 @@ const Jobs = () => {
   // Sort jobs
   const sortedJobs = [...filteredJobs].sort((a, b) => {
     if (sortBy === 'newest') {
-      // Sort by time posted (newer first)
       const timeOrder = ['1 dag sedan', '2 dagar sedan', '3 dagar sedan', '4 dagar sedan', '5 dagar sedan', '6 dagar sedan', '1 vecka sedan'];
       const aIndex = timeOrder.indexOf(a.timePosted);
       const bIndex = timeOrder.indexOf(b.timePosted);
       return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
     }
     if (sortBy === 'salary') {
-      // For deadline sorting, convert to days and sort by urgency (fewer days first)
       const getDeadlineDays = (deadline: string) => parseInt(deadline.split(' ')[0]);
       const aDays = getDeadlineDays(a.deadline || '999 dagar kvar');
       const bDays = getDeadlineDays(b.deadline || '999 dagar kvar');
       return aDays - bDays;
     }
-    return 0; // relevance (default order)
+    return 0;
   });
 
   // Calculate pagination
@@ -441,7 +439,6 @@ const Jobs = () => {
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedJobs = sortedJobs.slice(startIndex, endIndex);
   
-  // Reset to first page when filters change
   const resetPagination = () => {
     setCurrentPage(1);
   };
@@ -454,114 +451,198 @@ const Jobs = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Main Content - Responsive Layout */}
       <section className="pt-4 md:pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col">
-          <div className="flex-1 flex flex-col lg:grid lg:grid-cols-12 gap-4 transition-all duration-300">
-            
-            {/* Left Sidebar - Filters (Desktop only, hidden on mobile) */}
-            <div className={`hidden lg:block transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-1' : 'lg:col-span-2'
+          
+          {/* Filter Section (Desktop only, above main content) */}
+          <div className="hidden lg:block mb-4">
+            <div className={`transition-all duration-300 ${
+              isFilterCollapsed ? 'h-16' : 'h-auto'
             }`}>
-              <div className="sticky top-6">
-                <JobFiltersSidebar
-                  searchQuery={searchQuery}
-                  locationQuery={locationQuery}
-                  selectedCities={selectedCities}
-                  sortBy={sortBy}
-                  filterByType={filterByType}
-                  onSearchChange={(query) => {
-                    setSearchQuery(query);
-                    resetPagination();
-                  }}
-                  onLocationChange={(location) => {
-                    setLocationQuery(location);
-                    resetPagination();
-                  }}
-                  onSelectedCitiesChange={(cities) => {
-                    setSelectedCities(cities);
-                    resetPagination();
-                  }}
-                  onSortChange={(sort) => {
-                    setSortBy(sort);
-                    resetPagination();
-                  }}
-                  onTypeFilterChange={(type) => {
-                    setFilterByType(type);
-                    resetPagination();
-                  }}
-                  jobCount={filteredJobs.length}
-                  isCollapsed={isFilterCollapsed}
-                  onToggleCollapse={() => setIsFilterCollapsed(!isFilterCollapsed)}
-                />
+              <JobFiltersSidebar
+                searchQuery={searchQuery}
+                locationQuery={locationQuery}
+                selectedCities={selectedCities}
+                sortBy={sortBy}
+                filterByType={filterByType}
+                onSearchChange={(query) => {
+                  setSearchQuery(query);
+                  resetPagination();
+                }}
+                onLocationChange={(location) => {
+                  setLocationQuery(location);
+                  resetPagination();
+                }}
+                onSelectedCitiesChange={(cities) => {
+                  setSelectedCities(cities);
+                  resetPagination();
+                }}
+                onSortChange={(sort) => {
+                  setSortBy(sort);
+                  resetPagination();
+                }}
+                onTypeFilterChange={(type) => {
+                  setFilterByType(type);
+                  resetPagination();
+                }}
+                jobCount={filteredJobs.length}
+                isCollapsed={isFilterCollapsed}
+                onToggleCollapse={() => setIsFilterCollapsed(!isFilterCollapsed)}
+              />
+            </div>
+          </div>
+
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col">
+            
+            {/* Mobile Job List */}
+            <div className="lg:hidden">
+              {/* Mobile Search Bar */}
+              <div className="mb-4 p-4 bg-white rounded-xl border shadow-sm">
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                }} className="space-y-3">
+                  <div className="flex gap-2">
+                    <div className="flex-1 relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input 
+                        placeholder="Sök jobb eller företag..."
+                        className="pl-10"
+                        value={searchQuery}
+                        onChange={(e) => {
+                          setSearchQuery(e.target.value);
+                          resetPagination();
+                        }}
+                      />
+                    </div>
+                    <Button variant="outline" size="icon">
+                      <Filter className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <div className="flex-1 relative">
+                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Input 
+                        placeholder="Plats..."
+                        className="pl-10"
+                        value={locationQuery}
+                        onChange={(e) => {
+                          setLocationQuery(e.target.value);
+                          resetPagination();
+                        }}
+                      />
+                    </div>
+                    <Select value={sortBy} onValueChange={(sort) => {
+                      setSortBy(sort);
+                      resetPagination();
+                    }}>
+                      <SelectTrigger className="w-32">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="relevance">Relevans</SelectItem>
+                        <SelectItem value="newest">Nyast</SelectItem>
+                        <SelectItem value="salary">Deadline</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </form>
               </div>
+
+              {/* Selected Cities for Mobile */}
+              {selectedCities.length > 0 && (
+                <div className="mb-4">
+                  <h3 className="text-lg font-bold text-black mb-2">
+                    Lediga jobb i {selectedCities.join(', ')}
+                  </h3>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
+                    <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
+                    <span className="text-xs text-muted-foreground">jobb hittades</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Mobile Job List */}
+              <div className="space-y-3 mb-6">
+                {sortedJobs.length === 0 ? (
+                  <div className="text-center py-12 bg-white rounded-xl">
+                    <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
+                  </div>
+                ) : (
+                  paginatedJobs.map((job) => (
+                    <CompactJobCard
+                      key={job.id}
+                      {...job}
+                      isSelected={selectedJob?.id === job.id}
+                      onClick={() => handleJobSelect(job)}
+                      description={job.description}
+                    />
+                  ))
+                )}
+              </div>
+
+              {/* Mobile Pagination */}
+              {sortedJobs.length > ITEMS_PER_PAGE && (
+                <div className="mt-6 pt-4">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage > 1) setCurrentPage(currentPage - 1);
+                          }}
+                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                        />
+                      </PaginationItem>
+                      
+                      {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => {
+                        const page = currentPage <= 2 ? i + 1 : currentPage - 1 + i;
+                        if (page > totalPages) return null;
+                        return (
+                          <PaginationItem key={page}>
+                            <PaginationLink
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentPage(page);
+                              }}
+                              isActive={currentPage === page}
+                            >
+                              {page}
+                            </PaginationLink>
+                          </PaginationItem>
+                        );
+                      })}
+                      
+                      <PaginationItem>
+                        <PaginationNext 
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                          }}
+                          className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
             </div>
 
-            {/* Main Content Area */}
-            <div className={`flex flex-col transition-all duration-300 ${
-              isFilterCollapsed ? 'lg:col-span-11' : 'lg:col-span-10'
-            }`}>
-              
-              {/* Mobile Job List */}
-              <div className="lg:hidden">
-                {/* Mobile Search Bar */}
-                <div className="mb-4 p-4 bg-white rounded-xl border shadow-sm">
-                  <form onSubmit={(e) => {
-                    e.preventDefault();
-                    // Apply search
-                  }} className="space-y-3">
-                    <div className="flex gap-2">
-                      <div className="flex-1 relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input 
-                          placeholder="Sök jobb eller företag..."
-                          className="pl-10"
-                          value={searchQuery}
-                          onChange={(e) => {
-                            setSearchQuery(e.target.value);
-                            resetPagination();
-                          }}
-                        />
-                      </div>
-                      <Button variant="outline" size="icon">
-                        <Filter className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                      <div className="flex-1 relative">
-                        <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input 
-                          placeholder="Plats..."
-                          className="pl-10"
-                          value={locationQuery}
-                          onChange={(e) => {
-                            setLocationQuery(e.target.value);
-                            resetPagination();
-                          }}
-                        />
-                      </div>
-                      <Select value={sortBy} onValueChange={(sort) => {
-                        setSortBy(sort);
-                        resetPagination();
-                      }}>
-                        <SelectTrigger className="w-32">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="relevance">Relevans</SelectItem>
-                          <SelectItem value="newest">Nyast</SelectItem>
-                          <SelectItem value="salary">Deadline</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </form>
-                </div>
-
-                {/* Selected Cities for Mobile */}
+            {/* Desktop Layout */}
+            <div className="hidden lg:grid lg:grid-cols-12 gap-4 flex-1">
+              {/* Desktop Job List */}
+              <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
+                isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-6'
+              }`}>
+                {/* Selected Cities Header */}
                 {selectedCities.length > 0 && (
                   <div className="mb-4">
-                    <h3 className="text-lg font-bold text-black mb-2">
+                    <h3 className="text-xl font-bold text-black">
                       Lediga jobb i {selectedCities.join(', ')}
                     </h3>
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
@@ -570,11 +651,59 @@ const Jobs = () => {
                     </div>
                   </div>
                 )}
-
-                {/* Mobile Job List */}
-                <div className="space-y-3 mb-6">
+                
+                {/* Job Alert and Sorting Controls */}
+                <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4">
+                  <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+                    {/* Job Alert Creation */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Bell className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-medium text-foreground">Jobbbevakning</span>
+                      </div>
+                      <CreateJobAlertDialog 
+                        defaultValues={{
+                          searchQuery: searchQuery,
+                          location: locationQuery,
+                          jobType: filterByType !== 'all' ? filterByType : undefined
+                        }}
+                        trigger={
+                          <Button 
+                            size="sm" 
+                            className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
+                          >
+                            <Bell className="h-4 w-4" />
+                            Skapa bevakning
+                          </Button>
+                        }
+                      />
+                    </div>
+                    
+                    {/* Sorting Options */}
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-sm font-medium text-foreground">Sortera efter:</span>
+                      </div>
+                      <Select value={sortBy} onValueChange={(sort) => {
+                        setSortBy(sort);
+                        resetPagination();
+                      }}>
+                        <SelectTrigger className="w-48">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="relevance">Relevans</SelectItem>
+                          <SelectItem value="newest">Nyast först</SelectItem>
+                          <SelectItem value="salary">Sista ansökningsdag</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                   {sortedJobs.length === 0 ? (
-                    <div className="text-center py-12 bg-white rounded-xl">
+                    <div className="text-center py-12">
                       <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
                     </div>
                   ) : (
@@ -589,10 +718,10 @@ const Jobs = () => {
                     ))
                   )}
                 </div>
-
-                {/* Mobile Pagination */}
+                
+                {/* Pagination */}
                 {sortedJobs.length > ITEMS_PER_PAGE && (
-                  <div className="mt-6 pt-4">
+                  <div className="mt-6 pt-4 border-t border-gray-200">
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
@@ -606,23 +735,37 @@ const Jobs = () => {
                           />
                         </PaginationItem>
                         
-                        {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => {
-                          const page = currentPage <= 2 ? i + 1 : currentPage - 1 + i;
-                          if (page > totalPages) return null;
-                          return (
-                            <PaginationItem key={page}>
-                              <PaginationLink
-                                href="#"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setCurrentPage(page);
-                                }}
-                                isActive={currentPage === page}
-                              >
-                                {page}
-                              </PaginationLink>
-                            </PaginationItem>
-                          );
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                          if (
+                            page === 1 ||
+                            page === totalPages ||
+                            (page >= currentPage - 1 && page <= currentPage + 1)
+                          ) {
+                            return (
+                              <PaginationItem key={page}>
+                                <PaginationLink
+                                  href="#"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage(page);
+                                  }}
+                                  isActive={currentPage === page}
+                                >
+                                  {page}
+                                </PaginationLink>
+                              </PaginationItem>
+                            );
+                          } else if (
+                            page === currentPage - 2 ||
+                            page === currentPage + 2
+                          ) {
+                            return (
+                              <PaginationItem key={page}>
+                                <PaginationEllipsis />
+                              </PaginationItem>
+                            );
+                          }
+                          return null;
                         })}
                         
                         <PaginationItem>
@@ -641,169 +784,17 @@ const Jobs = () => {
                 )}
               </div>
 
-              {/* Desktop Layout */}
-              <div className="hidden lg:grid lg:grid-cols-12 gap-4 flex-1">
-                {/* Desktop Job List */}
-                <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
-                  isFilterCollapsed ? 'lg:col-span-4' : 'lg:col-span-5'
-                }`}>
-              {/* Selected Cities Header */}
-              {selectedCities.length > 0 && (
-                <div className="mb-4">
-                  <h3 className="text-xl font-bold text-black">
-                    Lediga jobb i {selectedCities.join(', ')}
-                  </h3>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
-                    <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
-                    <span className="text-xs text-muted-foreground">jobb hittades</span>
-                  </div>
-                </div>
-              )}
-              
-              {/* Job Alert and Sorting Controls */}
-              <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4">
-                <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
-                  {/* Job Alert Creation */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Bell className="h-4 w-4 text-primary" />
-                      <span className="text-sm font-medium text-foreground">Jobbbevakning</span>
-                    </div>
-                    <CreateJobAlertDialog 
-                      defaultValues={{
-                        searchQuery: searchQuery,
-                        location: locationQuery,
-                        jobType: filterByType !== 'all' ? filterByType : undefined
-                      }}
-                      trigger={
-                        <Button 
-                          size="sm" 
-                          className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
-                        >
-                          <Bell className="h-4 w-4" />
-                          Skapa bevakning
-                        </Button>
-                      }
+              {/* Desktop Job Detail Panel */}
+              <div className={`transition-all duration-300 ${
+                isFilterCollapsed ? 'lg:col-span-7' : 'lg:col-span-6'
+              }`}>
+                <div className="sticky top-6">
+                  <div className="h-[calc(100vh-12rem)]">
+                    <JobDetailPanel 
+                      job={selectedJob} 
+                      onClose={() => setSelectedJob(null)}
+                      hasJobs={sortedJobs.length > 0}
                     />
-                  </div>
-                  
-                  {/* Sorting Options */}
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-sm font-medium text-foreground">Sortera efter:</span>
-                    </div>
-                    <Select value={sortBy} onValueChange={(sort) => {
-                      setSortBy(sort);
-                      resetPagination();
-                    }}>
-                      <SelectTrigger className="w-48">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="relevance">Relevans</SelectItem>
-                        <SelectItem value="newest">Nyast först</SelectItem>
-                        <SelectItem value="salary">Sista ansökningsdag</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-                {sortedJobs.length === 0 ? (
-                  <div className="text-center py-12">
-                    <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
-                  </div>
-                ) : (
-                  paginatedJobs.map((job) => (
-                    <CompactJobCard
-                      key={job.id}
-                      {...job}
-                      isSelected={selectedJob?.id === job.id}
-                      onClick={() => handleJobSelect(job)}
-                      description={job.description}
-                    />
-                  ))
-                )}
-              </div>
-              
-              {/* Pagination */}
-              {sortedJobs.length > ITEMS_PER_PAGE && (
-                <div className="mt-6 pt-4 border-t border-gray-200">
-                  <Pagination>
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious 
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (currentPage > 1) setCurrentPage(currentPage - 1);
-                          }}
-                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
-                        />
-                      </PaginationItem>
-                      
-                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                        if (
-                          page === 1 ||
-                          page === totalPages ||
-                          (page >= currentPage - 1 && page <= currentPage + 1)
-                        ) {
-                          return (
-                            <PaginationItem key={page}>
-                              <PaginationLink
-                                href="#"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setCurrentPage(page);
-                                }}
-                                isActive={currentPage === page}
-                              >
-                                {page}
-                              </PaginationLink>
-                            </PaginationItem>
-                          );
-                        } else if (
-                          page === currentPage - 2 ||
-                          page === currentPage + 2
-                        ) {
-                          return (
-                            <PaginationItem key={page}>
-                              <PaginationEllipsis />
-                            </PaginationItem>
-                          );
-                        }
-                        return null;
-                      })}
-                      
-                      <PaginationItem>
-                        <PaginationNext 
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-                          }}
-                          className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
-                        />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                </div>
-              )}
-                </div>
-
-                {/* Desktop Job Detail Panel */}
-                <div className={`transition-all duration-300 ${
-                  isFilterCollapsed ? 'lg:col-span-7' : 'lg:col-span-5'
-                }`}>
-                  <div className="sticky top-6">
-                    <div className="h-[calc(100vh-12rem)]">
-                      <JobDetailPanel 
-                        job={selectedJob} 
-                        onClose={() => setSelectedJob(null)}
-                        hasJobs={sortedJobs.length > 0}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
