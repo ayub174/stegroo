@@ -114,12 +114,12 @@ export const JobFiltersSidebar = ({
           variant="ghost"
           size="icon"
           onClick={onToggleCollapse}
-          className="absolute top-8 -right-4 z-10 h-8 w-8 bg-background border border-border/50 rounded-full shadow-sm hover:bg-primary/10 hover:border-primary/30 transition-all duration-300"
+          className="absolute top-8 -right-4 z-10 h-10 w-10 bg-background border-2 border-primary/30 rounded-full shadow-lg hover:bg-primary/10 hover:border-primary/50 transition-all duration-300"
           style={{
-            animation: 'vibrate 0.3s ease-in-out 0s, vibrate-periodic 5s infinite'
+            animation: 'vibrate-periodic 5s infinite'
           }}
         >
-          <ChevronLeft className="h-4 w-4 text-primary" />
+          <ChevronLeft className="h-5 w-5 text-primary font-bold" />
         </Button>
 
         <div className="p-6 space-y-6">
