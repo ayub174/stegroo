@@ -90,15 +90,15 @@ export const JobFiltersSidebar = ({
       <div className="relative">
         {/* Collapsed State - Just the toggle button */}
         <div className="w-12 h-full bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl flex items-center justify-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onToggleCollapse}
-            className="h-10 w-10 hover:bg-primary/10 transition-all duration-300"
-            style={{
-              animation: 'pulse 0.5s ease-in-out infinite alternate, vibrate 5s infinite'
-            }}
-          >
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onToggleCollapse}
+              className="h-10 w-10 hover:bg-primary/10 transition-all duration-300"
+              style={{
+                animation: 'vibrate-periodic 5s infinite'
+              }}
+            >
             <ChevronRight className="h-5 w-5 text-primary" />
           </Button>
         </div>
