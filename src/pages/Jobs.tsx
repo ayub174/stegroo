@@ -453,47 +453,8 @@ const Jobs = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Minimized Hero Section */}
-      <section className="relative py-3 overflow-hidden bg-white border-b border-gray-100">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex items-center justify-between">
-          {/* Compact title and count */}
-          <div className="flex items-center gap-4">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Alla jobb
-            </h1>
-            <Badge variant="secondary" className="bg-blue-50 border border-blue-200 px-3 py-1">
-              <TrendingUp className="h-3 w-3 text-blue-600 mr-1" />
-              <span className="font-semibold text-blue-600">{filteredJobs.length}</span>
-              <span className="text-gray-600 ml-1">jobb</span>
-            </Badge>
-            {/* Job Alert Quick Access */}
-            {(searchQuery || locationQuery || filterByType !== 'all') && (
-              <CreateJobAlertDialog 
-                defaultValues={{
-                  searchQuery: searchQuery,
-                  location: locationQuery,
-                  jobType: filterByType !== 'all' ? filterByType : undefined
-                }}
-                trigger={
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    className="gap-2 bg-white/80 hover:bg-white border-2 border-primary/20 hover:border-primary/40 text-primary hover:text-primary/80 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl px-4 py-2"
-                  >
-                    <Bell className="h-3 w-3" />
-                    Bevaka sökning
-                  </Button>
-                }
-              />
-            )}
-          </div>
-          </div>
-        </div>
-      </section>
-
       {/* Main Content - 3 Column Layout */}
-      <section className="py-4 bg-gray-50 min-h-screen">
+      <section className="pt-6 pb-4 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">
           <div className={`grid grid-cols-1 lg:grid-cols-12 gap-6 h-full transition-all duration-300 ${
             isFilterCollapsed ? 'lg:grid-cols-8' : 'lg:grid-cols-12'
