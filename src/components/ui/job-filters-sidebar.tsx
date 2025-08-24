@@ -229,11 +229,6 @@ export const JobFiltersSidebar = ({
 
           <Separator />
 
-          {/* Results Count */}
-          <div className="text-center p-4 bg-primary/5 rounded-xl border border-primary/10">
-            <div className="text-2xl font-bold text-primary">{jobCount}</div>
-            <div className="text-sm text-muted-foreground">jobb hittades</div>
-          </div>
         </div>
       </div>
     </div>

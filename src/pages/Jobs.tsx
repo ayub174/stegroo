@@ -507,6 +507,7 @@ const Jobs = () => {
                   <h3 className="text-xl font-bold text-black">
                     Lediga jobb i {selectedCities.join(', ')}
                   </h3>
+                  <p className="text-sm text-muted-foreground mt-1">{filteredJobs.length} jobb hittades</p>
                 </div>
               )}
               
