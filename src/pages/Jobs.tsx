@@ -540,6 +540,15 @@ const Jobs = () => {
             <div className={`flex flex-col h-[calc(100vh-12rem)] transition-all duration-300 ${
               isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-5'
             }`}>
+              {/* Selected Cities Header */}
+              {selectedCities.length > 0 && (
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-black">
+                    Lediga jobb i {selectedCities.join(', ')}
+                  </h3>
+                </div>
+              )}
+              
               {/* Job Alert and Sorting Controls */}
               <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4">
                 <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
@@ -588,15 +597,6 @@ const Jobs = () => {
                   </div>
                 </div>
               </div>
-              
-              {/* Selected Cities Header */}
-              {selectedCities.length > 0 && (
-                <div className="mb-4">
-                  <h2 className="text-xl font-bold text-black">
-                    Lediga jobb i {selectedCities.join(', ')}
-                  </h2>
-                </div>
-              )}
               
               <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
