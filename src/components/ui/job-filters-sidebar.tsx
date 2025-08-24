@@ -11,10 +11,12 @@ import { cn } from "@/lib/utils";
 interface JobFiltersSidebarProps {
   searchQuery: string;
   locationQuery: string;
+  selectedCities: string[];
   sortBy: string;
   filterByType: string;
   onSearchChange: (query: string) => void;
   onLocationChange: (location: string) => void;
+  onSelectedCitiesChange: (cities: string[]) => void;
   onSortChange: (sort: string) => void;
   onTypeFilterChange: (type: string) => void;
   jobCount: number;
@@ -43,10 +45,12 @@ const popularLocations = [
 export const JobFiltersSidebar = ({
   searchQuery,
   locationQuery,
+  selectedCities,
   sortBy,
   filterByType,
   onSearchChange,
   onLocationChange,
+  onSelectedCitiesChange,
   onSortChange,
   onTypeFilterChange,
   jobCount,
@@ -67,11 +71,19 @@ export const JobFiltersSidebar = ({
     setLocalLocationQuery('');
     onSearchChange('');
     onLocationChange('');
+    onSelectedCitiesChange([]);
     onSortChange('relevance');
     onTypeFilterChange('all');
   };
 
-  const hasActiveFilters = searchQuery || locationQuery || sortBy !== 'relevance' || filterByType !== 'all';
+  const toggleCity = (city: string) => {
+    const newSelectedCities = selectedCities.includes(city)
+      ? selectedCities.filter(c => c !== city)
+      : [...selectedCities, city];
+    onSelectedCitiesChange(newSelectedCities);
+  };
+
+  const hasActiveFilters = searchQuery || locationQuery || selectedCities.length > 0 || sortBy !== 'relevance' || filterByType !== 'all';
 
   if (isCollapsed) {
     return (
@@ -167,25 +179,27 @@ export const JobFiltersSidebar = ({
 
           {/* Popular Locations */}
           <div className="space-y-3">
-            <label className="text-sm font-medium text-foreground">Populära platser</label>
+            <label className="text-sm font-medium text-foreground">Populära platser (välj flera)</label>
             <div className="flex flex-wrap gap-2">
               {popularLocations.map((location) => (
                 <Badge 
                   key={location}
-                  variant={locationQuery === location ? "default" : "outline"}
+                  variant={selectedCities.includes(location) ? "default" : "outline"}
                   className={cn(
                     "cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors",
-                    locationQuery === location && "bg-primary text-primary-foreground"
+                    selectedCities.includes(location) && "bg-primary text-primary-foreground"
                   )}
-                  onClick={() => {
-                    setLocalLocationQuery(location);
-                    onLocationChange(location);
-                  }}
+                  onClick={() => toggleCity(location)}
                 >
                   {location}
                 </Badge>
               ))}
             </div>
+            {selectedCities.length > 0 && (
+              <div className="text-xs text-muted-foreground">
+                Valda städer: {selectedCities.join(', ')}
+              </div>
+            )}
           </div>
 
           <Separator />

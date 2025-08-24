@@ -391,6 +391,7 @@ const Jobs = () => {
   
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [locationQuery, setLocationQuery] = useState(initialLocationQuery);
+  const [selectedCities, setSelectedCities] = useState<string[]>(initialLocationQuery ? [initialLocationQuery] : []);
   const [sortBy, setSortBy] = useState('relevance');
   const [filterByType, setFilterByType] = useState('all');
   const [selectedJob, setSelectedJob] = useState<typeof allJobs[0] | null>(null);
@@ -406,8 +407,8 @@ const Jobs = () => {
       job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
       job.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     
-    const matchesLocation = locationQuery === '' || 
-      job.location.toLowerCase().includes(locationQuery.toLowerCase());
+    const matchesLocation = selectedCities.length === 0 || 
+      selectedCities.some(city => job.location.toLowerCase().includes(city.toLowerCase()));
     
     const matchesType = filterByType === 'all' || job.type === filterByType;
     
@@ -505,6 +506,7 @@ const Jobs = () => {
                 <JobFiltersSidebar
                   searchQuery={searchQuery}
                   locationQuery={locationQuery}
+                  selectedCities={selectedCities}
                   sortBy={sortBy}
                   filterByType={filterByType}
                   onSearchChange={(query) => {
@@ -513,6 +515,10 @@ const Jobs = () => {
                   }}
                   onLocationChange={(location) => {
                     setLocationQuery(location);
+                    resetPagination();
+                  }}
+                  onSelectedCitiesChange={(cities) => {
+                    setSelectedCities(cities);
                     resetPagination();
                   }}
                   onSortChange={(sort) => {
@@ -582,6 +588,15 @@ const Jobs = () => {
                   </div>
                 </div>
               </div>
+              
+              {/* Selected Cities Header */}
+              {selectedCities.length > 0 && (
+                <div className="mb-4">
+                  <h2 className="text-xl font-bold text-black">
+                    Lediga jobb i {selectedCities.join(', ')}
+                  </h2>
+                </div>
+              )}
               
               <div className="flex-1 space-y-4 overflow-y-auto pr-2">
                 {sortedJobs.length === 0 ? (
