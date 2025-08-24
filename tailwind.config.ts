@@ -154,6 +154,21 @@ export default {
 					'100%': {
 						transform: 'translateX(-50%)'
 					}
+				},
+				'vibrate': {
+					'0%, 100%': { transform: 'translateX(0)' },
+					'10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-2px)' },
+					'20%, 40%, 60%, 80%': { transform: 'translateX(2px)' }
+				},
+				'vibrate-periodic': {
+					'0%, 90%': { transform: 'translateX(0)' },
+					'91%': { transform: 'translateX(-2px)' },
+					'92%': { transform: 'translateX(2px)' },
+					'93%': { transform: 'translateX(-2px)' },
+					'94%': { transform: 'translateX(2px)' },
+					'95%': { transform: 'translateX(-1px)' },
+					'96%': { transform: 'translateX(1px)' },
+					'97%, 100%': { transform: 'translateX(0)' }
 				}
 			},
 			animation: {
@@ -164,7 +179,9 @@ export default {
 				'gradient-shift': 'gradient-shift 8s ease-in-out infinite',
 				'float': 'float 6s ease-in-out infinite',
 				'scroll-vertical': 'scroll-vertical 20s linear infinite',
-				'scroll-horizontal': 'scroll-horizontal 30s linear infinite'
+				'scroll-horizontal': 'scroll-horizontal 30s linear infinite',
+				'vibrate': 'vibrate 0.3s ease-in-out',
+				'vibrate-periodic': 'vibrate-periodic 5s infinite'
 			},
 			boxShadow: {
 				'card': 'var(--shadow-card)',
