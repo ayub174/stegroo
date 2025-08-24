@@ -407,7 +407,7 @@ export default function Profile() {
                       <div className="flex justify-end">
                         <Button 
                           onClick={handleSaveProfile}
-                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
+                          className="px-6 py-3 rounded-2xl bg-primary text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
                         >
                           <Save className="h-4 w-4 mr-2" />
                           Spara ändringar
