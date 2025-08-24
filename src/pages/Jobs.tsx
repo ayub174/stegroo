@@ -455,7 +455,7 @@ const Jobs = () => {
       
       {/* Main Content - 3 Column Layout */}
       <section className="pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
-        <div className="max-w-[1800px] mx-auto px-2 flex-1 flex flex-col">
+        <div className="max-w-[1800px] mx-auto px-16 flex-1 flex flex-col">
           <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 transition-all duration-300`}>
             {/* Left Sidebar - Filters */}
             <div className={`transition-all duration-300 ${
