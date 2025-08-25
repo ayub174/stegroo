@@ -167,7 +167,7 @@ const Index = () => {
         </div>
         
         {/* Main Content */}
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 pt-12 relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Status Badge */}
             <div className="flex justify-center lg:justify-start mb-8 animate-fade-in">
