@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { 
   MapPin, 
   Clock, 
@@ -26,6 +26,7 @@ import { JobCard } from "@/components/ui/job-card";
 
 const JobDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // Dummy job data - In a real app, this would come from an API
   const jobData = {
@@ -156,9 +157,7 @@ const JobDetails = () => {
         <Header />
         <div className="container mx-auto px-4 py-20 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Jobbet kunde inte hittas</h1>
-          <Link to="/">
-            <Button variant="outline">Tillbaka till startsidan</Button>
-          </Link>
+          <Button variant="outline" onClick={() => navigate(-1)}>Tillbaka till föregående sida</Button>
         </div>
         <Footer />
       </div>
