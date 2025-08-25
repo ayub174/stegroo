@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { CompactJobCard } from "@/components/ui/compact-job-card";
-import { JobFiltersSidebar } from "@/components/ui/job-filters-sidebar";
 import { JobDetailPanel } from "@/components/ui/job-detail-panel";
 import { CreateJobAlertDialog } from "@/components/ui/create-job-alert-dialog";
 import { Badge } from "@/components/ui/badge";
@@ -392,12 +391,10 @@ const Jobs = () => {
   
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [locationQuery, setLocationQuery] = useState(initialLocationQuery);
-  const [selectedCities, setSelectedCities] = useState<string[]>(initialLocationQuery ? [initialLocationQuery] : []);
   const [sortBy, setSortBy] = useState('relevance');
   const [filterByType, setFilterByType] = useState('all');
   const [selectedJob, setSelectedJob] = useState<typeof allJobs[0] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isFilterCollapsed, setIsFilterCollapsed] = useState(false);
   
   const ITEMS_PER_PAGE = 20;
 
@@ -408,8 +405,8 @@ const Jobs = () => {
       job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
       job.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     
-    const matchesLocation = selectedCities.length === 0 || 
-      selectedCities.some(city => job.location.toLowerCase().includes(city.toLowerCase()));
+    const matchesLocation = locationQuery === '' || 
+      job.location.toLowerCase().includes(locationQuery.toLowerCase());
     
     const matchesType = filterByType === 'all' || job.type === filterByType;
     
@@ -449,49 +446,33 @@ const Jobs = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header 
+        searchQuery={searchQuery}
+        locationQuery={locationQuery}
+        sortBy={sortBy}
+        filterByType={filterByType}
+        onSearchChange={(query) => {
+          setSearchQuery(query);
+          resetPagination();
+        }}
+        onLocationChange={(location) => {
+          setLocationQuery(location);
+          resetPagination();
+        }}
+        onSortChange={(sort) => {
+          setSortBy(sort);
+          resetPagination();
+        }}
+        onTypeFilterChange={(type) => {
+          setFilterByType(type);
+          resetPagination();
+        }}
+        jobCount={filteredJobs.length}
+      />
       
       <section className="pt-4 md:pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col">
           
-          {/* Filter Section (Desktop only, above main content) */}
-          <div className="hidden lg:block mb-4">
-            <div className={`transition-all duration-300 ${
-              isFilterCollapsed ? 'h-16' : 'h-auto'
-            }`}>
-              <JobFiltersSidebar
-                searchQuery={searchQuery}
-                locationQuery={locationQuery}
-                selectedCities={selectedCities}
-                sortBy={sortBy}
-                filterByType={filterByType}
-                onSearchChange={(query) => {
-                  setSearchQuery(query);
-                  resetPagination();
-                }}
-                onLocationChange={(location) => {
-                  setLocationQuery(location);
-                  resetPagination();
-                }}
-                onSelectedCitiesChange={(cities) => {
-                  setSelectedCities(cities);
-                  resetPagination();
-                }}
-                onSortChange={(sort) => {
-                  setSortBy(sort);
-                  resetPagination();
-                }}
-                onTypeFilterChange={(type) => {
-                  setFilterByType(type);
-                  resetPagination();
-                }}
-                jobCount={filteredJobs.length}
-                isCollapsed={isFilterCollapsed}
-                onToggleCollapse={() => setIsFilterCollapsed(!isFilterCollapsed)}
-              />
-            </div>
-          </div>
-
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col">
             
@@ -550,12 +531,9 @@ const Jobs = () => {
                 </form>
               </div>
 
-              {/* Selected Cities for Mobile */}
-              {selectedCities.length > 0 && (
+              {/* Job Count for Mobile */}
+              {filteredJobs.length > 0 && (
                 <div className="mb-4">
-                  <h3 className="text-lg font-bold text-black mb-2">
-                    Lediga jobb i {selectedCities.join(', ')}
-                  </h3>
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
                     <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
                     <span className="text-xs text-muted-foreground">jobb hittades</span>
@@ -636,15 +614,10 @@ const Jobs = () => {
             {/* Desktop Layout */}
             <div className="hidden lg:grid lg:grid-cols-12 gap-4 flex-1">
               {/* Desktop Job List */}
-              <div className={`flex flex-col h-[calc(100vh-8rem)] transition-all duration-300 ${
-                isFilterCollapsed ? 'lg:col-span-5' : 'lg:col-span-6'
-              }`}>
-                {/* Selected Cities Header */}
-                {selectedCities.length > 0 && (
+              <div className="lg:col-span-6 flex flex-col h-[calc(100vh-8rem)]">
+                {/* Job Count Header */}
+                {filteredJobs.length > 0 && (
                   <div className="mb-4">
-                    <h3 className="text-xl font-bold text-black">
-                      Lediga jobb i {selectedCities.join(', ')}
-                    </h3>
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
                       <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
                       <span className="text-xs text-muted-foreground">jobb hittades</span>
@@ -785,9 +758,7 @@ const Jobs = () => {
               </div>
 
               {/* Desktop Job Detail Panel */}
-              <div className={`transition-all duration-300 ${
-                isFilterCollapsed ? 'lg:col-span-7' : 'lg:col-span-6'
-              }`}>
+              <div className="lg:col-span-6">
                 <div className="sticky top-6">
                   <div className="h-[calc(100vh-12rem)]">
                     <JobDetailPanel 

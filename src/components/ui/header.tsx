@@ -1,16 +1,77 @@
-import { Bell, User, Menu, X, ChevronDown } from "lucide-react";
+import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter } from "lucide-react";
 import { Button } from "./button";
 import { Logo } from "./logo";
+import { Input } from "./input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
+import { Badge } from "./badge";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
-export const Header = () => {
+interface HeaderSearchProps {
+  searchQuery?: string;
+  locationQuery?: string;
+  sortBy?: string;
+  filterByType?: string;
+  onSearchChange?: (query: string) => void;
+  onLocationChange?: (location: string) => void;
+  onSortChange?: (sort: string) => void;
+  onTypeFilterChange?: (type: string) => void;
+  jobCount?: number;
+}
+
+interface HeaderProps extends HeaderSearchProps {}
+
+const jobTypes = [
+  { value: 'all', label: 'Alla typer' },
+  { value: 'Heltid', label: 'Heltid' },
+  { value: 'Deltid', label: 'Deltid' },
+  { value: 'Konsult', label: 'Konsult' },
+  { value: 'Praktik', label: 'Praktik' }
+];
+
+const sortOptions = [
+  { value: 'relevance', label: 'Relevans' },
+  { value: 'newest', label: 'Nyast först' },
+  { value: 'salary', label: 'Sista ansökningsdag' }
+];
+
+export const Header = ({
+  searchQuery = '',
+  locationQuery = '',
+  sortBy = 'relevance',
+  filterByType = 'all',
+  onSearchChange,
+  onLocationChange,
+  onSortChange,
+  onTypeFilterChange,
+  jobCount
+}: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
+  const [localLocationQuery, setLocalLocationQuery] = useState(locationQuery);
   const location = useLocation();
   const { user } = useAuth();
+
+  // Check if we're on jobs page to show search
+  const isJobsPage = location.pathname === '/jobs';
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearchChange?.(localSearchQuery);
+    onLocationChange?.(localLocationQuery);
+  };
+
+  // Sync local state with props
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    setLocalLocationQuery(locationQuery);
+  }, [locationQuery]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -145,6 +206,78 @@ export const Header = () => {
                 >
                   Registrera dig
                 </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* LinkedIn-style Search Section - Only on Jobs Page */}
+      {isJobsPage && (
+        <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200/50">
+          <div className="container mx-auto px-4 py-3">
+            <form onSubmit={handleSearchSubmit} className="flex items-center gap-3">
+              {/* Search Input */}
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input 
+                  placeholder="Sök jobb, företag..."
+                  className="pl-10 h-9 text-sm border-gray-300 focus:border-primary"
+                  value={localSearchQuery}
+                  onChange={(e) => setLocalSearchQuery(e.target.value)}
+                />
+              </div>
+
+              {/* Location Input */}
+              <div className="relative flex-1 max-w-xs">
+                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input 
+                  placeholder="Plats..."
+                  className="pl-10 h-9 text-sm border-gray-300 focus:border-primary"
+                  value={localLocationQuery}
+                  onChange={(e) => setLocalLocationQuery(e.target.value)}
+                />
+              </div>
+
+              {/* Filters */}
+              <div className="hidden lg:flex items-center gap-2">
+                <Select value={filterByType} onValueChange={onTypeFilterChange}>
+                  <SelectTrigger className="h-9 w-32 text-sm border-gray-300">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {jobTypes.map((type) => (
+                      <SelectItem key={type.value} value={type.value} className="text-sm">
+                        {type.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={sortBy} onValueChange={onSortChange}>
+                  <SelectTrigger className="h-9 w-36 text-sm border-gray-300">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sortOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value} className="text-sm">
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Search Button */}
+              <Button type="submit" size="sm" className="h-9 px-4">
+                Sök
+              </Button>
+            </form>
+
+            {/* Job Count */}
+            {jobCount !== undefined && (
+              <div className="mt-2 text-sm text-muted-foreground">
+                {jobCount} jobb hittades
               </div>
             )}
           </div>
