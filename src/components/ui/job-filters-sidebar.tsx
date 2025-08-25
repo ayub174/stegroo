@@ -119,7 +119,7 @@ export const JobFiltersSidebar = ({
           <ChevronLeft className="h-4 w-4 text-primary" />
         </Button>
 
-        <div className="p-3 space-y-3">
+        <div className="p-2 space-y-2">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
