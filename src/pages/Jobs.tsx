@@ -478,58 +478,6 @@ const Jobs = () => {
             
             {/* Mobile Job List */}
             <div className="lg:hidden">
-              {/* Mobile Search Bar */}
-              <div className="mb-4 p-4 bg-white rounded-xl border shadow-sm">
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                }} className="space-y-3">
-                  <div className="flex gap-2">
-                    <div className="flex-1 relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input 
-                        placeholder="Sök jobb eller företag..."
-                        className="pl-10"
-                        value={searchQuery}
-                        onChange={(e) => {
-                          setSearchQuery(e.target.value);
-                          resetPagination();
-                        }}
-                      />
-                    </div>
-                    <Button variant="outline" size="icon">
-                      <Filter className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    <div className="flex-1 relative">
-                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                      <Input 
-                        placeholder="Plats..."
-                        className="pl-10"
-                        value={locationQuery}
-                        onChange={(e) => {
-                          setLocationQuery(e.target.value);
-                          resetPagination();
-                        }}
-                      />
-                    </div>
-                    <Select value={sortBy} onValueChange={(sort) => {
-                      setSortBy(sort);
-                      resetPagination();
-                    }}>
-                      <SelectTrigger className="w-32">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="relevance">Relevans</SelectItem>
-                        <SelectItem value="newest">Nyast</SelectItem>
-                        <SelectItem value="salary">Deadline</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </form>
-              </div>
 
               {/* Job Count for Mobile */}
               {filteredJobs.length > 0 && (
