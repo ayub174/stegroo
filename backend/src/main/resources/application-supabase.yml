@@ -1,0 +1,59 @@
+# Konfiguration för Supabase-anslutning
+spring:
+  datasource:
+    # Supabase PostgreSQL-anslutning
+    # Ersätt med din egen Supabase-URL, användarnamn och lösenord
+    url: ${SUPABASE_JDBC_URL:jdbc:postgresql://db.fwysotlogybsnaehuuee.supabase.co:5432/postgres}
+    username: ${SUPABASE_USERNAME:postgres}
+    password: ${SUPABASE_PASSWORD:postgres-password}
+    driver-class-name: org.postgresql.Driver
+    
+    # Connection pool-konfiguration
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 5
+      maximum-pool-size: 12
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      auto-commit: true
+  
+  # JPA/Hibernate-konfiguration
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+# Stegroo säkerhetskonfiguration för Supabase
+stegroo:
+  security:
+    jwt:
+      enabled: true  # Aktivera JWT-säkerhet för produktion
+    cors:
+      allowed-origins: https://stegroo.com,https://www.stegroo.com
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: "*"
+      max-age: 3600
+
+# Supabase JWT-konfiguration
+supabase:
+  jwt:
+    secret: ${SUPABASE_JWT_SECRET}
+    issuer: ${SUPABASE_JWT_ISSUER:https://fwysotlogybsnaehuuee.supabase.co}
+
+# Server-konfiguration
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+# Loggning
+logging:
+  level:
+    se.stegroo.backend: INFO
+    org.springframework.security: INFO

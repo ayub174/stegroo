@@ -1,0 +1,209 @@
+# Produktionskonfiguration för Stegroo Backend
+spring:
+  application:
+    name: stegroo-backend
+  
+  # Databas-konfiguration
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/stegroo}
+    username: ${DATABASE_USERNAME:stegroo}
+    password: ${DATABASE_PASSWORD:stegroo}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  
+  # JPA-konfiguration
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+  
+  # Flyway-migration
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    validate-on-migrate: true
+  
+  # Security-konfiguration
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:https://stegroo.se}
+          jwk-set-uri: ${JWT_JWK_SET_URI:https://stegroo.se/.well-known/jwks.json}
+
+# Stegroo-specifik konfiguration
+stegroo:
+  # API-konfiguration
+  api:
+    base-url: ${API_BASE_URL:https://api.stegroo.se}
+    version: v1
+    timeout:
+      connect: 5000
+      read: 30000
+  
+  # Arbetsförmedlingen API-konfiguration
+  arbetsformedlingen:
+    base-url: ${AF_API_BASE_URL:https://jobsearch.api.arbetsformedlingen.se}
+    timeout:
+      connect: 10000
+      read: 60000
+    retry:
+      max-attempts: 3
+      backoff:
+        initial-interval: 1000
+        multiplier: 2.0
+        max-interval: 10000
+  
+  # Synkroniseringskonfiguration
+  sync:
+    jobs:
+      enabled: true
+      cron: "0 */4 * * * *" # Var 4:e timme
+      batch-size: 100
+      max-jobs-per-sync: 1000
+    taxonomies:
+      enabled: true
+      cron: "0 0 2 * * *" # Varje dag kl 02:00
+      batch-size: 50
+  
+  # Säkerhetskonfiguration
+  security:
+    rate-limit:
+      requests-per-minute: 100
+      burst-capacity: 200
+    cors:
+      allowed-origins: ${CORS_ALLOWED_ORIGINS:https://stegroo.se,https://www.stegroo.se}
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: "*"
+      max-age: 3600
+    jwt:
+      secret: ${JWT_SECRET:}
+      expiration: 86400000 # 24 timmar
+      refresh-expiration: 604800000 # 7 dagar
+  
+  # Loggning
+  logging:
+    level:
+      se.stegroo.backend: INFO
+      se.stegroo.backend.security: INFO
+      se.stegroo.backend.controller: INFO
+      se.stegroo.backend.service: DEBUG
+      se.stegroo.backend.repository: DEBUG
+      org.springframework.security: INFO
+      org.springframework.web: INFO
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    file:
+      name: logs/stegroo-backend.log
+      max-size: 100MB
+      max-history: 30
+  
+  # Monitoring och metrics
+  monitoring:
+    enabled: true
+    prometheus:
+      enabled: true
+    health:
+      enabled: true
+      show-details: when-authorized
+  
+  # Cache-konfiguration
+  cache:
+    type: redis
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000
+      database: 0
+
+# Actuator-konfiguration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,env,configprops
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        descriptions: true
+        step: 1m
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      percentiles:
+        http.server.requests: 0.5,0.95,0.99
+  health:
+    redis:
+      enabled: true
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+      threshold: 10MB
+
+# Logging-konfiguration
+logging:
+  config: classpath:logback-spring.xml
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Server-konfiguration
+server:
+  port: ${SERVER_PORT:8084}
+  servlet:
+    context-path: /api
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+    include-exception: false
+
+# Swagger/OpenAPI-konfiguration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+
+# Profil-specifik konfiguration
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  profiles:
+    active: prod
