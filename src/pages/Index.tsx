@@ -174,7 +174,7 @@ const Index = () => {
               <div className="relative group">
                 <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-blue-50 border-2 border-blue-200 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl">
                   {/* Blue button effect */}
-                  <div className="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-b-2xl"></div>
                   
                   {/* Content */}
                   <div className="relative z-10 flex items-center gap-3">
