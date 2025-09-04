@@ -169,22 +169,22 @@ const Index = () => {
         {/* Main Content */}
         <div className="container mx-auto px-4 pt-12 relative z-10">
           <div className="max-w-5xl mx-auto">
-            {/* Status Badge */}
-            <div className="flex justify-center mb-8 animate-fade-in">
+            {/* Status Badge - Minimized and discrete */}
+            <div className="absolute top-4 right-4 z-20 animate-fade-in">
               <div className="relative group">
-                <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-blue-50 border-2 border-blue-200 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl">
+                <Badge variant="secondary" className="relative group font-medium text-xs hover:scale-105 transition-all duration-300 cursor-pointer bg-blue-50/90 border border-blue-200/60 hover:border-blue-400 px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md backdrop-blur-sm">
                   {/* Blue button effect */}
-                  <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-b-2xl"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-b-lg"></div>
                   
                   {/* Content */}
-                  <div className="relative z-10 flex items-center gap-3">
-                    <div className="p-1.5 bg-blue-500 rounded-lg shadow-inner">
-                      <TrendingUp className="h-4 w-4 text-white" />
+                  <div className="relative z-10 flex items-center gap-2">
+                    <div className="p-0.5 bg-blue-500 rounded-md shadow-inner">
+                      <TrendingUp className="h-2.5 w-2.5 text-white" />
                     </div>
-                    <span className="font-bold text-lg text-blue-600">
+                    <span className="font-bold text-sm text-blue-600">
                       25,000+
                     </span>
-                    <span className="text-gray-700 font-medium">nya jobb denna vecka</span>
+                    <span className="text-gray-600 font-medium text-xs">nya jobb</span>
                   </div>
                 </Badge>
               </div>
