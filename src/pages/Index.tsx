@@ -169,27 +169,6 @@ const Index = () => {
         {/* Main Content */}
         <div className="container mx-auto px-4 pt-12 relative z-10">
           <div className="max-w-5xl mx-auto">
-            {/* Status Badge - Minimized and discrete */}
-            <div className="absolute top-4 right-4 z-20 animate-fade-in">
-              <div className="relative group">
-                <Badge variant="secondary" className="relative group font-medium text-xs hover:scale-105 transition-all duration-300 cursor-pointer bg-blue-50/90 border border-blue-200/60 hover:border-blue-400 px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md backdrop-blur-sm">
-                  {/* Blue button effect */}
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-b-lg"></div>
-                  
-                  {/* Content */}
-                  <div className="relative z-10 flex items-center gap-2">
-                    <div className="p-0.5 bg-blue-500 rounded-md shadow-inner">
-                      <TrendingUp className="h-2.5 w-2.5 text-white" />
-                    </div>
-                    <span className="font-bold text-sm text-blue-600">
-                      25,000+
-                    </span>
-                    <span className="text-gray-600 font-medium text-xs">nya jobb</span>
-                  </div>
-                </Badge>
-              </div>
-            </div>
-            
             {/* Hero Title */}
             <div className="text-center mb-8">
               <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{
@@ -221,6 +200,29 @@ const Index = () => {
               <div className="w-full max-w-2xl relative group">
                 <div className="absolute inset-0 bg-white rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500 border border-gray-200"></div>
                 <SearchBar className="relative transform hover:scale-[1.02] transition-all duration-300 bg-transparent shadow-none border-0" />
+              </div>
+            </div>
+            
+            {/* Status Badge - Under search bar */}
+            <div className="flex justify-center mb-12 animate-fade-in" style={{
+            animationDelay: '0.8s'
+          }}>
+              <div className="relative group">
+                <Badge variant="secondary" className="relative group font-medium text-xs hover:scale-105 transition-all duration-300 cursor-pointer bg-blue-50/90 border border-blue-200/60 hover:border-blue-400 px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md backdrop-blur-sm">
+                  {/* Blue button effect */}
+                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 opacity-0 group-hover:opacity-60 transition-opacity duration-300 rounded-b-lg"></div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 flex items-center gap-2">
+                    <div className="p-0.5 bg-blue-500 rounded-md shadow-inner">
+                      <TrendingUp className="h-2.5 w-2.5 text-white" />
+                    </div>
+                    <span className="font-bold text-sm text-blue-600">
+                      25,000+
+                    </span>
+                    <span className="text-gray-600 font-medium text-xs">nya jobb denna vecka</span>
+                  </div>
+                </Badge>
               </div>
             </div>
             
