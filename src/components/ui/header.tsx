@@ -20,7 +20,9 @@ interface HeaderSearchProps {
   jobCount?: number;
 }
 
-interface HeaderProps extends HeaderSearchProps {}
+interface HeaderProps extends HeaderSearchProps {
+  isEmployerContext?: boolean;
+}
 
 const jobTypes = [
   { value: 'all', label: 'Alla typer' },
@@ -45,7 +47,8 @@ export const Header = ({
   onLocationChange,
   onSortChange,
   onTypeFilterChange,
-  jobCount
+  jobCount,
+  isEmployerContext = false
 }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -93,9 +96,14 @@ export const Header = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  const navigationItems = [
+  const navigationItems = isEmployerContext ? [
+    { label: "Dashboard", href: "/employers/dashboard" },
+    { label: "Jobbannonser", href: "/employers/jobs" },
+    { label: "Kandidater", href: "/employers/candidates" },
+    { label: "Inställningar", href: "/employers/settings" }
+  ] : [
     { label: "Hitta jobb", href: "/jobs" },
-    { label: "Företag", href: "/companies" },
+    { label: "För arbetsgivare", href: "/companies" },
     { label: "Profil", href: "/profile" }
   ];
 
@@ -130,6 +138,13 @@ export const Header = ({
 
         {/* Right Section */}
         <div className="flex items-center gap-3">
+          {/* Context Switch Button - Show "För Jobbsökande" in employer context */}
+          {isEmployerContext && (
+            <Button variant="outline" size="sm" asChild className="hidden md:flex">
+              <Link to="/">För Jobbsökande</Link>
+            </Button>
+          )}
+
           {/* Notifications - Only show when logged in */}
           {user && (
             <Button 
@@ -146,10 +161,14 @@ export const Header = ({
           {!user && (
             <div className="hidden md:flex items-center gap-2">
               <Button variant="ghost" size="sm" asChild>
-                <Link to="/login">Logga in</Link>
+                <Link to={isEmployerContext ? "/employers/login" : "/login"}>
+                  Logga in
+                </Link>
               </Button>
               <Button variant="default" size="sm" asChild>
-                <Link to="/register">Registrera</Link>
+                <Link to={isEmployerContext ? "/employers/register" : "/register"}>
+                  {isEmployerContext ? "Registrera företag" : "Registrera"}
+                </Link>
               </Button>
             </div>
           )}
@@ -189,22 +208,35 @@ export const Header = ({
               </Link>
             ))}
             
+            {/* Context Switch - Show in employer context */}
+            {isEmployerContext && (
+              <div className="pt-2 border-t border-border/40">
+                <Link
+                  to="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                >
+                  För Jobbsökande
+                </Link>
+              </div>
+            )}
+
             {/* Auth section - Only show when not logged in */}
             {!user && (
               <div className="pt-4 border-t border-border/40 space-y-2">
                 <Link
-                  to="/login"
+                  to={isEmployerContext ? "/employers/login" : "/login"}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 >
                   Logga in
                 </Link>
                 <Link
-                  to="/register"
+                  to={isEmployerContext ? "/employers/register" : "/register"}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
                 >
-                  Registrera dig
+                  {isEmployerContext ? "Registrera företag" : "Registrera dig"}
                 </Link>
               </div>
             )}

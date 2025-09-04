@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Companies from "./pages/Companies";
+import EmployerLogin from "./pages/EmployerLogin";
+import EmployerRegister from "./pages/EmployerRegister";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/companies" element={<Companies />} />
+          <Route path="/employers/login" element={<EmployerLogin />} />
+          <Route path="/employers/register" element={<EmployerRegister />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
