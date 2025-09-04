@@ -9,7 +9,7 @@ import { CategoryCard } from "@/components/ui/category-card";
 import { CompanyCard } from "@/components/ui/company-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import heroImage from "@/assets/hero-image.jpg";
+import heroImage from "@/assets/career-education-hero.jpg";
 import techCategoryImage from "@/assets/tech-category.jpg";
 import marketingCategoryImage from "@/assets/marketing-category.jpg";
 import healthcareCategoryImage from "@/assets/healthcare-category.jpg";
@@ -159,7 +159,7 @@ const Index = () => {
         {/* Hero Image */}
         <div className="absolute inset-0 z-0">
           <div className="relative w-full h-full overflow-hidden rounded-3xl mx-4">
-            <img src={heroImage} alt="Modern collaborative workspace" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[15s] ease-out" />
+            <img src={heroImage} alt="Professional career and education workspace" className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[15s] ease-out" />
             {/* Blue-tinted overlays */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-white/70 to-white/60"></div>
             <div className="absolute inset-0 bg-gradient-to-t from-white via-blue-50/30 to-transparent"></div>
