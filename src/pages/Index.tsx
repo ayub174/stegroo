@@ -204,7 +204,7 @@ const Index = () => {
             </div>
             
             {/* Status Badge - Under search bar */}
-            <div className="flex justify-center mb-12 animate-fade-in" style={{
+            <div className="flex justify-center mb-8 -mt-4 animate-fade-in" style={{
             animationDelay: '0.8s'
           }}>
               <div className="relative group">
