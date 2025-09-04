@@ -170,7 +170,7 @@ const Index = () => {
         <div className="container mx-auto px-4 pt-12 relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Status Badge */}
-            <div className="flex justify-center lg:justify-start mb-8 animate-fade-in">
+            <div className="flex justify-center mb-8 animate-fade-in">
               <div className="relative group">
                 <Badge variant="secondary" className="relative group font-semibold text-sm hover:scale-105 transition-all duration-500 cursor-pointer bg-blue-50 border-2 border-blue-200 hover:border-blue-500 px-6 py-3 rounded-2xl shadow-lg hover:shadow-xl">
                   {/* Blue button effect */}
@@ -191,7 +191,7 @@ const Index = () => {
             </div>
             
             {/* Hero Title */}
-            <div className="text-center lg:text-left mb-8">
+            <div className="text-center mb-8">
               <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{
               animationDelay: '0.2s'
             }}>
@@ -206,7 +206,7 @@ const Index = () => {
                 </span>
               </h1>
               
-              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto lg:mx-0 animate-fade-in leading-relaxed font-light" style={{
+              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto animate-fade-in leading-relaxed font-light" style={{
               animationDelay: '0.4s'
             }}>
                 Upptäck tusentals möjligheter från Sveriges ledande företag. 
@@ -215,7 +215,7 @@ const Index = () => {
             </div>
             
             {/* Search Bar */}
-            <div className="flex justify-center lg:justify-start mb-12 animate-fade-in" style={{
+            <div className="flex justify-center mb-12 animate-fade-in" style={{
             animationDelay: '0.6s'
           }}>
               <div className="w-full max-w-2xl relative group">
