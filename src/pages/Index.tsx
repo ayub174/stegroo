@@ -1,4 +1,4 @@
-import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap, Clock, Shield } from "lucide-react";
+import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap, Clock, Shield, Building2, ChevronRight, MapPin as Map } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/ui/header";
@@ -277,8 +277,142 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
       </section>
 
-      {/* Categories Section */}
-      
+      {/* Cities Section */}
+      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-16 animate-fade-in">
+            <div className="inline-flex items-center gap-2 mb-6">
+              <Badge variant="secondary" className="font-medium bg-blue-50 border-2 border-blue-200 px-4 py-2 rounded-2xl shadow-lg">
+                <Map className="h-3 w-3 mr-1 text-blue-600" />
+                <span className="text-gray-700">Populära städer</span>
+              </Badge>
+            </div>
+            
+            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 mb-6 leading-tight">
+              <span className="text-blue-600">Hitta jobb</span>
+              <span className="block text-gray-600 mt-2">i Sveriges största städer</span>
+            </h2>
+            
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Utforska karriärmöjligheter i landets mest 
+              <span className="text-blue-600 font-medium"> dynamiska arbetsmarknader</span>
+            </p>
+          </div>
+          
+          {/* Cities Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            {[
+              {
+                name: "Stockholm",
+                jobCount: "8,547",
+                description: "Huvudstaden erbjuder flest möjligheter",
+                color: "from-blue-500 to-blue-600",
+                bgColor: "bg-blue-50",
+                hoverColor: "hover:border-blue-300"
+              },
+              {
+                name: "Göteborg",
+                jobCount: "3,241",
+                description: "Västkustens tech- och industricentrum",
+                color: "from-emerald-500 to-emerald-600",
+                bgColor: "bg-emerald-50",
+                hoverColor: "hover:border-emerald-300"
+              },
+              {
+                name: "Malmö",
+                jobCount: "2,186",
+                description: "Dynamisk Öresundsregion",
+                color: "from-purple-500 to-purple-600",
+                bgColor: "bg-purple-50",
+                hoverColor: "hover:border-purple-300"
+              },
+              {
+                name: "Uppsala",
+                jobCount: "1,423",
+                description: "Universitetsstad med innovation",
+                color: "from-orange-500 to-orange-600",
+                bgColor: "bg-orange-50",
+                hoverColor: "hover:border-orange-300"
+              },
+              {
+                name: "Västerås",
+                jobCount: "987",
+                description: "Industriell kraft och utveckling",
+                color: "from-teal-500 to-teal-600",
+                bgColor: "bg-teal-50",
+                hoverColor: "hover:border-teal-300"
+              }
+            ].map((city, index) => (
+              <div key={city.name} className="group cursor-pointer" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className={`relative p-6 rounded-3xl bg-white border-2 border-gray-100 ${city.hoverColor} shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden`}>
+                  {/* Background overlay */}
+                  <div className={`absolute inset-0 ${city.bgColor} opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500`}></div>
+                  
+                  {/* Corner decoration */}
+                  <div className="absolute top-0 right-0 w-16 h-16 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                    <div className={`w-full h-full bg-gradient-to-br ${city.color} transform rotate-45 translate-x-8 -translate-y-8`}></div>
+                  </div>
+                  
+                  <div className="relative z-10">
+                    {/* City icon */}
+                    <div className={`w-14 h-14 bg-gradient-to-r ${city.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <Building2 className="h-7 w-7 text-white" />
+                    </div>
+                    
+                    {/* City name */}
+                    <div className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 mb-2">
+                      {city.name}
+                    </div>
+                    
+                    {/* Job count */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className={`flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r ${city.color} text-white shadow-md group-hover:shadow-lg transition-shadow duration-300`}>
+                        <Briefcase className="h-3 w-3" />
+                        <span className="font-bold text-sm">{city.jobCount}</span>
+                      </div>
+                      <span className="text-xs text-gray-500 font-medium">lediga jobb</span>
+                    </div>
+                    
+                    {/* Description */}
+                    <div className="text-sm text-gray-600 leading-relaxed mb-4">
+                      {city.description}
+                    </div>
+                    
+                    {/* Action arrow */}
+                    <div className="flex items-center text-blue-600 font-medium text-sm group-hover:translate-x-1 transition-transform duration-300">
+                      <span>Utforska jobb</span>
+                      <ArrowRight className="h-4 w-4 ml-1 group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                  </div>
+                  
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400/0 via-blue-400/5 to-blue-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Call to action */}
+          <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="group hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 shadow-md hover:shadow-lg"
+            >
+              <Map className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
+              Se alla städer
+              <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* How It Works Section */}
       <section className="relative py-20 overflow-hidden bg-gray-50">
