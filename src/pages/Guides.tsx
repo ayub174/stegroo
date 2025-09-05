@@ -170,7 +170,7 @@ const Guides = () => {
                 <BookOpen className="w-10 h-10 text-white drop-shadow-sm" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent animate-fade-in">
               Utforska våra guider
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
