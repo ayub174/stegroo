@@ -33,7 +33,12 @@ import {
   Upload,
   Edit3,
   Save,
-  BookmarkIcon
+  BookmarkIcon,
+  ChevronLeft,
+  ChevronRight,
+  Building2,
+  ExternalLink,
+  Trash2
 } from "lucide-react";
 
 type Profile = {
@@ -55,6 +60,10 @@ export default function Profile() {
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
+  const [activeSection, setActiveSection] = useState<'saved-jobs' | 'applications' | null>(null);
+  const [savedJobs, setSavedJobs] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalSavedJobs, setTotalSavedJobs] = useState(0);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -128,6 +137,47 @@ export default function Profile() {
   const exitTestMode = () => {
     localStorage.removeItem('demoAuth');
     navigate("/");
+  };
+
+  const fetchSavedJobs = async (page = 1) => {
+    if (!user) return;
+    
+    try {
+      const itemsPerPage = 10;
+      const from = (page - 1) * itemsPerPage;
+      const to = from + itemsPerPage - 1;
+
+      const { data, error, count } = await supabase
+        .from('saved_jobs')
+        .select('*', { count: 'exact' })
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
+        .range(from, to);
+      
+      if (error) throw error;
+      
+      setSavedJobs(data || []);
+      setTotalSavedJobs(count || 0);
+    } catch (error) {
+      console.error('Error fetching saved jobs:', error);
+      toast({
+        title: "Fel",
+        description: "Kunde inte hämta sparade jobb.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleCardClick = (section: 'saved-jobs' | 'applications') => {
+    if (activeSection === section) {
+      setActiveSection(null);
+    } else {
+      setActiveSection(section);
+      if (section === 'saved-jobs') {
+        fetchSavedJobs(1);
+        setCurrentPage(1);
+      }
+    }
   };
 
   const handleSaveProfile = async () => {
@@ -425,10 +475,12 @@ export default function Profile() {
                     { 
                       title: "Sparade jobb", 
                       icon: Heart, 
-                      value: mockJobs.filter(j => j.saved).length, 
+                      value: totalSavedJobs || mockJobs.filter(j => j.saved).length, 
                       description: "favoriter",
                       color: "from-rose-500/20 to-pink-500/10",
-                      iconColor: "text-rose-600"
+                      iconColor: "text-rose-600",
+                      clickable: true,
+                      section: 'saved-jobs' as const
                     },
                     { 
                       title: "Ansökningar", 
@@ -436,7 +488,9 @@ export default function Profile() {
                       value: mockApplications.length, 
                       description: "pågående",
                       color: "from-blue-500/20 to-indigo-500/10",
-                      iconColor: "text-blue-600"
+                      iconColor: "text-blue-600",
+                      clickable: true,
+                      section: 'applications' as const
                     },
                     { 
                       title: "Profilstyrka", 
@@ -444,10 +498,19 @@ export default function Profile() {
                       value: "75%", 
                       description: "komplett",
                       color: "from-amber-500/20 to-yellow-500/10",
-                      iconColor: "text-amber-600"
+                      iconColor: "text-amber-600",
+                      clickable: false
                     }
                   ].map((stat, index) => (
-                    <Card key={stat.title} className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale overflow-hidden">
+                    <Card 
+                      key={stat.title} 
+                      className={`border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden ${
+                        stat.clickable ? 'cursor-pointer hover-scale' : ''
+                      } ${
+                        activeSection === stat.section ? 'ring-2 ring-primary/50' : ''
+                      }`}
+                      onClick={() => stat.clickable && stat.section && handleCardClick(stat.section)}
+                    >
                       <CardContent className="p-6">
                         <div className="flex items-center gap-4">
                           <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
@@ -494,7 +557,211 @@ export default function Profile() {
                       </div>
                     ))}
                   </CardContent>
-                </Card>
+                 </Card>
+
+                {/* Detailed Section */}
+                {activeSection && (
+                  <Card className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-2xl shadow-lg animate-fade-in">
+                    <CardHeader className="pb-4">
+                      <CardTitle className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                          {activeSection === 'saved-jobs' ? (
+                            <Heart className="h-5 w-5 text-rose-600" />
+                          ) : (
+                            <FileText className="h-5 w-5 text-blue-600" />
+                          )}
+                        </div>
+                        {activeSection === 'saved-jobs' ? 'Sparade jobb' : 'Ansökningar'}
+                      </CardTitle>
+                      <CardDescription>
+                        {activeSection === 'saved-jobs' 
+                          ? 'Alla dina sparade jobb' 
+                          : 'Status på alla dina jobbansökningar'
+                        }
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      {activeSection === 'saved-jobs' ? (
+                        <div className="space-y-4">
+                          {savedJobs.length === 0 ? (
+                            <div className="text-center py-8">
+                              <p className="text-muted-foreground mb-4">Du har inga sparade jobb än.</p>
+                              <Button asChild>
+                                <a href="/jobs">Börja söka jobb</a>
+                              </Button>
+                            </div>
+                          ) : (
+                            <>
+                              <div className="space-y-3">
+                                {savedJobs.map((job) => (
+                                  <div key={job.id} className="p-4 bg-background/40 rounded-xl border border-white/10 group hover:bg-background/60 transition-colors">
+                                    <div className="flex justify-between items-start mb-3">
+                                      <div className="flex items-start gap-3 flex-1">
+                                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 border border-border">
+                                          {job.logo ? (
+                                            <img src={job.logo} alt={`${job.company} logo`} className="w-6 h-6 object-contain" />
+                                          ) : (
+                                            <Building2 className="h-5 w-5 text-muted-foreground" />
+                                          )}
+                                        </div>
+                                        
+                                        <div className="flex-1 min-w-0">
+                                          <h4 className="font-medium text-foreground mb-1 truncate">
+                                            {job.job_title}
+                                          </h4>
+                                          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
+                                            <div className="flex items-center gap-1">
+                                              <Building2 className="h-3 w-3" />
+                                              <span className="truncate">{job.company}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                              <MapPin className="h-3 w-3" />
+                                              <span className="truncate">{job.location}</span>
+                                            </div>
+                                            {job.deadline && (
+                                              <div className="flex items-center gap-1">
+                                                <Calendar className="h-3 w-3" />
+                                                <span className="truncate">Ansök senast {job.deadline}</span>
+                                              </div>
+                                            )}
+                                          </div>
+                                          
+                                          <div className="flex flex-wrap gap-2">
+                                            {job.type && <Badge variant="secondary" className="text-xs">{job.type}</Badge>}
+                                            {job.tags?.slice(0, 2).map((tag: string, index: number) => (
+                                              <Badge key={index} variant="outline" className="text-xs">
+                                                {tag}
+                                              </Badge>
+                                            ))}
+                                            {job.tags && job.tags.length > 2 && (
+                                              <Badge variant="outline" className="text-xs">
+                                                +{job.tags.length - 2} mer
+                                              </Badge>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                                      <div className="flex items-center gap-2 ml-4">
+                                        <Button size="sm" asChild>
+                                          <a href={`/job/${job.job_id}`} target="_blank" rel="noopener noreferrer">
+                                            <ExternalLink className="h-3 w-3 mr-1" />
+                                            Visa
+                                          </a>
+                                        </Button>
+                                        <Button
+                                          size="sm"
+                                          variant="ghost"
+                                          onClick={async () => {
+                                            const { error } = await supabase
+                                              .from('saved_jobs')
+                                              .delete()
+                                              .eq('id', job.id);
+                                            if (!error) {
+                                              fetchSavedJobs(currentPage);
+                                              toast({
+                                                title: "Jobbet har tagits bort",
+                                                description: "Jobbet har tagits bort från dina sparade jobb.",
+                                              });
+                                            }
+                                          }}
+                                          className="text-muted-foreground hover:text-destructive"
+                                        >
+                                          <Trash2 className="h-3 w-3" />
+                                        </Button>
+                                      </div>
+                                    </div>
+                                    
+                                    <p className="text-xs text-muted-foreground">
+                                      Sparad: {new Date(job.created_at).toLocaleDateString('sv-SE')}
+                                    </p>
+                                  </div>
+                                ))}
+                              </div>
+                              
+                              {/* Pagination */}
+                              {totalSavedJobs > 10 && (
+                                <div className="flex justify-between items-center pt-4">
+                                  <p className="text-sm text-muted-foreground">
+                                    Visar {(currentPage - 1) * 10 + 1}-{Math.min(currentPage * 10, totalSavedJobs)} av {totalSavedJobs} jobb
+                                  </p>
+                                  <div className="flex gap-2">
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => {
+                                        const newPage = currentPage - 1;
+                                        setCurrentPage(newPage);
+                                        fetchSavedJobs(newPage);
+                                      }}
+                                      disabled={currentPage === 1}
+                                    >
+                                      <ChevronLeft className="h-4 w-4" />
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => {
+                                        const newPage = currentPage + 1;
+                                        setCurrentPage(newPage);
+                                        fetchSavedJobs(newPage);
+                                      }}
+                                      disabled={currentPage * 10 >= totalSavedJobs}
+                                    >
+                                      <ChevronRight className="h-4 w-4" />
+                                    </Button>
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </div>
+                      ) : (
+                        // Applications section
+                        <div className="space-y-4">
+                          {mockApplications.length === 0 ? (
+                            <div className="text-center py-8">
+                              <p className="text-muted-foreground mb-4">Du har inga ansökningar än.</p>
+                              <Button asChild>
+                                <a href="/jobs">Börja söka jobb</a>
+                              </Button>
+                            </div>
+                          ) : (
+                            <div className="space-y-3">
+                              {mockApplications.map((app) => (
+                                <div key={app.id} className="p-4 bg-background/40 rounded-xl border border-white/10">
+                                  <div className="flex justify-between items-start mb-2">
+                                    <div>
+                                      <h4 className="font-medium text-foreground mb-1">
+                                        {app.title}
+                                      </h4>
+                                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                        <Building2 className="h-3 w-3" />
+                                        <span>{app.company}</span>
+                                      </div>
+                                    </div>
+                                    <Badge 
+                                      className={
+                                        app.status === 'Intervju bokad' 
+                                          ? 'bg-green-100 text-green-800 border-green-200' 
+                                          : 'bg-yellow-100 text-yellow-800 border-yellow-200'
+                                      }
+                                    >
+                                      {app.status}
+                                    </Badge>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground">
+                                    Ansökt: {new Date(app.date).toLocaleDateString('sv-SE')}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
               </TabsContent>
 
               <TabsContent value="jobs" className="space-y-6 animate-fade-in">
