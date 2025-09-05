@@ -40,7 +40,12 @@ import {
   ExternalLink,
   Trash2,
   BarChart3,
-  TrendingUp
+  TrendingUp,
+  Target,
+  Zap,
+  Clock,
+  BookOpen,
+  Award
 } from "lucide-react";
 
 type Profile = {
@@ -380,7 +385,7 @@ export default function Profile() {
               <div className="lg:w-72 shrink-0">
                 <TabsList className="w-full h-auto p-1 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-white/10 rounded-2xl flex lg:flex-col gap-1 overflow-x-auto lg:overflow-x-visible">
                   {[
-                    { value: "personal", label: "Personuppgifter", icon: "👤", description: "Hantera personlig information" },
+                    { value: "personal", label: "Rekommenderade jobb", icon: "🎯", description: "Jobbrekommendationer för dig" },
                     { value: "overview", label: "Översikt", icon: "📊", description: "Din dashboard" },
                     { value: "jobs", label: "Sparade jobb", icon: "💼", description: "Favoriter" },
                     { value: "alerts", label: "Jobbevakningar", icon: "🔔", description: "Bevaka nya jobb" },
@@ -408,62 +413,247 @@ export default function Profile() {
               <div className="flex-1 min-w-0">
 
               <TabsContent value="personal" className="space-y-6 animate-fade-in">
-                <div className="grid gap-6">
-                  <Card className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover-scale overflow-hidden">
-                    <CardHeader className="pb-4">
-                      <CardTitle className="text-2xl font-bold flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center">
-                          <User className="h-6 w-6 text-primary" />
+                <div className="space-y-6">
+                  {/* Header with AI recommendation status */}
+                  <Card className="border-0 bg-gradient-to-br from-primary/5 to-accent/5 backdrop-blur-xl rounded-3xl shadow-xl overflow-hidden">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                          <Target className="h-8 w-8 text-primary" />
                         </div>
-                        Personuppgifter
-                      </CardTitle>
-                      <CardDescription className="text-base">Hantera din personliga information och kontaktuppgifter</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-8 pb-8">
-                      <div className="grid gap-6">
-                        <div className="space-y-3">
-                          <Label htmlFor="personal-location" className="text-lg font-semibold">Plats</Label>
-                          <Input
-                            id="personal-location"
-                            placeholder="Din stad"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
-                          />
-                        </div>
-                        
-                        <div className="space-y-3">
-                          <Label htmlFor="personal-phone" className="text-lg font-semibold">Telefon</Label>
-                          <Input
-                            id="personal-phone"
-                            type="tel"
-                            placeholder="070-123 45 67"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300"
-                          />
-                        </div>
-
-                        <div className="space-y-3">
-                          <Label htmlFor="personal-bio" className="text-lg font-semibold">Beskrivning</Label>
-                          <Textarea
-                            id="personal-bio"
-                            placeholder="Berätta lite om dig själv..."
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            className="border-0 rounded-2xl px-6 py-4 bg-background/40 transition-all duration-300 min-h-[120px]"
-                          />
+                        <div className="flex-1">
+                          <h2 className="text-2xl font-bold text-primary mb-2">Rekommenderade jobb för dig</h2>
+                          <p className="text-muted-foreground mb-3">
+                            Vi har analyserat din profil och hittat {12} jobb som passar dina färdigheter och erfarenheter.
+                          </p>
+                          <div className="flex items-center gap-2 text-sm">
+                            <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 text-green-700">
+                              <Zap className="h-3 w-3" />
+                              <span>AI-driven matchning</span>
+                            </div>
+                            <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-blue-100 text-blue-700">
+                              <Clock className="h-3 w-3" />
+                              <span>Uppdaterad för 2 timmar sedan</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="flex justify-end">
-                        <Button 
-                          onClick={handleSaveProfile}
-                          className="px-6 py-3 rounded-2xl bg-primary text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
-                        >
-                          <Save className="h-4 w-4 mr-2" />
-                          Spara ändringar
+                    </CardContent>
+                  </Card>
+
+                  {/* Recommendation filters */}
+                  <Card className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-2xl shadow-lg">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-semibold text-lg">Filtrera rekommendationer</h3>
+                        <Button size="sm" variant="outline">
+                          <Settings className="h-4 w-4 mr-2" />
+                          Anpassa AI-matchning
                         </Button>
+                      </div>
+                      <div className="flex flex-wrap gap-3">
+                        {[
+                          { label: "Alla", active: true },
+                          { label: "90%+ matchning", active: false },
+                          { label: "Remote", active: false },
+                          { label: "Stockholm", active: false },
+                          { label: "Senior nivå", active: false }
+                        ].map((filter) => (
+                          <Button
+                            key={filter.label}
+                            size="sm"
+                            variant={filter.active ? "default" : "outline"}
+                            className="rounded-full"
+                          >
+                            {filter.label}
+                          </Button>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Recommended jobs list */}
+                  <div className="space-y-4">
+                    {[
+                      {
+                        id: 1,
+                        title: "Senior Frontend Developer",
+                        company: "TechNova AB",
+                        location: "Stockholm (Remote möjligt)",
+                        match: 95,
+                        salary: "65,000 - 80,000 SEK",
+                        tags: ["React", "TypeScript", "Node.js"],
+                        posted: "2 dagar sedan",
+                        why: "Perfekt matchning för dina React och TypeScript-färdigheter",
+                        logo: null,
+                        urgent: true
+                      },
+                      {
+                        id: 2,
+                        title: "Full Stack Developer",
+                        company: "StartupHub",
+                        location: "Göteborg",
+                        match: 88,
+                        salary: "55,000 - 70,000 SEK",
+                        tags: ["JavaScript", "Python", "AWS"],
+                        posted: "1 dag sedan",
+                        why: "Dina fullstack-kunskaper och molnexpertis passar utmärkt",
+                        logo: null,
+                        urgent: false
+                      },
+                      {
+                        id: 3,
+                        title: "Lead Developer",
+                        company: "FinTech Solutions",
+                        location: "Stockholm",
+                        match: 82,
+                        salary: "75,000 - 95,000 SEK",
+                        tags: ["Team Lead", "Architecture", "React"],
+                        posted: "3 dagar sedan",
+                        why: "Din ledarskapsexpertis och tekniska bakgrund är idealisk",
+                        logo: null,
+                        urgent: false
+                      }
+                    ].map((job) => (
+                      <Card key={job.id} className="border-0 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale overflow-hidden group">
+                        <CardContent className="p-6">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="flex items-start gap-4 flex-1">
+                              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shrink-0 border border-border shadow-sm">
+                                {job.logo ? (
+                                  <img src={job.logo} alt={`${job.company} logo`} className="w-8 h-8 object-contain" />
+                                ) : (
+                                  <Building2 className="h-6 w-6 text-muted-foreground" />
+                                )}
+                              </div>
+                              
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-3 mb-2">
+                                  <h4 className="font-semibold text-lg text-foreground">
+                                    {job.title}
+                                  </h4>
+                                  {job.urgent && (
+                                    <Badge className="bg-red-100 text-red-700 border-red-200 animate-pulse">
+                                      Brådskande
+                                    </Badge>
+                                  )}
+                                </div>
+                                
+                                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                                  <div className="flex items-center gap-1">
+                                    <Building2 className="h-3 w-3" />
+                                    <span>{job.company}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <MapPin className="h-3 w-3" />
+                                    <span>{job.location}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <Clock className="h-3 w-3" />
+                                    <span>{job.posted}</span>
+                                  </div>
+                                </div>
+
+                                {/* AI recommendation explanation */}
+                                <div className="mb-3 p-3 rounded-lg bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <Zap className="h-3 w-3 text-primary" />
+                                    <span className="text-xs font-medium text-primary">AI-matchning: {job.match}%</span>
+                                  </div>
+                                  <p className="text-xs text-muted-foreground">{job.why}</p>
+                                </div>
+                                
+                                <div className="flex flex-wrap gap-2 mb-3">
+                                  {job.tags.map((tag, index) => (
+                                    <Badge key={index} variant="secondary" className="text-xs">
+                                      {tag}
+                                    </Badge>
+                                  ))}
+                                </div>
+
+                                <div className="text-sm font-medium text-primary">
+                                  {job.salary} / månad
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Match percentage circle */}
+                            <div className="flex flex-col items-center gap-2 ml-4">
+                              <div className="relative w-16 h-16">
+                                <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                                  <path
+                                    className="text-muted stroke-current"
+                                    strokeWidth="3"
+                                    fill="none"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                  <path
+                                    className={`stroke-current ${
+                                      job.match >= 90 ? 'text-green-500' : job.match >= 80 ? 'text-blue-500' : 'text-amber-500'
+                                    }`}
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    fill="none"
+                                    strokeDasharray={`${job.match}, 100`}
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                </svg>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <span className="text-sm font-bold text-foreground">{job.match}%</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center justify-between pt-4 border-t border-border">
+                            <div className="flex gap-2">
+                              <Button size="sm" className="flex-1">
+                                <ExternalLink className="h-3 w-3 mr-1" />
+                                Visa annons
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                <Heart className="h-3 w-3 mr-1" />
+                                Spara
+                              </Button>
+                            </div>
+                            <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground">
+                              <span className="text-xs">Inte intresserad</span>
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+
+                  {/* Load more */}
+                  <div className="text-center">
+                    <Button variant="outline" size="lg" className="px-8">
+                      <BookOpen className="h-4 w-4 mr-2" />
+                      Visa fler rekommendationer
+                    </Button>
+                  </div>
+
+                  {/* Improvement suggestions */}
+                  <Card className="border-0 bg-gradient-to-br from-amber-50/50 to-orange-50/50 backdrop-blur-xl rounded-2xl shadow-lg">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center">
+                          <Award className="h-5 w-5 text-amber-600" />
+                        </div>
+                        <h3 className="font-semibold text-lg">Förbättra dina matchningar</h3>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Komplettera din profil för att få ännu bättre jobbmatchningar
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="flex items-center gap-3 p-3 rounded-lg bg-background/60">
+                          <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                          <span className="text-sm">Lägg till fler färdigheter i din profil</span>
+                        </div>
+                        <div className="flex items-center gap-3 p-3 rounded-lg bg-background/60">
+                          <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                          <span className="text-sm">Ladda upp ditt CV för bättre analys</span>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
