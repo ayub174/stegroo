@@ -104,8 +104,7 @@ export const Header = ({
     { label: "Kandidater", href: "/employers/candidates" },
     { label: "Inställningar", href: "/employers/settings" }
   ] : [
-    { label: "Hitta jobb", href: "/jobs" },
-    { label: "Profil", href: "/profile" }
+    { label: "Hitta jobb", href: "/jobs" }
   ];
 
   // Dropdown menu items for job seekers
