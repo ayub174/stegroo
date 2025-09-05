@@ -185,7 +185,7 @@ export const Header = ({
 
           {/* Auth Buttons and Context Switcher - Only show when not logged in */}
           {!user && (
-            <div className="hidden md:flex flex-col items-end gap-2">
+            <div className="hidden md:flex flex-col items-end gap-1">
               {/* Auth Buttons */}
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" asChild>
