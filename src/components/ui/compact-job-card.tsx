@@ -169,7 +169,7 @@ export const CompactJobCard = ({
           "group relative p-3 sm:p-6 rounded-xl sm:rounded-2xl border transition-all duration-300 cursor-pointer",
           isSelected 
             ? "bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-primary/30 shadow-lg" 
-            : "bg-gradient-subtle border-border/50 hover:border-primary/30 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-2xl hover:shadow-primary/20",
+            : "bg-gradient-subtle border-border/50 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/20",
           className
         )}
         onClick={onClick}
