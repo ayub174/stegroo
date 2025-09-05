@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SavedJobsSection } from "@/components/ui/saved-jobs-section";
+import { JobAlertsSection } from "@/components/ui/job-alerts-section";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -251,9 +252,14 @@ export default function Profile() {
                             className="text-2xl font-bold bg-background/50 border-0 rounded-xl px-4 py-3 transition-all duration-300"
                           />
                         ) : (
-                          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-primary-hover to-accent bg-clip-text text-transparent">
-                            {displayName || "Ange ditt namn"}
-                          </h1>
+                          <div className="relative">
+                            <h1 className="text-3xl font-bold text-gray-800 px-6 py-4 rounded-2xl bg-gradient-to-br from-white/90 via-gray-50/80 to-white/90 border-2 border-gray-200/60 shadow-clay-inset backdrop-blur-sm relative overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 rounded-2xl"></div>
+                              <span className="relative z-10 text-primary font-bold">
+                                {displayName || "Ange ditt namn"}
+                              </span>
+                            </h1>
+                          </div>
                         )}
                         
                         <div className="flex items-center gap-2 p-3 rounded-xl bg-white/90 border-2 border-gray-200 shadow-clay-inset w-fit">
@@ -294,16 +300,16 @@ export default function Profile() {
                         ) : (
                           <Button 
                             onClick={() => setEditing(true)} 
-                            className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-primary font-semibold transition-all duration-300"
+                            className="px-6 py-3 rounded-2xl bg-white border-2 border-gray-300 shadow-clay-base hover:shadow-clay-pressed text-gray-700 hover:text-white hover:bg-primary font-semibold transition-all duration-300"
                           >
                             <Edit3 className="h-4 w-4 mr-2" />
                             Redigera
                           </Button>
                         )}
-                        <Button 
-                          onClick={handleSignOut}
-                          className="px-6 py-3 rounded-2xl bg-red-50 border-2 border-red-200 shadow-clay-base hover:shadow-clay-pressed text-red-600 hover:text-red-700 font-semibold transition-all duration-300"
-                        >
+                          <Button 
+                            onClick={handleSignOut}
+                            className="px-6 py-3 rounded-2xl bg-red-50 border-2 border-red-200 shadow-clay-base hover:shadow-clay-pressed text-red-600 hover:text-white hover:bg-red-600 font-semibold transition-all duration-300"
+                          >
                           <LogOut className="h-4 w-4 mr-2" />
                           Logga ut
                         </Button>
@@ -325,6 +331,7 @@ export default function Profile() {
                     { value: "personal", label: "Personuppgifter", icon: "👤", description: "Hantera personlig information" },
                     { value: "overview", label: "Översikt", icon: "📊", description: "Din dashboard" },
                     { value: "jobs", label: "Sparade jobb", icon: "💼", description: "Favoriter" },
+                    { value: "alerts", label: "Jobbevakningar", icon: "🔔", description: "Bevaka nya jobb" },
                     { value: "applications", label: "Ansökningar", icon: "📋", description: "Status" },
                     { value: "cv", label: "CV & Profil", icon: "🎓", description: "Hantera CV" },
                     { value: "settings", label: "Inställningar", icon: "⚙️", description: "Systeminställningar" }
@@ -400,7 +407,7 @@ export default function Profile() {
                       <div className="flex justify-end">
                         <Button 
                           onClick={handleSaveProfile}
-                          className="px-6 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
+                          className="px-6 py-3 rounded-2xl bg-primary text-white border-2 border-primary/20 shadow-clay-elevated hover:shadow-clay-pressed font-semibold transition-all duration-300"
                         >
                           <Save className="h-4 w-4 mr-2" />
                           Spara ändringar
@@ -492,6 +499,10 @@ export default function Profile() {
 
               <TabsContent value="jobs" className="space-y-6 animate-fade-in">
                 <SavedJobsSection />
+              </TabsContent>
+
+              <TabsContent value="alerts" className="space-y-6 animate-fade-in">
+                <JobAlertsSection />
               </TabsContent>
 
               <TabsContent value="applications" className="space-y-6 animate-fade-in">

@@ -1,0 +1,123 @@
+spring:
+  application:
+    name: stegroo-backend
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  
+  # Databasanslutning
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:h2:mem:stegroo;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE}
+    username: ${SPRING_DATASOURCE_USERNAME:sa}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+    driver-class-name: org.h2.Driver
+  
+  # JPA/Hibernate konfiguration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+  
+  # Flyway migrering
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    validate-on-migrate: true
+    
+  # H2 konsol
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Server konfiguration
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+# Stegroo säkerhetskonfiguration
+stegroo:
+  security:
+    jwt:
+      enabled: false  # JWT-säkerhet inaktiverad för testning
+    cors:
+      allowed-origins: http://localhost:3000,http://localhost:5173,http://localhost:8080,http://localhost:8082,http://127.0.0.1:50759,https://stegroo.com
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: "*"
+      max-age: 3600
+
+# Arbetsförmedlingens API konfiguration
+af:
+  api:
+    base-url: https://jobstream.api.jobtechdev.se
+    key: ${AF_API_KEY:}
+
+# Supabase konfiguration
+supabase:
+  jwt:
+    secret: ${SUPABASE_JWT_SECRET:your-256-bit-secret-key-for-local-development-only-do-not-use-in-production-environment-please-use-a-secure-key}
+    issuer: ${SUPABASE_JWT_ISSUER:https://fwysotlogybsnaehuuee.supabase.co}
+
+# Jobbsynkronisering
+job-sync:
+  batch-size: 100
+  initial-delay: 60000  # 1 minut efter start
+  fixed-rate: 86400000  # 24 timmar
+
+# Retry-konfiguration
+retry:
+  default:
+    max-retries: 3
+    initial-delay-ms: 1000
+    backoff-multiplier: 2.0
+    max-delay-ms: 30000
+    enable-jitter: true
+    jitter-factor: 0.1
+  api:
+    max-retries: 5
+    initial-delay-ms: 2000
+    backoff-multiplier: 1.5
+    max-delay-ms: 60000
+    connection-timeout-ms: 10000
+    read-timeout-ms: 30000
+  sync:
+    max-retries: 10
+    initial-delay-ms: 5000
+    backoff-multiplier: 2.0
+    max-delay-ms: 300000
+    batch-timeout-ms: 120000
+    max-concurrent-batches: 3
+  database:
+    max-retries: 3
+    initial-delay-ms: 500
+    backoff-multiplier: 1.5
+    max-delay-ms: 5000
+    transaction-timeout-ms: 30000
+  timeout:
+    global-timeout-ms: 300000
+    short-timeout-ms: 30000
+    long-timeout-ms: 600000
+    enable-timeout-interruption: true
+
+# Loggning
+logging:
+  level:
+    root: INFO
+    se.stegroo: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO
+
+# API dokumentation
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
