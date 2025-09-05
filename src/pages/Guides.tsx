@@ -163,31 +163,35 @@ const Guides = () => {
 
         <main className="container mx-auto px-4 pb-16">
           {/* Hero Section */}
-          <section className="text-center mb-16 animate-fade-in">
-            <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-hero rounded-3xl mb-8 shadow-button animate-float">
-              <BookOpen className="w-12 h-12 text-white" />
+          <section className="text-center mb-12 animate-fade-in relative">
+            <div className="relative inline-block mb-6">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-xl animate-pulse"></div>
+              <div className="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-hero rounded-2xl shadow-elegant animate-float">
+                <BookOpen className="w-10 h-10 text-white drop-shadow-sm" />
+              </div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-primary-hover to-primary bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-fade-in">
               Utforska våra guider
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
-              Få expertråd och praktiska tips för att lyckas i din karriär. Våra omfattande guider hjälper dig 
-              att navigera arbetsmarknaden och uppnå dina professionella mål.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
+              Expertråd och praktiska tips för din karriärsuccé
             </p>
             
-            {/* Quick stats */}
-            <div className="flex flex-wrap justify-center gap-8 mb-12">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">45+</div>
-                <div className="text-sm text-muted-foreground">Guider</div>
+            {/* Compact stats with personality */}
+            <div className="inline-flex items-center gap-6 px-6 py-3 bg-gradient-to-r from-background/80 to-muted/30 backdrop-blur-sm rounded-full border border-border/50 shadow-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-primary">45+ Guider</span>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">50k+</div>
-                <div className="text-sm text-muted-foreground">Läsningar</div>
+              <div className="w-px h-4 bg-border"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                <span className="text-sm font-semibold text-secondary">50k+ Läsningar</span>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-1">4.8/5</div>
-                <div className="text-sm text-muted-foreground">Betyg</div>
+              <div className="w-px h-4 bg-border"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-accent rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                <span className="text-sm font-semibold text-accent">4.8★ Betyg</span>
               </div>
             </div>
           </section>
