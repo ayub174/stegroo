@@ -1,4 +1,4 @@
-import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter, Building2, Users } from "lucide-react";
+import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter, Building2, Users, BookOpen, GraduationCap } from "lucide-react";
 import { Button } from "./button";
 import { Logo } from "./logo";
 import { Input } from "./input";
@@ -108,6 +108,20 @@ export const Header = ({
     { label: "Profil", href: "/profile" }
   ];
 
+  // Dropdown menu items for job seekers
+  const guideItems = [
+    { label: "Jobbsökning", href: "/guider/jobbsokning" },
+    { label: "Intervjutekniker", href: "/guider/intervjutekniker" },
+    { label: "Karriärutveckling", href: "/guider/karriarutveckling" },
+    { label: "Praktiska tips", href: "/guider/praktiska-tips" }
+  ];
+
+  const educationItems = [
+    { label: "Gymnasie nivå", href: "/utbildning/gymnasie" },
+    { label: "Eftergymnasial nivå", href: "/utbildning/eftergymnasial" },
+    { label: "Kortare utbildningar", href: "/utbildning/kortare" }
+  ];
+
   const isActive = (href: string) => location.pathname === href;
 
   return (
@@ -122,6 +136,7 @@ export const Header = ({
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
+          {/* Regular Navigation Items */}
           {navigationItems.map((item) => (
             <Link
               key={item.href}
@@ -135,6 +150,71 @@ export const Header = ({
               {item.label}
             </Link>
           ))}
+
+          {/* Dropdown Menus - Only for job seekers */}
+          {!isEmployerContext && (
+            <>
+              {/* Guider Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 data-[state=open]:text-primary data-[state=open]:bg-primary/10"
+                  >
+                    <BookOpen className="w-4 h-4 mr-1" />
+                    Guider
+                    <ChevronDown className="w-3 h-3 ml-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent 
+                  align="start" 
+                  className="w-48 bg-white/95 backdrop-blur-sm border border-blue-200/60 shadow-lg z-50"
+                >
+                  {guideItems.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link
+                        to={item.href}
+                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
+                      >
+                        {item.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Utbildning Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 data-[state=open]:text-primary data-[state=open]:bg-primary/10"
+                  >
+                    <GraduationCap className="w-4 h-4 mr-1" />
+                    Utbildning
+                    <ChevronDown className="w-3 h-3 ml-1" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent 
+                  align="start" 
+                  className="w-48 bg-white/95 backdrop-blur-sm border border-blue-200/60 shadow-lg z-50"
+                >
+                  {educationItems.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link
+                        to={item.href}
+                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
+                      >
+                        {item.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          )}
         </nav>
 
         {/* Right Section */}
@@ -256,6 +336,47 @@ export const Header = ({
                 {item.label}
               </Link>
             ))}
+
+            {/* Mobile Dropdown Menus - Only for job seekers */}
+            {!isEmployerContext && (
+              <>
+                {/* Guider Section */}
+                <div className="pt-2 border-t border-border/40">
+                  <div className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground">
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    Guider
+                  </div>
+                  {guideItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-8 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Utbildning Section */}
+                <div className="pt-2 border-t border-border/40">
+                  <div className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground">
+                    <GraduationCap className="w-4 h-4 mr-2" />
+                    Utbildning
+                  </div>
+                  {educationItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-8 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
             
             {/* Auth section - Only show when not logged in */}
             {!user && (
