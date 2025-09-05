@@ -38,7 +38,9 @@ import {
   ChevronRight,
   Building2,
   ExternalLink,
-  Trash2
+  Trash2,
+  BarChart3,
+  TrendingUp
 } from "lucide-react";
 
 type Profile = {
@@ -60,7 +62,7 @@ export default function Profile() {
   const [bio, setBio] = useState("");
   const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
-  const [activeSection, setActiveSection] = useState<'saved-jobs' | 'applications' | null>(null);
+  const [activeSection, setActiveSection] = useState<'saved-jobs' | 'applications' | 'statistics' | null>(null);
   const [savedJobs, setSavedJobs] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalSavedJobs, setTotalSavedJobs] = useState(0);
@@ -168,7 +170,7 @@ export default function Profile() {
     }
   };
 
-  const handleCardClick = (section: 'saved-jobs' | 'applications') => {
+  const handleCardClick = (section: 'saved-jobs' | 'applications' | 'statistics') => {
     if (activeSection === section) {
       setActiveSection(null);
     } else {
@@ -493,13 +495,14 @@ export default function Profile() {
                       section: 'applications' as const
                     },
                     { 
-                      title: "Profilstyrka", 
-                      icon: Star, 
-                      value: "75%", 
-                      description: "komplett",
+                      title: "Statistik", 
+                      icon: BarChart3, 
+                      value: "Visa", 
+                      description: "detaljer",
                       color: "from-amber-500/20 to-yellow-500/10",
                       iconColor: "text-amber-600",
-                      clickable: false
+                      clickable: true,
+                      section: 'statistics' as const
                     }
                   ].map((stat, index) => (
                     <Card 
@@ -567,16 +570,20 @@ export default function Profile() {
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                           {activeSection === 'saved-jobs' ? (
                             <Heart className="h-5 w-5 text-rose-600" />
-                          ) : (
+                          ) : activeSection === 'applications' ? (
                             <FileText className="h-5 w-5 text-blue-600" />
+                          ) : (
+                            <BarChart3 className="h-5 w-5 text-amber-600" />
                           )}
                         </div>
-                        {activeSection === 'saved-jobs' ? 'Sparade jobb' : 'Ansökningar'}
+                        {activeSection === 'saved-jobs' ? 'Sparade jobb' : activeSection === 'applications' ? 'Ansökningar' : 'Statistik'}
                       </CardTitle>
                       <CardDescription>
                         {activeSection === 'saved-jobs' 
                           ? 'Alla dina sparade jobb' 
-                          : 'Status på alla dina jobbansökningar'
+                          : activeSection === 'applications'
+                          ? 'Status på alla dina jobbansökningar'
+                          : 'Din jobbsökningsstatistik och kategorier'
                         }
                       </CardDescription>
                     </CardHeader>
@@ -716,7 +723,7 @@ export default function Profile() {
                             </>
                           )}
                         </div>
-                      ) : (
+                      ) : activeSection === 'applications' ? (
                         // Applications section
                         <div className="space-y-4">
                           {mockApplications.length === 0 ? (
@@ -758,7 +765,124 @@ export default function Profile() {
                             </div>
                           )}
                         </div>
-                      )}
+                      ) : activeSection === 'statistics' ? (
+                        // Statistics section
+                        <div className="space-y-6">
+                          {/* Overall Statistics */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="p-4 bg-background/40 rounded-xl border border-white/10">
+                              <div className="flex items-center gap-3 mb-2">
+                                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                                  <FileText className="h-5 w-5 text-blue-600" />
+                                </div>
+                                <div>
+                                  <div className="text-2xl font-bold text-foreground">
+                                    {mockApplications.length}
+                                  </div>
+                                  <div className="text-sm text-muted-foreground">
+                                    Totala ansökningar
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="p-4 bg-background/40 rounded-xl border border-white/10">
+                              <div className="flex items-center gap-3 mb-2">
+                                <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                                  <TrendingUp className="h-5 w-5 text-green-600" />
+                                </div>
+                                <div>
+                                  <div className="text-2xl font-bold text-foreground">
+                                    {mockApplications.filter(app => app.status === 'Intervju bokad').length}
+                                  </div>
+                                  <div className="text-sm text-muted-foreground">
+                                    Intervjuer
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="p-4 bg-background/40 rounded-xl border border-white/10">
+                              <div className="flex items-center gap-3 mb-2">
+                                <div className="w-10 h-10 rounded-lg bg-rose-100 flex items-center justify-center">
+                                  <Heart className="h-5 w-5 text-rose-600" />
+                                </div>
+                                <div>
+                                  <div className="text-2xl font-bold text-foreground">
+                                    {totalSavedJobs || mockJobs.filter(j => j.saved).length}
+                                  </div>
+                                  <div className="text-sm text-muted-foreground">
+                                    Sparade jobb
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Job Categories Statistics */}
+                          <div className="p-6 bg-background/40 rounded-xl border border-white/10">
+                            <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                              <BarChart3 className="h-5 w-5 text-primary" />
+                              Jobbkategorier du sökt i
+                            </h4>
+                            
+                            <div className="space-y-3">
+                              {[
+                                { category: 'Teknik & IT', count: 8, percentage: 40 },
+                                { category: 'Design & UX', count: 4, percentage: 20 },
+                                { category: 'Marknadsföring', count: 3, percentage: 15 },
+                                { category: 'Produktledning', count: 3, percentage: 15 },
+                                { category: 'Övrigt', count: 2, percentage: 10 }
+                              ].map((item) => (
+                                <div key={item.category} className="space-y-2">
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-sm font-medium text-foreground">{item.category}</span>
+                                    <span className="text-sm text-muted-foreground">{item.count} ansökningar ({item.percentage}%)</span>
+                                  </div>
+                                  <div className="w-full bg-muted rounded-full h-2">
+                                    <div 
+                                      className="bg-gradient-to-r from-primary to-accent h-2 rounded-full transition-all duration-300" 
+                                      style={{ width: `${item.percentage}%` }}
+                                    ></div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Recent Activity Timeline */}
+                          <div className="p-6 bg-background/40 rounded-xl border border-white/10">
+                            <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                              <Calendar className="h-5 w-5 text-primary" />
+                              Senaste månaden
+                            </h4>
+                            
+                            <div className="space-y-4">
+                              {[
+                                { date: '2024-01-15', action: 'Skickade ansökan', job: 'Senior Developer', company: 'BigTech AB' },
+                                { date: '2024-01-12', action: 'Sparade jobb', job: 'Frontend Developer', company: 'Tech AB' },
+                                { date: '2024-01-10', action: 'Skickade ansökan', job: 'Product Manager', company: 'Innovation Co' },
+                                { date: '2024-01-08', action: 'Sparade jobb', job: 'UX Designer', company: 'Design Studio' }
+                              ].map((activity, index) => (
+                                <div key={index} className="flex items-start gap-4 p-3 rounded-lg bg-background/60 border border-white/5">
+                                  <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <span className="text-sm font-medium text-foreground">{activity.action}</span>
+                                      <span className="text-xs text-muted-foreground">
+                                        {new Date(activity.date).toLocaleDateString('sv-SE')}
+                                      </span>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground">
+                                      {activity.job} - {activity.company}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      ) : null}
                     </CardContent>
                   </Card>
                 )}
