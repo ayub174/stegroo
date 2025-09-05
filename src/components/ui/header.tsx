@@ -107,14 +107,6 @@ export const Header = ({
     { label: "Jobb", href: "/jobs" }
   ];
 
-  // Dropdown menu items for job seekers
-  const guideItems = [
-    { label: "Jobbsökning", href: "/guider/jobbsokning" },
-    { label: "Intervjutekniker", href: "/guider/intervjutekniker" },
-    { label: "Karriärutveckling", href: "/guider/karriarutveckling" },
-    { label: "Praktiska tips", href: "/guider/praktiska-tips" }
-  ];
-
   const educationItems = [
     { label: "Gymnasie nivå", href: "/utbildning/gymnasie" },
     { label: "Eftergymnasial nivå", href: "/utbildning/eftergymnasial" },
@@ -154,38 +146,18 @@ export const Header = ({
           {/* Dropdown Menus - Only for job seekers */}
           {!isEmployerContext && (
             <>
-              {/* Guider Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Link
-                    to="/guider"
-                    className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
-                      isActive('/guider') || location.pathname.startsWith('/guider/')
-                        ? 'text-primary bg-primary/10' 
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    <BookOpen className="w-4 h-4 mr-1" />
-                    Guider
-                    <ChevronDown className="w-3 h-3 ml-1" />
-                  </Link>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent 
-                  align="start" 
-                  className="w-48 bg-white/95 backdrop-blur-sm border border-blue-200/60 shadow-lg z-50"
-                >
-                  {guideItems.map((item) => (
-                    <DropdownMenuItem key={item.href} asChild>
-                      <Link
-                        to={item.href}
-                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
-                      >
-                        {item.label}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {/* Guider Link */}
+              <Link
+                to="/guider"
+                className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
+                  isActive('/guider') || location.pathname.startsWith('/guider/')
+                    ? 'text-primary bg-primary/10' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <BookOpen className="w-4 h-4 mr-1" />
+                Guider
+              </Link>
 
               {/* Utbildning Dropdown */}
               <DropdownMenu>
@@ -344,23 +316,19 @@ export const Header = ({
             {/* Mobile Dropdown Menus - Only for job seekers */}
             {!isEmployerContext && (
               <>
-                {/* Guider Section */}
-                <div className="pt-2 border-t border-border/40">
-                  <div className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground">
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    Guider
-                  </div>
-                  {guideItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      to={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-8 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
+                {/* Guider Link */}
+                <Link
+                  to="/guider"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive('/guider') || location.pathname.startsWith('/guider/')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Guider
+                </Link>
 
                 {/* Utbildning Section */}
                 <div className="pt-2 border-t border-border/40">
