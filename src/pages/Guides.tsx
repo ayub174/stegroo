@@ -185,13 +185,13 @@ const Guides = () => {
               </div>
               <div className="w-px h-4 bg-border"></div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-secondary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                <span className="text-sm font-semibold text-secondary">50k+ Läsningar</span>
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+                <span className="text-sm font-semibold text-primary">50k+ Läsningar</span>
               </div>
               <div className="w-px h-4 bg-border"></div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-                <span className="text-sm font-semibold text-accent">4.8★ Betyg</span>
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+                <span className="text-sm font-semibold text-primary">4.8★ Betyg</span>
               </div>
             </div>
           </section>
