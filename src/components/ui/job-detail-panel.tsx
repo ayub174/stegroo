@@ -67,7 +67,7 @@ export const JobDetailPanel = ({
   
   const deadlineColorClass = getDeadlineColor(job.deadline);
   
-  return <div className="h-full overflow-y-auto bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl lg:rounded-2xl rounded-t-2xl relative">
+  return <div className="h-full flex flex-col overflow-hidden bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl border border-border/50 rounded-2xl lg:rounded-2xl rounded-t-2xl relative">
       {/* Close Button - Positioned better for mobile */}
       {onClose && (
         <Button 
@@ -80,7 +80,7 @@ export const JobDetailPanel = ({
         </Button>
       )}
       
-      <div className="px-2 py-4 sm:px-3 sm:py-6 space-y-4 sm:space-y-6">
+      <div className="flex-1 overflow-y-auto px-2 py-4 sm:px-3 sm:py-6 space-y-4 sm:space-y-6">
         {/* Header */}
         <div className="flex items-start gap-3 sm:gap-4">
           <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-subtle flex items-center justify-center shrink-0">

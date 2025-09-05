@@ -151,7 +151,7 @@ const Companies = () => {
       </div>
 
       <div className="relative z-10">
-        <Header />
+        <Header isEmployerContext={true} />
       
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16">

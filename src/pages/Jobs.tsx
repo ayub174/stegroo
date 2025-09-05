@@ -560,12 +560,12 @@ const Jobs = () => {
             </div>
 
             {/* Desktop Layout */}
-            <div className="hidden lg:grid lg:grid-cols-12 gap-4 flex-1">
+            <div className="hidden lg:flex gap-6 flex-1 h-[calc(100vh-8rem)]">
               {/* Desktop Job List */}
-              <div className="lg:col-span-6 flex flex-col h-[calc(100vh-8rem)]">
+              <div className="flex-[0_0_50%] flex flex-col h-full">
                 {/* Job Count Header */}
                 {filteredJobs.length > 0 && (
-                  <div className="mb-4">
+                  <div className="mb-4 flex-shrink-0">
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
                       <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
                       <span className="text-xs text-muted-foreground">jobb hittades</span>
@@ -574,7 +574,7 @@ const Jobs = () => {
                 )}
                 
                 {/* Job Alert and Sorting Controls */}
-                <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4">
+                <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4 flex-shrink-0">
                   <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
                     {/* Job Alert Creation */}
                     <div className="flex-1">
@@ -622,7 +622,7 @@ const Jobs = () => {
                   </div>
                 </div>
                 
-                <div className="flex-1 space-y-4 overflow-y-auto pr-2">
+                <div className="flex-1 overflow-y-auto pr-2 space-y-4 min-h-0">
                   {sortedJobs.length === 0 ? (
                     <div className="text-center py-12">
                       <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
@@ -642,7 +642,7 @@ const Jobs = () => {
                 
                 {/* Pagination */}
                 {sortedJobs.length > ITEMS_PER_PAGE && (
-                  <div className="mt-6 pt-4 border-t border-gray-200">
+                  <div className="mt-6 pt-4 border-t border-gray-200 flex-shrink-0">
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
@@ -706,15 +706,13 @@ const Jobs = () => {
               </div>
 
               {/* Desktop Job Detail Panel */}
-              <div className="lg:col-span-6">
-                <div className="sticky top-6">
-                  <div className="h-[calc(100vh-12rem)]">
-                    <JobDetailPanel 
-                      job={selectedJob} 
-                      onClose={() => setSelectedJob(null)}
-                      hasJobs={sortedJobs.length > 0}
-                    />
-                  </div>
+              <div className="flex-[0_0_50%] h-full">
+                <div className="h-full bg-white rounded-lg border border-gray-200 overflow-hidden">
+                  <JobDetailPanel 
+                    job={selectedJob} 
+                    onClose={() => setSelectedJob(null)}
+                    hasJobs={sortedJobs.length > 0}
+                  />
                 </div>
               </div>
             </div>
