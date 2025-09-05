@@ -1,4 +1,4 @@
-import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter, Building2, Users, BookOpen, GraduationCap } from "lucide-react";
+import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter, Building2, Users, BookOpen, GraduationCap, Briefcase } from "lucide-react";
 import { Button } from "./button";
 import { Logo } from "./logo";
 import { Input } from "./input";
@@ -104,7 +104,7 @@ export const Header = ({
     { label: "Kandidater", href: "/employers/candidates" },
     { label: "Inställningar", href: "/employers/settings" }
   ] : [
-    { label: "Hitta jobb", href: "/jobs" }
+    { label: "Jobb", href: "/jobs" }
   ];
 
   // Dropdown menu items for job seekers
@@ -140,12 +140,13 @@ export const Header = ({
             <Link
               key={item.href}
               to={item.href}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
+              className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
                 isActive(item.href) 
                   ? 'text-primary bg-primary/10' 
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
+              {item.label === "Jobb" && <Briefcase className="w-4 h-4 mr-1" />}
               {item.label}
             </Link>
           ))}
@@ -326,12 +327,13 @@ export const Header = ({
                 key={item.href}
                 to={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
                   isActive(item.href)
                     ? 'text-primary bg-primary/10'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
               >
+                {item.label === "Jobb" && <Briefcase className="w-4 h-4 mr-2" />}
                 {item.label}
               </Link>
             ))}
