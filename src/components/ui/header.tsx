@@ -157,15 +157,18 @@ export const Header = ({
               {/* Guider Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 data-[state=open]:text-primary data-[state=open]:bg-primary/10"
+                  <Link
+                    to="/guider"
+                    className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
+                      isActive('/guider') || location.pathname.startsWith('/guider/')
+                        ? 'text-primary bg-primary/10' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
                   >
                     <BookOpen className="w-4 h-4 mr-1" />
                     Guider
                     <ChevronDown className="w-3 h-3 ml-1" />
-                  </Button>
+                  </Link>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
                   align="start" 
