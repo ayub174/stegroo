@@ -107,12 +107,6 @@ export const Header = ({
     { label: "Jobb", href: "/jobs" }
   ];
 
-  const educationItems = [
-    { label: "Gymnasie nivå", href: "/utbildning/gymnasie" },
-    { label: "Eftergymnasial nivå", href: "/utbildning/eftergymnasial" },
-    { label: "Kortare utbildningar", href: "/utbildning/kortare" }
-  ];
-
   const isActive = (href: string) => location.pathname === href;
 
   return (
@@ -159,35 +153,18 @@ export const Header = ({
                 Guider
               </Link>
 
-              {/* Utbildning Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="px-4 py-2 h-auto text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 data-[state=open]:text-primary data-[state=open]:bg-primary/10"
-                  >
-                    <GraduationCap className="w-4 h-4 mr-1" />
-                    Utbildning
-                    <ChevronDown className="w-3 h-3 ml-1" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent 
-                  align="start" 
-                  className="w-48 bg-white/95 backdrop-blur-sm border border-blue-200/60 shadow-lg z-50"
-                >
-                  {educationItems.map((item) => (
-                    <DropdownMenuItem key={item.href} asChild>
-                      <Link
-                        to={item.href}
-                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
-                      >
-                        {item.label}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {/* Utbildning Link */}
+              <Link
+                to="/utbildning"
+                className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
+                  isActive('/utbildning') || location.pathname.startsWith('/utbildning/')
+                    ? 'text-primary bg-primary/10' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <GraduationCap className="w-4 h-4 mr-1" />
+                Utbildning
+              </Link>
             </>
           )}
         </nav>
@@ -313,7 +290,7 @@ export const Header = ({
               </Link>
             ))}
 
-            {/* Mobile Dropdown Menus - Only for job seekers */}
+            {/* Mobile Navigation Items */}
             {!isEmployerContext && (
               <>
                 {/* Guider Link */}
@@ -330,23 +307,19 @@ export const Header = ({
                   Guider
                 </Link>
 
-                {/* Utbildning Section */}
-                <div className="pt-2 border-t border-border/40">
-                  <div className="flex items-center px-4 py-2 text-sm font-medium text-muted-foreground">
-                    <GraduationCap className="w-4 h-4 mr-2" />
-                    Utbildning
-                  </div>
-                  {educationItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      to={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block px-8 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
+                {/* Utbildning Link */}
+                <Link
+                  to="/utbildning"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive('/utbildning') || location.pathname.startsWith('/utbildning/')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <GraduationCap className="w-4 h-4 mr-2" />
+                  Utbildning
+                </Link>
               </>
             )}
             
