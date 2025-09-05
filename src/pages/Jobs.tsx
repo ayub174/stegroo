@@ -562,7 +562,7 @@ const Jobs = () => {
             {/* Desktop Layout */}
             <div className="hidden lg:flex gap-6 flex-1 h-[calc(100vh-8rem)]">
               {/* Desktop Job List */}
-              <div className="w-1/2 flex flex-col h-full">
+              <div className="flex-[0_0_50%] flex flex-col h-full">
                 {/* Job Count Header */}
                 {filteredJobs.length > 0 && (
                   <div className="mb-4 flex-shrink-0">
@@ -706,7 +706,7 @@ const Jobs = () => {
               </div>
 
               {/* Desktop Job Detail Panel */}
-              <div className="w-1/2 h-full">
+              <div className="flex-[0_0_50%] h-full">
                 <div className="h-full bg-white rounded-lg border border-gray-200 overflow-hidden">
                   <JobDetailPanel 
                     job={selectedJob} 
