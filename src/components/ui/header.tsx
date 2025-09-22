@@ -196,10 +196,10 @@ export const Header = ({
             </Button>
           )}
 
-          {/* Auth Buttons and Context Switcher - Only show when not logged in */}
-          {!user && (
-            <div className="hidden md:flex flex-col items-end gap-1">
-              {/* Auth Buttons */}
+          {/* Desktop Right Section */}
+          <div className="hidden md:flex flex-col items-end gap-1">
+            {/* Auth Buttons - Only show when not logged in */}
+            {!user && (
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" asChild>
                   <Link to={isEmployerContext ? "/employers/login" : "/login"}>
@@ -212,60 +212,60 @@ export const Header = ({
                   </Link>
                 </Button>
               </div>
+            )}
 
-              {/* Context Switch Dropdown */}
-              <DropdownMenu open={contextDropdownOpen} onOpenChange={setContextDropdownOpen}>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="text-xs h-7 px-3 bg-white/80 backdrop-blur-sm hover:bg-white/90 border-blue-200/60"
-                  >
-                    {isEmployerContext ? (
-                      <>
-                        <Building2 className="w-3 h-3 mr-1" />
-                        Arbetsgivare
-                      </>
-                    ) : (
-                      <>
-                        <Users className="w-3 h-3 mr-1" />
-                        Arbetssökande
-                      </>
-                    )}
-                    <ChevronDown className="w-3 h-3 ml-1" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent 
-                  align="end" 
-                  className="w-40 bg-white/95 backdrop-blur-sm border border-blue-200/60 shadow-clay-md z-50"
+            {/* Context Switch Dropdown - Always show */}
+            <DropdownMenu open={contextDropdownOpen} onOpenChange={setContextDropdownOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="text-xs h-7 px-3 bg-white/80 backdrop-blur-sm hover:bg-white/90 border-blue-200/60"
                 >
                   {isEmployerContext ? (
-                    <DropdownMenuItem asChild>
-                      <Link 
-                        to="/" 
-                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
-                        onClick={() => setContextDropdownOpen(false)}
-                      >
-                        <Users className="w-4 h-4 mr-2" />
-                        För Arbetssökande
-                      </Link>
-                    </DropdownMenuItem>
+                    <>
+                      <Building2 className="w-3 h-3 mr-1" />
+                      Arbetsgivare
+                    </>
                   ) : (
-                    <DropdownMenuItem asChild>
-                      <Link 
-                        to="/companies" 
-                        className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
-                        onClick={() => setContextDropdownOpen(false)}
-                      >
-                        <Building2 className="w-4 h-4 mr-2" />
-                        För Arbetsgivare
-                      </Link>
-                    </DropdownMenuItem>
+                    <>
+                      <Users className="w-3 h-3 mr-1" />
+                      Arbetssökande
+                    </>
                   )}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          )}
+                  <ChevronDown className="w-3 h-3 ml-1" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                className="w-40 bg-white/95 backdrop-blur-sm border border-blue-200/60 shadow-clay-md z-50"
+              >
+                {isEmployerContext ? (
+                  <DropdownMenuItem asChild>
+                    <Link 
+                      to="/" 
+                      className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
+                      onClick={() => setContextDropdownOpen(false)}
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      För Arbetssökande
+                    </Link>
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem asChild>
+                    <Link 
+                      to="/companies" 
+                      className="flex items-center w-full px-3 py-2 text-sm hover:bg-blue-50/80 cursor-pointer"
+                      onClick={() => setContextDropdownOpen(false)}
+                    >
+                      <Building2 className="w-4 h-4 mr-2" />
+                      För Arbetsgivare
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
           {/* Mobile Menu Button */}
           <Button
@@ -350,46 +350,49 @@ export const Header = ({
               </>
             )}
             
-            {/* Auth section - Only show when not logged in */}
-            {!user && (
-              <div className="pt-4 border-t border-border/40 space-y-2">
-                <Link
-                  to={isEmployerContext ? "/employers/login" : "/login"}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                >
-                  Logga in
-                </Link>
-                <Link
-                  to={isEmployerContext ? "/employers/register" : "/register"}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  {isEmployerContext ? "Registrera företag" : "Registrera dig"}
-                </Link>
-                
-                {/* Context Switch for Mobile */}
-                <div className="pt-3 border-t border-border/40">
+            {/* Mobile bottom section */}
+            <div className="pt-4 border-t border-border/40 space-y-2">
+              {/* Auth section - Only show when not logged in */}
+              {!user && (
+                <>
                   <Link
-                    to={isEmployerContext ? "/" : "/companies"}
+                    to={isEmployerContext ? "/employers/login" : "/login"}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    className="block px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
                   >
-                    {isEmployerContext ? (
-                      <>
-                        <Users className="w-4 h-4 mr-2" />
-                        För Arbetssökande
-                      </>
-                    ) : (
-                      <>
-                        <Building2 className="w-4 h-4 mr-2" />
-                        För Arbetsgivare
-                      </>
-                    )}
+                    Logga in
                   </Link>
-                </div>
+                  <Link
+                    to={isEmployerContext ? "/employers/register" : "/register"}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90"
+                  >
+                    {isEmployerContext ? "Registrera företag" : "Registrera dig"}
+                  </Link>
+                </>
+              )}
+              
+              {/* Context Switch for Mobile - Always show */}
+              <div className={!user ? "pt-3 border-t border-border/40" : ""}>
+                <Link
+                  to={isEmployerContext ? "/" : "/companies"}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                >
+                  {isEmployerContext ? (
+                    <>
+                      <Users className="w-4 h-4 mr-2" />
+                      För Arbetssökande
+                    </>
+                  ) : (
+                    <>
+                      <Building2 className="w-4 h-4 mr-2" />
+                      För Arbetsgivare
+                    </>
+                  )}
+                </Link>
               </div>
-            )}
+            </div>
           </div>
         </div>
       )}
