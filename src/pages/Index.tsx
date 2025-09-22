@@ -1,6 +1,6 @@
 import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap, Clock, Shield, Building2, ChevronRight, MapPin as Map } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { SearchBar } from "@/components/ui/search-bar";
@@ -14,6 +14,7 @@ import techCategoryImage from "@/assets/tech-category.jpg";
 import marketingCategoryImage from "@/assets/marketing-category.jpg";
 import healthcareCategoryImage from "@/assets/healthcare-category.jpg";
 const Index = () => {
+  const navigate = useNavigate();
   // Rotating words state
   const rotatingWords = ["Arbete", "Nätverk", "Praktik", "Utbildning"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -305,9 +306,9 @@ const Index = () => {
             color: "from-teal-500 to-teal-600",
             bgColor: "bg-teal-50",
             hoverColor: "hover:border-teal-300"
-          }].map((city, index) => <div key={city.name} className="group cursor-pointer" style={{
+}].map((city, index) => <div key={city.name} className="group cursor-pointer" style={{
             animationDelay: `${index * 0.1}s`
-          }}>
+          }} onClick={() => navigate(`/jobs?location=${encodeURIComponent(city.name)}`)}>
                 <div className={`relative p-6 rounded-3xl bg-white border-2 border-gray-100 ${city.hoverColor} shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden`}>
                   {/* Background overlay */}
                   <div className={`absolute inset-0 ${city.bgColor} opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500`}></div>
