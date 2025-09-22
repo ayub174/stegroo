@@ -15,20 +15,6 @@ import marketingCategoryImage from "@/assets/marketing-category.jpg";
 import healthcareCategoryImage from "@/assets/healthcare-category.jpg";
 const Index = () => {
   const navigate = useNavigate();
-  // Rotating words state
-  const rotatingWords = ["Arbete", "Nätverk", "Praktik", "Utbildning"];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(true);
-      setTimeout(() => {
-        setCurrentWordIndex(prev => (prev + 1) % rotatingWords.length);
-        setIsAnimating(false);
-      }, 300); // Half of animation duration for smooth transition
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
   const featuredJobs = [{
     id: "1",
     title: "Senior Frontend Utvecklare",
@@ -143,12 +129,8 @@ const Index = () => {
         <div className="absolute inset-0 z-[1]">
           {/* Blue geometric shapes */}
           <div className="absolute top-20 left-10 w-64 h-64 bg-blue-100 rounded-3xl rotate-12 opacity-60 animate-float"></div>
-          <div className="absolute top-40 right-20 w-96 h-80 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float" style={{
-          animationDelay: '2s'
-        }}></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-72 bg-blue-200 rounded-3xl rotate-3 opacity-50 animate-float" style={{
-          animationDelay: '4s'
-        }}></div>
+          <div className="absolute top-40 right-20 w-96 h-80 bg-blue-50 rounded-3xl -rotate-6 opacity-40 animate-float"></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-72 bg-blue-200 rounded-3xl rotate-3 opacity-50 animate-float"></div>
           
           {/* Subtle pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
@@ -172,32 +154,26 @@ const Index = () => {
           <div className="max-w-5xl mx-auto">
             {/* Hero Title */}
             <div className="text-center mb-8">
-              <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9] animate-fade-in" style={{
-              animationDelay: '0.2s'
-            }}>
+            <h1 className="text-5xl lg:text-7xl font-black text-gray-900 mb-6 leading-[0.9]">
                 <span className="block mb-2">Karriär</span>
                 <span className="block mb-2">Plattformen för</span>
-                <span className="relative inline-block group min-h-[1.2em]">
-                  <span className={`text-blue-600 block relative transition-all duration-600 ${isAnimating ? 'opacity-0 transform scale-95 translate-y-4' : 'opacity-100 transform scale-100 translate-y-0'}`} key={currentWordIndex}>
-                    {rotatingWords[currentWordIndex]}
+                <span className="relative inline-block group">
+                  <span className="text-blue-600 block relative">
+                    Arbete
                     {/* Blue highlight */}
                     <div className="absolute inset-0 bg-blue-200 opacity-20 rounded-xl -skew-x-12 transform scale-105 -z-10"></div>
                   </span>
                 </span>
               </h1>
               
-              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto animate-fade-in leading-relaxed font-light" style={{
-              animationDelay: '0.4s'
-            }}>
+              <p className="text-xl lg:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
                 Upptäck tusentals möjligheter från Sveriges ledande företag. 
                 <span className="text-blue-600 font-medium"> Vi använder AI för att matcha dig med perfekta roller</span> som passar din profil och ambitioner.
               </p>
             </div>
             
             {/* Search Bar */}
-            <div className="flex justify-center mb-12 animate-fade-in" style={{
-            animationDelay: '0.6s'
-          }}>
+            <div className="flex justify-center mb-12">
               <div className="w-full max-w-2xl relative group">
                 <div className="absolute inset-0 bg-white rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500 border border-gray-200"></div>
                 <SearchBar className="relative transform hover:scale-[1.02] transition-all duration-300 bg-transparent shadow-none border-0" />
@@ -205,9 +181,7 @@ const Index = () => {
             </div>
             
             {/* Status Badge - Under search bar */}
-            <div className="flex justify-center mb-8 -mt-4 animate-fade-in" style={{
-            animationDelay: '0.8s'
-          }}>
+            <div className="flex justify-center mb-8 -mt-4">
               <div className="relative group">
                 <Badge variant="secondary" className="relative group font-medium text-xs hover:scale-105 transition-all duration-300 cursor-pointer bg-blue-50/90 border border-blue-200/60 hover:border-blue-400 px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md backdrop-blur-sm">
                   {/* Blue button effect */}
@@ -241,14 +215,12 @@ const Index = () => {
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-10 left-10 w-64 h-64 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-10 right-10 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl animate-float" style={{
-          animationDelay: '2s'
-        }}></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl animate-float"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
               <Badge variant="secondary" className="font-medium bg-blue-50 border-2 border-blue-200 px-4 py-2 rounded-2xl shadow-lg">
                 <Map className="h-3 w-3 mr-1 text-blue-600" />
@@ -268,9 +240,7 @@ const Index = () => {
           </div>
           
           {/* Cities Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto animate-fade-in" style={{
-          animationDelay: '0.4s'
-        }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
             {[{
             name: "Stockholm",
             jobCount: "8,547",
@@ -283,7 +253,7 @@ const Index = () => {
             jobCount: "3,241",
             description: "Västkustens tech- och industricentrum",
             color: "from-emerald-500 to-emerald-600",
-            bgColor: "bg-emerald-50",
+            bgColor: "bg-emerald-50",  
             hoverColor: "hover:border-emerald-300"
           }, {
             name: "Malmö",
@@ -306,9 +276,7 @@ const Index = () => {
             color: "from-teal-500 to-teal-600",
             bgColor: "bg-teal-50",
             hoverColor: "hover:border-teal-300"
-}].map((city, index) => <div key={city.name} className="group cursor-pointer" style={{
-            animationDelay: `${index * 0.1}s`
-          }} onClick={() => navigate(`/jobs?location=${encodeURIComponent(city.name)}`)}>
+}].map((city, index) => <div key={city.name} className="group cursor-pointer" onClick={() => navigate(`/jobs?location=${encodeURIComponent(city.name)}`)}>
                 <div className={`relative p-6 rounded-3xl bg-white border-2 border-gray-100 ${city.hoverColor} shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden`}>
                   {/* Background overlay */}
                   <div className={`absolute inset-0 ${city.bgColor} opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500`}></div>
@@ -357,9 +325,7 @@ const Index = () => {
           </div>
           
           {/* Call to action */}
-          <div className="text-center mt-12 animate-fade-in" style={{
-          animationDelay: '0.8s'
-        }}>
+          <div className="text-center mt-12">
             <Button size="lg" variant="outline" className="group hover:bg-blue-50 hover:border-blue-300 transition-all duration-300 shadow-md hover:shadow-lg">
               <Map className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" />
               Se alla städer
@@ -373,17 +339,13 @@ const Index = () => {
       <section className="relative py-20 overflow-hidden bg-gray-50">
         {/* Blue decorative shapes */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float" style={{
-          animationDelay: '1s'
-        }}></div>
-          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float" style={{
-          animationDelay: '3s'
-        }}></div>
+          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
               <Badge variant="secondary" className="font-medium bg-blue-50 border-2 border-blue-200 px-4 py-2 rounded-2xl shadow-lg">
                 <Zap className="h-3 w-3 mr-1 text-blue-600" />
@@ -405,7 +367,7 @@ const Index = () => {
           {/* Steps */}
           <div className="relative z-10 flex items-center gap-4 max-w-6xl mx-auto">
             {/* Step 1 */}
-            <div className="flex-1 group animate-fade-in">
+            <div className="flex-1 group">
               <div className="relative h-80 w-full perspective-1000">
                 <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
                   {/* Front Face */}
@@ -440,16 +402,12 @@ const Index = () => {
             </div>
             
             {/* Arrow */}
-            <div className="hidden lg:block animate-fade-in" style={{
-            animationDelay: '0.2s'
-          }}>
+            <div className="hidden lg:block">
               <ArrowRight className="h-8 w-8 text-blue-400" />
             </div>
             
             {/* Step 2 */}
-            <div className="flex-1 group animate-fade-in" style={{
-            animationDelay: '0.2s'
-          }}>
+            <div className="flex-1 group">
               <div className="relative h-80 w-full perspective-1000">
                 <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
                   {/* Front Face */}
@@ -484,16 +442,12 @@ const Index = () => {
             </div>
             
             {/* Arrow */}
-            <div className="hidden lg:block animate-fade-in" style={{
-            animationDelay: '0.4s'
-          }}>
+            <div className="hidden lg:block">
               <ArrowRight className="h-8 w-8 text-blue-400" />
             </div>
             
             {/* Step 3 */}
-            <div className="flex-1 group animate-fade-in" style={{
-            animationDelay: '0.4s'
-          }}>
+            <div className="flex-1 group">
               <div className="relative h-80 w-full perspective-1000">
                 <div className="flip-card w-full h-full relative preserve-3d transition-transform duration-700 group-hover:rotate-y-180">
                   {/* Front Face */}
@@ -529,9 +483,7 @@ const Index = () => {
           </div>
           
           {/* CTA */}
-          <div className="text-center mt-16 animate-fade-in" style={{
-          animationDelay: '0.6s'
-        }}>
+          <div className="text-center mt-16">
             <div className="relative inline-block group">
               <div className="absolute inset-0 bg-blue-600 rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500"></div>
               <Button variant="hero" size="lg" className="relative px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-inner">
@@ -549,17 +501,13 @@ const Index = () => {
       <section className="relative py-20 overflow-hidden bg-white">
         {/* Blue decorative shapes */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float" style={{
-          animationDelay: '1s'
-        }}></div>
-          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float" style={{
-          animationDelay: '3s'
-        }}></div>
+          <div className="absolute top-20 right-10 w-80 h-80 bg-blue-100 rounded-[4rem] rotate-6 opacity-50 animate-float"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-72 bg-blue-50 rounded-[3rem] -rotate-12 opacity-40 animate-float"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           {/* Section Header */}
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 mb-6">
               <Badge variant="secondary" className="font-medium bg-blue-50 border-2 border-blue-200 px-4 py-2 rounded-2xl shadow-lg">
                 <TrendingUp className="h-3 w-3 mr-1 text-blue-600" />
@@ -605,9 +553,7 @@ const Index = () => {
           </div>
           
           {/* CTA Button */}
-          <div className="text-center mt-16 animate-fade-in" style={{
-          animationDelay: '0.6s'
-        }}>
+          <div className="text-center mt-16">
             <div className="relative inline-block group">
               <div className="absolute inset-0 bg-blue-600 rounded-2xl shadow-xl group-hover:shadow-2xl transition-all duration-500"></div>
               <Link to="/jobs">
@@ -648,7 +594,7 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {companies.map((company, index) => <CompanyCard key={index} {...company} className="animate-fade-in shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl" />)}
+            {companies.map((company, index) => <CompanyCard key={index} {...company} className="shadow-lg hover:shadow-xl transition-all duration-300 bg-white border border-gray-200 hover:border-blue-300 rounded-3xl" />)}
           </div>
         </div>
       </section>
@@ -658,9 +604,7 @@ const Index = () => {
         {/* Blue decorative shapes */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-1/4 w-72 h-72 bg-blue-400/30 rounded-[4rem] rotate-12 animate-float opacity-40"></div>
-          <div className="absolute bottom-10 right-1/4 w-80 h-64 bg-blue-500/20 rounded-[3rem] -rotate-6 animate-float opacity-50" style={{
-          animationDelay: '2s'
-        }}></div>
+          <div className="absolute bottom-10 right-1/4 w-80 h-64 bg-blue-500/20 rounded-[3rem] -rotate-6 animate-float opacity-50"></div>
         </div>
         
         <div className="container mx-auto px-4 text-center relative z-10">
