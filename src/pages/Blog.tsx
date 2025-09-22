@@ -9,6 +9,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useAdmin } from '@/hooks/useAdmin';
 import { CreateBlogPostDialog } from '@/components/ui/create-blog-post-dialog';
 import { useToast } from '@/hooks/use-toast';
+import { Header } from '@/components/ui/header';
+import { Footer } from '@/components/ui/footer';
+import { useLocation } from 'react-router-dom';
 
 interface BlogPost {
   id: string;
@@ -30,10 +33,17 @@ const Blog = () => {
   const { user } = useAuth();
   const { isAdmin, loading: adminLoading } = useAdmin();
   const { toast } = useToast();
+  const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState("Alla");
   const [email, setEmail] = useState("");
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Check if we're in employer context based on URL params or localStorage
+  const searchParams = new URLSearchParams(location.search);
+  const isEmployerContext = searchParams.get('context') === 'employer' || 
+                           localStorage.getItem('userContext') === 'employer' ||
+                           document.referrer.includes('/companies');
 
   const fetchBlogPosts = async () => {
     try {
@@ -100,6 +110,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header isEmployerContext={isEmployerContext} />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 via-accent/5 to-background border-b border-border/50">
         <div className="container mx-auto px-4 py-16">
@@ -246,6 +257,8 @@ const Blog = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
