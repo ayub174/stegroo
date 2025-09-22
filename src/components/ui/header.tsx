@@ -1,4 +1,4 @@
-import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter, Building2, Users, BookOpen, GraduationCap, Briefcase } from "lucide-react";
+import { Bell, User, Menu, X, ChevronDown, Search, MapPin, Filter, Building2, Users, BookOpen, GraduationCap, Briefcase, PenTool } from "lucide-react";
 import { Button } from "./button";
 import { Logo } from "./logo";
 import { Input } from "./input";
@@ -165,6 +165,19 @@ export const Header = ({
                 <GraduationCap className="w-4 h-4 mr-1" />
                 Utbildning
               </Link>
+
+              {/* Blogg Link */}
+              <Link
+                to="/blogg"
+                className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
+                  isActive('/blogg') || location.pathname.startsWith('/blogg/')
+                    ? 'text-primary bg-primary/10' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <PenTool className="w-4 h-4 mr-1" />
+                Blogg
+              </Link>
             </>
           )}
         </nav>
@@ -319,6 +332,20 @@ export const Header = ({
                 >
                   <GraduationCap className="w-4 h-4 mr-2" />
                   Utbildning
+                </Link>
+
+                {/* Blogg Link */}
+                <Link
+                  to="/blogg"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive('/blogg') || location.pathname.startsWith('/blogg/')
+                      ? 'text-primary bg-primary/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <PenTool className="w-4 h-4 mr-2" />
+                  Blogg
                 </Link>
               </>
             )}
