@@ -51,7 +51,7 @@ import {
 type Profile = {
   id: string;
   user_id: string;
-  account_type: 'private' | 'business';
+  account_type: 'private' | 'business' | 'admin';
   company_name?: string;
   display_name?: string;
   created_at: string;
