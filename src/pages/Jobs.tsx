@@ -32,7 +32,20 @@ const allJobs: Array<{
   tags: string[];
   logo: string;
   description: string;
-}> = [];
+}> = [
+  {
+    id: "1",
+    title: "Frontend Developer",
+    company: "Tech Solutions AB",
+    location: "Stockholm",
+    deadline: "2024-12-31",
+    type: "Heltid",
+    timePosted: "2 dagar sedan",
+    tags: ["React", "TypeScript", "JavaScript"],
+    logo: "TS",
+    description: "Vi söker en erfaren Frontend Developer som vill arbeta med moderna teknologier som React och TypeScript. Du kommer att vara en del av vårt utvecklingsteam och bidra till att bygga användarcentrerade webbapplikationer."
+  }
+];
 
 const Jobs = () => {
   const [searchParams] = useSearchParams();
