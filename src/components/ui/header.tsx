@@ -197,23 +197,7 @@ export const Header = ({
           )}
 
           {/* Desktop Right Section */}
-          <div className="hidden md:flex flex-col items-end gap-1">
-            {/* Auth Buttons - Only show when not logged in */}
-            {!user && (
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="sm" asChild>
-                  <Link to={isEmployerContext ? "/employers/login" : "/login"}>
-                    Logga in
-                  </Link>
-                </Button>
-                <Button variant="default" size="sm" asChild>
-                  <Link to={isEmployerContext ? "/employers/register" : "/register"}>
-                    {isEmployerContext ? "Registrera företag" : "Registrera"}
-                  </Link>
-                </Button>
-              </div>
-            )}
-
+          <div className="hidden md:flex items-center gap-3">
             {/* Context Switch Dropdown - Always show */}
             <DropdownMenu open={contextDropdownOpen} onOpenChange={setContextDropdownOpen}>
               <DropdownMenuTrigger asChild>
@@ -265,6 +249,22 @@ export const Header = ({
                 )}
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* Auth Buttons - Only show when not logged in */}
+            {!user && (
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" asChild>
+                  <Link to={isEmployerContext ? "/employers/login" : "/login"}>
+                    Logga in
+                  </Link>
+                </Button>
+                <Button variant="default" size="sm" asChild>
+                  <Link to={isEmployerContext ? "/employers/register" : "/register"}>
+                    {isEmployerContext ? "Registrera företag" : "Registrera"}
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
