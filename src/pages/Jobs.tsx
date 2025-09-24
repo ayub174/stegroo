@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
@@ -98,6 +98,15 @@ const Jobs = () => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedJobs = sortedJobs.slice(startIndex, endIndex);
+  
+  // Auto-select first job when search results change
+  useEffect(() => {
+    if (paginatedJobs.length > 0) {
+      setSelectedJob(paginatedJobs[0]);
+    } else {
+      setSelectedJob(null);
+    }
+  }, [searchQuery, locationQuery, sortBy, filterByType, currentPage]);
   
   const resetPagination = () => {
     setCurrentPage(1);
