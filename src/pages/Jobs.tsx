@@ -120,6 +120,55 @@ const Jobs = () => {
         jobCount={filteredJobs.length}
       />
       
+      {/* Integrated Controls Under Search */}
+      <div className="bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-16 py-3">
+        <div className="max-w-[1800px] mx-auto flex flex-col sm:flex-row gap-3 sm:gap-6 items-start sm:items-center justify-between">
+          {/* Job Count */}
+          {filteredJobs.length > 0 && (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span className="font-medium text-foreground">{filteredJobs.length}</span>
+              <span>jobb hittades</span>
+            </div>
+          )}
+          
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
+            {/* Job Alert */}
+            <CreateJobAlertDialog 
+              defaultValues={{
+                searchQuery: searchQuery,
+                location: locationQuery,
+                jobType: filterByType !== 'all' ? filterByType : undefined
+              }}
+              trigger={
+                <Button 
+                  variant="outline"
+                  size="sm" 
+                  className="gap-2 text-sm border-primary/20 hover:border-primary/40"
+                >
+                  <Bell className="h-4 w-4" />
+                  Skapa bevakning
+                </Button>
+              }
+            />
+            
+            {/* Sort */}
+            <Select value={sortBy} onValueChange={(sort) => {
+              setSortBy(sort);
+              resetPagination();
+            }}>
+              <SelectTrigger className="w-40 h-9 text-sm border-gray-200">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="relevance">Relevans</SelectItem>
+                <SelectItem value="newest">Nyast först</SelectItem>
+                <SelectItem value="salary">Sista ansökningsdag</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </div>
+      
       <section className="pt-4 md:pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col">
           
@@ -213,65 +262,6 @@ const Jobs = () => {
             <div className="hidden lg:flex gap-6 flex-1 h-[calc(100vh-8rem)]">
               {/* Desktop Job List */}
               <div className="flex-[0_0_50%] flex flex-col h-full">
-                {/* Job Count Header */}
-                {filteredJobs.length > 0 && (
-                  <div className="mb-4 flex-shrink-0">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
-                      <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
-                      <span className="text-xs text-muted-foreground">jobb hittades</span>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Job Alert and Sorting Controls */}
-                <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4 flex-shrink-0">
-                  <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
-                    {/* Job Alert Creation */}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Bell className="h-4 w-4 text-primary" />
-                        <span className="text-sm font-medium text-foreground">Jobbbevakning</span>
-                      </div>
-                      <CreateJobAlertDialog 
-                        defaultValues={{
-                          searchQuery: searchQuery,
-                          location: locationQuery,
-                          jobType: filterByType !== 'all' ? filterByType : undefined
-                        }}
-                        trigger={
-                          <Button 
-                            size="sm" 
-                            className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
-                          >
-                            <Bell className="h-4 w-4" />
-                            Skapa bevakning
-                          </Button>
-                        }
-                      />
-                    </div>
-                    
-                    {/* Sorting Options */}
-                    <div className="flex-shrink-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-sm font-medium text-foreground">Sortera efter:</span>
-                      </div>
-                      <Select value={sortBy} onValueChange={(sort) => {
-                        setSortBy(sort);
-                        resetPagination();
-                      }}>
-                        <SelectTrigger className="w-48">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="relevance">Relevans</SelectItem>
-                          <SelectItem value="newest">Nyast först</SelectItem>
-                          <SelectItem value="salary">Sista ansökningsdag</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-                
                 <div className="flex-1 overflow-y-auto pr-2 space-y-4 min-h-0">
                   {sortedJobs.length === 0 ? (
                     <div className="text-center py-12">
