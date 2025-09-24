@@ -122,50 +122,34 @@ const Jobs = () => {
       
       {/* Integrated Controls Under Search */}
       <div className="bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-16 py-3">
-        <div className="max-w-[1800px] mx-auto flex flex-col sm:flex-row gap-3 sm:gap-6 items-start sm:items-center justify-between">
-          {/* Job Count */}
+        <div className="max-w-[1800px] mx-auto flex items-center gap-4">
+          {/* Job Count and Alert */}
           {filteredJobs.length > 0 && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">{filteredJobs.length}</span>
-              <span>jobb hittades</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">{filteredJobs.length}</span>
+                <span>jobb hittades</span>
+              </div>
+              
+              <CreateJobAlertDialog 
+                defaultValues={{
+                  searchQuery: searchQuery,
+                  location: locationQuery,
+                  jobType: filterByType !== 'all' ? filterByType : undefined
+                }}
+                trigger={
+                  <Button 
+                    variant="outline"
+                    size="sm" 
+                    className="gap-2 text-sm border-primary/20 hover:border-primary/40"
+                  >
+                    <Bell className="h-4 w-4" />
+                    Skapa bevakning
+                  </Button>
+                }
+              />
             </div>
           )}
-          
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
-            {/* Job Alert */}
-            <CreateJobAlertDialog 
-              defaultValues={{
-                searchQuery: searchQuery,
-                location: locationQuery,
-                jobType: filterByType !== 'all' ? filterByType : undefined
-              }}
-              trigger={
-                <Button 
-                  variant="outline"
-                  size="sm" 
-                  className="gap-2 text-sm border-primary/20 hover:border-primary/40"
-                >
-                  <Bell className="h-4 w-4" />
-                  Skapa bevakning
-                </Button>
-              }
-            />
-            
-            {/* Sort */}
-            <Select value={sortBy} onValueChange={(sort) => {
-              setSortBy(sort);
-              resetPagination();
-            }}>
-              <SelectTrigger className="w-40 h-9 text-sm border-gray-200">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="relevance">Relevans</SelectItem>
-                <SelectItem value="newest">Nyast först</SelectItem>
-                <SelectItem value="salary">Sista ansökningsdag</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
       </div>
       
