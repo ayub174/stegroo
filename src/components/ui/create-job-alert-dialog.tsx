@@ -262,7 +262,7 @@ export const CreateJobAlertDialog = ({
           <Button
             onClick={handleCreateAlert}
             disabled={isCreating}
-            className="flex-1 bg-gradient-to-r from-primary to-accent text-white hover:from-primary/90 hover:to-accent/90 rounded-xl"
+            className="flex-1 bg-primary text-white hover:bg-primary/90 rounded-xl"
           >
             {isCreating ? (
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
