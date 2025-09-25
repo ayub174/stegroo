@@ -44,6 +44,126 @@ const allJobs: Array<{
     tags: ["React", "TypeScript", "JavaScript"],
     logo: "TS",
     description: "Vi söker en erfaren Frontend Developer som vill arbeta med moderna teknologier som React och TypeScript. Du kommer att vara en del av vårt utvecklingsteam och bidra till att bygga användarcentrerade webbapplikationer."
+  },
+  {
+    id: "2",
+    title: "Lagerarbetare",
+    company: "LogiFlow Sverige",
+    location: "Göteborg",
+    deadline: "2024-12-15",
+    type: "Heltid",
+    timePosted: "1 dag sedan",
+    tags: ["Lager", "Logistik", "Truckkort"],
+    logo: "LF",
+    description: "Vi söker en pålitlig lagerarbetare till vårt moderna lager i Göteborg. Du kommer att arbeta med plockning, packning och truckkörning. Truckkort är meriterande men inte nödvändigt då vi erbjuder utbildning."
+  },
+  {
+    id: "3",
+    title: "Backend Developer",
+    company: "DataCorp Solutions",
+    location: "Stockholm",
+    deadline: "2025-01-10",
+    type: "Heltid",
+    timePosted: "3 dagar sedan",
+    tags: ["Java", "Spring Boot", "PostgreSQL"],
+    logo: "DC",
+    description: "Erfaren Backend Developer sökes för att utveckla robusta API:er och mikroservices. Du kommer att arbeta med Java, Spring Boot och moderna databaser i en agil utvecklingsmiljö."
+  },
+  {
+    id: "4",
+    title: "Sjuksköterska",
+    company: "Karolinska Sjukhuset",
+    location: "Stockholm",
+    deadline: "2024-12-20",
+    type: "Heltid",
+    timePosted: "1 dag sedan",
+    tags: ["Sjukvård", "Legitimation", "Vård"],
+    logo: "KS",
+    description: "Vi söker en legitimerad sjuksköterska till vår medicinavdelning. Du kommer att arbeta i ett engagerat team och bidra till att ge patienterna bästa möjliga vård. Tidigare erfarenhet från sjukhus är meriterande."
+  },
+  {
+    id: "5",
+    title: "Marknadsförare",
+    company: "Creative Marketing Group",
+    location: "Malmö",
+    deadline: "2025-01-05",
+    type: "Heltid",
+    timePosted: "4 dagar sedan",
+    tags: ["Marknadsföring", "Digital", "SEO", "SEM"],
+    logo: "CM",
+    description: "Vi söker en kreativ marknadsförare som brinner för digital marknadsföring. Du kommer att arbeta med SEO, SEM, sociala medier och innehållsmarknadsföring för våra kunder."
+  },
+  {
+    id: "6",
+    title: "Försäljare Butik",
+    company: "Mode & Stil AB",
+    location: "Stockholm",
+    deadline: "2024-12-25",
+    type: "Deltid",
+    timePosted: "2 dagar sedan",
+    tags: ["Försäljning", "Kundservice", "Mode"],
+    logo: "MS",
+    description: "Vi söker en serviceinriktad försäljare till vår butik i Stockholms centrum. Du kommer att hjälpa kunder, hantera kassa och bidra till en positiv shoppingupplevelse. Tidigare försäljningserfarenhet är meriterande."
+  },
+  {
+    id: "7",
+    title: "UX/UI Designer",
+    company: "Design Studio Nordic",
+    location: "Stockholm",
+    deadline: "2025-01-15",
+    type: "Heltid",
+    timePosted: "5 dagar sedan",
+    tags: ["UX", "UI", "Figma", "Prototyping"],
+    logo: "DS",
+    description: "Erfaren UX/UI Designer sökes för att skapa intuitiva och tillgängliga digitala upplevelser. Du behärskar Figma, är van vid användarforskning och har ett starkt portfol från digitala produkter."
+  },
+  {
+    id: "8",
+    title: "Kock",
+    company: "Restaurang Smak",
+    location: "Göteborg",
+    deadline: "2024-12-18",
+    type: "Heltid",
+    timePosted: "1 dag sedan",
+    tags: ["Kock", "Restaurang", "À la carte"],
+    logo: "RS",
+    description: "Vi söker en passionerad kock till vår populära restaurang i Göteborgs centrum. Du kommer att arbeta med à la carte-menyn och bidra till att skapa fantastiska smakresor för våra gäster."
+  },
+  {
+    id: "9",
+    title: "Elektriker",
+    company: "ElTeknik Väst AB",
+    location: "Göteborg",
+    deadline: "2025-01-20",
+    type: "Heltid",
+    timePosted: "3 dagar sedan",
+    tags: ["Elektriker", "Installation", "Legitimation"],
+    logo: "EV",
+    description: "Legitimerad elektriker sökes för installationsarbeten inom både bostäder och kommersiella lokaler. Du kommer att arbeta med allt från grundinstallationer till avancerade elsystem."
+  },
+  {
+    id: "10",
+    title: "Redovisningsekonom",
+    company: "Ekonomi Partner Sverige",
+    location: "Malmö",
+    deadline: "2025-01-08",
+    type: "Heltid",
+    timePosted: "6 dagar sedan",
+    tags: ["Redovisning", "Ekonomi", "Excel", "Bokföring"],
+    logo: "EP",
+    description: "Vi söker en noggrann redovisningsekonom som vill arbeta med månadsrapporter, bokföring och ekonomisk analys. Du har gedigen erfarenhet av ekonomisystem och Excel samt en relevant utbildning."
+  },
+  {
+    id: "11",
+    title: "Personlig Tränare",
+    company: "FitLife Gym",
+    location: "Stockholm",
+    deadline: "2024-12-30",
+    type: "Deltid",
+    timePosted: "2 dagar sedan",
+    tags: ["Träning", "Hälsa", "PT-certifiering"],
+    logo: "FL",
+    description: "Motiverad personlig tränare sökes till vårt gym i Stockholm. Du kommer att coacha medlemmar, hålla gruppträning och bidra till en inspirerande träningsmiljö. PT-certifiering krävs."
   }
 ];
 
