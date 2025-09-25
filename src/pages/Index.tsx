@@ -1,4 +1,4 @@
-import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap, Clock, Shield, Building2, ChevronRight, MapPin as Map } from "lucide-react";
+import { TrendingUp, Users, Briefcase, Star, ArrowRight, Search, UserCheck, Zap, Clock, Shield, Building2, ChevronRight, MapPin as Map, Castle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Header } from "@/components/ui/header";
@@ -289,7 +289,11 @@ const Index = () => {
                   <div className="relative z-10">
                     {/* City icon */}
                     <div className={`w-14 h-14 bg-gradient-to-r ${city.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                      <Building2 className="h-7 w-7 text-white" />
+                      {city.name === "Stockholm" ? (
+                        <Castle className="h-7 w-7 text-white" />
+                      ) : (
+                        <Building2 className="h-7 w-7 text-white" />
+                      )}
                     </div>
                     
                     {/* City name */}
