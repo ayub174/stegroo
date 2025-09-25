@@ -153,18 +153,6 @@ export const Header = ({
                 Guider
               </Link>
 
-              {/* Utbildning Link */}
-              <Link
-                to="/utbildning"
-                className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-muted/50 ${
-                  isActive('/utbildning') || location.pathname.startsWith('/utbildning/')
-                    ? 'text-primary bg-primary/10' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <GraduationCap className="w-4 h-4 mr-1" />
-                Utbildning
-              </Link>
 
               {/* Blogg Link */}
               <Link
@@ -320,19 +308,6 @@ export const Header = ({
                   Guider
                 </Link>
 
-                {/* Utbildning Link */}
-                <Link
-                  to="/utbildning"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    isActive('/utbildning') || location.pathname.startsWith('/utbildning/')
-                      ? 'text-primary bg-primary/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                  }`}
-                >
-                  <GraduationCap className="w-4 h-4 mr-2" />
-                  Utbildning
-                </Link>
 
                 {/* Blogg Link */}
                 <Link
