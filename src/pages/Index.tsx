@@ -619,9 +619,11 @@ const Index = () => {
             Gå med i miljontals jobbsökare som redan hittat sin drömkarriär genom vår plattform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="secondary" size="lg" className="font-semibold bg-white text-blue-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl border-0 rounded-2xl">
-              Skapa profil
-            </Button>
+            <Link to="/register">
+              <Button variant="secondary" size="lg" className="font-semibold bg-white text-blue-600 hover:bg-gray-50 shadow-xl hover:shadow-2xl border-0 rounded-2xl">
+                Skapa profil
+              </Button>
+            </Link>
             <Button variant="outline" size="lg" className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur bg-white/5 rounded-2xl shadow-lg">
               För företag
             </Button>
