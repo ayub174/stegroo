@@ -15,8 +15,7 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accountType, setAccountType] = useState<"private" | "business">("private");
-  const [companyName, setCompanyName] = useState("");
+  const accountType = "private"; // Fast inställd för arbetssökande
   const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -32,8 +31,7 @@ export default function Register() {
         options: {
           emailRedirectTo: `${window.location.origin}/`,
           data: {
-            account_type: accountType,
-            company_name: accountType === "business" ? companyName : null,
+            account_type: "private",
             display_name: displayName || null
           }
         }
@@ -109,10 +107,26 @@ export default function Register() {
   };
 
   const benefits = [
-    { icon: Gift, text: "Spara och organisera dina favoritjobb" },
-    { icon: Users, text: "Få personliga jobbrekommendationer" },
-    { icon: CheckCircle, text: "Håll koll på dina ansökningar" },
-    { icon: Sparkles, text: "Exklusiva jobbnotifieringar" },
+    { 
+      icon: Sparkles, 
+      title: "AI-driven matchning", 
+      text: "Få jobbförslag som matchar din profil och dina intressen automatiskt" 
+    },
+    { 
+      icon: Gift, 
+      title: "Spara & organisera", 
+      text: "Samla alla intressanta jobb på ett ställe och skapa en strukturerad jobbsökning" 
+    },
+    { 
+      icon: CheckCircle, 
+      title: "Ansökningsöversikt", 
+      text: "Håll koll på alla dina ansökningar och få påminnelser om uppföljningar" 
+    },
+    { 
+      icon: Users, 
+      title: "Intelligenta notiser", 
+      text: "Bli först med att veta när ditt drömjobb blir tillgängligt - direkt i din mejl" 
+    },
   ];
 
   return (
@@ -133,13 +147,13 @@ export default function Register() {
               Helt gratis att komma igång
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-4">
-              Välkommen till din
+              Hitta ditt nästa
               <span className="block bg-gradient-to-r from-success via-primary to-primary-hover bg-clip-text text-transparent">
-                drömkarriär!
+                drömjobb!
               </span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Skapa ditt konto idag och få tillgång till tusentals jobb från Sveriges bästa företag.
+              Gå med idag och få tillgång till tusentals jobb, smarta AI-matchningar och personliga notifieringar – helt gratis!
             </p>
           </div>
 
@@ -147,33 +161,54 @@ export default function Register() {
             {/* Left side - Benefits */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <h2 className="text-2xl font-semibold text-foreground">Vad får du?</h2>
+                <h2 className="text-2xl font-semibold text-foreground">Varför skapa ett konto?</h2>
                 <div className="grid gap-4">
                   {benefits.map((benefit, index) => (
                     <div 
                       key={index}
-                      className="flex items-center gap-4 p-4 bg-card/60 backdrop-blur-sm rounded-lg border border-border/20 hover:shadow-clay-base transition-all duration-200 animate-fade-in"
+                      className="flex items-start gap-4 p-5 bg-card/60 backdrop-blur-sm rounded-lg border border-border/20 hover:shadow-clay-base transition-all duration-200 animate-fade-in"
                       style={{animationDelay: `${index * 0.1}s`}}
                     >
-                      <div className="p-2 bg-gradient-to-br from-success/10 to-primary/10 rounded-lg">
+                      <div className="p-2 bg-gradient-to-br from-success/10 to-primary/10 rounded-lg flex-shrink-0">
                         <benefit.icon className="h-5 w-5 text-success" />
                       </div>
-                      <span className="text-foreground font-medium">{benefit.text}</span>
+                      <div className="space-y-1">
+                        <h3 className="text-foreground font-semibold">{benefit.title}</h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{benefit.text}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 bg-gradient-to-r from-primary/5 to-success/5 rounded-xl border border-primary/20">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Users className="h-6 w-6 text-primary" />
+              <div className="space-y-4">
+                <div className="p-6 bg-gradient-to-r from-primary/5 to-success/5 rounded-xl border border-primary/20">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      <CheckCircle className="h-6 w-6 text-success" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground mb-2">Över 50 000+ nöjda användare</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        "Tack vare plattformen hittade jag mitt drömjobb på bara 2 veckor! AI-matchningen sparade mig timmar av letande." 
+                        <span className="block mt-1 font-medium text-foreground">- Maria, Stockholm</span>
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-2">Över 50 000+ nöjda användare</h3>
-                    <p className="text-muted-foreground text-sm">
-                      "Tack vare plattformen hittade jag mitt drömjobb på bara 2 veckor!" - Maria, Stockholm
-                    </p>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="p-4 bg-card/60 backdrop-blur-sm rounded-lg border border-border/20 text-center">
+                    <div className="text-2xl font-bold text-success mb-1">15 000+</div>
+                    <div className="text-xs text-muted-foreground">Nya jobb/månad</div>
+                  </div>
+                  <div className="p-4 bg-card/60 backdrop-blur-sm rounded-lg border border-border/20 text-center">
+                    <div className="text-2xl font-bold text-primary mb-1">94%</div>
+                    <div className="text-xs text-muted-foreground">Nöjda användare</div>
+                  </div>
+                  <div className="p-4 bg-card/60 backdrop-blur-sm rounded-lg border border-border/20 text-center">
+                    <div className="text-2xl font-bold text-success mb-1">2.5 v</div>
+                    <div className="text-xs text-muted-foreground">Snitt till jobb</div>
                   </div>
                 </div>
               </div>
@@ -247,63 +282,16 @@ export default function Register() {
 
                 {/* Email Form */}
                 <form onSubmit={handleEmailAuth} className="space-y-4">
-                  <div className="space-y-4 p-4 bg-gradient-to-r from-muted/20 to-accent/10 rounded-lg border border-border/20">
-                    <div className="space-y-3">
-                      <Label className="text-sm font-medium">Kontotyp</Label>
-                      <div className="flex gap-4">
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="radio"
-                            id="private"
-                            name="accountType"
-                            value="private"
-                            checked={accountType === "private"}
-                            onChange={(e) => setAccountType(e.target.value as "private" | "business")}
-                            className="text-primary focus:ring-primary"
-                          />
-                          <Label htmlFor="private" className="cursor-pointer">Privatkonto</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <input
-                            type="radio"
-                            id="business"
-                            name="accountType"
-                            value="business"
-                            checked={accountType === "business"}
-                            onChange={(e) => setAccountType(e.target.value as "private" | "business")}
-                            className="text-primary focus:ring-primary"
-                          />
-                          <Label htmlFor="business" className="cursor-pointer">Företagskonto</Label>
-                        </div>
-                      </div>
-                    </div>
-
-                    {accountType === "business" && (
-                      <div className="space-y-2">
-                        <Label htmlFor="companyName">Företagsnamn *</Label>
-                        <Input
-                          id="companyName"
-                          type="text"
-                          placeholder="Ditt företag AB"
-                          value={companyName}
-                          onChange={(e) => setCompanyName(e.target.value)}
-                          required
-                          className="border-border/20 focus:border-primary/50 transition-colors"
-                        />
-                      </div>
-                    )}
-
-                    <div className="space-y-2">
-                      <Label htmlFor="displayName">Visningsnamn</Label>
-                      <Input
-                        id="displayName"
-                        type="text"
-                        placeholder="Ditt namn"
-                        value={displayName}
-                        onChange={(e) => setDisplayName(e.target.value)}
-                        className="border-border/20 focus:border-primary/50 transition-colors"
-                      />
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="displayName">Ditt namn (valfritt)</Label>
+                    <Input
+                      id="displayName"
+                      type="text"
+                      placeholder="T.ex. Anna Andersson"
+                      value={displayName}
+                      onChange={(e) => setDisplayName(e.target.value)}
+                      className="border-border/20 focus:border-primary/50 transition-colors"
+                    />
                   </div>
 
                   <div className="space-y-2">
