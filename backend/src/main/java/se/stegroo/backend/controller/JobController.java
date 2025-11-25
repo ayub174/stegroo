@@ -52,18 +52,21 @@ public class JobController {
     private final SkillRepository skillRepository;
     private final JobSearchApiService jobSearchApiService;
     private final JobSearchService jobSearchService;
+    private final BatchJobSyncService batchJobSyncService;
 
     public JobController(
             JobListingRepository jobListingRepository,
             JobCategoryRepository jobCategoryRepository,
             SkillRepository skillRepository,
             JobSearchApiService jobSearchApiService,
-            JobSearchService jobSearchService) {
+            JobSearchService jobSearchService,
+            BatchJobSyncService batchJobSyncService) {
         this.jobListingRepository = jobListingRepository;
         this.jobCategoryRepository = jobCategoryRepository;
         this.skillRepository = skillRepository;
         this.jobSearchApiService = jobSearchApiService;
         this.jobSearchService = jobSearchService;
+        this.batchJobSyncService = batchJobSyncService;
     }
 
     /**
@@ -529,6 +532,57 @@ public class JobController {
                 response.setTimestamp(LocalDateTime.now());
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
             }
+        }
+    }
+
+    /**
+     * Startar en batch-synkronisering av jobb från Arbetsförmedlingen.
+     * Denna endpoint hanterar stora mängder data genom att använda olika sökstrategier.
+     */
+    @PostMapping("/sync/batch")
+    @Operation(summary = "Batch-synkronisering", description = "Startar en asynkron batch-synkronisering av hundratusentals jobb från Arbetsförmedlingen")
+    public ResponseEntity<SyncResponse> startBatchSync(
+            @Parameter(description = "Max antal jobb per kommun")
+            @RequestParam(defaultValue = "100") int maxJobsPerMunicipality) {
+
+        log.info("Startar batch-synkronisering med maxJobsPerMunicipality={}", maxJobsPerMunicipality);
+
+        try {
+            batchJobSyncService.startBatchSync(maxJobsPerMunicipality);
+
+            SyncResponse response = new SyncResponse();
+            response.setSuccess(true);
+            response.setSyncedCount(0);
+            response.setMessage("Batch-synkronisering startad i bakgrunden. Använd /api/jobs/sync/status för att följa progress.");
+            response.setTimestamp(LocalDateTime.now());
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            log.error("Fel vid start av batch-synkronisering: {}", e.getMessage(), e);
+
+            SyncResponse response = new SyncResponse();
+            response.setSuccess(false);
+            response.setSyncedCount(0);
+            response.setMessage("Fel vid start av batch-synkronisering: " + e.getMessage());
+            response.setTimestamp(LocalDateTime.now());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    /**
+     * Hämtar status för pågående eller senaste batch-synkronisering
+     */
+    @GetMapping("/sync/status")
+    @Operation(summary = "Synkroniseringsstatus", description = "Hämtar status för pågående eller senaste batch-synkronisering")
+    public ResponseEntity<BatchJobSyncService.SyncStatus> getSyncStatus() {
+        try {
+            BatchJobSyncService.SyncStatus status = batchJobSyncService.getSyncStatus();
+            return ResponseEntity.ok(status);
+        } catch (Exception e) {
+            log.error("Fel vid hämtning av sync-status: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
