@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { CompactJobCard } from "@/components/ui/compact-job-card";
 import { JobDetailPanel } from "@/components/ui/job-detail-panel";
 import { CreateJobAlertDialog } from "@/components/ui/create-job-alert-dialog";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, MapPin, Filter, Bell } from "lucide-react";
+import { Bell, Loader2 } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -19,434 +17,105 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
-// Extensive dummy job data (30 jobs)
-const allJobs = [
-  {
-    id: "1",
-    title: "Senior Frontend Developer",
-    company: "TechVision AB",
-    location: "Stockholm",
-    deadline: "5 dagar kvar",
-    type: "Heltid",
-    timePosted: "2 dagar sedan",
-    tags: ["React", "TypeScript", "Next.js", "GraphQL"],
-    logo: "/placeholder.svg",
-    description: "Vi söker en erfaren frontend-utvecklare för att bygga nästa generations webbapplikationer."
-  },
-  {
-    id: "2",
-    title: "UX/UI Designer",
-    company: "Creative Studio",
-    location: "Göteborg",
-    deadline: "2 dagar kvar",
-    type: "Heltid",
-    timePosted: "1 dag sedan",
-    tags: ["Figma", "Adobe XD", "Prototyping", "User Research"],
-    logo: "/placeholder.svg",
-    description: "Designa användarupplevelser som förändrar hur människor interagerar med teknik."
-  },
-  {
-    id: "3",
-    title: "DevOps Engineer",
-    company: "CloudFirst Solutions",
-    location: "Malmö",
-    deadline: "8 dagar kvar",
-    type: "Heltid",
-    timePosted: "3 dagar sedan",
-    tags: ["AWS", "Docker", "Kubernetes", "Terraform"],
-    logo: "/placeholder.svg",
-    description: "Automatisera och optimera vår molninfrastruktur för skalbarhet och tillförlitlighet."
-  },
-  {
-    id: "4",
-    title: "Data Scientist",
-    company: "Analytics Pro",
-    location: "Stockholm",
-    deadline: "1 dag kvar",
-    type: "Heltid",
-    timePosted: "1 vecka sedan",
-    tags: ["Python", "Machine Learning", "SQL", "Tableau"],
-    logo: "/placeholder.svg",
-    description: "Utvinna insikter från data för att driva affärsbeslut och innovation."
-  },
-  {
-    id: "5",
-    title: "Backend Developer",
-    company: "ServerWorks Inc",
-    location: "Uppsala",
-    deadline: "6 dagar kvar",
-    type: "Heltid",
-    timePosted: "4 dagar sedan",
-    tags: ["Node.js", "MongoDB", "Express", "REST API"],
-    logo: "/placeholder.svg",
-    description: "Utveckla robusta backend-system som hanterar miljontals användare dagligen."
-  },
-  {
-    id: "6",
-    title: "Product Manager",
-    company: "InnovateNow",
-    location: "Stockholm",
-    deadline: "10 dagar kvar",
-    type: "Heltid",
-    timePosted: "2 dagar sedan",
-    tags: ["Agile", "Scrum", "Product Strategy", "Analytics"],
-    logo: "/placeholder.svg",
-    description: "Leda produktutveckling från ide till lansering för våra digitala plattformar."
-  },
-  {
-    id: "7",
-    title: "Cybersecurity Specialist",
-    company: "SecureTech AB",
-    location: "Göteborg",
-    deadline: "3 dagar kvar",
-    type: "Heltid",
-    timePosted: "5 dagar sedan",
-    tags: ["Penetration Testing", "CISSP", "Network Security", "Incident Response"],
-    logo: "/placeholder.svg",
-    description: "Skydda vår organisation mot cyberhot och säkerställ dataintegritet."
-  },
-  {
-    id: "8",
-    title: "Mobile App Developer",
-    company: "AppCreators",
-    location: "Lund",
-    deadline: "7 dagar kvar",
-    type: "Heltid",
-    timePosted: "1 dag sedan",
-    tags: ["React Native", "iOS", "Android", "Flutter"],
-    logo: "/placeholder.svg",
-    description: "Skapa nästa generations mobilapplikationer för iOS och Android."
-  },
-  {
-    id: "9",
-    title: "AI/ML Engineer",
-    company: "FutureAI Solutions",
-    location: "Stockholm",
-    deadline: "12 dagar kvar",
-    type: "Heltid",
-    timePosted: "3 dagar sedan",
-    tags: ["TensorFlow", "PyTorch", "Deep Learning", "Computer Vision"],
-    logo: "/placeholder.svg",
-    description: "Utveckla AI-lösningar som formar framtiden inom olika industrier."
-  },
-  {
-    id: "10",
-    title: "Full Stack Developer",
-    company: "WebSolutions Pro",
-    location: "Västerås",
-    deadline: "4 dagar kvar",
-    type: "Heltid",
-    timePosted: "6 dagar sedan",
-    tags: ["React", "Node.js", "PostgreSQL", "TypeScript"],
-    logo: "/placeholder.svg",
-    description: "Jobba med hela teknikstacken för att leverera kompletta webblösningar."
-  },
-  {
-    id: "11",
-    title: "Marketing Manager",
-    company: "GrowthHack Media",
-    location: "Stockholm",
-    deadline: "9 dagar kvar",
-    type: "Heltid",
-    timePosted: "2 dagar sedan",
-    tags: ["Digital Marketing", "SEO", "Social Media", "Analytics"],
-    logo: "/placeholder.svg",
-    description: "Utveckla och genomför marknadsföringsstrategier för att driva tillväxt."
-  },
-  {
-    id: "12",
-    title: "QA Engineer",
-    company: "QualityFirst Tech",
-    location: "Linköping",
-    deadline: "15 dagar kvar",
-    type: "Heltid",
-    timePosted: "4 dagar sedan",
-    tags: ["Test Automation", "Selenium", "Jest", "CI/CD"],
-    logo: "/placeholder.svg",
-    description: "Säkerställ kvalitet genom omfattande testning och automatisering."
-  },
-  {
-    id: "13",
-    title: "Business Analyst",
-    company: "DataDriven Solutions",
-    location: "Göteborg",
-    deadline: "11 dagar kvar",
-    type: "Heltid",
-    timePosted: "1 vecka sedan",
-    tags: ["Business Intelligence", "SQL", "Power BI", "Process Improvement"],
-    logo: "/placeholder.svg",
-    description: "Analysera affärsprocesser och föreslå förbättringar baserat på data."
-  },
-  {
-    id: "14",
-    title: "Cloud Architect",
-    company: "CloudNative AB",
-    location: "Stockholm",
-    deadline: "20 dagar kvar",
-    type: "Heltid",
-    timePosted: "3 dagar sedan",
-    tags: ["Azure", "AWS", "Microservices", "System Design"],
-    logo: "/placeholder.svg",
-    description: "Designa och implementera skalbar molnarkitektur för enterprise-lösningar."
-  },
-  {
-    id: "15",
-    title: "Content Creator",
-    company: "Creative Content Co",
-    location: "Malmö",
-    deadline: "3 dagar kvar",
-    type: "Heltid",
-    timePosted: "2 dagar sedan",
-    tags: ["Content Writing", "Video Production", "Social Media", "Adobe Creative"],
-    logo: "/placeholder.svg",
-    description: "Skapa engagerande innehåll för digitala plattformar och sociala medier."
-  },
-  {
-    id: "16",
-    title: "Sales Representative",
-    company: "SalesPro Nordic",
-    location: "Stockholm",
-    deadline: "14 dagar kvar",
-    type: "Heltid",
-    timePosted: "5 dagar sedan",
-    tags: ["B2B Sales", "CRM", "Lead Generation", "Negotiation"],
-    logo: "/placeholder.svg",
-    description: "Driva försäljning och bygga långsiktiga kundrelationer inom B2B-marknaden."
-  },
-  {
-    id: "17",
-    title: "HR Manager",
-    company: "PeopleFirst AB",
-    location: "Göteborg",
-    deadline: "7 dagar kvar",
-    type: "Heltid",
-    timePosted: "1 dag sedan",
-    tags: ["Recruitment", "Employee Relations", "Performance Management", "HR Systems"],
-    logo: "/placeholder.svg",
-    description: "Leda HR-processer och skapa en positiv arbetsmiljö för våra medarbetare."
-  },
-  {
-    id: "18",
-    title: "Financial Analyst",
-    company: "FinanceFlow Solutions",
-    location: "Stockholm",
-    deadline: "18 dagar kvar",
-    type: "Heltid",
-    timePosted: "4 dagar sedan",
-    tags: ["Financial Modeling", "Excel", "Budgeting", "Forecasting"],
-    logo: "/placeholder.svg",
-    description: "Analysera finansiell data och stödja strategiska affärsbeslut."
-  },
-  {
-    id: "19",
-    title: "Graphic Designer",
-    company: "Visual Impact Studio",
-    location: "Lund",
-    deadline: "2 dagar kvar",
-    type: "Heltid",
-    timePosted: "3 dagar sedan",
-    tags: ["Adobe Illustrator", "Photoshop", "InDesign", "Brand Design"],
-    logo: "/placeholder.svg",
-    description: "Skapa visuell identitet och designlösningar för varumärken och kampanjer."
-  },
-  {
-    id: "20",
-    title: "Project Manager",
-    company: "ProjectPro Consulting",
-    location: "Västerås",
-    deadline: "22 dagar kvar",
-    type: "Heltid",
-    timePosted: "6 dagar sedan",
-    tags: ["PMP", "Agile", "Risk Management", "Stakeholder Management"],
-    logo: "/placeholder.svg",
-    description: "Leda komplexa projekt från start till avslut och säkerställ leverans i tid."
-  },
-  {
-    id: "21",
-    title: "Systems Administrator",
-    company: "IT Infrastructure Ltd",
-    location: "Uppsala",
-    deadline: "13 dagar kvar",
-    type: "Heltid",
-    timePosted: "2 dagar sedan",
-    tags: ["Linux", "Windows Server", "VMware", "Network Administration"],
-    logo: "/placeholder.svg",
-    description: "Administrera och underhålla IT-infrastruktur för optimal prestanda och säkerhet."
-  },
-  {
-    id: "22",
-    title: "Customer Success Manager",
-    company: "ClientCare Solutions",
-    location: "Stockholm",
-    deadline: "16 dagar kvar",
-    type: "Heltid",
-    timePosted: "1 vecka sedan",
-    tags: ["Customer Relations", "SaaS", "Onboarding", "Account Management"],
-    logo: "/placeholder.svg",
-    description: "Säkerställ kundnöjdhet och driva retention genom proaktiv kundvård."
-  },
-  {
-    id: "23",
-    title: "Network Engineer",
-    company: "NetworkPro AB",
-    location: "Göteborg",
-    deadline: "25 dagar kvar",
-    type: "Heltid",
-    timePosted: "4 dagar sedan",
-    tags: ["Cisco", "CCNA", "Network Design", "Troubleshooting"],
-    logo: "/placeholder.svg",
-    description: "Designa och underhålla nätverksinfrastruktur för optimal konnektivitet."
-  },
-  {
-    id: "24",
-    title: "Technical Writer",
-    company: "DocuTech Solutions",
-    location: "Linköping",
-    deadline: "8 dagar kvar",
-    type: "Heltid",
-    timePosted: "3 dagar sedan",
-    tags: ["Technical Documentation", "API Documentation", "Markdown", "Git"],
-    logo: "/placeholder.svg",
-    description: "Skapa tydlig och användbar teknisk dokumentation för utvecklare och slutanvändare."
-  },
-  {
-    id: "25",
-    title: "Database Administrator",
-    company: "DataBase Experts",
-    location: "Malmö",
-    deadline: "30 dagar kvar",
-    type: "Heltid",
-    timePosted: "5 dagar sedan",
-    tags: ["MySQL", "PostgreSQL", "Oracle", "Database Optimization"],
-    logo: "/placeholder.svg",
-    description: "Administrera och optimera databaser för maximala prestanda och tillförlitlighet."
-  },
-  {
-    id: "26",
-    title: "Scrum Master",
-    company: "AgileWorks AB",
-    location: "Stockholm",
-    deadline: "6 dagar kvar",
-    type: "Heltid",
-    timePosted: "2 dagar sedan",
-    tags: ["Scrum", "Agile Coaching", "Team Leadership", "Sprint Planning"],
-    logo: "/placeholder.svg",
-    description: "Facilitera agila processer och hjälpa team att leverera värde effektivt."
-  },
-  {
-    id: "27",
-    title: "SEO Specialist",
-    company: "SearchOptimize Pro",
-    location: "Göteborg",
-    deadline: "5 dagar kvar",
-    type: "Heltid",
-    timePosted: "1 dag sedan",
-    tags: ["SEO", "Google Analytics", "Keyword Research", "Content Optimization"],
-    logo: "/placeholder.svg",
-    description: "Optimera webbplatser för sökmotor för att öka organisk trafik och synlighet."
-  },
-  {
-    id: "28",
-    title: "Operations Manager",
-    company: "OpEx Solutions",
-    location: "Uppsala",
-    deadline: "21 dagar kvar",
-    type: "Heltid",
-    timePosted: "6 dagar sedan",
-    tags: ["Operations Management", "Process Optimization", "Supply Chain", "Lean"],
-    logo: "/placeholder.svg",
-    description: "Optimera operativa processer för att förbättra effektivitet och kvalitet."
-  },
-  {
-    id: "29",
-    title: "React Developer",
-    company: "Frontend Masters",
-    location: "Lund",
-    deadline: "17 dagar kvar",
-    type: "Heltid",
-    timePosted: "3 dagar sedan",
-    tags: ["React", "Redux", "JavaScript", "CSS"],
-    logo: "/placeholder.svg",
-    description: "Utveckla moderna webbapplikationer med React och relaterade teknologier."
-  },
-  {
-    id: "30",
-    title: "IT Support Specialist",
-    company: "TechSupport Nordic",
-    location: "Västerås",
-    deadline: "12 dagar kvar",
-    type: "Heltid",
-    timePosted: "4 dagar sedan",
-    tags: ["Help Desk", "Windows", "Hardware Support", "ITIL"],
-    logo: "/placeholder.svg",
-    description: "Tillhandahålla teknisk support och lösningar för användare och system."
-  }
-];
+import { fetchJobs, type Job, formatDate, daysUntilDeadline } from "@/lib/jobsApi";
+import { useToast } from "@/hooks/use-toast";
 
 const Jobs = () => {
   const [searchParams] = useSearchParams();
+  const { toast } = useToast();
   const initialSearchQuery = searchParams.get('q') || '';
   const initialLocationQuery = searchParams.get('location') || '';
-  
+
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [locationQuery, setLocationQuery] = useState(initialLocationQuery);
   const [sortBy, setSortBy] = useState('relevance');
   const [filterByType, setFilterByType] = useState('all');
-  const [selectedJob, setSelectedJob] = useState<typeof allJobs[0] | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  
+  const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // API state
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [totalJobs, setTotalJobs] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const ITEMS_PER_PAGE = 20;
 
-  // Filter jobs based on search parameters
-  const filteredJobs = allJobs.filter(job => {
-    const matchesSearch = searchQuery === '' || 
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    
-    const matchesLocation = locationQuery === '' || 
-      job.location.toLowerCase().includes(locationQuery.toLowerCase());
-    
-    const matchesType = filterByType === 'all' || job.type === filterByType;
-    
-    return matchesSearch && matchesLocation && matchesType;
-  });
+  // Fetch jobs from API
+  useEffect(() => {
+    const loadJobs = async () => {
+      setLoading(true);
+      setError(null);
 
-  // Sort jobs
-  const sortedJobs = [...filteredJobs].sort((a, b) => {
-    if (sortBy === 'newest') {
-      const timeOrder = ['1 dag sedan', '2 dagar sedan', '3 dagar sedan', '4 dagar sedan', '5 dagar sedan', '6 dagar sedan', '1 vecka sedan'];
-      const aIndex = timeOrder.indexOf(a.timePosted);
-      const bIndex = timeOrder.indexOf(b.timePosted);
-      return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
-    }
-    if (sortBy === 'salary') {
-      const getDeadlineDays = (deadline: string) => parseInt(deadline.split(' ')[0]);
-      const aDays = getDeadlineDays(a.deadline || '999 dagar kvar');
-      const bDays = getDeadlineDays(b.deadline || '999 dagar kvar');
-      return aDays - bDays;
-    }
-    return 0;
-  });
+      try {
+        const sortMapping: Record<string, { sortBy: string; sortDir: string }> = {
+          'relevance': { sortBy: 'createdAt', sortDir: 'desc' },
+          'newest': { sortBy: 'publishedAt', sortDir: 'desc' },
+          'salary': { sortBy: 'deadline', sortDir: 'asc' },
+        };
 
-  // Calculate pagination
-  const totalPages = Math.ceil(sortedJobs.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const paginatedJobs = sortedJobs.slice(startIndex, endIndex);
-  
+        const sortConfig = sortMapping[sortBy] || sortMapping['relevance'];
+
+        const data = await fetchJobs({
+          page: currentPage,
+          size: ITEMS_PER_PAGE,
+          sortBy: sortConfig.sortBy,
+          sortDir: sortConfig.sortDir,
+          query: searchQuery,
+          location: locationQuery,
+          employmentType: filterByType === 'all' ? '' : filterByType,
+        });
+
+        setJobs(data.content);
+        setTotalJobs(data.totalElements);
+        setTotalPages(data.totalPages);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : 'Ett fel uppstod vid hämtning av jobb';
+        setError(errorMessage);
+        toast({
+          title: "Fel",
+          description: errorMessage,
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadJobs();
+  }, [currentPage, searchQuery, locationQuery, sortBy, filterByType, toast]);
+
   const resetPagination = () => {
-    setCurrentPage(1);
+    setCurrentPage(0);
   };
 
-  const handleJobSelect = (job: typeof allJobs[0]) => {
+  const handleJobSelect = (job: Job) => {
     setSelectedJob(job);
   };
 
+  // Convert API job to display format
+  const convertJobToDisplayFormat = (job: Job) => {
+    return {
+      id: job.id.toString(),
+      title: job.title,
+      company: job.companyName || 'Okänt företag',
+      location: job.location || 'Okänd plats',
+      deadline: daysUntilDeadline(job.deadline),
+      type: job.employmentType || 'Heltid',
+      timePosted: formatDate(job.publishedAt || job.createdAt),
+      tags: job.skills?.map(s => s.name) || [],
+      logo: "/placeholder.svg",
+      description: job.description || 'Ingen beskrivning tillgänglig',
+      externalUrl: job.externalUrl,
+    };
+  };
+
+  const displayJobs = jobs.map(convertJobToDisplayFormat);
+
   return (
     <div className="min-h-screen bg-white">
-      <Header 
+      <Header
         searchQuery={searchQuery}
         locationQuery={locationQuery}
         sortBy={sortBy}
@@ -467,66 +136,90 @@ const Jobs = () => {
           setFilterByType(type);
           resetPagination();
         }}
-        jobCount={filteredJobs.length}
+        jobCount={totalJobs}
       />
-      
+
       <section className="pt-4 md:pt-6 pb-4 bg-gray-50 min-h-screen flex flex-col">
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col">
-          
+
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col">
-            
+
             {/* Mobile Job List */}
             <div className="lg:hidden">
 
               {/* Job Count for Mobile */}
-              {filteredJobs.length > 0 && (
+              {totalJobs > 0 && !loading && (
                 <div className="mb-4">
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
-                    <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
+                    <span className="text-sm font-semibold text-primary">{totalJobs}</span>
                     <span className="text-xs text-muted-foreground">jobb hittades</span>
                   </div>
                 </div>
               )}
 
+              {/* Loading State */}
+              {loading && (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                  <span className="ml-2 text-gray-600">Laddar jobb...</span>
+                </div>
+              )}
+
+              {/* Error State */}
+              {error && !loading && (
+                <div className="text-center py-12 bg-white rounded-xl">
+                  <p className="text-red-500 text-lg mb-4">{error}</p>
+                  <Button onClick={() => window.location.reload()}>
+                    Försök igen
+                  </Button>
+                </div>
+              )}
+
               {/* Mobile Job List */}
-              <div className="space-y-3 mb-6">
-                {sortedJobs.length === 0 ? (
-                  <div className="text-center py-12 bg-white rounded-xl">
-                    <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
-                  </div>
-                ) : (
-                  paginatedJobs.map((job) => (
-                    <CompactJobCard
-                      key={job.id}
-                      {...job}
-                      isSelected={selectedJob?.id === job.id}
-                      onClick={() => handleJobSelect(job)}
-                      description={job.description}
-                    />
-                  ))
-                )}
-              </div>
+              {!loading && !error && (
+                <div className="space-y-3 mb-6">
+                  {displayJobs.length === 0 ? (
+                    <div className="text-center py-12 bg-white rounded-xl">
+                      <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
+                      <p className="text-gray-400 text-sm mt-2">Prova att ändra dina sökkriterier</p>
+                    </div>
+                  ) : (
+                    displayJobs.map((job) => (
+                      <CompactJobCard
+                        key={job.id}
+                        {...job}
+                        isSelected={selectedJob?.id.toString() === job.id}
+                        onClick={() => {
+                          const originalJob = jobs.find(j => j.id.toString() === job.id);
+                          if (originalJob) handleJobSelect(originalJob);
+                        }}
+                        description={job.description}
+                      />
+                    ))
+                  )}
+                </div>
+              )}
 
               {/* Mobile Pagination */}
-              {sortedJobs.length > ITEMS_PER_PAGE && (
+              {!loading && displayJobs.length > 0 && totalPages > 1 && (
                 <div className="mt-6 pt-4">
                   <Pagination>
                     <PaginationContent>
                       <PaginationItem>
-                        <PaginationPrevious 
+                        <PaginationPrevious
                           href="#"
                           onClick={(e) => {
                             e.preventDefault();
-                            if (currentPage > 1) setCurrentPage(currentPage - 1);
+                            if (currentPage > 0) setCurrentPage(currentPage - 1);
                           }}
-                          className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                          className={currentPage <= 0 ? 'pointer-events-none opacity-50' : ''}
                         />
                       </PaginationItem>
-                      
+
                       {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => {
-                        const page = currentPage <= 2 ? i + 1 : currentPage - 1 + i;
-                        if (page > totalPages) return null;
+                        const page = currentPage <= 1 ? i : currentPage - 1 + i;
+                        if (page >= totalPages) return null;
                         return (
                           <PaginationItem key={page}>
                             <PaginationLink
@@ -537,20 +230,20 @@ const Jobs = () => {
                               }}
                               isActive={currentPage === page}
                             >
-                              {page}
+                              {page + 1}
                             </PaginationLink>
                           </PaginationItem>
                         );
                       })}
-                      
+
                       <PaginationItem>
-                        <PaginationNext 
+                        <PaginationNext
                           href="#"
                           onClick={(e) => {
                             e.preventDefault();
-                            if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                            if (currentPage < totalPages - 1) setCurrentPage(currentPage + 1);
                           }}
-                          className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                          className={currentPage >= totalPages - 1 ? 'pointer-events-none opacity-50' : ''}
                         />
                       </PaginationItem>
                     </PaginationContent>
@@ -564,15 +257,15 @@ const Jobs = () => {
               {/* Desktop Job List */}
               <div className="flex-[0_0_50%] flex flex-col h-full">
                 {/* Job Count Header */}
-                {filteredJobs.length > 0 && (
+                {totalJobs > 0 && !loading && (
                   <div className="mb-4 flex-shrink-0">
                     <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 rounded-lg border border-primary/10">
-                      <span className="text-sm font-semibold text-primary">{filteredJobs.length}</span>
+                      <span className="text-sm font-semibold text-primary">{totalJobs}</span>
                       <span className="text-xs text-muted-foreground">jobb hittades</span>
                     </div>
                   </div>
                 )}
-                
+
                 {/* Job Alert and Sorting Controls */}
                 <div className="mb-6 p-4 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl border border-border/50 rounded-2xl space-y-4 flex-shrink-0">
                   <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
@@ -582,15 +275,15 @@ const Jobs = () => {
                         <Bell className="h-4 w-4 text-primary" />
                         <span className="text-sm font-medium text-foreground">Jobbbevakning</span>
                       </div>
-                      <CreateJobAlertDialog 
+                      <CreateJobAlertDialog
                         defaultValues={{
                           searchQuery: searchQuery,
                           location: locationQuery,
                           jobType: filterByType !== 'all' ? filterByType : undefined
                         }}
                         trigger={
-                          <Button 
-                            size="sm" 
+                          <Button
+                            size="sm"
                             className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl"
                           >
                             <Bell className="h-4 w-4" />
@@ -599,7 +292,7 @@ const Jobs = () => {
                         }
                       />
                     </div>
-                    
+
                     {/* Sorting Options */}
                     <div className="flex-shrink-0">
                       <div className="flex items-center gap-2 mb-2">
@@ -621,45 +314,70 @@ const Jobs = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="flex-1 overflow-y-auto pr-2 space-y-4 min-h-0">
-                  {sortedJobs.length === 0 ? (
-                    <div className="text-center py-12">
-                      <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
-                    </div>
-                  ) : (
-                    paginatedJobs.map((job) => (
-                      <CompactJobCard
-                        key={job.id}
-                        {...job}
-                        isSelected={selectedJob?.id === job.id}
-                        onClick={() => handleJobSelect(job)}
-                        description={job.description}
-                      />
-                    ))
-                  )}
-                </div>
-                
+
+                {/* Loading State */}
+                {loading && (
+                  <div className="flex items-center justify-center py-12">
+                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                    <span className="ml-2 text-gray-600">Laddar jobb...</span>
+                  </div>
+                )}
+
+                {/* Error State */}
+                {error && !loading && (
+                  <div className="text-center py-12 bg-white rounded-xl">
+                    <p className="text-red-500 text-lg mb-4">{error}</p>
+                    <Button onClick={() => window.location.reload()}>
+                      Försök igen
+                    </Button>
+                  </div>
+                )}
+
+                {/* Job List */}
+                {!loading && !error && (
+                  <div className="flex-1 overflow-y-auto pr-2 space-y-4 min-h-0">
+                    {displayJobs.length === 0 ? (
+                      <div className="text-center py-12">
+                        <p className="text-gray-500 text-lg">Inga jobb hittades med dina filter.</p>
+                        <p className="text-gray-400 text-sm mt-2">Prova att ändra dina sökkriterier</p>
+                      </div>
+                    ) : (
+                      displayJobs.map((job) => (
+                        <CompactJobCard
+                          key={job.id}
+                          {...job}
+                          isSelected={selectedJob?.id.toString() === job.id}
+                          onClick={() => {
+                            const originalJob = jobs.find(j => j.id.toString() === job.id);
+                            if (originalJob) handleJobSelect(originalJob);
+                          }}
+                          description={job.description}
+                        />
+                      ))
+                    )}
+                  </div>
+                )}
+
                 {/* Pagination */}
-                {sortedJobs.length > ITEMS_PER_PAGE && (
+                {!loading && displayJobs.length > 0 && totalPages > 1 && (
                   <div className="mt-6 pt-4 border-t border-gray-200 flex-shrink-0">
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
-                          <PaginationPrevious 
+                          <PaginationPrevious
                             href="#"
                             onClick={(e) => {
                               e.preventDefault();
-                              if (currentPage > 1) setCurrentPage(currentPage - 1);
+                              if (currentPage > 0) setCurrentPage(currentPage - 1);
                             }}
-                            className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
+                            className={currentPage <= 0 ? 'pointer-events-none opacity-50' : ''}
                           />
                         </PaginationItem>
-                        
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+
+                        {Array.from({ length: totalPages }, (_, i) => i).map((page) => {
                           if (
-                            page === 1 ||
-                            page === totalPages ||
+                            page === 0 ||
+                            page === totalPages - 1 ||
                             (page >= currentPage - 1 && page <= currentPage + 1)
                           ) {
                             return (
@@ -672,7 +390,7 @@ const Jobs = () => {
                                   }}
                                   isActive={currentPage === page}
                                 >
-                                  {page}
+                                  {page + 1}
                                 </PaginationLink>
                               </PaginationItem>
                             );
@@ -688,15 +406,15 @@ const Jobs = () => {
                           }
                           return null;
                         })}
-                        
+
                         <PaginationItem>
-                          <PaginationNext 
+                          <PaginationNext
                             href="#"
                             onClick={(e) => {
                               e.preventDefault();
-                              if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                              if (currentPage < totalPages - 1) setCurrentPage(currentPage + 1);
                             }}
-                            className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
+                            className={currentPage >= totalPages - 1 ? 'pointer-events-none opacity-50' : ''}
                           />
                         </PaginationItem>
                       </PaginationContent>
@@ -708,10 +426,10 @@ const Jobs = () => {
               {/* Desktop Job Detail Panel */}
               <div className="flex-[0_0_50%] h-full">
                 <div className="h-full bg-white rounded-lg border border-gray-200 overflow-hidden">
-                  <JobDetailPanel 
-                    job={selectedJob} 
+                  <JobDetailPanel
+                    job={selectedJob ? convertJobToDisplayFormat(selectedJob) : null}
                     onClose={() => setSelectedJob(null)}
-                    hasJobs={sortedJobs.length > 0}
+                    hasJobs={displayJobs.length > 0}
                   />
                 </div>
               </div>
@@ -728,10 +446,10 @@ const Jobs = () => {
             <div className="flex justify-center pt-3 pb-2">
               <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
             </div>
-            <JobDetailPanel 
-              job={selectedJob} 
+            <JobDetailPanel
+              job={convertJobToDisplayFormat(selectedJob)}
               onClose={() => setSelectedJob(null)}
-              hasJobs={sortedJobs.length > 0}
+              hasJobs={displayJobs.length > 0}
             />
           </div>
         </div>
